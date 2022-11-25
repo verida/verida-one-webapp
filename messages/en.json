@@ -1,0 +1,10 @@
+{
+  "App.ComingSoon": {
+    "description": "Message stating that the app will be available soon",
+    "defaultMessage": "Coming Soon"
+  },
+  "App.LogoAlt": {
+    "description": "Alternate text for the logo image",
+    "defaultMessage": "Verida One Logo"
+  }
+}

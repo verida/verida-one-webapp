@@ -16,7 +16,8 @@
     "jsdoc",
     "functional",
     "promise",
-    "no-loops"
+    "no-loops",
+    "formatjs"
   ],
   "extends": [
     "eslint:recommended",
@@ -33,7 +34,12 @@
     "no-loops/no-loops": "error",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-empty-function": "off"
+    "@typescript-eslint/no-empty-function": "off",
+    "formatjs/no-offset": "error",
+    "formatjs/enforce-description": ["error", "literal"],
+    "formatjs/enforce-default-message": ["error", "literal"],
+    "formatjs/enforce-placeholders": "error",
+    "formatjs/no-literal-string-in-jsx": "error"
   },
   "settings": {
     "react": {

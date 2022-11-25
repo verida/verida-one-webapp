@@ -40,11 +40,48 @@ yarn run check
 yarn run fix
 ```
 
+### i18n
+
+This project uses `react-intl` to manage the internationalisation. No user-facing messages should be hardcoded.
+
+Messages are all listed in a dedicated json file in the `messages` folder at the root of the project.
+
+When running `yarn run start` or `yarn run build` the messages are automatically compiled under `src/lib/lang`.
+
+#### Usage
+
+```jsx
+// src/HelloWorld.tsx
+const i18n = useIntl();
+const helloWorld = i18n.formatMessage({
+  defaultMessage: "Hello World!",
+});
+
+return <p>{helloWorld}</p>;
+```
+
+The default message should always be set as a fallback.
+
+```json
+//messages/en.json
+{
+  "hello.world": {
+    "defaultMessage": "Hello World!"
+  }
+}
+```
+
+The message definition should always be copied into the json file in the messages folder.
+
+See more information on the [react-intl documentation](https://formatjs.io/docs/getting-started/message-declaration).
+
 ### Build
 
 ```
 yarn run build
 ```
+
+Messages are compiled automatically before the build.
 
 ## Deployment
 

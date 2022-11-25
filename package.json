@@ -3,10 +3,8 @@
   "description": "Frontend for the Verida One application",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": "^14.0.0"
-  },
   "dependencies": {
+    "@formatjs/cli": "^4.5.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.5.0",
@@ -20,6 +18,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-react": "^1.1.7",
     "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-formatjs": "^4.3.4",
     "eslint-plugin-functional": "^4.2.2",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsdoc": "^39.3.3",
@@ -31,6 +30,7 @@
     "prettier": "^2.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-intl": "^6.2.1",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
     "typescript": "^4.4.2"
@@ -38,16 +38,19 @@
   "scripts": {
     "clean:node_modules": "rm -rf node_modules/",
     "clean:build": "rm -rf build/",
-    "clean": "npm run clean:build && npm run clean:node_modules",
+    "clean": "yarn run clean:build && yarn run clean:node_modules",
+    "messages:extract": "formatjs extract 'src/**/*.ts*' --out-file messages/en.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'",
+    "messages:compile": "formatjs compile-folder --ast messages src/lib/lang/",
     "format:check": "npx prettier src/ --check",
     "format": "npx prettier src/ --write",
     "lint:check": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "lint": "eslint src/ --fix --ext .js,.jsx,.ts,.tsx",
-    "check": "npm run format:check && npm run lint:check",
-    "fix": "npm run format && npm run lint",
-    "start": "react-scripts start",
+    "check": "yarn run format:check && yarn run lint:check",
+    "fix": "yarn run format && yarn run lint",
+    "start": "yarn run messages:compile && react-scripts start",
+    "prebuild": "yarn run clean:build && yarn run messages:compile",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --passWithNoTests",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
