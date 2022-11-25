@@ -33,6 +33,7 @@
     "react-intl": "^6.2.1",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
+    "source-map-explorer": "^2.5.3",
     "typescript": "^4.4.2"
   },
   "scripts": {
@@ -50,6 +51,8 @@
     "start": "yarn run messages:compile && react-scripts start",
     "prebuild": "yarn run clean:build && yarn run messages:compile",
     "build": "react-scripts build",
+    "build:profiler": "yarn run prebuild && react-scripts build --profile",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "test": "react-scripts test --passWithNoTests",
     "eject": "react-scripts eject"
   },
