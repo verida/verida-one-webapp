@@ -1,0 +1,17 @@
+.App {
+  background-color: #0d0a27;
+  color: white;
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
+
+.App-logo {
+  width: 100%;
+  max-width: max-content;
+}
