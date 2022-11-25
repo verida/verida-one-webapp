@@ -1,6 +1,5 @@
 import React from "react";
 import logo from "./verida_one_logo.png";
-import "./App.css";
 import { useIntl } from "react-intl";
 
 export const App = () => {
@@ -19,9 +18,9 @@ export const App = () => {
   });
 
   return (
-    <div className="App">
-      <img src={logo} className="App-logo" alt={logoAlt} />
-      <p>{comingSoonMessage}</p>
+    <div className="flex min-h-screen flex-col items-center justify-center space-y-12 bg-background p-8 text-white">
+      <img src={logo} alt={logoAlt} className="w-full max-w-fit" />
+      <p className="text-xl md:text-4xl">{comingSoonMessage}</p>
     </div>
   );
 };
