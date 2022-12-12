@@ -1,10 +1,15 @@
 import React from "react";
 import { IntlProvider } from "./IntlContext";
+import { VeridaProvider } from "./VeridaContext";
 
 interface Props {
   children: React.ReactNode;
 }
 
 export const AppContextProvider: React.FunctionComponent<Props> = (props) => {
-  return <IntlProvider>{props.children}</IntlProvider>;
+  return (
+    <VeridaProvider>
+      <IntlProvider>{props.children}</IntlProvider>
+    </VeridaProvider>
+  );
 };
