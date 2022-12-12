@@ -4,14 +4,17 @@ module.exports = {
   theme: {
     colors: {
       "white": "#ffffff",
-      "blue": "#1fb6ff",
-      "pink": "#ff49db",
-      "orange": "#ff7849",
+      "black": "#0000",
+      "error": "#CE4B46",
       "green": "#13ce66",
-      "gray-dark": "#273444",
-      "gray": "#8492a6",
-      "gray-light": "#d3dce6",
-      "background": "#0d0a27",
+      "gray-dark": "#7B7C7E",
+      "gray-light": "#9D9D9D",
+      "background": "#0D0A27",
+      "verida-blue": "#37D5C7",
+      "verida-purple": "#5354D1"
+    },
+    fontFamily: {
+      sora: ['Sora', 'sans-serif']
     },
     extend: {},
   },
