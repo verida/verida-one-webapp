@@ -17,7 +17,7 @@ Some environment variables are required for the application to run. Have a look 
 Copy `.env.example`, rename it to `.env.local` and modify the variables for your local environment.
 
 ```
-cp .env.example .env
+cp .env.example .env.local
 ```
 
 ### Run

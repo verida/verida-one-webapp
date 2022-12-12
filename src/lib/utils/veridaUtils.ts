@@ -7,34 +7,17 @@ import {
 } from "@verida/client-ts";
 import { VaultAccount } from "@verida/account-web-vault";
 import { UserProfile } from "../types";
-import { DEFAULT_CHAIN_ID, initWalletConnect } from "./walletConnectUtils";
-import WalletConnect from "@walletconnect/client";
 
 const connect = async (
   contextName: string,
   environment: EnvironmentType,
   logoUrl?: string,
-  openUrl?: string,
-  walletConnectChainId = DEFAULT_CHAIN_ID
-): Promise<
-  [
-    context: Context,
-    account: VaultAccount,
-    profile: UserProfile,
-    walletConnectConnector: WalletConnect
-  ]
-> => {
-  const walletConnectConnector = await initWalletConnect();
+  openUrl?: string
+): Promise<[context: Context, account: VaultAccount, profile: UserProfile]> => {
   const account = new VaultAccount({
     request: {
       logoUrl,
       openUrl,
-    },
-    // @ts-ignore
-    walletConnect: {
-      version: walletConnectConnector.version,
-      uri: walletConnectConnector.uri,
-      chainId: walletConnectChainId,
     },
   });
 
@@ -55,7 +38,7 @@ const connect = async (
   const did = await account.did();
   const profile = await getPublicProfileInfo(context, did);
 
-  return [context, account, profile, walletConnectConnector];
+  return [context, account, profile];
 };
 
 const getPublicProfileInfo = async (
