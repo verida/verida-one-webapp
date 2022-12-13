@@ -1,6 +1,7 @@
 import React from "react";
-import logo from "./verida_one_logo.png";
 import { useIntl } from "react-intl";
+import { Modal } from "./components/molecules";
+import { Header } from "./components/organisms";
 
 export const App = () => {
   const i18n = useIntl();
@@ -11,16 +12,12 @@ export const App = () => {
     defaultMessage: "Coming Soon",
   });
 
-  const logoAlt = i18n.formatMessage({
-    id: "App.LogoAlt",
-    description: "Alternate text for the logo image",
-    defaultMessage: "Verida One Logo",
-  });
-
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center space-y-12 bg-background p-8 text-white">
-      <img src={logo} alt={logoAlt} className="w-full max-w-fit" />
-      <p className="text-xl md:text-4xl">{comingSoonMessage}</p>
+    <div className=" h-screen bg-background">
+      <Header />
+      <div className="flex flex-col items-center justify-center">
+        <p className="text-xl text-white md:text-4xl">{comingSoonMessage}</p>
+      </div>
     </div>
   );
 };
