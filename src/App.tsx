@@ -2,7 +2,7 @@ import React from "react";
 import logo from "./verida_one_logo.png";
 import { useIntl } from "react-intl";
 
-export const App = () => {
+export const App: React.FunctionComponent = () => {
   const i18n = useIntl();
 
   const comingSoonMessage = i18n.formatMessage({

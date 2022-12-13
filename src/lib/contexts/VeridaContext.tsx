@@ -3,11 +3,11 @@ import { Context } from "@verida/client-ts";
 import { VaultAccount, hasSession } from "@verida/account-web-vault";
 import { UserProfile } from "../types";
 import { config } from "../config";
-import { Verida } from "../utils/veridaUtils";
+import { Verida } from "../utils";
 
-type VeridaProviderType = {
+interface VeridaProviderProps {
   children?: React.ReactNode;
-};
+}
 
 type VeridaContextType = {
   connect: () => Promise<void>;
@@ -21,8 +21,8 @@ type VeridaContextType = {
 };
 
 export const VeridaContext = React.createContext<VeridaContextType>({
-  connect: async () => { },
-  disconnect: async () => { },
+  connect: async () => {},
+  disconnect: async () => {},
   isConnecting: false,
   isConnected: false,
   account: null,
@@ -30,7 +30,8 @@ export const VeridaContext = React.createContext<VeridaContextType>({
   profile: null,
 });
 
-export const VeridaProvider: React.FC<VeridaProviderType> = ({ children }) => {
+export const VeridaProvider: React.FC<VeridaProviderProps> = (props) => {
+  const { children } = props;
   const [isConnecting, setIsConnecting] = useState<boolean>(false);
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const [account, setAccount] = useState<VaultAccount | null>(null);
