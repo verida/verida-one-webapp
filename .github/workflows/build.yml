@@ -1,0 +1,38 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - "**"
+
+  pull_request:
+    branches: 
+      - "**"
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+        
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2.5.0
+        
+      - name: Define node version
+        run: echo "NODE_VERSION=$(cat .nvmrc)" >> $GITHUB_ENV
+
+      - name: Set up node
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: '${{ env.NODE_VERSION }}'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test app
+        run: npm run test --if-present
+
+      - name: Build app
+        run: npm run build --if-present
