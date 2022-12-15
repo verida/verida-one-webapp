@@ -1,4 +1,4 @@
-@import './font.css';
+@import "./font.css";
 
 @tailwind base;
 @tailwind components;
@@ -6,6 +6,6 @@
 
 @layer base {
   body {
-    @apply font-sora;
+    @apply bg-background font-sora text-white;
   }
 }
