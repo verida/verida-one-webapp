@@ -5,7 +5,7 @@ import {
   Datastore,
 } from "@verida/client-ts";
 import { VaultAccount } from "@verida/account-web-vault";
-import { UserProfile } from "../types";
+import { UserProfile } from "lib/types";
 
 const connect = async (
   contextName: string,

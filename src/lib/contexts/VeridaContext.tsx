@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Context } from "@verida/client-ts";
 import { VaultAccount, hasSession } from "@verida/account-web-vault";
-import { UserProfile } from "../types";
-import { config } from "../config";
-import { Verida } from "../utils/veridaUtils";
+import { UserProfile } from "lib/types";
+import { config } from "lib/config";
+import { Verida } from "lib/utils";
 
 type VeridaProviderType = {
   children?: React.ReactNode;
@@ -21,8 +21,8 @@ type VeridaContextType = {
 };
 
 export const VeridaContext = React.createContext<VeridaContextType>({
-  connect: async () => { },
-  disconnect: async () => { },
+  connect: async () => {},
+  disconnect: async () => {},
   isConnecting: false,
   isConnected: false,
   account: null,
