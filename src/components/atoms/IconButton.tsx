@@ -1,25 +1,24 @@
 import React from "react";
-import Icon, { IconType, Theme } from "@icon-park/react/es/all";
-import { ReactComponent as CheckedIcon } from "../../assets/icons/verida_tick.svg";
+import { ReactComponent as CheckedIcon } from "assets/icons/verida_tick.svg";
 
 type IconButtonProps = {
   onClick?: () => void;
   label?: string;
-  isActive?: boolean;
+  connected?: boolean;
   variant?: "rounded" | "rounded-full";
-  iconType: IconType;
   styles?: string;
-  iconTheme?: Theme;
+  icon: React.ReactElement;
   iconSize?: number | string;
-};
+  customIcon?: React.ReactElement;
+} & React.ComponentPropsWithoutRef<"button">;
 
 export const IconButton: React.FC<IconButtonProps> = ({
+  icon,
   onClick,
-  iconType,
-  isActive,
+  connected,
+  customIcon,
   iconSize = "1.25em",
-  iconTheme = "filled",
-  variant = "rounded",
+  variant = "rounded-xl",
 }) => {
   return (
     <button
@@ -27,8 +26,8 @@ export const IconButton: React.FC<IconButtonProps> = ({
       onClick={onClick}
       className={`relative flex p-2.5 ${variant} items-center justify-center bg-gray-dark text-white hover:opacity-30`}
     >
-      <Icon type={iconType} theme={iconTheme} size={iconSize} />
-      {isActive && <CheckedIcon className="absolute bottom-0 right-0" />}
+      {icon}
+      {connected && <CheckedIcon className="absolute bottom-0 right-0" />}
     </button>
   );
 };

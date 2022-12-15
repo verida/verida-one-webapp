@@ -1,23 +1,20 @@
 import React from "react";
-import Icon, { IconType, Theme } from "@icon-park/react/es/all";
 
 type ButtonColorVariant = "primary" | "secondary";
 
 type ButtonProps = {
   label: string;
   styles?: string;
-  iconType?: IconType;
-  onClickHandler: () => void;
-  iconTheme?: Theme;
+  icon?: React.ReactElement;
+  onClickHandler?: () => void;
   variant?: ButtonColorVariant;
 } & React.ComponentPropsWithoutRef<"button">;
 
 export const Button: React.FC<ButtonProps> = ({
+  icon,
+  label,
   onClickHandler,
   styles = "w-fit",
-  iconType,
-  label,
-  iconTheme = "outline",
   variant = "primary",
   ...rest
 }) => {
@@ -31,15 +28,7 @@ export const Button: React.FC<ButtonProps> = ({
       type="button"
       onClick={onClickHandler}
     >
-      {iconType && (
-        <span className=" mr-2">
-          <Icon
-            type={iconType}
-            theme={iconTheme}
-            fill={variant === "primary" ? "#fff" : "#000"}
-          />
-        </span>
-      )}
+      <span className=" mr-2">{icon}</span>
       {label}
     </button>
   );
