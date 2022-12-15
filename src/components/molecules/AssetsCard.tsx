@@ -1,5 +1,6 @@
 import React from "react";
 import { ChipLabel } from "components/atoms";
+import { screenSize } from "lib/constants";
 
 type AssetsCardProps = {
   image: string;
@@ -20,7 +21,7 @@ export const AssetsCard: React.FC<AssetsCardProps> = ({
   chipIcon,
   tokenSymbol,
 }) => {
-  const query = `(min-width: 640px)`;
+  const query = `(min-width: ${screenSize.sm})`;
   const mediaMatch = window.matchMedia(query).matches;
   const sizeVariant =
     variant === "sm" && mediaMatch

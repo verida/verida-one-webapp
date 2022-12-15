@@ -1,23 +1,17 @@
 import React from "react";
-import { useIntl } from "react-intl";
-import { Modal } from "./components/molecules";
-import { Header } from "./components/organisms";
+import { Header } from "components/organisms";
+import { ProfileView } from "components/pages";
+import { screenSize } from "lib/constants";
 
 export const App = () => {
-  const i18n = useIntl();
-
-  const comingSoonMessage = i18n.formatMessage({
-    id: "App.ComingSoon",
-    description: "Message stating that the app will be available soon",
-    defaultMessage: "Coming Soon",
-  });
-
   return (
-    <div className=" h-screen bg-background">
+    <div className="h-screen">
       <Header />
-      <div className="flex flex-col items-center justify-center">
-        <p className="text-xl text-white md:text-4xl">{comingSoonMessage}</p>
-      </div>
+      <main
+        className={`mx-auto px-4 py-3.5 md:flex md:w-[${screenSize.sm}] md:flex-col md:items-center md:justify-center`}
+      >
+        <ProfileView />
+      </main>
     </div>
   );
 };
