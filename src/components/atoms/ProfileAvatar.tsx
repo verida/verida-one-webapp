@@ -2,13 +2,13 @@ import React from "react";
 import { useIntl } from "react-intl";
 
 type ProfileAvatarProps = {
-  img: string;
+  avatar: string;
   name: string;
   timeStamp: string;
 };
 
 export const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
-  img,
+  avatar,
   name,
   timeStamp,
 }) => {
@@ -22,7 +22,7 @@ export const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
 
   return (
     <div className="flex items-center justify-center text-white">
-      <img src={img} alt={logoAlt} className="mr-2" />
+      <img src={avatar} alt={logoAlt} className="mr-2" />
       <div>
         <h4 className="text-sm">{name}</h4>
         <span className="text-sm font-light">{timeStamp}</span>
