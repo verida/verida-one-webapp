@@ -1,30 +1,34 @@
 import React from "react";
-import { IconButton, ProfileAvatar } from "../atoms";
-
-import bgImg from "../../assets/post_image.png";
+import { IconButton, ProfileAvatar } from "components/atoms";
 
 type ActivityCardProps = {
-  title?: string;
   bodyText?: string;
+  image?: string;
+  icon: React.ReactElement;
+  profile: {
+    avatar: string;
+    name: string;
+    timeStamp: string;
+  };
 };
-
-const profile = {
-  img: "@cmcWebCode",
-  name: "@cmcWebCode",
-  timeStamp: "2 hours ago",
-};
-
 export const ActivityCard: React.FC<ActivityCardProps> = ({
-  bodyText = "Updated roadmap diagram!",
+  image,
+  icon,
+  profile,
+  bodyText,
 }) => {
   return (
-    <div className="rounded-xl  bg-gray-dark p-4 text-white">
+    <div className="rounded-xl  bg-gray-dark p-4">
       <div className="flex items-center justify-between">
         <ProfileAvatar {...profile} />
-        <IconButton iconType="Twitter" variant="rounded-full" isActive />
+        <IconButton icon={icon} variant="rounded-full" connected={true} />
       </div>
       <p className="my-3">{bodyText}</p>
-      <img src={bgImg} alt="" />
+      {image && (
+        <div>
+          <img className="w-full bg-cover" src={image} alt={profile.name} />
+        </div>
+      )}
     </div>
   );
 };

@@ -1,41 +1,47 @@
 import React from "react";
-import nftImage from "../../assets/nft_image.png";
-import { ChipLabel } from "../atoms";
+import { ChipLabel } from "components/atoms";
 
 type AssetsCardProps = {
   image: string;
-  title: string;
-  tagNumber: string;
-  chipLabel: string;
+  title?: string;
+  tagNumber?: string;
+  price: string;
+  tokenSymbol: string;
   variant?: "lg" | "sm";
   chipIcon?: React.ReactElement;
 };
 
 export const AssetsCard: React.FC<AssetsCardProps> = ({
   title,
-  tagNumber,
-  chipLabel,
+  price,
+  image,
   variant,
+  tagNumber,
   chipIcon,
+  tokenSymbol,
 }) => {
-  const sizeVariant = variant === "sm" ? "w-20 h-20" : "h-40 w-40 ";
+  const query = `(min-width: 640px)`;
+  const mediaMatch = window.matchMedia(query).matches;
+  const sizeVariant =
+    variant === "sm" && mediaMatch
+      ? "h-40 w-40 "
+      : variant === "lg"
+      ? "h-40 w-40 "
+      : "h-20 w-20";
 
   return (
     <div>
-      <div
-        className={`relative ${sizeVariant} rounded-lg bg-contain bg-center`}
-        style={{
-          backgroundImage: `url(${nftImage})`,
-        }}
-      >
+      <div className={`relative ${sizeVariant}`}>
+        <img src={image} className="rounded-lg bg-cover" alt={tagNumber} />
         <ChipLabel
           styles="absolute -bottom-0 m-1"
-          label={chipLabel}
-          variant={variant}
+          price={price}
           icon={chipIcon}
+          variant={variant}
+          tokenSymbol={tokenSymbol}
         />
       </div>
-      {variant !== "sm" && (
+      {((variant === "sm" && mediaMatch) || variant === "lg") && (
         <div>
           <h3 className="mt-2 text-sm font-normal text-gray-light">{title}</h3>
           <span className="mt-1 font-bold text-white">{tagNumber}</span>
