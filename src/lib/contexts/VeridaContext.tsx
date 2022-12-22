@@ -21,8 +21,8 @@ type VeridaContextType = {
 };
 
 export const VeridaContext = React.createContext<VeridaContextType>({
-  connect: async () => { },
-  disconnect: async () => { },
+  connect: async () => {},
+  disconnect: async () => {},
   isConnecting: false,
   isConnected: false,
   account: null,
