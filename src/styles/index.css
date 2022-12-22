@@ -6,6 +6,6 @@
 
 @layer base {
   body {
-    @apply font-sora;
+    @apply bg-background font-sans text-sm text-primary;
   }
 }

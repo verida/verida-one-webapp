@@ -2,3 +2,4 @@ node_modules
 build
 tailwind.config.js
 postcss.config.js
+src/lib/lang/*.json

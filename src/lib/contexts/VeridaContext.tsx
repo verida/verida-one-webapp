@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Context } from "@verida/client-ts";
 import { VaultAccount, hasSession } from "@verida/account-web-vault";
-import { UserProfile } from "../types";
-import { config } from "../config";
-import { Verida } from "../utils";
+import { UserProfile } from "lib/types";
+import { config } from "lib/config";
+import { Verida } from "lib/utils";
 
 interface VeridaProviderProps {
   children?: React.ReactNode;

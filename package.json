@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@formatjs/cli": "^4.5.0",
+    "@icon-park/react": "^1.4.2",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.5.0",

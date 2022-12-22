@@ -1,0 +1,43 @@
+import React from "react";
+import { AssetPriceChip } from "components/molecules";
+import { Collectible } from "lib/types";
+import { AssetMedia } from "components/atoms";
+
+type CollectibleCardProps = {
+  collectible: Collectible;
+  variant?: "standard" | "compact";
+} & Omit<React.ComponentPropsWithoutRef<"div">, "children">;
+
+export const CollectibleCard: React.FC<CollectibleCardProps> = (props) => {
+  const { collectible, variant = "standard", ...otherProps } = props;
+
+  return (
+    <div {...otherProps}>
+      <div className="flex flex-col items-start space-y-2">
+        <div className="relative">
+          <AssetMedia
+            src={collectible.media}
+            alt={collectible.tokenLabel}
+            radius={variant === "compact" ? "rounded-lg" : "rounded-xl"}
+          />
+          {collectible.floorPrice && collectible.priceUnit && (
+            <div className="absolute bottom-0 left-0 ml-1 mb-1 max-w-full pr-2">
+              <AssetPriceChip
+                variant={variant}
+                chain={collectible.chain}
+                price={collectible.floorPrice}
+                unit={collectible.priceUnit}
+              />
+            </div>
+          )}
+        </div>
+        {variant !== "compact" && (
+          <div className="flex flex-col items-start">
+            <p className="text-primary/60">{collectible.collectionLabel}</p>
+            <p className="font-bold">{collectible.tokenLabel}</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};

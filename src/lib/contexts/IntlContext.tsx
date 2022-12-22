@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { IntlProvider as ReactIntlProvider } from "react-intl";
-import { defaultLocale, getMessages, getUserLocale } from "../lang";
-import { LocalizedMessages } from "../types";
+import { defaultLocale, getMessages, getUserLocale } from "lib/lang";
+import { LocalizedMessages } from "lib/types";
 
 interface Props {
   children: React.ReactNode;
