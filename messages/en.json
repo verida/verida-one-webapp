@@ -1,10 +1,34 @@
 {
-  "App.ComingSoon": {
-    "description": "Message stating that the app will be available soon",
-    "defaultMessage": "Coming Soon"
-  },
-  "App.LogoAlt": {
+  "Header.logoAlt": {
     "description": "Alternate text for the logo image",
     "defaultMessage": "Verida One Logo"
+  },
+  "Header.connectButtonLabel": {
+    "description": "Label of the Connect button in the Header",
+    "defaultMessage": "Connect"
+  },
+  "Footer.createOwnProfileMessage": {
+    "description": "Call to action for viewer to create their own profile",
+    "defaultMessage": "Create your own profile"
+  },
+  "FeaturedSection.sectionTitle": {
+    "description": "Title of the 'Featured' section in the 'Profile' page",
+    "defaultMessage": "Featured"
+  },
+  "SocialMediaSection.sectionTitle": {
+    "description": "Title of the 'Socials' section in the 'Profile' page",
+    "defaultMessage": "Socials"
+  },
+  "CollectiblesSection.sectionTitle": {
+    "description": "Title of the 'Collectibles' section in the 'Profile' page",
+    "defaultMessage": "Collectibles"
+  },
+  "CollectiblesSection.showAllButtonLabel": {
+    "description": "Label of the button redirecting from the 'Collectibles' profile section to the 'Collectibles' page",
+    "defaultMessage": "Show All"
+  },
+  "CustomLinksSection.sectionTitle": {
+    "description": "Title of the 'Links' section in the 'Profile' page",
+    "defaultMessage": "Links"
   }
 }
