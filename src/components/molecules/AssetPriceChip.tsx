@@ -12,6 +12,7 @@ type AssetPriceChipProps = {
   variant?: AssetPriceChipVariant;
 };
 
+/** Render a chip with the price, unit and chain logo of an asset */
 export const AssetPriceChip: React.FunctionComponent<AssetPriceChipProps> = (
   props
 ) => {

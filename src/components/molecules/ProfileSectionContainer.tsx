@@ -6,6 +6,8 @@ type ProfileSectionContainerProps = {
   onClickMore?: () => void;
 } & React.ComponentPropsWithoutRef<"section">;
 
+/** Conatiner for a section in a the Profile page. Provides a title and an
+ * action button with the `onClickMore` prop.*/
 export const ProfileSectionContainer: React.FunctionComponent<
   ProfileSectionContainerProps
 > = (props) => {

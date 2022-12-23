@@ -9,6 +9,7 @@ type WalletAddressCardProps = {
   address: WalletAddress;
 } & Omit<React.ComponentPropsWithoutRef<"div">, "children">;
 
+/** Rendering a card with the main information of a wallet address. */
 export const WalletAddressCard: React.FunctionComponent<
   WalletAddressCardProps
 > = (props) => {
