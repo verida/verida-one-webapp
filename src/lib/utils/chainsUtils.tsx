@@ -1,32 +1,64 @@
 import React from "react";
-import { Chains, ETHEREUM_CHAIN_EXPLORER_ADDRESS_URL } from "lib/constants";
+import {
+  ALGORAND_EXPLORER_ADDRESS_URL,
+  ALGORAND_TESTNET_EXPLORER_ADDRESS_URL,
+  ChainNetworkTypes,
+  Chains,
+  ETHEREUM_EXPLORER_ADDRESS_URL,
+  ETHEREUM_TESTNET_EXPLORER_ADDRESS_URL,
+  NEAR_EXPLORER_ADDRESS_URL,
+  NEAR_TESTNET_EXPLORER_ADDRESS_URL,
+  POLYGON_EXPLORER_ADDRESS_URL,
+  POLYGON_TESTNET_EXPLORER_ADDRESS_URL,
+} from "lib/constants";
 import { Icon } from "components/atoms";
 
 export const getChainLogo = (chain: Chains, size?: number): React.ReactNode => {
-  // TODO: introduce variants such as coloured, white, black, ...
-
   switch (chain) {
+    case Chains.ALGORAND:
+      return <Icon type="chain-algorand" size={size} />;
     case Chains.ETHEREUM:
       return <Icon type="chain-ethereum" size={size} />;
-    case Chains.POLYGON: // TODO: Provide an icon for Polygon
-    case Chains.ALGORAND: // TODO: Provide an icon for Algorand
-    case Chains.NEAR: // TODO: Provide an icon for Near
+    case Chains.NEAR:
+      return <Icon type="chain-near" size={size} />;
+    case Chains.POLYGON:
+      return <Icon type="chain-polygon" size={size} />;
     default:
-      return null;
+      throw new Error("Chain not supported");
   }
 };
 
 export const getChainExplorerUrlForAddress = (
   chain: Chains,
-  address: string
+  address: string,
+  network = ChainNetworkTypes.MAINNET
 ): string => {
   switch (chain) {
+    case Chains.ALGORAND:
+      return `${
+        network === ChainNetworkTypes.TESTNET
+          ? ALGORAND_TESTNET_EXPLORER_ADDRESS_URL
+          : ALGORAND_EXPLORER_ADDRESS_URL
+      }/${address}`;
     case Chains.ETHEREUM:
-      return `${ETHEREUM_CHAIN_EXPLORER_ADDRESS_URL}/${address}`;
-    case Chains.POLYGON: // TODO: Provide an icon for Polygon
-    case Chains.ALGORAND: // TODO: Provide an icon for Algorand
-    case Chains.NEAR: // TODO: Provide an icon for Near
+      return `${
+        network === ChainNetworkTypes.TESTNET
+          ? ETHEREUM_TESTNET_EXPLORER_ADDRESS_URL
+          : ETHEREUM_EXPLORER_ADDRESS_URL
+      }/${address}`;
+    case Chains.NEAR:
+      return `${
+        network === ChainNetworkTypes.TESTNET
+          ? NEAR_TESTNET_EXPLORER_ADDRESS_URL
+          : NEAR_EXPLORER_ADDRESS_URL
+      }/${address}`;
+    case Chains.POLYGON:
+      return `${
+        network === ChainNetworkTypes.TESTNET
+          ? POLYGON_TESTNET_EXPLORER_ADDRESS_URL
+          : POLYGON_EXPLORER_ADDRESS_URL
+      }/${address}`;
     default:
-      throw new Error("Chain not yet implemented");
+      throw new Error("Chain not supported");
   }
 };

@@ -70,13 +70,11 @@ export const WalletAddresses: WalletAddress[] = [
     address: "0xfD22004806A6846EA67ad883356be810F0428793",
     chain: Chains.ETHEREUM,
     verified: true,
-    explorerUrl: "",
   },
   {
     address: "0xc6400A5584db71e41B0E5dFbdC769b54B91256CD",
     chain: Chains.ETHEREUM,
     verified: true,
-    explorerUrl: "",
   },
 ];
 

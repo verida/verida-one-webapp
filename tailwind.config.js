@@ -31,10 +31,6 @@ module.exports = {
       backdropBlur: {
         xs: "3px",
       },
-      backgroundImage: {
-        "top-gradient": "url('./images/top-bg-gradient.png')",
-        "bottom-gradient": "url('./images/bottom-bg-gradient.png')",
-      },
     },
   },
   plugins: [],

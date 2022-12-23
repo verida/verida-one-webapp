@@ -8,6 +8,8 @@ type CollectibleCardProps = {
   variant?: "standard" | "compact";
 } & Omit<React.ComponentPropsWithoutRef<"div">, "children">;
 
+/** Render a card displaying the main information of a Collectible: media,
+ * labels of the collection and item and price.  */
 export const CollectibleCard: React.FC<CollectibleCardProps> = (props) => {
   const { collectible, variant = "standard", ...otherProps } = props;
 
