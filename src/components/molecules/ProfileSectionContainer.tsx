@@ -3,6 +3,7 @@ import { Icon, IconButton } from "components/atoms";
 
 type ProfileSectionContainerProps = {
   title: string;
+  badge?: string | number;
   onClickMore?: () => void;
 } & React.ComponentPropsWithoutRef<"section">;
 
@@ -11,7 +12,7 @@ type ProfileSectionContainerProps = {
 export const ProfileSectionContainer: React.FunctionComponent<
   ProfileSectionContainerProps
 > = (props) => {
-  const { children, title, onClickMore, ...otherProps } = props;
+  const { children, title, badge, onClickMore, ...otherProps } = props;
 
   if (!children) {
     return null;
@@ -21,7 +22,15 @@ export const ProfileSectionContainer: React.FunctionComponent<
     <section {...otherProps}>
       <div className="">
         <div className="mb-2 flex items-center justify-between space-x-1.5">
-          <h3 className="py-1.5 font-semibold">{title}</h3>
+          <div className="flex items-center space-x-1">
+            <h3 className="py-1.5 font-semibold">{title}</h3>
+            {badge && (
+              <div className="rounded bg-gray-dark p-0.5 text-xs leading-3">
+                {/** TODO: Create a dedicated atomic component */}
+                {badge}
+              </div>
+            )}
+          </div>
           {onClickMore && (
             <IconButton
               variant="text"
