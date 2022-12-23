@@ -12,7 +12,10 @@ import {
 import { ReactComponent as Share } from "assets/icons/share.svg";
 import { ReactComponent as Outside } from "assets/icons/outside.svg";
 import { ReactComponent as VeridaTick } from "assets/icons/verida_tick.svg";
+import { ReactComponent as Algorand } from "assets/logos/chains/algorand.svg";
 import { ReactComponent as Ethereum } from "assets/logos/chains/ethereum.svg";
+import { ReactComponent as Near } from "assets/logos/chains/near.svg";
+import { ReactComponent as Polygon } from "assets/logos/chains/polygon.svg";
 import { ReactComponent as Discord } from "assets/logos/socialMedia/discord.svg";
 
 // TODO: Need a variant for the logos (coloured, white, black, ...)
@@ -29,7 +32,11 @@ type GenericIconType =
   | "arrow-right"
   | "verida-tick";
 type SocialMediaIconType = "social-twitter" | "social-discord";
-type ChainIconType = "chain-ethereum";
+type ChainIconType =
+  | "chain-algorand"
+  | "chain-ethereum"
+  | "chain-near"
+  | "chain-polygon";
 type IconType = GenericIconType | SocialMediaIconType | ChainIconType;
 
 type IconProps = {
@@ -73,10 +80,28 @@ export const Icon: React.FunctionComponent<IconProps> = (props) => {
           <VeridaTick height={size} width={size} />
         </IconContainer>
       );
+    case "chain-algorand":
+      return (
+        <IconContainer {...otherProps}>
+          <Algorand height={size} width={size} />
+        </IconContainer>
+      );
     case "chain-ethereum":
       return (
         <IconContainer {...otherProps}>
           <Ethereum height={size} width={size} />
+        </IconContainer>
+      );
+    case "chain-near":
+      return (
+        <IconContainer {...otherProps}>
+          <Near height={size} width={size} />
+        </IconContainer>
+      );
+    case "chain-polygon":
+      return (
+        <IconContainer {...otherProps}>
+          <Polygon height={size} width={size} />
         </IconContainer>
       );
     case "social-discord":
