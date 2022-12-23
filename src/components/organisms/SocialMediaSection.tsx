@@ -7,7 +7,7 @@ type SocialSectionProps = {
   socialMediaLinks: SocialMediaLinkType[];
 };
 
-/** Section for the Profile page redenring the list of Social Media links */
+/** Section for the Profile page rendering the list of Social Media links */
 export const SocialMediaSection: React.FC<SocialSectionProps> = (props) => {
   const { socialMediaLinks } = props;
 

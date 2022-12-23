@@ -10,7 +10,7 @@ type WalletSectionProps = {
   addresses: WalletAddress[];
 };
 
-/** Section for the Profile page redenring the list of wallet addresses */
+/** Section for the Profile page rendering the list of wallet addresses */
 export const WalletAddressesSection: React.FC<WalletSectionProps> = (props) => {
   const { addresses } = props;
 

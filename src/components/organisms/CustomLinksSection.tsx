@@ -7,7 +7,7 @@ type LinkSectionProps = {
   links: CustomLinkType[];
 };
 
-/** Section for the Profile page redenring the list of custom links */
+/** Section for the Profile page rendering the list of custom links */
 export const CustomLinksSection: React.FC<LinkSectionProps> = (props) => {
   const { links } = props;
 

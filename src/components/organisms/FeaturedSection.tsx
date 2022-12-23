@@ -14,7 +14,7 @@ type FeaturedSectionProps = {
   links: CustomLinkType[];
 };
 
-/** Section for the Profile page redenring the featured items */
+/** Section for the Profile page rendering the featured items */
 export const FeaturedSection: React.FC<FeaturedSectionProps> = (props) => {
   const { collectibles, links } = props;
 

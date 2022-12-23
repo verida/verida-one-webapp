@@ -6,7 +6,7 @@ type ProfileInfoSectionProps = {
   profileInfo: ProfileInfo;
 };
 
-/** Section for the Profile page redenring the main information */
+/** Section for the Profile page rendering the main information */
 export const ProfileInfoSection: React.FC<ProfileInfoSectionProps> = (
   props
 ) => {

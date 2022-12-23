@@ -10,7 +10,7 @@ type CollectiblesSectionProps = {
   collectibles: Collectible[];
 };
 
-/** Section for the Profile page redenring the list of Collectibles */
+/** Section for the Profile page rendering the list of Collectibles */
 export const CollectiblesSection: React.FC<CollectiblesSectionProps> = (
   props
 ) => {
