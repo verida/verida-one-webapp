@@ -1,10 +1,15 @@
 import React from "react";
 import {
   ALGORAND_EXPLORER_ADDRESS_URL,
+  ALGORAND_TESTNET_EXPLORER_ADDRESS_URL,
+  ChainNetworkTypes,
   Chains,
   ETHEREUM_EXPLORER_ADDRESS_URL,
+  ETHEREUM_TESTNET_EXPLORER_ADDRESS_URL,
   NEAR_EXPLORER_ADDRESS_URL,
+  NEAR_TESTNET_EXPLORER_ADDRESS_URL,
   POLYGON_EXPLORER_ADDRESS_URL,
+  POLYGON_TESTNET_EXPLORER_ADDRESS_URL,
 } from "lib/constants";
 import { Icon } from "components/atoms";
 
@@ -25,17 +30,34 @@ export const getChainLogo = (chain: Chains, size?: number): React.ReactNode => {
 
 export const getChainExplorerUrlForAddress = (
   chain: Chains,
-  address: string
+  address: string,
+  network = ChainNetworkTypes.MAINNET
 ): string => {
   switch (chain) {
     case Chains.ALGORAND:
-      return `${ALGORAND_EXPLORER_ADDRESS_URL}/${address}`;
+      return `${
+        network === ChainNetworkTypes.TESTNET
+          ? ALGORAND_TESTNET_EXPLORER_ADDRESS_URL
+          : ALGORAND_EXPLORER_ADDRESS_URL
+      }/${address}`;
     case Chains.ETHEREUM:
-      return `${ETHEREUM_EXPLORER_ADDRESS_URL}/${address}`;
+      return `${
+        network === ChainNetworkTypes.TESTNET
+          ? ETHEREUM_TESTNET_EXPLORER_ADDRESS_URL
+          : ETHEREUM_EXPLORER_ADDRESS_URL
+      }/${address}`;
     case Chains.NEAR:
-      return `${NEAR_EXPLORER_ADDRESS_URL}/${address}`;
+      return `${
+        network === ChainNetworkTypes.TESTNET
+          ? NEAR_TESTNET_EXPLORER_ADDRESS_URL
+          : NEAR_EXPLORER_ADDRESS_URL
+      }/${address}`;
     case Chains.POLYGON:
-      return `${POLYGON_EXPLORER_ADDRESS_URL}/${address}`;
+      return `${
+        network === ChainNetworkTypes.TESTNET
+          ? POLYGON_TESTNET_EXPLORER_ADDRESS_URL
+          : POLYGON_EXPLORER_ADDRESS_URL
+      }/${address}`;
     default:
       throw new Error("Chain not supported");
   }

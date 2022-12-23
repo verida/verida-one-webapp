@@ -27,7 +27,6 @@ export interface WalletAddress {
   address: string;
   chain: Chains;
   verified?: boolean;
-  explorerUrl: string;
 }
 
 export interface Collectible {
