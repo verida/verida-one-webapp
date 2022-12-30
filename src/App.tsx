@@ -1,24 +1,53 @@
 import React from "react";
-import { Footer, Header, HeaderOffset } from "components/organisms";
-import { ProfileView } from "components/pages";
+import {
+  BadgeDetailsView,
+  BadgeListView,
+  CollectibleDetailsView,
+  CollectibleListView,
+  HomeView,
+  NoProfileFoundView,
+  ProfileView,
+} from "components/pages";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { AppLayout } from "components/templates";
 
-export const App = () => {
+/**
+ * Routes
+ *
+ * /                                          -> Home
+ * /:identity                                 -> Profile
+ * /:identity/collectibles                    -> CollectibleList
+ * /:identity/collectibles/:collectibleId     -> CollectibleDetails
+ * /:identity/badges                          -> BadgeList
+ * /:identity/badges/:badgeId                 -> BadgeDetails
+ */
+
+export const App: React.FunctionComponent = () => {
   return (
-    <div className="relative flex h-full w-full flex-col">
-      <div className="fixed top-0 left-0 right-0 z-50 backdrop-blur-[6px]">
-        <Header />
-      </div>
-      <div className="bg-app">
-        <HeaderOffset />
-        <div className="z-10 flex-grow pt-4">
-          <main className={`mx-auto w-full max-w-screen-sm px-4`}>
-            <ProfileView />
-          </main>
-          <div className="pt-10 pb-10">
-            <Footer />
-          </div>
-        </div>
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<HomeView />} />
+          <Route path=":identity">
+            <Route
+              index
+              element={<ProfileView />}
+              errorElement={<NoProfileFoundView />}
+            />
+            <Route path="collectibles">
+              <Route index element={<CollectibleListView />} />
+              <Route
+                path=":collectibleId"
+                element={<CollectibleDetailsView />}
+              />
+            </Route>
+            <Route path="badges">
+              <Route index element={<BadgeListView />} />
+              <Route path=":badgeId" element={<BadgeDetailsView />} />
+            </Route>
+          </Route>
+        </Route>
+      </Routes>
+    </Router>
   );
 };
