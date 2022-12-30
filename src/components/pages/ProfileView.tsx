@@ -23,6 +23,7 @@ import {
   SocialMediaLink,
   WalletAddress,
 } from "lib/types";
+import { ProfileCallToAction } from "components/molecules";
 
 export const ProfileView: React.FC = () => {
   const [profileInfo, setProfileInfo] = useState<ProfileInfo>({ name: "" });
@@ -65,6 +66,9 @@ export const ProfileView: React.FC = () => {
         {/** FIXME: Find a way to overlap the collectibles list above the padding of the main container */}
         <CustomLinksSection links={customLinks} />
         <WalletAddressesSection addresses={walletAddresses} />
+      </div>
+      <div className="pt-10 pb-10">
+        <ProfileCallToAction />
       </div>
     </div>
   );

@@ -7,7 +7,7 @@
     "description": "Label of the Connect button in the Header",
     "defaultMessage": "Connect"
   },
-  "Footer.createOwnProfileMessage": {
+  "ProfileCallToAction.createOwnProfileMessage": {
     "description": "Call to action for viewer to create their own profile",
     "defaultMessage": "Create your own profile"
   },
