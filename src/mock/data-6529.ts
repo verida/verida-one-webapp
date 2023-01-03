@@ -207,7 +207,7 @@ export const collectibles: Collectible[] = [
     contractAddress: "0xBd3531dA5CF5857e7CfAA92426877b022e612cf8",
     tokenId: "2974",
     collectionLabel: "Pudgy Penguins",
-    tokenLabel: "Pudgy Penguin # 2974",
+    tokenLabel: "Pudgy Penguin #2974",
     description:
       "A collection 8888 Cute Chubby Pudgy Penquins sliding around on the freezing ETH blockchain.",
     ownerAddress: "0xc6400A5584db71e41B0E5dFbdC769b54B91256CD",
