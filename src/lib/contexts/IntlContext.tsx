@@ -31,9 +31,6 @@ export const IntlProvider: React.FunctionComponent<Props> = (props) => {
       locale={locale}
       defaultLocale={defaultLocale}
       messages={messages}
-      onError={() => {
-        // TODO: Handle errors
-      }}
     >
       {props.children}
     </ReactIntlProvider>
