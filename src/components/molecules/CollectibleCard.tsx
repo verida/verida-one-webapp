@@ -2,6 +2,7 @@ import React from "react";
 import { AssetPriceChip } from "components/molecules";
 import { Collectible } from "lib/types";
 import { AssetMedia } from "components/atoms";
+import { splitTokenLabel } from "lib/utils";
 
 type CollectibleCardProps = {
   collectible: Collectible;
@@ -12,6 +13,11 @@ type CollectibleCardProps = {
  * labels of the collection and item and price.  */
 export const CollectibleCard: React.FC<CollectibleCardProps> = (props) => {
   const { collectible, variant = "standard", ...otherProps } = props;
+
+  const { labelWithoutIdPart, idPart } = splitTokenLabel(
+    collectible.tokenLabel,
+    collectible.tokenId
+  );
 
   return (
     <div {...otherProps}>
@@ -38,7 +44,10 @@ export const CollectibleCard: React.FC<CollectibleCardProps> = (props) => {
             <p className="w-full truncate text-primary/60">
               {collectible.collectionLabel}
             </p>
-            <p className="font-bold">{collectible.tokenLabel}</p>
+            <p className="flex w-full font-bold">
+              <span className="mr-1 truncate">{labelWithoutIdPart}</span>
+              {idPart && <span className="whitespace-nowrap">{idPart}</span>}
+            </p>
           </div>
         )}
       </div>
