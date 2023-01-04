@@ -20,6 +20,8 @@ import { AppLayout } from "components/templates";
  * /:identity/collectibles/:collectibleId     -> CollectibleDetails
  * /:identity/badges                          -> BadgeList
  * /:identity/badges/:badgeId                 -> BadgeDetails
+ *
+ * TODO: Strenghten with a list of routes as constant to be used throughout the app
  */
 
 export const App: React.FunctionComponent = () => {

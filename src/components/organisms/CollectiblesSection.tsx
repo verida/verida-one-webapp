@@ -3,7 +3,7 @@ import { useIntl } from "react-intl";
 import { CollectibleCard, ProfileSectionContainer } from "components/molecules";
 import { Collectible } from "lib/types";
 import { Button } from "components/atoms";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MAX_COLLECTIBLES_IN_PROFILE_SECTION } from "lib/constants";
 
 type CollectiblesSectionProps = {
@@ -17,14 +17,15 @@ export const CollectiblesSection: React.FC<CollectiblesSectionProps> = (
   const { collectibles } = props;
 
   const i18n = useIntl();
+  const navigate = useNavigate();
 
   const handleClickMore = useCallback(() => {
-    // TODO: Redirect to Collectibles page when implemented
-  }, []);
+    navigate("collectibles");
+  }, [navigate]);
 
   const handleClickShowAll = useCallback(() => {
-    // TODO: Redirect to Collectibles page when implemented
-  }, []);
+    navigate("collectibles");
+  }, [navigate]);
 
   if (!collectibles || collectibles.length === 0) {
     return null;
@@ -68,7 +69,9 @@ export const CollectiblesSection: React.FC<CollectiblesSectionProps> = (
             key={`${collectible.contractAddress}#${collectible.tokenId}`}
             className="snap-start transition-all"
           >
-            <Link to={``}>
+            <Link
+              to={`collectibles/${collectible.contractAddress}#${collectible.tokenId}`}
+            >
               <CollectibleCard variant="standard" collectible={collectible} />
             </Link>
           </li>
