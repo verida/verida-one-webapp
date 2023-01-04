@@ -4,7 +4,7 @@ import { SocialMediaLink as SocialMediaLinkType } from "lib/types";
 import { ProfileSectionContainer, SocialMediaLink } from "components/molecules";
 
 type SocialSectionProps = {
-  socialMediaLinks: SocialMediaLinkType[];
+  socialMediaLinks?: SocialMediaLinkType[];
 };
 
 /** Section for the Profile page rendering the list of Social Media links */
@@ -13,7 +13,7 @@ export const SocialMediaSection: React.FC<SocialSectionProps> = (props) => {
 
   const i18n = useIntl();
 
-  if (socialMediaLinks.length === 0) {
+  if (!socialMediaLinks || socialMediaLinks.length === 0) {
     return null;
   }
 

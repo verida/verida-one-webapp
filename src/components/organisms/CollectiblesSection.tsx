@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { MAX_COLLECTIBLES_IN_PROFILE_SECTION } from "lib/constants";
 
 type CollectiblesSectionProps = {
-  collectibles: Collectible[];
+  collectibles?: Collectible[];
 };
 
 /** Section for the Profile page rendering the list of Collectibles */
@@ -15,11 +15,6 @@ export const CollectiblesSection: React.FC<CollectiblesSectionProps> = (
   props
 ) => {
   const { collectibles } = props;
-  const truncatedCollectiblesList = collectibles.slice(
-    0,
-    MAX_COLLECTIBLES_IN_PROFILE_SECTION
-  );
-  const hasMore = collectibles.length > truncatedCollectiblesList.length;
 
   const i18n = useIntl();
 
@@ -31,9 +26,15 @@ export const CollectiblesSection: React.FC<CollectiblesSectionProps> = (
     // TODO: Redirect to Collectibles page when implemented
   }, []);
 
-  if (collectibles.length === 0) {
+  if (!collectibles || collectibles.length === 0) {
     return null;
   }
+
+  const truncatedCollectiblesList = collectibles.slice(
+    0,
+    MAX_COLLECTIBLES_IN_PROFILE_SECTION
+  );
+  const hasMore = collectibles.length > truncatedCollectiblesList.length;
 
   const sectionTitle = i18n.formatMessage({
     id: "CollectiblesSection.sectionTitle",
