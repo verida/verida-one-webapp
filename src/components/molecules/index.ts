@@ -7,4 +7,4 @@ export * from "./ProfileCallToAction";
 export * from "./ProfileSectionContainer";
 export * from "./SocialMediaLink";
 export * from "./WalletAddressCard";
-export * from "./AssetPageWrapper";
+export * from "./PageWrapper";

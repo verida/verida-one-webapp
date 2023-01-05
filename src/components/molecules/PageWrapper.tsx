@@ -2,14 +2,14 @@ import React from "react";
 import { Badge, Icon, IconButton } from "components/atoms";
 import { useNavigate } from "react-router-dom";
 
-type AssetPageWrapperProps = {
+type PageWrapperProps = {
   title: string;
-  badgeCount?: string | number;
+  badgeValue?: string | number;
 } & React.ComponentPropsWithoutRef<"div">;
 
 /** Assets Page wrapper to wrapper badge-list, collectibles lists page */
-export const AssetPageWrapper: React.FC<AssetPageWrapperProps> = (props) => {
-  const { children, title, badgeCount, ...otherProps } = props;
+export const PageWrapper: React.FC<PageWrapperProps> = (props) => {
+  const { children, title, badgeValue, ...otherProps } = props;
   const navigate = useNavigate();
 
   const handleGoBackNavigation = () => {
@@ -22,20 +22,19 @@ export const AssetPageWrapper: React.FC<AssetPageWrapperProps> = (props) => {
 
   return (
     <div {...otherProps}>
-      <div className="mb-7 flex items-center justify-between">
+      <header className="mb-6 flex items-center justify-between">
         <IconButton
           variant="text"
           size="small"
           icon={<Icon type="arrow-left" />}
           onClick={handleGoBackNavigation}
         />
-        <div>
-          {badgeCount && (
-            <Badge className="text-xl" count={badgeCount} title={title} />
-          )}
+        <div className="flex items-center space-x-1">
+          <h2 className={`text-xl font-bold`}>{title}</h2>
+          {badgeValue && <Badge value={badgeValue} />}
         </div>
         <div />
-      </div>
+      </header>
       <div>{children}</div>
     </div>
   );

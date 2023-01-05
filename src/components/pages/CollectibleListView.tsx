@@ -1,5 +1,5 @@
-import { AssetPageWrapper } from "components/molecules";
-import { CollectiblesList } from "components/organisms";
+import { PageWrapper } from "components/molecules";
+import { CollectibleGrid } from "components/organisms";
 import { Collectible } from "lib/types";
 import { getCollectibles } from "lib/utils";
 import React, { useEffect, useState } from "react";
@@ -9,10 +9,9 @@ export const CollectibleListView: React.FunctionComponent = () => {
   const i18n = useIntl();
   const [collectibles, setCollectibles] = useState<Collectible[]>([]);
 
-  const sectionTitle = i18n.formatMessage({
-    id: "CollectiblesListPage.sectionTitle",
-    description:
-      "Title of the 'Collectibles' section in the 'Collectible list view' page",
+  const pageTitle = i18n.formatMessage({
+    id: "CollectibleListView.pageTitle",
+    description: "Title of the 'Collectibles' page",
     defaultMessage: "Collectibles",
   });
 
@@ -24,8 +23,8 @@ export const CollectibleListView: React.FunctionComponent = () => {
   }, []);
 
   return (
-    <AssetPageWrapper title={sectionTitle} badgeCount={collectibles.length}>
-      <CollectiblesList collectibles={collectibles} />
-    </AssetPageWrapper>
+    <PageWrapper title={pageTitle} badgeValue={collectibles.length}>
+      <CollectibleGrid collectibles={collectibles} />
+    </PageWrapper>
   );
 };

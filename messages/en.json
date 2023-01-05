@@ -16,9 +16,9 @@
   "CollectibleDetailsView.message": {
     "defaultMessage": "Collectible details"
   },
-  "CollectiblesListPage.sectionTitle": {
+  "CollectibleListView.pageTitle": {
     "defaultMessage": "Collectibles",
-    "description": "Title of the 'Collectibles' section in the 'Collectible list view' page"
+    "description": "Title of the 'Collectibles' page"
   },
   "CollectiblesSection.sectionTitle": {
     "defaultMessage": "Collectibles",
