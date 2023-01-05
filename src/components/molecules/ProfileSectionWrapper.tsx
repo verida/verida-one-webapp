@@ -1,35 +1,30 @@
 import React from "react";
-import { Icon, IconButton } from "components/atoms";
+import { Badge, Icon, IconButton } from "components/atoms";
 
-type ProfileSectionContainerProps = {
+type ProfileSectionWrapperProps = {
   title: string;
-  badge?: string | number;
+  badgeValue?: string | number;
   onClickMore?: () => void;
 } & React.ComponentPropsWithoutRef<"section">;
 
-/** Conatiner for a section in a the Profile page. Provides a title and an
+/** Wrapper for a section in a the Profile page. Provides a title and an
  * action button with the `onClickMore` prop.*/
-export const ProfileSectionContainer: React.FunctionComponent<
-  ProfileSectionContainerProps
+export const ProfileSectionWrapper: React.FunctionComponent<
+  ProfileSectionWrapperProps
 > = (props) => {
-  const { children, title, badge, onClickMore, ...otherProps } = props;
+  const { children, title, badgeValue, onClickMore, ...sectionProps } = props;
 
   if (!children) {
     return null;
   }
 
   return (
-    <section {...otherProps}>
+    <section {...sectionProps}>
       <div className="">
         <div className="mb-2 flex items-center justify-between space-x-1.5">
           <div className="flex items-center space-x-1">
             <h3 className="py-1.5 font-semibold">{title}</h3>
-            {badge && (
-              <div className="rounded bg-gray-dark p-0.5 text-xs leading-3">
-                {/** TODO: Create a dedicated atomic component */}
-                {badge}
-              </div>
-            )}
+            {badgeValue && <Badge value={badgeValue} />}
           </div>
           {onClickMore && (
             <IconButton
