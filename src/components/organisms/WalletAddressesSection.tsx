@@ -7,7 +7,7 @@ import {
 } from "components/molecules";
 
 type WalletSectionProps = {
-  addresses: WalletAddress[];
+  addresses?: WalletAddress[];
 };
 
 /** Section for the Profile page rendering the list of wallet addresses */
@@ -16,7 +16,7 @@ export const WalletAddressesSection: React.FC<WalletSectionProps> = (props) => {
 
   const i18n = useIntl();
 
-  if (addresses.length === 0) {
+  if (!addresses || addresses.length === 0) {
     return null;
   }
 

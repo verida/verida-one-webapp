@@ -4,7 +4,7 @@ import { CustomLink, ProfileSectionContainer } from "components/molecules";
 import { CustomLink as CustomLinkType } from "lib/types";
 
 type LinkSectionProps = {
-  links: CustomLinkType[];
+  links?: CustomLinkType[];
 };
 
 /** Section for the Profile page rendering the list of custom links */
@@ -13,7 +13,7 @@ export const CustomLinksSection: React.FC<LinkSectionProps> = (props) => {
 
   const i18n = useIntl();
 
-  if (links.length === 0) {
+  if (!links || links.length === 0) {
     return null;
   }
 

@@ -10,8 +10,8 @@ import { Link } from "react-router-dom";
 import { screenSizes } from "lib/constants";
 
 type FeaturedSectionProps = {
-  collectibles: Collectible[];
-  links: CustomLinkType[];
+  collectibles?: Collectible[];
+  links?: CustomLinkType[];
 };
 
 /** Section for the Profile page rendering the featured items */
@@ -25,7 +25,7 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = (props) => {
 
   const i18n = useIntl();
 
-  if (collectibles.length === 0 && links.length === 0) {
+  if (collectibles?.length === 0 && links?.length === 0) {
     return null;
   }
 
@@ -40,9 +40,11 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = (props) => {
     <ProfileSectionContainer title={sectionTitle}>
       <div className="flex flex-col space-y-3">
         <ul className="grid grid-cols-4 gap-2">
-          {collectibles.map((collectible) => (
+          {collectibles?.map((collectible) => (
             <li key={`${collectible.contractAddress}#${collectible.tokenId}`}>
-              <Link to={``}>
+              <Link
+                to={`collectibles/${collectible.contractAddress}#${collectible.tokenId}`}
+              >
                 <CollectibleCard
                   variant={mediaMatch ? "standard" : "compact"}
                   collectible={collectible}
@@ -52,7 +54,7 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = (props) => {
           ))}
         </ul>
         <ul className="space-y-2">
-          {links.map((link) => (
+          {links?.map((link) => (
             <li key={link.url}>
               <CustomLink link={link} />
             </li>
