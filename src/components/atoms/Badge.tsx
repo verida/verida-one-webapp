@@ -1,21 +1,16 @@
 import React from "react";
 
 type BadgeProps = {
-  count: number | string;
-  title: string;
+  value: number | string;
 } & React.ComponentPropsWithRef<"div">;
 
-export const Badge: React.FC<BadgeProps> = ({
-  count,
-  title,
-  className = "",
-  ...otherProps
-}) => {
+/** Display a information, usually a number, in a small container. */
+export const Badge: React.FC<BadgeProps> = (props) => {
+  const { value, ...divProps } = props;
   return (
-    <div {...otherProps} className="flex items-center space-x-1">
-      <h3 className={`py-1.5 text-sm font-semibold ${className}`}>{title}</h3>
+    <div {...divProps}>
       <div className="rounded bg-gray-dark p-0.5 text-xs leading-3">
-        {count}
+        {value}
       </div>
     </div>
   );
