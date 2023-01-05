@@ -8,6 +8,7 @@ import {
   Right,
   User,
   ArrowRight,
+  ArrowLeft,
 } from "@icon-park/react";
 import { ReactComponent as Share } from "assets/icons/share.svg";
 import { ReactComponent as Outside } from "assets/icons/outside.svg";
@@ -30,6 +31,7 @@ type GenericIconType =
   | "more"
   | "chevron-right"
   | "arrow-right"
+  | "arrow-left"
   | "verida-tick";
 type SocialMediaIconType = "social-twitter" | "social-discord";
 type ChainIconType =
@@ -72,6 +74,8 @@ export const Icon: React.FunctionComponent<IconProps> = (props) => {
       return <Right size={size} {...otherProps} />;
     case "arrow-right":
       return <ArrowRight size={size} {...otherProps} />;
+    case "arrow-left":
+      return <ArrowLeft size={size} {...otherProps} />;
     case "more":
       return <More size={size} {...otherProps} />;
     case "verida-tick":

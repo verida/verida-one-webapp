@@ -7,3 +7,4 @@ export * from "./CustomLinksSection";
 export * from "./SocialMediaSection";
 export * from "./WalletAddressesSection";
 export * from "./ProfileInfoSection";
+export * from "./CollectiblesList";
