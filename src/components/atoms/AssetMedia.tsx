@@ -4,6 +4,7 @@ type AssetMediaProps = {
   src: string; // Making src mandatory
   alt: string; // Making alt mandatory
   radius?: "rounded-lg" | "rounded-xl";
+  aspect?: "aspect-auto" | "aspect-square";
 } & Omit<React.ComponentPropsWithoutRef<"img">, "src" | "alt">;
 
 export const AssetMedia: React.FunctionComponent<AssetMediaProps> = (props) => {
@@ -11,6 +12,7 @@ export const AssetMedia: React.FunctionComponent<AssetMediaProps> = (props) => {
     src,
     alt,
     radius = "rounded-xl",
+    aspect = "aspect-square",
     className = "",
     ...otherProps
   } = props;
@@ -21,7 +23,7 @@ export const AssetMedia: React.FunctionComponent<AssetMediaProps> = (props) => {
       {...otherProps}
       src={src}
       alt={alt}
-      className={`aspect-square bg-cover ${radius} ${className}`}
+      className={`w-full object-cover ${aspect} ${radius} ${className}`}
     />
   );
 };
