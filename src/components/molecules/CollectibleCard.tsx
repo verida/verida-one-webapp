@@ -34,9 +34,13 @@ export const CollectibleCard: React.FC<CollectibleCardProps> = (props) => {
           )}
         </div>
         {variant !== "compact" && (
-          <div className="flex flex-col items-start">
-            <p className="text-primary/60">{collectible.collectionLabel}</p>
-            <p className="font-bold">{collectible.tokenLabel}</p>
+          <div className="flex max-w-full flex-col items-start">
+            <p className="w-full truncate text-primary/60">
+              {collectible.collectionLabel}
+            </p>
+            <p className="w-full font-bold line-clamp-2">
+              {collectible.tokenLabel}
+            </p>
           </div>
         )}
       </div>
