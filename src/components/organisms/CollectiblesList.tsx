@@ -11,7 +11,7 @@ export const CollectiblesList: React.FC<CollectiblesListProps> = ({
   collectibles,
 }) => {
   return (
-    <div className="grid grid-cols-2 space-x-2 space-y-4 md:grid-cols-3 lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-x-2 gap-y-4 sm:grid-cols-3 lg:grid-cols-4">
       {collectibles.map((collectible) => (
         <div key={`${collectible.contractAddress}#${collectible.tokenId}`}>
           <Link to={`${collectible.contractAddress}#${collectible.tokenId}`}>

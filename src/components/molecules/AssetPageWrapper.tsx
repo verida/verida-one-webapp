@@ -22,7 +22,7 @@ export const AssetPageWrapper: React.FC<AssetPageWrapperProps> = (props) => {
 
   return (
     <div {...otherProps}>
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-7 flex items-center justify-between">
         <IconButton
           variant="text"
           size="small"
