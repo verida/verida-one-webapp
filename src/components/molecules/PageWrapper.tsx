@@ -3,7 +3,7 @@ import { Badge, Icon, IconButton } from "components/atoms";
 import { useNavigate } from "react-router-dom";
 
 type PageWrapperProps = {
-  title: string;
+  title?: string;
   badgeValue?: string | number;
 } & React.ComponentPropsWithoutRef<"div">;
 
@@ -29,11 +29,13 @@ export const PageWrapper: React.FC<PageWrapperProps> = (props) => {
           icon={<Icon type="arrow-left" />}
           onClick={handleGoBackNavigation}
         />
-        <div className="flex items-center space-x-1">
-          <h2 className={`text-xl font-bold`}>{title}</h2>
-          {badgeValue && <Badge value={badgeValue} />}
-        </div>
-        <div />
+        {(title || badgeValue) && (
+          <div className="flex items-center space-x-1">
+            {title && <h2 className={`text-xl font-bold`}>{title}</h2>}
+            {badgeValue && <Badge value={badgeValue} />}
+          </div>
+        )}
+        <div className="w-8" />
       </header>
       <div>{children}</div>
     </div>
