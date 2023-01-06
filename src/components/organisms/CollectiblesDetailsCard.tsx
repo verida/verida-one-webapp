@@ -7,7 +7,12 @@ import { truncateWalletAddress } from "lib/utils/WalletUtils";
 
 type CollectiblesDetailsCardProps = Pick<
   Collectible,
-  "chain" | "ownerAddress" | "floorPrice" | "tokenId" | "contractAddress"
+  | "chain"
+  | "ownerAddress"
+  | "floorPrice"
+  | "tokenId"
+  | "contractAddress"
+  | "priceUnit"
 > &
   React.ComponentPropsWithRef<"div">;
 
@@ -18,6 +23,7 @@ export const CollectiblesDetailsCard: React.FC<
   contractAddress,
   tokenId,
   floorPrice,
+  priceUnit,
   ownerAddress,
   ...otherProps
 }) => {
@@ -66,7 +72,9 @@ export const CollectiblesDetailsCard: React.FC<
       </div>
       <div className="flex justify-between text-sm">
         <span>{floorPriceText}</span>
-        <span>{floorPrice}</span>
+        <span>
+          {floorPrice} {priceUnit}
+        </span>
       </div>
       <div className="flex justify-between text-sm">
         <h6>{assetsID}</h6>

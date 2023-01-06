@@ -36,6 +36,7 @@ const CollectibleDetailGrid: React.FC<CollectibleDetailGridProps> = ({
           description={collectible.description}
         />
         <CollectiblesDetailsCard
+          priceUnit={collectible.priceUnit}
           chain={collectible.chain}
           ownerAddress={collectible.ownerAddress}
           contractAddress={collectible.contractAddress}
