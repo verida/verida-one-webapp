@@ -68,7 +68,7 @@ export const featuredCollectibles: Collectible[] = [
     contractAddress: "0x10daa9f4c0f985430fde4959adb2c791ef2ccf83",
     tokenId: "10004",
     collectionLabel: "The Meta Key",
-    tokenLabel: "<Metakey: Edition 4 - The Captain",
+    tokenLabel: "Metakey: Edition 4 - The Captain",
     description:
       "We are the Metakey — a platform-agnostic and massively interoperable web3 utility creator. Our core product is a single token that can integrate with multiple platforms and games to transform into avatars; weapons; vehicles; exp bonuses; grant access to virtual land and exclusive educational content; VIP experiences at virtual events; and much more.",
     ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
