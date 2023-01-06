@@ -11,4 +11,3 @@ export * from "./ProfileSectionHeader";
 export * from "./SocialMediaLink";
 export * from "./WalletAddressCard";
 export * from "./AssetDetailsCard";
-export * from "./AssetLabelChip";

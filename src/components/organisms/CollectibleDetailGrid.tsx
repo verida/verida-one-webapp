@@ -1,7 +1,7 @@
 import React from "react";
 import { AssetMedia } from "components/atoms";
 import { AssetDetailsCard, CustomLink } from "components/molecules";
-import { CollectiblesDetailsCard } from "./CollectiblesDetailsCard";
+import { CollectiblesDetailsCard } from "../molecules/CollectiblesDetailsCard";
 import { useIntl } from "react-intl";
 import { Collectible } from "lib/types";
 import { getChainExplorerUrlForAddress } from "lib/utils";
