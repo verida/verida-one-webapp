@@ -1,19 +1,34 @@
-import React from "react";
-import { useIntl } from "react-intl";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Collectible } from "lib/types";
+import { collectibles } from "mock/data-6529";
+import CollectibleDetailGrid from "components/organisms/CollectibleDetailGrid";
+import { PageWrapper } from "components/molecules";
 
 export const CollectibleDetailsView: React.FunctionComponent = () => {
-  const i18n = useIntl();
+  const params = useParams();
+  const [collectible, setCollectible] = useState<Collectible | undefined>(
+    undefined
+  );
 
-  // Temporary message, to delete when implementing the component
-  // DO NOT ADD TO MESSAGES FILE
-  const message = i18n.formatMessage({
-    id: "CollectibleDetailsView.message",
-    defaultMessage: "Collectible details",
+  useEffect(() => {
+    getCollectiblesByID(collectibles);
   });
 
+  const getCollectiblesByID = (collectibles: Collectible[]) => {
+    const data = collectibles.find(
+      (item) => item.contractAddress === params?.collectibleId
+    );
+    setCollectible(data);
+  };
+
+  if (!collectible) {
+    return null;
+  }
+
   return (
-    <div className="flex flex-grow flex-col items-center space-y-12 p-8">
-      <p className="text-xl md:text-4xl">{message}</p>
-    </div>
+    <PageWrapper>
+      <CollectibleDetailGrid collectible={collectible} />
+    </PageWrapper>
   );
 };
