@@ -39,7 +39,7 @@ type ChainIconType =
   | "chain-ethereum"
   | "chain-near"
   | "chain-polygon";
-type IconType = GenericIconType | SocialMediaIconType | ChainIconType;
+export type IconType = GenericIconType | SocialMediaIconType | ChainIconType;
 
 type IconProps = {
   type: IconType;
