@@ -24,6 +24,7 @@ import {
   WalletAddress,
 } from "lib/types";
 import { ProfileCallToAction } from "components/molecules";
+import { useParams } from "react-router-dom";
 
 export const ProfileView: React.FC = () => {
   const [profileInfo, setProfileInfo] = useState<ProfileInfo>({ name: "" });
@@ -38,18 +39,20 @@ export const ProfileView: React.FC = () => {
   const [customLinks, setCustomLinks] = useState<CustomLink[]>([]);
   const [walletAddresses, setWalletAddresses] = useState<WalletAddress[]>([]);
 
+  const { identity } = useParams();
+
   useEffect(() => {
     const getData = async () => {
-      setProfileInfo(await getProfileInfo());
-      setFeaturedCollectibles(await getFeaturedCollectibles());
-      setFeaturedLinks(await getFeaturedLinks());
-      setSocialMediaLinks(await getSocialMediaLinks());
-      setCollectibles(await getCollectibles());
-      setCustomLinks(await getLinks());
-      setWalletAddresses(await getWalletAddresses());
+      setProfileInfo(await getProfileInfo(identity));
+      setFeaturedCollectibles(await getFeaturedCollectibles(identity));
+      setFeaturedLinks(await getFeaturedLinks(identity));
+      setSocialMediaLinks(await getSocialMediaLinks(identity));
+      setCollectibles(await getCollectibles(identity));
+      setCustomLinks(await getLinks(identity));
+      setWalletAddresses(await getWalletAddresses(identity));
     };
     void getData();
-  }, []);
+  }, [identity]);
 
   return (
     <div>
