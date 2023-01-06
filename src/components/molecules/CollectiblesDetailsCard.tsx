@@ -19,6 +19,8 @@ type CollectiblesDetailsCardProps = Pick<
 
 type copiedToClipboardItems = "assetsID" | "ownerAddress" | "contractAddress";
 
+const ICON_SIZE = 14;
+
 export const CollectiblesDetailsCard: React.FC<
   CollectiblesDetailsCardProps
 > = ({
@@ -70,48 +72,52 @@ export const CollectiblesDetailsCard: React.FC<
     };
   }, [copiedToClipboard]);
 
-  const chainText = i18n.formatMessage({
+  const chainTitle = i18n.formatMessage({
     id: "CollectibleDetailsCard.chain",
     defaultMessage: "Chain",
   });
 
-  const owner = i18n.formatMessage({
+  const ownerTitle = i18n.formatMessage({
     id: "CollectibleDetailsCard.owner",
     defaultMessage: "Owner",
   });
 
-  const floorPriceText = i18n.formatMessage({
+  const floorPriceTitle = i18n.formatMessage({
     id: "CollectibleDetailsCard.floorPrice",
     defaultMessage: "Floor price",
   });
 
-  const assetsID = i18n.formatMessage({
+  const assetsIDTitle = i18n.formatMessage({
     id: "CollectibleDetailsCard.assetID",
     defaultMessage: "Asset ID",
   });
 
-  const creatorWalletAddress = i18n.formatMessage({
+  const creatorWalletAddressTitle = i18n.formatMessage({
     id: "CollectibleDetailsCard.creatorWalletAddress",
     defaultMessage: "Creator wallet address",
   });
 
   return (
     <div className="space-y-2" {...otherProps}>
-      <div className="flex items-center  justify-between  text-sm">
-        <span>{chainText}</span>
-        <div className="flex">
-          {getChainLogo(chain)}
+      <div className="flex items-center justify-between text-sm">
+        <span>{chainTitle}</span>
+        <div className="flex items-center justify-center ">
+          <IconButton
+            size="small"
+            variant="text"
+            icon={getChainLogo(chain, ICON_SIZE)}
+          />
           <span>{chain}</span>
         </div>
       </div>
       <div className="flex justify-between text-sm">
-        <span>{owner}</span>
+        <span>{ownerTitle}</span>
         <div className="flex items-center  justify-center ">
           {copiedToClipboard.ownerAddress ? (
             <IconButton
               size="small"
               variant="text"
-              icon={<Icon type="check" />}
+              icon={<Icon size={ICON_SIZE} type="check" />}
             />
           ) : (
             <IconButton
@@ -120,26 +126,26 @@ export const CollectiblesDetailsCard: React.FC<
               onClick={() => {
                 handleCopyToClipboard(ownerAddress, "ownerAddress");
               }}
-              icon={<Icon type="copy" />}
+              icon={<Icon size={ICON_SIZE} type="copy" />}
             />
           )}
           <span>{truncateWalletAddress(ownerAddress)}</span>
         </div>
       </div>
       <div className="flex items-center justify-between text-sm">
-        <span>{floorPriceText}</span>
+        <span>{floorPriceTitle}</span>
         <span>
           {floorPrice} {priceUnit}
         </span>
       </div>
       <div className="flex items-center  justify-between  text-sm">
-        <h6>{assetsID}</h6>
+        <h6>{assetsIDTitle}</h6>
         <div className="flex items-center justify-center  ">
           {copiedToClipboard.assetsID ? (
             <IconButton
               size="small"
               variant="text"
-              icon={<Icon type="check" />}
+              icon={<Icon size={ICON_SIZE} type="check" />}
             />
           ) : (
             <IconButton
@@ -148,20 +154,20 @@ export const CollectiblesDetailsCard: React.FC<
               onClick={() => {
                 handleCopyToClipboard(tokenId, "assetsID");
               }}
-              icon={<Icon type="copy" />}
+              icon={<Icon size={ICON_SIZE} type="copy" />}
             />
           )}
           <span>{tokenId}</span>
         </div>
       </div>
       <div className="flex items-center  justify-between  text-sm">
-        <h6>{creatorWalletAddress}</h6>
+        <h6>{creatorWalletAddressTitle}</h6>
         <div className="flex items-center justify-center">
           {copiedToClipboard.contractAddress ? (
             <IconButton
               size="small"
               variant="text"
-              icon={<Icon type="check" />}
+              icon={<Icon size={ICON_SIZE} type="check" />}
             />
           ) : (
             <IconButton
@@ -170,7 +176,7 @@ export const CollectiblesDetailsCard: React.FC<
               onClick={() => {
                 handleCopyToClipboard(contractAddress, "contractAddress");
               }}
-              icon={<Icon type="copy" />}
+              icon={<Icon size={ICON_SIZE} type="copy" />}
             />
           )}
           <span>{truncateWalletAddress(contractAddress)}</span>
