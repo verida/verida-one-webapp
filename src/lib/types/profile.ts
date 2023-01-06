@@ -49,3 +49,13 @@ export interface VeridaBadge {
   itemLabel: string;
   media: string;
 }
+
+export interface Profile {
+  profileInfo: ProfileInfo;
+  socialMediaLinks: SocialMediaLink[];
+  featuredLinks: CustomLink[];
+  links: CustomLink[];
+  walletAddresses: WalletAddress[];
+  featuredCollectibles: Collectible[];
+  collectibles: Collectible[];
+}
