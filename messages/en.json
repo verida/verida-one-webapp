@@ -1,20 +1,11 @@
 {
-  "App.BadgeSectionTitle": {
+  "BadgesSection.sectionTitle": {
     "defaultMessage": "Badges",
-    "description": "Badges"
+    "description": "Title of the 'Badges' section in the 'Profile' page"
   },
-  "App.WalletSectionTitle": {
+  "WalletAddressesSection.sectionTitle": {
     "defaultMessage": "Wallets",
-    "description": "Wallets"
-  },
-  "BadgeDetailsView.message": {
-    "defaultMessage": "Badge details"
-  },
-  "BadgeListView.message": {
-    "defaultMessage": "Badge list"
-  },
-  "CollectibleDetailsView.message": {
-    "defaultMessage": "Collectible details"
+    "description": "Title of the 'Wallets' section in the 'Profile' page"
   },
   "CollectibleListView.pageTitle": {
     "defaultMessage": "Collectibles",
@@ -51,9 +42,6 @@
   "HomeView.LogoAlt": {
     "defaultMessage": "Verida One Logo",
     "description": "Alternate text for the logo image"
-  },
-  "NotProfileFoundView.message": {
-    "defaultMessage": "No Profile Found"
   },
   "ProfileCallToAction.createOwnProfileMessage": {
     "defaultMessage": "Create your own profile",

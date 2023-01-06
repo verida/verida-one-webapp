@@ -5,6 +5,7 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
   const i18n = useIntl();
 
   // Temporary message, to delete when implementing the component
+  // DO NOT ADD TO MESSAGES FILE
   const message = i18n.formatMessage({
     id: "BadgeDetailsView.message",
     defaultMessage: "Badge details",

@@ -18,8 +18,8 @@ export const WalletAddressesSection: React.FC<WalletSectionProps> = (props) => {
   }
 
   const sectionTitle = i18n.formatMessage({
-    id: "App.WalletSectionTitle",
-    description: "Wallets",
+    id: "WalletAddressesSection.sectionTitle",
+    description: "Title of the 'Wallets' section in the 'Profile' page",
     defaultMessage: "Wallets",
   });
 

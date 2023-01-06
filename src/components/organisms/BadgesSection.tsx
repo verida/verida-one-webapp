@@ -8,12 +8,12 @@ type BadgeSectionProps = {
 };
 
 // TODO: To rework when needed
-export const BadgeSection: React.FC<BadgeSectionProps> = ({ data = [] }) => {
+export const BadgesSection: React.FC<BadgeSectionProps> = ({ data = [] }) => {
   const i18n = useIntl();
 
-  const contentTitle = i18n.formatMessage({
-    id: "App.BadgeSectionTitle",
-    description: "Badges",
+  const sectionTitle = i18n.formatMessage({
+    id: "BadgesSection.sectionTitle",
+    description: "Title of the 'Badges' section in the 'Profile' page",
     defaultMessage: "Badges",
   });
 
@@ -23,7 +23,7 @@ export const BadgeSection: React.FC<BadgeSectionProps> = ({ data = [] }) => {
     <section>
       <div className="mb-3.5 flex items-center justify-between">
         <div className="flex items-center">
-          <h3 className="mr-1.5 font-semibold ">{contentTitle}</h3>
+          <h3 className="mr-1.5 font-semibold ">{sectionTitle}</h3>
           <span className="rounded bg-gray-dark p-0.5 text-[11px]">
             {data.length}
           </span>
