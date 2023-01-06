@@ -1,6 +1,6 @@
 import React from "react";
-import { Badge, Icon, IconButton } from "components/atoms";
 import { useNavigate } from "react-router-dom";
+import { PageHeader } from "./PageHeader";
 
 type PageWrapperProps = {
   title?: string;
@@ -22,21 +22,11 @@ export const PageWrapper: React.FC<PageWrapperProps> = (props) => {
 
   return (
     <div {...otherProps}>
-      <header className="mb-6 flex items-center justify-between">
-        <IconButton
-          variant="text"
-          size="small"
-          icon={<Icon type="arrow-left" />}
-          onClick={handleGoBackNavigation}
-        />
-        {(title || badgeValue) && (
-          <div className="flex items-center space-x-1">
-            {title && <h2 className={`text-xl font-bold`}>{title}</h2>}
-            {badgeValue && <Badge value={badgeValue} />}
-          </div>
-        )}
-        <div className="w-8" />
-      </header>
+      <PageHeader
+        title={title}
+        badgeValue={badgeValue}
+        onBackClick={handleGoBackNavigation}
+      />
       <div>{children}</div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { Badge, Icon, IconButton } from "components/atoms";
+import { ProfileSectionHeader } from "./ProfileSectionHeader";
 
 type ProfileSectionWrapperProps = {
   title: string;
@@ -20,23 +20,12 @@ export const ProfileSectionWrapper: React.FunctionComponent<
 
   return (
     <section {...sectionProps}>
-      <div className="">
-        <div className="mb-2 flex items-center justify-between space-x-1.5">
-          <div className="flex items-center space-x-1">
-            <h3 className="py-1.5 font-semibold">{title}</h3>
-            {badgeValue && <Badge value={badgeValue} />}
-          </div>
-          {onClickMore && (
-            <IconButton
-              variant="text"
-              size="small"
-              icon={<Icon type="arrow-right" />}
-              onClick={onClickMore}
-            />
-          )}
-        </div>
-        <div>{children}</div>
-      </div>
+      <ProfileSectionHeader
+        title={title}
+        badgeValue={badgeValue}
+        onClickMore={onClickMore}
+      />
+      <div>{children}</div>
     </section>
   );
 };
