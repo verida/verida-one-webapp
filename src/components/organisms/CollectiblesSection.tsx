@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useIntl } from "react-intl";
-import { CollectibleCard, ProfileSectionContainer } from "components/molecules";
+import { CollectibleCard, ProfileSectionWrapper } from "components/molecules";
 import { Collectible } from "lib/types";
 import { Button } from "components/atoms";
 import { Link, useNavigate } from "react-router-dom";
@@ -58,9 +58,9 @@ export const CollectiblesSection: React.FC<CollectiblesSectionProps> = (
 
   // TODO: Handle click on collectible when collectible page implemented
   return (
-    <ProfileSectionContainer
+    <ProfileSectionWrapper
       title={sectionTitle}
-      badge={collectibles.length}
+      badgeValue={collectibles.length}
       onClickMore={handleClickMore}
     >
       <ul className="grid snap-x snap-mandatory auto-cols-[160px] gap-2 overflow-x-auto max-sm:grid-flow-col sm:grid-cols-4">
@@ -86,6 +86,6 @@ export const CollectiblesSection: React.FC<CollectiblesSectionProps> = (
         )}
       </ul>
       {hasMore && <div className="mt-4 max-sm:hidden">{showAllButton}</div>}
-    </ProfileSectionContainer>
+    </ProfileSectionWrapper>
   );
 };

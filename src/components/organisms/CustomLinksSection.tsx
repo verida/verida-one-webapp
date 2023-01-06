@@ -1,6 +1,6 @@
 import React from "react";
 import { useIntl } from "react-intl";
-import { CustomLink, ProfileSectionContainer } from "components/molecules";
+import { CustomLink, ProfileSectionWrapper } from "components/molecules";
 import { CustomLink as CustomLinkType } from "lib/types";
 
 type LinkSectionProps = {
@@ -24,7 +24,7 @@ export const CustomLinksSection: React.FC<LinkSectionProps> = (props) => {
   });
 
   return (
-    <ProfileSectionContainer title={sectionTitle}>
+    <ProfileSectionWrapper title={sectionTitle}>
       <ul className="space-y-2">
         {links.map((link) => (
           <li key={link.url}>
@@ -32,6 +32,6 @@ export const CustomLinksSection: React.FC<LinkSectionProps> = (props) => {
           </li>
         ))}
       </ul>
-    </ProfileSectionContainer>
+    </ProfileSectionWrapper>
   );
 };

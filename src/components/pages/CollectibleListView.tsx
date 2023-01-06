@@ -1,18 +1,30 @@
-import React from "react";
+import { PageWrapper } from "components/molecules";
+import { CollectibleGrid } from "components/organisms";
+import { Collectible } from "lib/types";
+import { getCollectibles } from "lib/utils";
+import React, { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 
 export const CollectibleListView: React.FunctionComponent = () => {
   const i18n = useIntl();
+  const [collectibles, setCollectibles] = useState<Collectible[]>([]);
 
-  // Temporary message, to delete when implementing the component
-  const message = i18n.formatMessage({
-    id: "CollectibleListView.message",
-    defaultMessage: "Collectible list",
+  const pageTitle = i18n.formatMessage({
+    id: "CollectibleListView.pageTitle",
+    description: "Title of the 'Collectibles' page",
+    defaultMessage: "Collectibles",
   });
 
+  useEffect(() => {
+    const getData = async () => {
+      setCollectibles(await getCollectibles());
+    };
+    void getData();
+  }, []);
+
   return (
-    <div className="flex flex-grow flex-col items-center space-y-12 p-8">
-      <p className="text-xl md:text-4xl">{message}</p>
-    </div>
+    <PageWrapper title={pageTitle} badgeValue={collectibles.length}>
+      <CollectibleGrid collectibles={collectibles} />
+    </PageWrapper>
   );
 };

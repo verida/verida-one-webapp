@@ -1,10 +1,7 @@
 import React from "react";
 import { useIntl } from "react-intl";
 import { WalletAddress } from "lib/types";
-import {
-  ProfileSectionContainer,
-  WalletAddressCard,
-} from "components/molecules";
+import { ProfileSectionWrapper, WalletAddressCard } from "components/molecules";
 
 type WalletSectionProps = {
   addresses?: WalletAddress[];
@@ -21,13 +18,13 @@ export const WalletAddressesSection: React.FC<WalletSectionProps> = (props) => {
   }
 
   const sectionTitle = i18n.formatMessage({
-    id: "App.WalletSectionTitle",
-    description: "Wallets",
+    id: "WalletAddressesSection.sectionTitle",
+    description: "Title of the 'Wallets' section in the 'Profile' page",
     defaultMessage: "Wallets",
   });
 
   return (
-    <ProfileSectionContainer title={sectionTitle}>
+    <ProfileSectionWrapper title={sectionTitle}>
       <ul className="space-y-2">
         {addresses.map((address) => (
           <li key={address.address}>
@@ -35,6 +32,6 @@ export const WalletAddressesSection: React.FC<WalletSectionProps> = (props) => {
           </li>
         ))}
       </ul>
-    </ProfileSectionContainer>
+    </ProfileSectionWrapper>
   );
 };

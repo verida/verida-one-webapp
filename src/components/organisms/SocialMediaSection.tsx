@@ -1,7 +1,7 @@
 import React from "react";
 import { useIntl } from "react-intl";
 import { SocialMediaLink as SocialMediaLinkType } from "lib/types";
-import { ProfileSectionContainer, SocialMediaLink } from "components/molecules";
+import { ProfileSectionWrapper, SocialMediaLink } from "components/molecules";
 
 type SocialSectionProps = {
   socialMediaLinks?: SocialMediaLinkType[];
@@ -24,7 +24,7 @@ export const SocialMediaSection: React.FC<SocialSectionProps> = (props) => {
   });
 
   return (
-    <ProfileSectionContainer title={sectionTitle}>
+    <ProfileSectionWrapper title={sectionTitle}>
       <ul className="flex flex-wrap gap-3">
         {socialMediaLinks.map((link) => (
           <li key={link.url}>
@@ -32,6 +32,6 @@ export const SocialMediaSection: React.FC<SocialSectionProps> = (props) => {
           </li>
         ))}
       </ul>
-    </ProfileSectionContainer>
+    </ProfileSectionWrapper>
   );
 };
