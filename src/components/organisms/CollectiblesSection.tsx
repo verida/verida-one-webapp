@@ -70,7 +70,7 @@ export const CollectiblesSection: React.FC<CollectiblesSectionProps> = (
             className="snap-start transition-all"
           >
             <Link
-              to={`collectibles/${collectible.contractAddress}#${collectible.tokenId}`}
+              to={`collectibles/${collectible.contractAddress}/${collectible.tokenId}`}
             >
               <CollectibleCard variant="standard" collectible={collectible} />
             </Link>

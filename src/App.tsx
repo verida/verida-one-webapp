@@ -39,7 +39,7 @@ export const App: React.FunctionComponent = () => {
             <Route path="collectibles">
               <Route index element={<CollectibleListView />} />
               <Route
-                path=":collectibleId"
+                path=":contractAddress/:tokenId"
                 element={<CollectibleDetailsView />}
               />
             </Route>

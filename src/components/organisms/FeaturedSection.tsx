@@ -43,7 +43,7 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = (props) => {
           {collectibles?.map((collectible) => (
             <li key={`${collectible.contractAddress}#${collectible.tokenId}`}>
               <Link
-                to={`collectibles/${collectible.contractAddress}#${collectible.tokenId}`}
+                to={`collectibles/${collectible.contractAddress}/${collectible.tokenId}`}
               >
                 <CollectibleCard
                   variant={mediaMatch ? "standard" : "compact"}
