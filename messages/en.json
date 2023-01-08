@@ -31,6 +31,10 @@
     "defaultMessage": "Connect",
     "description": "Label of the Connect button in the Header"
   },
+  "Header.createYourProfileButtonLabel": {
+    "description": "Label of the CTA button in the Header to create a profile",
+    "defaultMessage": "Create your profile"
+  },
   "Header.logoAlt": {
     "defaultMessage": "Verida One Logo",
     "description": "Alternate text for the logo image"
