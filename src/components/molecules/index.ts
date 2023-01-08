@@ -3,6 +3,7 @@ export * from "./ChainIcon";
 export * from "./CollectibleCard";
 export * from "./CollectiblesDetailsCard";
 export * from "./CustomLink";
+export * from "./CopyToClipboardButton";
 export * from "./Modal";
 export * from "./PageHeader";
 export * from "./PageWrapper";
