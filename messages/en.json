@@ -50,5 +50,13 @@
   "SocialMediaSection.sectionTitle": {
     "defaultMessage": "Socials",
     "description": "Title of the 'Socials' section in the 'Profile' page"
+  },
+  "CollectibleDetailsView.viewInExplorerButtonLabel": {
+    "defaultMessage": "View in Explorer",
+    "description": "Label of the button to view an asset in a blockchain explorer."
+  },
+  "AssetDetailsMainInfo.descriptionTitle": {
+    "defaultMessage": "Description",
+    "description": "Title above the description of an asset in the details page"
   }
 }

@@ -12,7 +12,6 @@ export const AssetDetailsMainInfo: React.FC<AssetDetailCardProps> = (props) => {
 
   const i18n = useIntl();
 
-  // TODO: Add in the messages file
   const descriptionTitle = i18n.formatMessage({
     id: "AssetDetailsMainInfo.descriptionTitle",
     defaultMessage: "Description",

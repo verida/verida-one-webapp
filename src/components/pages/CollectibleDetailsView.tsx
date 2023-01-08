@@ -34,7 +34,6 @@ export const CollectibleDetailsView: React.FunctionComponent = () => {
     return null; // TODO: Handle it but not return null, which means blank page
   }
 
-  // TODO: Add to messages file
   const viewInExplorerButtonLabel = i18n.formatMessage({
     id: "CollectibleDetailsView.viewInExplorerButtonLabel",
     defaultMessage: "View in Explorer",
