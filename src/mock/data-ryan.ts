@@ -104,6 +104,42 @@ export const featuredCollectibles: Collectible[] = [
 export const collectibles: Collectible[] = [
   {
     chain: Chains.ETHEREUM,
+    contractAddress: "0x10daa9f4c0f985430fde4959adb2c791ef2ccf83",
+    tokenId: "10004",
+    collectionLabel: "The Meta Key",
+    tokenLabel: "Metakey: Edition 4 - The Captain",
+    description:
+      "We are the Metakey — a platform-agnostic and massively interoperable web3 utility creator. Our core product is a single token that can integrate with multiple platforms and games to transform into avatars; weapons; vehicles; exp bonuses; grant access to virtual land and exclusive educational content; VIP experiences at virtual events; and much more.",
+    ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
+    media: nftMetakey10004Image,
+    priceUnit: "ETH",
+    floorPrice: 0.129,
+  },
+  {
+    chain: Chains.ETHEREUM,
+    contractAddress: "0x22C1f6050E56d2876009903609a2cC3fEf83B415",
+    tokenId: "12060",
+    collectionLabel: "POAP",
+    tokenLabel: "Bankless Member - 2020",
+    description: "The Proof of Attendance Protocole",
+    ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
+    media: nftPOAP12060Image,
+    priceUnit: "WETH",
+    floorPrice: 0.0043,
+  },
+  {
+    chain: Chains.POLYGON,
+    contractAddress: "0xdb46d1dc155634fbc732f92e853b10b288ad5a1d",
+    tokenId: "85835",
+    collectionLabel: "Lens Protocol Profiles",
+    tokenLabel: "@hotsauce.lens",
+    description:
+      "Planted in this collection, you’ll find all the Lens Protocol Profile NFTs that have been claimed so far. By owning a Lens Profile NFT, you are in control. You can choose where and how you use it. Welcome to a new era of decentralized social media, welcome to Lens!",
+    ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
+    media: nftLens85835Image,
+  },
+  {
+    chain: Chains.ETHEREUM,
     contractAddress: "0x05844e9aE606f9867ae2047c93cAc370d54Ab2E1",
     tokenId: "5766",
     collectionLabel: "AO ArtBall",
