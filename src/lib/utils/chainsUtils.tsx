@@ -4,6 +4,7 @@ import {
   ALGORAND_TESTNET_EXPLORER_ADDRESS_URL,
   ChainNetworkTypes,
   Chains,
+  chainLabels,
   ETHEREUM_EXPLORER_ADDRESS_URL,
   ETHEREUM_TESTNET_EXPLORER_ADDRESS_URL,
   NEAR_EXPLORER_ADDRESS_URL,
@@ -12,6 +13,18 @@ import {
   POLYGON_TESTNET_EXPLORER_ADDRESS_URL,
 } from "lib/constants";
 import { Icon } from "components/atoms";
+
+export const getChainLabel = (chain: Chains): string => {
+  switch (chain) {
+    case Chains.ALGORAND:
+    case Chains.ETHEREUM:
+    case Chains.NEAR:
+    case Chains.POLYGON:
+      return chainLabels[chain];
+    default:
+      throw new Error("Chain not supported");
+  }
+};
 
 export const getChainLogo = (chain: Chains, size?: number): React.ReactNode => {
   switch (chain) {

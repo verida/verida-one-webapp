@@ -1,34 +1,82 @@
 {
-  "Header.logoAlt": {
-    "description": "Alternate text for the logo image",
-    "defaultMessage": "Verida One Logo"
+  "BadgesSection.sectionTitle": {
+    "defaultMessage": "Badges",
+    "description": "Title of the 'Badges' section in the 'Profile' page"
   },
-  "Header.connectButtonLabel": {
-    "description": "Label of the Connect button in the Header",
-    "defaultMessage": "Connect"
+  "WalletAddressesSection.sectionTitle": {
+    "defaultMessage": "Wallets",
+    "description": "Title of the 'Wallets' section in the 'Profile' page"
   },
-  "ProfileCallToAction.createOwnProfileMessage": {
-    "description": "Call to action for viewer to create their own profile",
-    "defaultMessage": "Create your own profile"
-  },
-  "FeaturedSection.sectionTitle": {
-    "description": "Title of the 'Featured' section in the 'Profile' page",
-    "defaultMessage": "Featured"
-  },
-  "SocialMediaSection.sectionTitle": {
-    "description": "Title of the 'Socials' section in the 'Profile' page",
-    "defaultMessage": "Socials"
+  "CollectibleListView.pageTitle": {
+    "defaultMessage": "Collectibles",
+    "description": "Title of the 'Collectibles' page"
   },
   "CollectiblesSection.sectionTitle": {
-    "description": "Title of the 'Collectibles' section in the 'Profile' page",
-    "defaultMessage": "Collectibles"
+    "defaultMessage": "Collectibles",
+    "description": "Title of the 'Collectibles' section in the 'Profile' page"
   },
   "CollectiblesSection.showAllButtonLabel": {
-    "description": "Label of the button redirecting from the 'Collectibles' profile section to the 'Collectibles' page",
-    "defaultMessage": "Show All"
+    "defaultMessage": "Show All",
+    "description": "Label of the button redirecting from the 'Collectibles' profile section to the 'Collectibles' page"
   },
   "CustomLinksSection.sectionTitle": {
-    "description": "Title of the 'Links' section in the 'Profile' page",
-    "defaultMessage": "Links"
+    "defaultMessage": "Links",
+    "description": "Title of the 'Links' section in the 'Profile' page"
+  },
+  "FeaturedSection.sectionTitle": {
+    "defaultMessage": "Featured",
+    "description": "Title of the 'Featured' section in the 'Profile' page"
+  },
+  "Header.connectButtonLabel": {
+    "defaultMessage": "Connect",
+    "description": "Label of the Connect button in the Header"
+  },
+  "Header.logoAlt": {
+    "defaultMessage": "Verida One Logo",
+    "description": "Alternate text for the logo image"
+  },
+  "HomeView.ComingSoon": {
+    "defaultMessage": "Coming Soon",
+    "description": "Message stating that the app will be available soon"
+  },
+  "HomeView.LogoAlt": {
+    "defaultMessage": "Verida One Logo",
+    "description": "Alternate text for the logo image"
+  },
+  "ProfileCallToAction.createOwnProfileMessage": {
+    "defaultMessage": "Create your own profile",
+    "description": "Call to action for viewer to create their own profile"
+  },
+  "SocialMediaSection.sectionTitle": {
+    "defaultMessage": "Socials",
+    "description": "Title of the 'Socials' section in the 'Profile' page"
+  },
+  "CollectibleDetailsView.viewInExplorerButtonLabel": {
+    "defaultMessage": "View in Explorer",
+    "description": "Label of the button to view an asset in a blockchain explorer."
+  },
+  "AssetDetailsMainInfo.descriptionTitle": {
+    "defaultMessage": "Description",
+    "description": "Title above the description of an asset in the details page"
+  },
+  "CollectibleDetailsProperties.chainPropertyLabel": {
+    "defaultMessage": "Chain",
+    "description": "Label of the 'chain' property for a collectible"
+  },
+  "CollectibleDetailsProperties.ownerPropertyLabel": {
+    "defaultMessage": "Owner",
+    "description": "Label of the 'owner' property for a collectible"
+  },
+  "CollectibleDetailsProperties.floorPricePropertyLabel": {
+    "defaultMessage": "Floor price",
+    "description": "Label of the 'floorPrice' property for a collectible"
+  },
+  "CollectibleDetailsProperties.assetsIdPropertyLabel": {
+    "defaultMessage": "Asset Id",
+    "description": "Label of the 'tokenId' property for a collectible"
+  },
+  "CollectibleDetailsProperties.creatorWalletAddressPropertyLabel": {
+    "defaultMessage": "Creator wallet address",
+    "description": "Label of the 'creatorWalletAddress' property for a collectible"
   }
 }

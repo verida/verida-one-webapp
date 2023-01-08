@@ -3,7 +3,7 @@ import { useIntl } from "react-intl";
 import {
   CollectibleCard,
   CustomLink,
-  ProfileSectionContainer,
+  ProfileSectionWrapper,
 } from "components/molecules";
 import { Collectible, CustomLink as CustomLinkType } from "lib/types";
 import { Link } from "react-router-dom";
@@ -37,13 +37,15 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = (props) => {
 
   // TODO: Handle click on collectible when collectible page implemented
   return (
-    <ProfileSectionContainer title={sectionTitle}>
+    <ProfileSectionWrapper title={sectionTitle}>
       <div className="flex flex-col space-y-3">
         <ul className="grid grid-cols-4 gap-2">
           {collectibles?.map((collectible) => (
-            <li key={`${collectible.contractAddress}#${collectible.tokenId}`}>
+            <li
+              key={`${collectible.chain}/${collectible.contractAddress}/${collectible.tokenId}`}
+            >
               <Link
-                to={`collectibles/${collectible.contractAddress}#${collectible.tokenId}`}
+                to={`collectibles/${collectible.chain}/${collectible.contractAddress}/${collectible.tokenId}`}
               >
                 <CollectibleCard
                   variant={mediaMatch ? "standard" : "compact"}
@@ -61,6 +63,6 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = (props) => {
           ))}
         </ul>
       </div>
-    </ProfileSectionContainer>
+    </ProfileSectionWrapper>
   );
 };
