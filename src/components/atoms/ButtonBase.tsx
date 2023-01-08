@@ -1,7 +1,7 @@
 import React from "react";
 
 type ButtonVariant = "text" | "contained";
-type ButtonSize = "small" | "medium" | "large";
+type ButtonSize = "small" | "medium" | "large" | "xlarge";
 type ButtonShape = "standard" | "square";
 
 type ButtonBaseProps = {
@@ -23,6 +23,8 @@ export const ButtonBase: React.FunctionComponent<ButtonBaseProps> = (props) => {
   const padding =
     size === "small"
       ? `py-1.5 ${shape === "standard" ? "px-2" : "px-1.5"}`
+      : size === "xlarge"
+      ? `py-4.5 ${shape === "standard" ? "px-5" : "px-4.5"} w-full`
       : size === "large"
       ? `py-3.5 ${shape === "standard" ? "px-4" : "px-3.5"} w-full`
       : `py-2.5 ${shape === "standard" ? "px-4" : "px-2.5"}`;

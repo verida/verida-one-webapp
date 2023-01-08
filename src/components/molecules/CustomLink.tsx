@@ -15,7 +15,7 @@ export const CustomLink: React.FunctionComponent<CustomLinkProps> = (props) => {
   return (
     <ButtonLink
       {...otherProps}
-      size="large"
+      size="xlarge"
       url={link.url}
       target="_blank"
       rel="noopener"
