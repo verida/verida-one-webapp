@@ -2,6 +2,7 @@ import React from "react";
 import { useIntl } from "react-intl";
 import { IconButton, Icon, ButtonLink } from "components/atoms";
 import logo from "assets/images/verida_one_logo.png";
+import { Link } from "react-router-dom";
 
 export const Header: React.FC = () => {
   const i18n = useIntl();
@@ -32,7 +33,9 @@ export const Header: React.FC = () => {
   return (
     <header className="box-border flex items-center justify-between border-b border-solid border-gray-dark bg-background px-4 py-3 opacity-80">
       <h1>
-        <img src={logo} alt={logoAlt} className="h-10" />
+        <Link to="/">
+          <img src={logo} alt={logoAlt} className="h-10" />
+        </Link>
       </h1>
       <div className="flex items-center justify-between space-x-3">
         <IconButton size="medium" icon={<Icon type="search" />} />
