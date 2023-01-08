@@ -1,7 +1,7 @@
 import { Collectible } from "lib/types";
 import React from "react";
 import { useIntl } from "react-intl";
-import { getChainLogo } from "lib/utils";
+import { getChainLabel, getChainLogo } from "lib/utils";
 import { IconButton } from "components/atoms";
 import { AssetDetailsPropertyLine } from "components/molecules";
 
@@ -62,7 +62,7 @@ export const AssetDetailsPropertyList: React.FC<
                 variant="text"
                 icon={getChainLogo(chain, 14)}
               />
-              <span>{chain}</span>
+              <span>{getChainLabel(chain)}</span>
             </div>
           </AssetDetailsPropertyLine>
         </li>
