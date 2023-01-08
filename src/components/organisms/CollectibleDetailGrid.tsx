@@ -1,7 +1,10 @@
 import React from "react";
 import { AssetMedia } from "components/atoms";
-import { AssetDetailsCard, CustomLink } from "components/molecules";
-import { CollectiblesDetailsCard } from "../molecules/CollectiblesDetailsCard";
+import {
+  AssetDetailsCard,
+  CollectiblesDetailsCard,
+  CustomLink,
+} from "components/molecules";
 import { useIntl } from "react-intl";
 import { Collectible } from "lib/types";
 import { getChainExplorerUrlForAddress } from "lib/utils";
@@ -10,7 +13,7 @@ type CollectibleDetailGridProps = {
   collectible: Collectible;
 } & React.ComponentPropsWithoutRef<"div">;
 
-const CollectibleDetailGrid: React.FC<CollectibleDetailGridProps> = ({
+export const CollectibleDetailGrid: React.FC<CollectibleDetailGridProps> = ({
   collectible,
 }) => {
   const i18n = useIntl();
@@ -58,5 +61,3 @@ const CollectibleDetailGrid: React.FC<CollectibleDetailGridProps> = ({
     </div>
   );
 };
-
-export default CollectibleDetailGrid;

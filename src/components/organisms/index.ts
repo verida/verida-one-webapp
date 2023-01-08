@@ -8,4 +8,4 @@ export * from "./SocialMediaSection";
 export * from "./WalletAddressesSection";
 export * from "./ProfileInfoSection";
 export * from "./CollectibleGrid";
-export * from "../molecules/CollectiblesDetailsCard";
+export * from "./CollectibleDetailGrid";

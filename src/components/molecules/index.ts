@@ -1,6 +1,7 @@
 export * from "./AssetPriceChip";
 export * from "./ChainIcon";
 export * from "./CollectibleCard";
+export * from "./CollectiblesDetailsCard";
 export * from "./CustomLink";
 export * from "./Modal";
 export * from "./PageHeader";
