@@ -23,7 +23,6 @@ import {
   SocialMediaLink,
   WalletAddress,
 } from "lib/types";
-import { ProfileCallToAction } from "components/molecules";
 import { useParams } from "react-router-dom";
 
 export const ProfileView: React.FC = () => {
@@ -70,9 +69,10 @@ export const ProfileView: React.FC = () => {
         <CustomLinksSection links={customLinks} />
         <WalletAddressesSection addresses={walletAddresses} />
       </div>
-      <div className="pt-10 pb-10">
+      {/* TODO: Bring back the CTA when removed from the header */}
+      {/* <div className="pt-10 pb-10">
         <ProfileCallToAction />
-      </div>
+      </div> */}
     </div>
   );
 };

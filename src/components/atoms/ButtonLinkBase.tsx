@@ -1,7 +1,7 @@
 import React from "react";
 
 type ButtonVariant = "text" | "contained";
-type ButtonLinkSize = "small" | "medium" | "large";
+type ButtonLinkSize = "small" | "medium" | "large" | "xlarge";
 type ButtonLinkShape = "standard" | "square" | "circle";
 
 type ButtonLinkBaseProps = {
@@ -27,9 +27,11 @@ export const ButtonLinkBase: React.FunctionComponent<ButtonLinkBaseProps> = (
   const padding =
     size === "small"
       ? `py-1.5 ${shape === "standard" ? "px-2" : "px-1.5"}`
-      : size === "large"
+      : size === "xlarge"
       ? `py-4.5 ${shape === "standard" ? "px-5" : "px-4.5"} w-full`
-      : `py-3.5 ${shape === "standard" ? "px-4" : "px-3.5"}`;
+      : size === "large"
+      ? `py-3.5 ${shape === "standard" ? "px-4" : "px-3.5"} w-full`
+      : `py-2.5 ${shape === "standard" ? "px-4" : "px-2.5"}`;
 
   const radius = shape === "circle" ? "rounded-full" : "rounded-xl";
 
