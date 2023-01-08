@@ -24,7 +24,7 @@ export const CollectibleListView: React.FunctionComponent = () => {
 
   return (
     <PageWrapper title={pageTitle} badgeValue={collectibles.length}>
-      <CollectibleGrid collectibles={collectibles} />
+      <CollectibleGrid className="pt-2" collectibles={collectibles} />
     </PageWrapper>
   );
 };

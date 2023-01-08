@@ -41,9 +41,11 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = (props) => {
       <div className="flex flex-col space-y-3">
         <ul className="grid grid-cols-4 gap-2">
           {collectibles?.map((collectible) => (
-            <li key={`${collectible.contractAddress}#${collectible.tokenId}`}>
+            <li
+              key={`${collectible.chain}/${collectible.contractAddress}/${collectible.tokenId}`}
+            >
               <Link
-                to={`collectibles/${collectible.contractAddress}#${collectible.tokenId}`}
+                to={`collectibles/${collectible.chain}/${collectible.contractAddress}/${collectible.tokenId}`}
               >
                 <CollectibleCard
                   variant={mediaMatch ? "standard" : "compact"}

@@ -12,6 +12,15 @@ export enum Chains {
   NEAR = "near",
 }
 
+// TODO: Define a ChainDefinition type and create a object defining all information of the supported chains
+
+export const chainLabels = {
+  [Chains.ETHEREUM]: "Ethereum",
+  [Chains.POLYGON]: "Polygon",
+  [Chains.ALGORAND]: "Algorand",
+  [Chains.NEAR]: "NEAR Protocol",
+};
+
 // Chain Explorers
 
 // Algorand

@@ -10,7 +10,7 @@ type PageHeaderProps = {
 export const PageHeader: React.FunctionComponent<PageHeaderProps> = (props) => {
   const { badgeValue, title, onBackClick } = props;
   return (
-    <header className="mb-6 flex items-center justify-between">
+    <header className="mb-4 flex items-center justify-between">
       <IconButton
         variant="text"
         size="small"

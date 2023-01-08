@@ -50,5 +50,33 @@
   "SocialMediaSection.sectionTitle": {
     "defaultMessage": "Socials",
     "description": "Title of the 'Socials' section in the 'Profile' page"
+  },
+  "CollectibleDetailsView.viewInExplorerButtonLabel": {
+    "defaultMessage": "View in Explorer",
+    "description": "Label of the button to view an asset in a blockchain explorer."
+  },
+  "AssetDetailsMainInfo.descriptionTitle": {
+    "defaultMessage": "Description",
+    "description": "Title above the description of an asset in the details page"
+  },
+  "CollectibleDetailsProperties.chainPropertyLabel": {
+    "defaultMessage": "Chain",
+    "description": "Label of the 'chain' property for a collectible"
+  },
+  "CollectibleDetailsProperties.ownerPropertyLabel": {
+    "defaultMessage": "Owner",
+    "description": "Label of the 'owner' property for a collectible"
+  },
+  "CollectibleDetailsProperties.floorPricePropertyLabel": {
+    "defaultMessage": "Floor price",
+    "description": "Label of the 'floorPrice' property for a collectible"
+  },
+  "CollectibleDetailsProperties.assetsIdPropertyLabel": {
+    "defaultMessage": "Asset Id",
+    "description": "Label of the 'tokenId' property for a collectible"
+  },
+  "CollectibleDetailsProperties.creatorWalletAddressPropertyLabel": {
+    "defaultMessage": "Creator wallet address",
+    "description": "Label of the 'creatorWalletAddress' property for a collectible"
   }
 }

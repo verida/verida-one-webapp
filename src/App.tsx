@@ -14,12 +14,12 @@ import { AppLayout } from "components/templates";
 /**
  * Routes
  *
- * /                                          -> Home
- * /:identity                                 -> Profile
- * /:identity/collectibles                    -> CollectibleList
- * /:identity/collectibles/:collectibleId     -> CollectibleDetails
- * /:identity/badges                          -> BadgeList
- * /:identity/badges/:badgeId                 -> BadgeDetails
+ * /                                                       -> Home
+ * /:identity                                              -> Profile
+ * /:identity/collectibles                                 -> CollectibleList
+ * /:identity/collectibles/:chain/:contractAddress/:tokenId-> CollectibleDetails
+ * /:identity/badges                                       -> BadgeList
+ * /:identity/badges/:badgeId                              -> BadgeDetails
  *
  * TODO: Strenghten with a list of routes as constant to be used throughout the app
  */
@@ -39,7 +39,7 @@ export const App: React.FunctionComponent = () => {
             <Route path="collectibles">
               <Route index element={<CollectibleListView />} />
               <Route
-                path=":collectibleId"
+                path=":chain/:contractAddress/:tokenId"
                 element={<CollectibleDetailsView />}
               />
             </Route>
