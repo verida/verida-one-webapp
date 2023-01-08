@@ -35,21 +35,35 @@ export const CollectibleDetailsView: React.FunctionComponent = () => {
   }
 
   // TODO: Add to messages file
-  const viewInExplorer = i18n.formatMessage({
-    id: "CollectibleDetailsView.viewInExplorer",
+  const viewInExplorerButtonLabel = i18n.formatMessage({
+    id: "CollectibleDetailsView.viewInExplorerButtonLabel",
     defaultMessage: "View in Explorer",
+    description:
+      "Label of the button to view an asset in a blockchain explorer.",
   });
 
   return (
     <PageWrapper>
-      <div className="sm:grid-cols1 grid gap-4 md:grid-cols-2">
-        <div className="mb-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="">
           <AssetMedia
             className="w-full"
             aspect="aspect-auto"
             src={collectible.media}
             alt={collectible.tokenLabel}
           />
+          <div className="mt-6 hidden sm:block">
+            <ButtonLink
+              url={getChainExplorerUrlForAddress(
+                collectible.chain,
+                collectible.ownerAddress
+              )}
+              target="_blank"
+              rel="noopener"
+            >
+              {viewInExplorerButtonLabel}
+            </ButtonLink>
+          </div>
         </div>
         <div>
           <AssetDetailsMainInfo
@@ -60,14 +74,17 @@ export const CollectibleDetailsView: React.FunctionComponent = () => {
           />
           <AssetDetailsPropertyList asset={collectible} />
         </div>
-        <div className="mt-4 md:mt-0">
+        <div className="sm:hidden md:mt-0">
+          {/* TODO: Place this button into a fixed bottom bar */}
           <ButtonLink
             url={getChainExplorerUrlForAddress(
               collectible.chain,
               collectible.ownerAddress
             )}
+            target="_blank"
+            rel="noopener"
           >
-            {viewInExplorer}
+            {viewInExplorerButtonLabel}
           </ButtonLink>
         </div>
       </div>
