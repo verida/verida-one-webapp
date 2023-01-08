@@ -4,6 +4,7 @@ import { Chains, SocialMedia } from "lib/constants";
 import {
   Collectible,
   CustomLink,
+  Profile,
   ProfileInfo,
   SocialMediaLink,
   WalletAddress,
@@ -65,7 +66,7 @@ export const links: CustomLink[] = [
   },
 ];
 
-export const WalletAddresses: WalletAddress[] = [
+export const walletAddresses: WalletAddress[] = [
   {
     address: "0xfD22004806A6846EA67ad883356be810F0428793",
     chain: Chains.ETHEREUM,
@@ -238,3 +239,13 @@ export const collectibles: Collectible[] = [
     floorPrice: 39.95,
   },
 ];
+
+export const profile: Profile = {
+  profileInfo,
+  socialMediaLinks,
+  featuredLinks,
+  links,
+  walletAddresses,
+  featuredCollectibles,
+  collectibles,
+};

@@ -14,21 +14,23 @@ export const CollectibleDetailsView: React.FunctionComponent = () => {
   const [collectible, setCollectible] = useState<Collectible | undefined>(
     undefined
   );
-  const { contractAddress, tokenId } = useParams();
+  const { identity, chain, contractAddress, tokenId } = useParams();
 
   const i18n = useIntl();
 
   useEffect(() => {
     const getData = async () => {
-      const collectibles = await getCollectibles();
+      const collectibles = await getCollectibles(identity);
       const foundCollectible = collectibles.find(
         (item) =>
-          item.contractAddress === contractAddress && item.tokenId === tokenId
+          item.chain === chain &&
+          item.contractAddress === contractAddress &&
+          item.tokenId === tokenId
       );
       setCollectible(foundCollectible);
     };
     void getData();
-  }, [contractAddress, tokenId]);
+  }, [identity, chain, contractAddress, tokenId]);
 
   if (!collectible) {
     return null; // TODO: Handle it but not return null, which means blank page
