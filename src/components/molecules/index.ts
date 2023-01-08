@@ -11,4 +11,5 @@ export * from "./ProfileSectionWrapper";
 export * from "./ProfileSectionHeader";
 export * from "./SocialMediaLink";
 export * from "./WalletAddressCard";
-export * from "./AssetDetailsPropertyLine";
+export * from "./AssetDetailsPropertyItem";
+export * from "./AssetDetailsPropertyList";

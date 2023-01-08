@@ -1,14 +1,14 @@
 import React from "react";
 import { CopyToClipboardButton } from "./CopyToClipboardButton";
 
-type AssetDetailsPropertyLineProps = {
+type AssetDetailsPropertyItemProps = {
   label: string;
   children?: React.ReactNode;
   valueToCopyToClipboard?: string;
 } & React.ComponentPropsWithRef<"div">;
 
-export const AssetDetailsPropertyLine: React.FunctionComponent<
-  AssetDetailsPropertyLineProps
+export const AssetDetailsPropertyItem: React.FunctionComponent<
+  AssetDetailsPropertyItemProps
 > = (props) => {
   const { label, children, valueToCopyToClipboard, ...divProps } = props;
 

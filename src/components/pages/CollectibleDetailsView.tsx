@@ -7,7 +7,7 @@ import { AssetMedia, ButtonLink } from "components/atoms";
 import { useIntl } from "react-intl";
 import {
   AssetDetailsMainInfo,
-  AssetDetailsPropertyList,
+  CollectibleDetailsProperties,
 } from "components/organisms";
 
 export const CollectibleDetailsView: React.FunctionComponent = () => {
@@ -71,10 +71,12 @@ export const CollectibleDetailsView: React.FunctionComponent = () => {
             tokenLabel={collectible.tokenLabel}
             description={collectible.description}
           />
-          <AssetDetailsPropertyList asset={collectible} />
+          <CollectibleDetailsProperties collectible={collectible} />
         </div>
         <div className="sm:hidden md:mt-0">
-          {/* TODO: Place this button into a fixed bottom bar */}
+          {/* TODO: Place this button into a fixed bottom bar.
+          see issue #41 https://github.com/verida/verida-one-webapp/issues/41
+           */}
           <ButtonLink
             url={getChainExplorerUrlForAddress(
               collectible.chain,
