@@ -35,7 +35,7 @@ export const Footer: React.FunctionComponent = () => {
     description: "'Verida One' product name in the footer section",
   });
 
-  const footerlogoAlt = i18n.formatMessage({
+  const footerLogoAlt = i18n.formatMessage({
     id: "footer.logoAlt",
     description: "Alternate text for the footer logo image",
     defaultMessage: "Verida One Logo",
@@ -53,15 +53,15 @@ export const Footer: React.FunctionComponent = () => {
   ];
 
   return (
-    <footer className="box-border flex flex-col items-center justify-center space-y-1 border-t border-solid border-gray-dark py-4 px-6 text-gray-dark md:flex-row md:justify-between">
-      <div className="md:order-2">
-        <h6 className="mb-2 text-center">{builtOnLabel}</h6>
-        <img src={logo} alt={footerlogoAlt} className="h-7" />
+    <footer className="box-border  flex flex-col items-center justify-center space-y-1 border-t border-solid border-gray-dark py-4 px-6 text-gray-dark md:flex-row md:justify-between">
+      <div className="flex flex-grow-0 flex-col justify-center md:order-2">
+        <h6 className="mb-2">{builtOnLabel}</h6>
+        <img src={logo} alt={footerLogoAlt} className="h-[26px]" />
       </div>
-      <div className="flex flex-col md:order-3 md:flex-row md:space-x-0">
+      <div className="flex w-1/4 flex-col md:order-3 md:flex-row md:space-x-0">
         <FooterLinkList links={footerLinks} />
       </div>
-      <div className="md:order-1">
+      <div className="w-1/4 md:order-1">
         <span className="mr-1">{currentYear}</span>
         <span>{veridaOnelabel}</span>
       </div>

@@ -1,4 +1,3 @@
-import { ButtonLink } from "components/atoms";
 import React from "react";
 
 type FooterLinkListProps = {
@@ -10,19 +9,22 @@ type FooterLinkListProps = {
 
 export const FooterLinkList: React.FunctionComponent<FooterLinkListProps> = ({
   links,
+  ...otherProps
 }) => {
   return (
-    <div>
-      <ul className="flex flex-col -space-y-2 md:flex-row md:-space-x-4 md:space-y-0">
+    <div {...otherProps}>
+      <ul className="flex flex-col space-y-2 md:flex-row md:space-x-2 md:space-y-0">
         {links.map((item) => (
-          <ButtonLink
-            target="_blank"
-            rel="noopener"
-            variant="text"
-            url={item.url}
-          >
-            {item.label}
-          </ButtonLink>
+          <li>
+            <a
+              href={item.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`hover:underline`}
+            >
+              {item.label}
+            </a>
+          </li>
         ))}
       </ul>
     </div>
