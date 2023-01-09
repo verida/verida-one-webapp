@@ -13,14 +13,14 @@ export const FooterLinkList: React.FunctionComponent<FooterLinkListProps> = ({
 }) => {
   return (
     <div {...otherProps}>
-      <ul className="flex flex-col space-y-2 md:flex-row md:space-x-2 md:space-y-0">
+      <ul className="flex flex-col items-center justify-center md:flex-row md:space-x-4">
         {links.map((item) => (
-          <li>
+          <li className="my-3">
             <a
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`hover:underline`}
+              className="hover:underline"
             >
               {item.label}
             </a>

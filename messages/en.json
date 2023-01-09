@@ -101,7 +101,7 @@
     "description": "Alternate text for the footer logo image"
   },
   "footer.termsAndConditionLinkLabel": {
-    "defaultMessage": "Terms and Conditions",
+    "defaultMessage": "Terms & Conditions",
     "description": "Label of the 'Terms and Condition' property in the footer footer section"
   },
   "footer.veridaOneLinkLabel": {

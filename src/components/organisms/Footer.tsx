@@ -24,7 +24,7 @@ export const Footer: React.FunctionComponent = () => {
 
   const termsAndConditionLinkLabel = i18n.formatMessage({
     id: "footer.termsAndConditionLinkLabel",
-    defaultMessage: "Terms and Conditions",
+    defaultMessage: "Terms & Conditions",
     description:
       "Label of the 'Terms and Condition' property in the footer footer section",
   });
@@ -53,15 +53,15 @@ export const Footer: React.FunctionComponent = () => {
   ];
 
   return (
-    <footer className="box-border  flex flex-col items-center justify-center space-y-1 border-t border-solid border-gray-dark py-4 px-6 text-gray-dark md:flex-row md:justify-between">
-      <div className="flex flex-grow-0 flex-col justify-center md:order-2">
-        <h6 className="mb-2">{builtOnLabel}</h6>
+    <footer className="box-border flex flex-col items-center justify-center space-y-3 border-t border-solid border-gray-dark py-4 px-6 text-gray-light md:flex-row md:justify-between">
+      <div className="flex flex-col justify-center md:order-2">
+        <h6 className="mb-2 text-center">{builtOnLabel}</h6>
         <img src={logo} alt={footerLogoAlt} className="h-[26px]" />
       </div>
-      <div className="flex w-1/4 flex-col md:order-3 md:flex-row md:space-x-0">
+      <div className="flex flex-col md:order-3 md:flex-row md:space-x-0">
         <FooterLinkList links={footerLinks} />
       </div>
-      <div className="w-1/4 md:order-1">
+      <div className="md:order-1 md:w-1/5">
         <span className="mr-1">{currentYear}</span>
         <span>{veridaOnelabel}</span>
       </div>
