@@ -53,7 +53,7 @@ export const Footer: React.FunctionComponent = () => {
   ];
 
   return (
-    <footer className="box-border flex flex-col items-center justify-center space-y-1 border-t border-solid border-gray-dark py-2 px-6 text-gray-dark md:flex-row md:justify-between">
+    <footer className="box-border flex flex-col items-center justify-center space-y-1 border-t border-solid border-gray-dark py-4 px-6 text-gray-dark md:flex-row md:justify-between">
       <div className="md:order-2">
         <h6 className="mb-2 text-center">{builtOnLabel}</h6>
         <img src={logo} alt={footerlogoAlt} className="h-7" />
