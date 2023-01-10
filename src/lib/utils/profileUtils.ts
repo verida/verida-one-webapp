@@ -1,4 +1,5 @@
 import {
+  Badge,
   Collectible,
   CustomLink,
   ProfileInfo,
@@ -52,4 +53,9 @@ export const getSocialMediaLinks = async (
 ): Promise<SocialMediaLink[]> => {
   const { socialMediaLinks } = await getIdentityProfile(identity);
   return socialMediaLinks;
+};
+
+export const getBadges = async (identity?: string): Promise<Badge[]> => {
+  const { badges } = await getIdentityProfile(identity);
+  return badges;
 };
