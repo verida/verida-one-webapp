@@ -1,69 +1,86 @@
 import React from "react";
 import { useIntl } from "react-intl";
-import { FooterLinkList } from "components/molecules";
-import logo from "assets/images/verida_one_logo.png";
+import logo from "assets/images/verida_network_logo.png";
 import {
-  VERIDA_DEVELOPERS_DOCUMENTATION_URL,
+  VERIDA_NETWORK_URL,
+  VERIDA_ONE_DOCUMENTATION_URL,
   VERIDA_TERMS_AND_CONDITIONS_URL,
 } from "lib/constants";
 
 export const Footer: React.FunctionComponent = () => {
   const i18n = useIntl();
-  const currentYear = `© ${new Date().getFullYear()}`;
+  const copyrightYear = `${new Date().getFullYear()}`;
 
   const builtOnLabel = i18n.formatMessage({
-    id: "footer.builtOnLabel",
+    id: "Footer.builtOnLabel",
     defaultMessage: "Built on",
     description: "label of the 'built on' text in the footer section",
   });
   const documentationLinkLabel = i18n.formatMessage({
-    id: "footer.documentationLinkLabel",
+    id: "Footer.documentationLinkLabel",
     defaultMessage: "Documentation",
-    description: "Label of the 'Documentation' property in the footer section",
+    description: "Label of the 'Documentation' Link in the footer section",
   });
 
   const termsAndConditionLinkLabel = i18n.formatMessage({
-    id: "footer.termsAndConditionLinkLabel",
+    id: "Footer.termsAndConditionLinkLabel",
     defaultMessage: "Terms & Conditions",
     description:
-      "Label of the 'Terms and Condition' property in the footer footer section",
-  });
-
-  const veridaOnelabel = i18n.formatMessage({
-    id: "footer.veridaOneLinkLabel",
-    defaultMessage: "Verida One",
-    description: "'Verida One' product name in the footer section",
+      "Label of the 'Terms and Condition' Link in the footer footer section",
   });
 
   const footerLogoAlt = i18n.formatMessage({
-    id: "footer.logoAlt",
+    id: "Footer.logoAlt",
     description: "Alternate text for the footer logo image",
     defaultMessage: "Verida One Logo",
   });
 
-  const footerLinks = [
+  const copyrightMessage = i18n.formatMessage(
     {
-      label: documentationLinkLabel,
-      url: VERIDA_DEVELOPERS_DOCUMENTATION_URL,
+      id: "Footer.copyrightMessage",
+      defaultMessage: "© {copyrightYear} Verida One",
+      description: "Copyright message in the footer section",
     },
-    {
-      label: termsAndConditionLinkLabel,
-      url: VERIDA_TERMS_AND_CONDITIONS_URL,
-    },
-  ];
+    { copyrightYear }
+  );
 
   return (
-    <footer className="box-border flex flex-col items-center justify-center space-y-3 border-t border-solid border-gray-dark py-4 px-6 text-gray-light md:flex-row md:justify-between">
+    <footer className="flex flex-col items-center justify-center space-y-3 border-t border-solid border-gray-dark py-4 px-6 text-gray-light md:flex-row md:justify-between">
       <div className="flex flex-col justify-center md:order-2">
-        <h6 className="mb-2 text-center">{builtOnLabel}</h6>
-        <img src={logo} alt={footerLogoAlt} className="h-[26px]" />
+        <a
+          className="flex flex-col items-center"
+          href={VERIDA_NETWORK_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span className="mb-1 place-content-center text-center">
+            {builtOnLabel}
+          </span>
+          <img src={logo} alt={footerLogoAlt} className="h-[26px]" />
+        </a>
       </div>
-      <div className="flex flex-col md:order-3 md:flex-row md:space-x-0">
-        <FooterLinkList links={footerLinks} />
+      <div className="md:order-3 md:flex-1">
+        <div className="flex flex-col items-center space-y-3 md:flex-row md:justify-end md:space-x-4 md:space-y-0">
+          <a
+            href={VERIDA_ONE_DOCUMENTATION_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline"
+          >
+            {documentationLinkLabel}
+          </a>
+          <a
+            href={VERIDA_TERMS_AND_CONDITIONS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline"
+          >
+            {termsAndConditionLinkLabel}
+          </a>
+        </div>
       </div>
-      <div className="md:order-1 md:w-1/5">
-        <span className="mr-1">{currentYear}</span>
-        <span>{veridaOnelabel}</span>
+      <div className="md:order-1 md:flex-1">
+        <span>{copyrightMessage}</span>
       </div>
     </footer>
   );

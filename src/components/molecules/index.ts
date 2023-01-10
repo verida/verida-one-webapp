@@ -13,4 +13,3 @@ export * from "./SocialMediaLink";
 export * from "./WalletAddressCard";
 export * from "./AssetDetailsPropertyItem";
 export * from "./AssetDetailsPropertyList";
-export * from "./FooterLinkList";
