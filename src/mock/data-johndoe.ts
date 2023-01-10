@@ -273,5 +273,5 @@ export const profile: Profile = {
   walletAddresses,
   featuredCollectibles,
   collectibles,
-  badges
+  badges,
 };

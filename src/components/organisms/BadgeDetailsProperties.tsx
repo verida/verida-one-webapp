@@ -12,9 +12,7 @@ export const BadgeDetailsProperties: React.FC<BadgeDetailsPropertiesProps> = (
   props
 ) => {
   const { badge, ...divProps } = props;
-
   const { chain, contractAddress, username, ownerAddress, proofType } = badge;
-
   const i18n = useIntl();
 
   const chainPropertyLabel = i18n.formatMessage({
