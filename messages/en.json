@@ -57,6 +57,26 @@
     "defaultMessage": "Featured",
     "description": "Title of the 'Featured' section in the 'Profile' page"
   },
+  "Footer.builtOnLabel": {
+    "defaultMessage": "Built on",
+    "description": "label of the 'built on' text in the footer section"
+  },
+  "Footer.copyrightMessage": {
+    "defaultMessage": "© {copyrightYear} Verida One",
+    "description": "Copyright message in the footer section"
+  },
+  "Footer.documentationLinkLabel": {
+    "defaultMessage": "Documentation",
+    "description": "Label of the 'Documentation' Link in the footer section"
+  },
+  "Footer.logoAlt": {
+    "defaultMessage": "Verida One Logo",
+    "description": "Alternate text for the footer logo image"
+  },
+  "Footer.termsAndConditionLinkLabel": {
+    "defaultMessage": "Terms & Conditions",
+    "description": "Label of the 'Terms and Condition' Link in the footer footer section"
+  },
   "Header.createYourProfileButtonLabel": {
     "defaultMessage": "Create your profile",
     "description": "Label of the CTA button in the Header to create a profile"
@@ -87,25 +107,5 @@
   "WalletAddressesSection.sectionTitle": {
     "defaultMessage": "Wallets",
     "description": "Title of the 'Wallets' section in the 'Profile' page"
-  },
-  "footer.builtOnLabel": {
-    "defaultMessage": "Built on",
-    "description": "label of the 'built on' text in the footer section"
-  },
-  "footer.documentationLinkLabel": {
-    "defaultMessage": "Documentation",
-    "description": "Label of the 'Documentation' property in the footer section"
-  },
-  "footer.logoAlt": {
-    "defaultMessage": "Verida One Logo",
-    "description": "Alternate text for the footer logo image"
-  },
-  "footer.termsAndConditionLinkLabel": {
-    "defaultMessage": "Terms & Conditions",
-    "description": "Label of the 'Terms and Condition' property in the footer footer section"
-  },
-  "footer.veridaOneLinkLabel": {
-    "defaultMessage": "Verida One",
-    "description": "'Verida One' product name in the footer section"
   }
 }
