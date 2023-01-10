@@ -10,3 +10,4 @@ export * from "./ProfileInfoSection";
 export * from "./CollectibleGrid";
 export * from "./AssetDetailsMainInfo";
 export * from "./CollectibleDetailsProperties";
+export * from "./BadgeDetailsProperties";
