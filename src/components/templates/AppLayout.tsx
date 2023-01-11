@@ -13,7 +13,7 @@ export const AppLayout: React.FunctionComponent = () => {
         <main className="mx-auto flex w-full max-w-screen-sm flex-grow flex-col px-4 pt-4">
           <Outlet />
         </main>
-        <div className="py-2">
+        <div className="pt-10">
           <Footer />
         </div>
       </div>
