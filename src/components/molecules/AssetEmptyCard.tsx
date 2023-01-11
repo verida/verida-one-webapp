@@ -26,8 +26,8 @@ export const AssetEmptyCard: React.FunctionComponent<AssetEmptyCardProps> = ({
   });
 
   return (
-    <div {...otherProps} className="rounded-xl bg-gray-dark p-4">
-      <div className="flex flex-col items-center justify-center">
+    <div {...otherProps}>
+      <div className="flex flex-col items-center justify-center rounded-xl bg-gray-dark p-4">
         <span className="mb-2 text-lg font-semibold">{title}</span>
         <p className="mb-4 text-sm">{message}</p>
         <div className="w-full">

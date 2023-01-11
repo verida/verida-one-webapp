@@ -51,13 +51,12 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
   if (!badge) {
     return (
       <PageWrapper>
-        <div className="absolute inset-0 m-auto flex items-center justify-center">
-          <AssetEmptyCard
-            identity={identity}
-            message={emptyBadgeDetailsMessage}
-            title={emptyBadgeDetailsTitle}
-          />
-        </div>
+        <AssetEmptyCard
+          identity={identity}
+          message={emptyBadgeDetailsMessage}
+          title={emptyBadgeDetailsTitle}
+          className="flex flex-grow flex-col justify-center"
+        />
       </PageWrapper>
     );
   }
