@@ -1,4 +1,4 @@
-import { SupportedLocales } from "../types";
+import { SupportedLocales } from "lib/types";
 
 export const defaultLocale = "en";
 

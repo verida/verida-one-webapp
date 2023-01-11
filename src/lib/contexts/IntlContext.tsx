@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { IntlProvider as ReactIntlProvider } from "react-intl";
-import { defaultLocale, getMessages, getUserLocale } from "../lang";
-import { LocalizedMessages } from "../types";
+import { defaultLocale, getMessages, getUserLocale } from "lib/lang";
+import { LocalizedMessages } from "lib/types";
 
 interface Props {
   children: React.ReactNode;
@@ -31,6 +31,9 @@ export const IntlProvider: React.FunctionComponent<Props> = (props) => {
       locale={locale}
       defaultLocale={defaultLocale}
       messages={messages}
+      onError={(_error: unknown) => {
+        // TODO: Handle i18n errors
+      }}
     >
       {props.children}
     </ReactIntlProvider>

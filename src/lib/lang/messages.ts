@@ -1,4 +1,4 @@
-import { LocalizedMessages } from "../types";
+import { LocalizedMessages } from "lib/types";
 import { defaultLocale, supportedLocales } from "./locales";
 
 /** Utility function to get the user locale */

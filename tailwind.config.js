@@ -3,17 +3,35 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     colors: {
+      "primary": "#ffffff",
+      "primary-inverse": "#000000",
+      "background": "#0D0A27",
+      "background-button": "rgba(255, 255, 255, 0.15)",
+      "background-button-hover": "rgba(255, 255, 255, 0.3);",
       "white": "#ffffff",
-      "blue": "#1fb6ff",
-      "pink": "#ff49db",
-      "orange": "#ff7849",
+      "black": "#000000",
+      "error": "#CE4B46",
       "green": "#13ce66",
-      "gray-dark": "#273444",
-      "gray": "#8492a6",
-      "gray-light": "#d3dce6",
-      "background": "#0d0a27",
+      "gray-dark": "rgba(255, 255, 255, 0.15);",
+      "gray-light": "#9D9D9D",
+      "verida-blue": "#37D5C7",
+      "verida-purple": "#5354D1",
+      "transparent": `rgba(17, 17, 17, 0.2)`,
     },
-    extend: {},
+    fontFamily: {
+      sans: ["Sora", "sans-serif"],
+    },
+    extend: {
+      screens: {
+        sm: "696px",
+      },
+      spacing: {
+        4.5: "1.125rem",
+      },
+      backdropBlur: {
+        xs: "3px",
+      },
+    },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/line-clamp")],
 };

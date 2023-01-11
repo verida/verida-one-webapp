@@ -1,10 +1,111 @@
 {
-  "App.ComingSoon": {
-    "description": "Message stating that the app will be available soon",
-    "defaultMessage": "Coming Soon"
+  "AssetDetailsMainInfo.descriptionTitle": {
+    "defaultMessage": "Description",
+    "description": "Title above the description of an asset in the details page"
   },
-  "App.LogoAlt": {
-    "description": "Alternate text for the logo image",
-    "defaultMessage": "Verida One Logo"
+  "BadgeDetailsView.message": {
+    "defaultMessage": "Badge details"
+  },
+  "BadgeListView.message": {
+    "defaultMessage": "Badge list"
+  },
+  "BadgesSection.sectionTitle": {
+    "defaultMessage": "Badges",
+    "description": "Title of the 'Badges' section in the 'Profile' page"
+  },
+  "CollectibleDetailsProperties.assetsIdPropertyLabel": {
+    "defaultMessage": "Asset Id",
+    "description": "Label of the 'tokenId' property for a collectible"
+  },
+  "CollectibleDetailsProperties.chainPropertyLabel": {
+    "defaultMessage": "Chain",
+    "description": "Label of the 'chain' property for a collectible"
+  },
+  "CollectibleDetailsProperties.creatorWalletAddressPropertyLabel": {
+    "defaultMessage": "Creator wallet address",
+    "description": "Label of the 'creatorWalletAddress' property for a collectible"
+  },
+  "CollectibleDetailsProperties.floorPricePropertyLabel": {
+    "defaultMessage": "Floor price",
+    "description": "Label of the 'floorPrice' property for a collectible"
+  },
+  "CollectibleDetailsProperties.ownerPropertyLabel": {
+    "defaultMessage": "Owner",
+    "description": "Label of the 'owner' property for a collectible"
+  },
+  "CollectibleDetailsView.viewInExplorerButtonLabel": {
+    "defaultMessage": "View in Explorer",
+    "description": "Label of the button to view an asset in a blockchain explorer."
+  },
+  "CollectibleListView.pageTitle": {
+    "defaultMessage": "Collectibles",
+    "description": "Title of the 'Collectibles' page"
+  },
+  "CollectiblesSection.sectionTitle": {
+    "defaultMessage": "Collectibles",
+    "description": "Title of the 'Collectibles' section in the 'Profile' page"
+  },
+  "CollectiblesSection.showAllButtonLabel": {
+    "defaultMessage": "Show All",
+    "description": "Label of the button redirecting from the 'Collectibles' profile section to the 'Collectibles' page"
+  },
+  "CustomLinksSection.sectionTitle": {
+    "defaultMessage": "Links",
+    "description": "Title of the 'Links' section in the 'Profile' page"
+  },
+  "FeaturedSection.sectionTitle": {
+    "defaultMessage": "Featured",
+    "description": "Title of the 'Featured' section in the 'Profile' page"
+  },
+  "Footer.builtOnLabel": {
+    "defaultMessage": "Built on",
+    "description": "label of the 'built on' text in the footer section"
+  },
+  "Footer.copyrightMessage": {
+    "defaultMessage": "© {copyrightYear} Verida One",
+    "description": "Copyright message in the footer section"
+  },
+  "Footer.documentationLinkLabel": {
+    "defaultMessage": "Documentation",
+    "description": "Label of the 'Documentation' Link in the footer section"
+  },
+  "Footer.logoAlt": {
+    "defaultMessage": "Verida One Logo",
+    "description": "Alternate text for the footer logo image"
+  },
+  "Footer.termsAndConditionLinkLabel": {
+    "defaultMessage": "Terms & Conditions",
+    "description": "Label of the 'Terms and Condition' Link in the footer footer section"
+  },
+  "Header.createYourProfileButtonLabel": {
+    "defaultMessage": "Create your profile",
+    "description": "Label of the CTA button in the Header to create a profile"
+  },
+  "Header.logoAlt": {
+    "defaultMessage": "Verida One Logo",
+    "description": "Alternate text for the logo image"
+  },
+  "HomeView.ComingSoon": {
+    "defaultMessage": "Coming Soon",
+    "description": "Message stating that the app will be available soon"
+  },
+  "HomeView.LogoAlt": {
+    "defaultMessage": "Verida One Logo",
+    "description": "Alternate text for the logo image"
+  },
+  "NotProfileFoundView.message": {
+    "defaultMessage": "No Profile Found"
+  },
+  "ProfileCallToAction.createOwnProfileMessage": {
+    "defaultMessage": "Create your own profile",
+    "description": "Call to action for viewer to create their own profile"
+  },
+  "SocialMediaSection.sectionTitle": {
+    "defaultMessage": "Socials",
+    "description": "Title of the 'Socials' section in the 'Profile' page"
+  },
+  "WalletAddressesSection.sectionTitle": {
+    "defaultMessage": "Wallets",
+    "description": "Title of the 'Wallets' section in the 'Profile' page"
   }
 }

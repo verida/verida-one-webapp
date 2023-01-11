@@ -1,26 +1,55 @@
 import React from "react";
-import logo from "./verida_one_logo.png";
-import { useIntl } from "react-intl";
+import {
+  BadgeDetailsView,
+  BadgeListView,
+  CollectibleDetailsView,
+  CollectibleListView,
+  HomeView,
+  NoProfileFoundView,
+  ProfileView,
+} from "components/pages";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { AppLayout } from "components/templates";
 
-export const App = () => {
-  const i18n = useIntl();
+/**
+ * Routes
+ *
+ * /                                                       -> Home
+ * /:identity                                              -> Profile
+ * /:identity/collectibles                                 -> CollectibleList
+ * /:identity/collectibles/:chain/:contractAddress/:tokenId-> CollectibleDetails
+ * /:identity/badges                                       -> BadgeList
+ * /:identity/badges/:badgeId                              -> BadgeDetails
+ *
+ * TODO: Strenghten with a list of routes as constant to be used throughout the app
+ */
 
-  const comingSoonMessage = i18n.formatMessage({
-    id: "App.ComingSoon",
-    description: "Message stating that the app will be available soon",
-    defaultMessage: "Coming Soon",
-  });
-
-  const logoAlt = i18n.formatMessage({
-    id: "App.LogoAlt",
-    description: "Alternate text for the logo image",
-    defaultMessage: "Verida One Logo",
-  });
-
+export const App: React.FunctionComponent = () => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center space-y-12 bg-background p-8 text-white">
-      <img src={logo} alt={logoAlt} className="w-full max-w-fit" />
-      <p className="text-xl md:text-4xl">{comingSoonMessage}</p>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<HomeView />} />
+          <Route path=":identity">
+            <Route
+              index
+              element={<ProfileView />}
+              errorElement={<NoProfileFoundView />}
+            />
+            <Route path="collectibles">
+              <Route index element={<CollectibleListView />} />
+              <Route
+                path=":chain/:contractAddress/:tokenId"
+                element={<CollectibleDetailsView />}
+              />
+            </Route>
+            <Route path="badges">
+              <Route index element={<BadgeListView />} />
+              <Route path=":badgeId" element={<BadgeDetailsView />} />
+            </Route>
+          </Route>
+        </Route>
+      </Routes>
+    </Router>
   );
 };
