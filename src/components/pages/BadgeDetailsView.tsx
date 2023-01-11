@@ -51,7 +51,7 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
   if (!badge) {
     return (
       <PageWrapper>
-        <div>
+        <div className="absolute inset-0 m-auto flex items-center justify-center">
           <AssetEmptyCard
             identity={identity}
             message={emptyBadgeDetailsMessage}
@@ -76,7 +76,7 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
     <PageWrapper>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
-          <div className="rounded-xl bg-transparent px-10 py-4.5">
+          <div className="bg-badge rounded-xl px-10 py-4.5">
             <AssetMedia
               className="w-full"
               aspect="aspect-auto"
