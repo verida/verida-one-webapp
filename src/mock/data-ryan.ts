@@ -19,7 +19,7 @@ import nftThorchain78Image from "./images/ryan/nft-thorchain-78.png";
 import nftLens85835Image from "./images/ryan/nft-lens-85835.png";
 import nftArbitrum426456Image from "./images/ryan/nft-arbitrum-426456.png";
 import nftZerion5Image from "./images/ryan/nft-zerion-5.png";
-import discordBadge from "assets/badges/discord.png";
+import twitterAccountBadge from "./images/badges/twitter-account.png";
 
 export const profileInfo: ProfileInfo = {
   avatar: avatarImage,
@@ -204,19 +204,16 @@ export const collectibles: Collectible[] = [
 
 export const badges: Badge[] = [
   {
-    chain: Chains.ETHEREUM,
+    chain: Chains.POLYGON,
     contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD270",
     tokenId: "78000314",
-    collectionLabel: "Discord Account Badge",
-    tokenLabel: "Verida Badges",
-    description: `Monomyth is the universal story about the transformation of the hero inside all of us. 
-      “Be brave and fear not, embrace the challenge before you. Travel through the 7 worlds of Innerspace, to physically transform, learn and collect tokens of awareness. Your journey will expose you to the functions of consciousness including intuition, thought, emotion, sensation, your shadow, aspirations, morality, conflict and even death. If done with a pure heart, you will experience individuation through the transformative nature of experiencing the human condition in all its varieties. One last piece of advice, above all else, enjoy the ride.”
-      `,
-    ownerAddress: "0xc6400A5584db71e41B0E5dFbdC769b54B91256CD",
-    media: discordBadge,
-    proofType: "Discord",
-    username: "ryan#7622",
-    proofValue: "0x....",
+    collectionLabel: "Verida Badges",
+    tokenLabel: "Twitter Account",
+    description: "",
+    ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
+    media: twitterAccountBadge,
+    proofLabel: "Twitter Account",
+    proofValue: "@RyanJKris",
   },
 ];
 

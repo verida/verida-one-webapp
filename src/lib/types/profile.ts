@@ -50,17 +50,8 @@ export interface Badge {
   description?: string;
   ownerAddress: string;
   media: string;
-  username: string;
-  proofType: string; // Not sure, but assumed it would be something like "Twitter handle"/"Verida DID"/... in a user-friendly format
+  proofLabel: string; // Not sure, but assumed it would be something like "Twitter handle"/"Verida DID"/... in a user-friendly format
   proofValue: string; // Not sure, but assumed it would be the actual value of the proof
-}
-
-export interface VeridaBadge {
-  chain: Chains;
-  address: string;
-  collectionLabel: string;
-  itemLabel: string;
-  media: string;
 }
 
 export interface Profile {
