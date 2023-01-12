@@ -10,3 +10,4 @@ export * from "./Icon";
 export * from "./IconButton";
 export * from "./IconButtonLink";
 export * from "./Badge";
+export * from "./BadgeSVG";
