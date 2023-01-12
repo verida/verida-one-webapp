@@ -12,7 +12,8 @@ export const BadgeDetailsProperties: React.FC<BadgeDetailsPropertiesProps> = (
   props
 ) => {
   const { badge, ...divProps } = props;
-  const { chain, contractAddress, username, ownerAddress, proofType } = badge;
+  const { chain, contractAddress, proofValue, ownerAddress, proofLabel } =
+    badge;
   const i18n = useIntl();
 
   const chainPropertyLabel = i18n.formatMessage({
@@ -27,14 +28,14 @@ export const BadgeDetailsProperties: React.FC<BadgeDetailsPropertiesProps> = (
     description: "Label of the 'owner' property for a badge",
   });
 
-  const userNamePropertyLabel = i18n.formatMessage(
+  const proofOfLabelPropertyLabel = i18n.formatMessage(
     {
-      id: "BadgeDetailsProperties.creatorWalletAddressPropertyLabel",
-      defaultMessage: "{proofType} username",
+      id: "BadgeDetailsProperties.proofOfLabelPropertyLabel",
+      defaultMessage: "{proofLabel} username",
       description: "Label of the 'username' property for a badge",
     },
     {
-      proofType,
+      proofLabel,
     }
   );
 
@@ -67,8 +68,8 @@ export const BadgeDetailsProperties: React.FC<BadgeDetailsPropertiesProps> = (
       value: contractAddress,
     },
     {
-      propertyLabel: userNamePropertyLabel,
-      formattedValue: username,
+      propertyLabel: proofOfLabelPropertyLabel,
+      formattedValue: proofValue,
     },
   ];
 

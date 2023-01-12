@@ -59,7 +59,7 @@ export const CollectibleDetailsProperties: React.FC<
     {
       propertyLabel: chainPropertyLabel,
       formattedValue: (
-        <div className="flex items-center">
+        <div className="flex items-center space-x-1">
           {getChainLogo(chain, 14)}
           <span>{getChainLabel(chain)}</span>
         </div>
