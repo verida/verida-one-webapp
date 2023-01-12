@@ -14,22 +14,23 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
   const [badge, setBadge] = useState<Badge | undefined>(undefined);
   const { identity, chain, contractAddress, tokenId } = useParams();
   const i18n = useIntl();
+  const redirectPath = identity ? `/${identity}` : `/`;
 
-  const viewInExplorerButtonLabel = i18n.formatMessage({
-    id: "BadgeDetailsView.viewInExplorerButtonLabel",
-    defaultMessage: "View in Explorer",
-    description: "Message of empty badge details in badge details page",
+  const assetEmptyCardButtonLabel = i18n.formatMessage({
+    id: "BadgeDetailsView.goToProfilePageLinkLabel",
+    description: "Go to 'profile' page link label",
+    defaultMessage: "Go to profile",
   });
 
   const emptyBadgeDetailsTitle = i18n.formatMessage({
     id: "BadgeDetailsView.emptyBadgeDetailsTitle",
     defaultMessage: "Item not found",
-    description: "Title of empty badge details in badge details page",
+    description: "Title of the card in badge details page",
   });
 
   const emptyBadgeDetailsMessage = i18n.formatMessage({
     id: "BadgeDetailsView.emptyBadgeDetailsMessage",
-    defaultMessage: "This item doesn’t exist or is not available",
+    defaultMessage: "This item doesn't exist or is not available",
     description:
       "Label of the button to view an asset in a blockchain explorer.",
   });
@@ -52,14 +53,22 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
     return (
       <PageWrapper>
         <AssetEmptyCard
-          identity={identity}
-          message={emptyBadgeDetailsMessage}
+          redirectPath={redirectPath}
           title={emptyBadgeDetailsTitle}
+          message={emptyBadgeDetailsMessage}
+          buttonLabel={assetEmptyCardButtonLabel}
           className="flex flex-grow flex-col justify-center"
         />
       </PageWrapper>
     );
   }
+
+  const viewInExplorerButtonLabel = i18n.formatMessage({
+    id: "BadgeDetailsView.viewInExplorerButtonLabel",
+    defaultMessage: "View in Explorer",
+    description:
+      "Label of the button to view an asset in a blockchain explorer.",
+  });
 
   const viewInExplorerButton = (
     <ButtonLink
@@ -75,7 +84,7 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
     <PageWrapper>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
-          <div className="bg-badge rounded-xl px-10 py-4.5">
+          <div className="bg-badge flex items-center justify-center rounded-xl p-10">
             <AssetMedia
               className="w-full"
               aspect="aspect-auto"
