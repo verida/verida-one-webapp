@@ -3,10 +3,6 @@
     "defaultMessage": "Description",
     "description": "Title above the description of an asset in the details page"
   },
-  "AssetEmptyCard.goToProfilePageLinkLabel": {
-    "defaultMessage": "Go to profile",
-    "description": "Go to 'profile' page link label"
-  },
   "BadgeDetailsProperties.chainPropertyLabel": {
     "defaultMessage": "Chain",
     "description": "Label of the 'chain' property for a badge"
@@ -19,17 +15,25 @@
     "defaultMessage": "Owner",
     "description": "Label of the 'owner' property for a badge"
   },
+  "BadgeDetailsProperties.proofOfLabelPropertyLabel": {
+    "defaultMessage": "{proofLabel} username",
+    "description": "Label of the 'username' property for a badge"
+  },
   "BadgeDetailsView.emptyBadgeDetailsMessage": {
-    "defaultMessage": "This item doesn’t exist or is not available",
+    "defaultMessage": "This item doesn't exist or is not available",
     "description": "Label of the button to view an asset in a blockchain explorer."
   },
   "BadgeDetailsView.emptyBadgeDetailsTitle": {
     "defaultMessage": "Item not found",
-    "description": "Title of empty badge details in badge details page"
+    "description": "Title of the card in badge details page"
+  },
+  "BadgeDetailsView.goToProfilePageLinkLabel": {
+    "defaultMessage": "Go to profile",
+    "description": "Go to 'profile' page link label"
   },
   "BadgeDetailsView.viewInExplorerButtonLabel": {
     "defaultMessage": "View in Explorer",
-    "description": "Message of empty badge details in badge details page"
+    "description": "Label of the button to view an asset in a blockchain explorer."
   },
   "BadgeListView.message": {
     "defaultMessage": "Badge list"
