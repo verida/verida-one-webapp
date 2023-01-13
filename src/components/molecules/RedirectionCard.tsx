@@ -2,7 +2,7 @@ import { Button } from "components/atoms";
 import React from "react";
 import { Link } from "react-router-dom";
 
-type AssetEmptyCardProps = {
+type RedirectionCardProps = {
   title: string;
   message: string;
   redirectPath: string;
@@ -10,7 +10,7 @@ type AssetEmptyCardProps = {
 } & React.ComponentPropsWithRef<"div">;
 
 /** Card to display empty assets list or details in assets pages*/
-export const AssetEmptyCard: React.FunctionComponent<AssetEmptyCardProps> = ({
+export const RedirectionCard: React.FunctionComponent<RedirectionCardProps> = ({
   message,
   title,
   buttonLabel,

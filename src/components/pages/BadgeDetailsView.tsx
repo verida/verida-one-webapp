@@ -1,5 +1,5 @@
 import { AssetMedia, ButtonLink } from "components/atoms";
-import { AssetEmptyCard, PageWrapper } from "components/molecules";
+import { RedirectionCard, PageWrapper } from "components/molecules";
 import {
   AssetDetailsMainInfo,
   BadgeDetailsProperties,
@@ -52,7 +52,7 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
   if (!badge) {
     return (
       <PageWrapper>
-        <AssetEmptyCard
+        <RedirectionCard
           redirectPath={redirectPath}
           title={emptyBadgeDetailsTitle}
           message={emptyBadgeDetailsMessage}
