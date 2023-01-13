@@ -13,20 +13,18 @@ import {
   getFeaturedCollectibles,
   getFeaturedLinks,
   getLinks,
-  getProfileInfo,
   getSocialMediaLinks,
   getWalletAddresses,
 } from "lib/utils";
 import {
   Collectible,
   CustomLink,
-  IdentityInfo,
   SocialMediaLink,
   WalletAddress,
 } from "lib/types";
+import { useIdentityInfo } from "lib/hooks";
 
 export const ProfileView: React.FC = () => {
-  const [identityInfo, setIdentityInfo] = useState<IdentityInfo>({ id: "" });
   const [featuredCollectibles, setFeaturedCollectibles] = useState<
     Collectible[]
   >([]);
@@ -42,7 +40,6 @@ export const ProfileView: React.FC = () => {
 
   useEffect(() => {
     const getData = async () => {
-      setIdentityInfo(await getProfileInfo(identity));
       setFeaturedCollectibles(await getFeaturedCollectibles(identity));
       setFeaturedLinks(await getFeaturedLinks(identity));
       setSocialMediaLinks(await getSocialMediaLinks(identity));
@@ -52,6 +49,23 @@ export const ProfileView: React.FC = () => {
     };
     void getData();
   }, [identity]);
+
+  const {
+    data: identityInfo,
+    isLoading: isLoadingIdentityInfo,
+    isError: isErrorIdentityInfo,
+    error: errorIdentityInfo,
+  } = useIdentityInfo();
+
+  if (isLoadingIdentityInfo || !identityInfo) {
+    // TODO: Handle loading state
+    return null;
+  }
+
+  if (isErrorIdentityInfo) {
+    console.error(errorIdentityInfo);
+    return null;
+  }
 
   return (
     <div>

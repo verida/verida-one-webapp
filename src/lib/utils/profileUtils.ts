@@ -1,55 +1,11 @@
-import {
-  Collectible,
-  CustomLink,
-  ProfileInfo,
-  SocialMediaLink,
-  WalletAddress,
-} from "lib/types";
-import { getIdentityProfile } from "mock/data";
+import { Client } from "@verida/client-ts";
+import { IdentityInfo } from "lib/types";
+import { Verida } from "./veridaUtils";
 
-export const getProfileInfo = async (
-  identity?: string
-): Promise<ProfileInfo> => {
-  const { profileInfo } = await getIdentityProfile(identity);
-  return profileInfo;
-};
-
-export const getWalletAddresses = async (
-  identity?: string
-): Promise<WalletAddress[]> => {
-  const { walletAddresses } = await getIdentityProfile(identity);
-  return walletAddresses;
-};
-
-export const getCollectibles = async (
-  identity?: string
-): Promise<Collectible[]> => {
-  const { collectibles } = await getIdentityProfile(identity);
-  return collectibles;
-};
-
-export const getFeaturedCollectibles = async (
-  identity?: string
-): Promise<Collectible[]> => {
-  const { featuredCollectibles } = await getIdentityProfile(identity);
-  return featuredCollectibles;
-};
-
-export const getFeaturedLinks = async (
-  identity?: string
-): Promise<CustomLink[]> => {
-  const { featuredLinks } = await getIdentityProfile(identity);
-  return featuredLinks;
-};
-
-export const getLinks = async (identity?: string): Promise<CustomLink[]> => {
-  const { links } = await getIdentityProfile(identity);
-  return links;
-};
-
-export const getSocialMediaLinks = async (
-  identity?: string
-): Promise<SocialMediaLink[]> => {
-  const { socialMediaLinks } = await getIdentityProfile(identity);
-  return socialMediaLinks;
+export const getIdentityInfo = async (
+  veridaClient: Client,
+  did: string
+): Promise<IdentityInfo> => {
+  return Verida.getVaultPublicProfile(veridaClient, did);
+  // Allow adding additional information or reorganising the data
 };

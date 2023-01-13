@@ -1,18 +1,10 @@
 import {
   Collectible,
   CustomLink,
-  IdentityInfo,
   SocialMediaLink,
   WalletAddress,
 } from "lib/types";
 import { getIdentityProfile } from "mock/data";
-
-export const getProfileInfo = async (
-  identity?: string
-): Promise<IdentityInfo> => {
-  const { identityInfo } = await getIdentityProfile(identity);
-  return identityInfo;
-};
 
 export const getWalletAddresses = async (
   identity?: string
