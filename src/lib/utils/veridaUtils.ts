@@ -57,9 +57,11 @@ const getVaultPublicProfile = async (
     const profileData = (await profileInstance.getMany({}, {})) as {
       name?: string;
       avatar?: { uri: string };
+      description?: string;
     };
     profile.name = profileData?.name;
     profile.avatar = profileData?.avatar?.uri;
+    profile.description = profileData?.description;
   }
 
   return profile;
