@@ -1,7 +1,7 @@
 import { Chains, SocialMedia } from "../constants";
-import { UserProfile } from "./verida";
+import { VaultPublicProfile } from "./verida";
 
-export interface IdentityInfo extends UserProfile {
+export interface IdentityInfo extends VaultPublicProfile {
   veridaName?: string;
 }
 
