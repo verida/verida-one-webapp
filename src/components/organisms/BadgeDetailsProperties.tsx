@@ -31,8 +31,8 @@ export const BadgeDetailsProperties: React.FC<BadgeDetailsPropertiesProps> = (
   const proofOfLabelPropertyLabel = i18n.formatMessage(
     {
       id: "BadgeDetailsProperties.proofOfLabelPropertyLabel",
-      defaultMessage: "{proofLabel} username",
-      description: "Label of the 'username' property for a badge",
+      defaultMessage: "{proofLabel}",
+      description: "Label of the 'proofLabel' property for a badge",
     },
     {
       proofLabel,

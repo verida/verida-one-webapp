@@ -25,14 +25,13 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
   const emptyBadgeDetailsTitle = i18n.formatMessage({
     id: "BadgeDetailsView.emptyBadgeDetailsTitle",
     defaultMessage: "Item not found",
-    description: "Title of the card in badge details page",
+    description: "This title is used when the Badge is not found",
   });
 
   const emptyBadgeDetailsMessage = i18n.formatMessage({
     id: "BadgeDetailsView.emptyBadgeDetailsMessage",
     defaultMessage: "This item doesn't exist or is not available",
-    description:
-      "Label of the button to view an asset in a blockchain explorer.",
+    description: "This message is used when the Badge is not found",
   });
 
   useEffect(() => {
