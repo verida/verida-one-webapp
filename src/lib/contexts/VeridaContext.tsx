@@ -1,26 +1,32 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Context } from "@verida/client-ts";
+import { Client, Context } from "@verida/client-ts";
 import { VaultAccount, hasSession } from "@verida/account-web-vault";
-import { UserProfile } from "lib/types";
+import { VaultPublicProfile } from "lib/types";
 import { config } from "lib/config";
 import { Verida } from "lib/utils";
+
+const client = new Client({
+  environment: config.veridaEnv,
+});
 
 interface VeridaProviderProps {
   children?: React.ReactNode;
 }
 
 type VeridaContextType = {
+  client: Client;
   connect: () => Promise<void>;
   disconnect: () => Promise<void>;
   isConnecting: boolean;
   isConnected: boolean;
   account: VaultAccount | null;
   context: Context | null;
-  profile: UserProfile | null;
+  profile: VaultPublicProfile | null;
   error?: unknown;
 };
 
 export const VeridaContext = React.createContext<VeridaContextType>({
+  client,
   connect: async () => {},
   disconnect: async () => {},
   isConnecting: false,
@@ -36,8 +42,20 @@ export const VeridaProvider: React.FC<VeridaProviderProps> = (props) => {
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const [account, setAccount] = useState<VaultAccount | null>(null);
   const [context, setContext] = useState<Context | null>(null);
-  const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [profile, setProfile] = useState<VaultPublicProfile | null>(null);
   const [error, setError] = useState<unknown>(null);
+
+  useEffect(() => {
+    const handler = async () => {
+      if (!config.veridaContextName) {
+        // TODO handle env variable not defined
+        return;
+      }
+      const tContext = await client.openContext(config.veridaContextName);
+      setContext(tContext || null);
+    };
+    void handler();
+  }, []);
 
   const connect = useCallback(async () => {
     if (!config.veridaContextName) {
@@ -47,6 +65,7 @@ export const VeridaProvider: React.FC<VeridaProviderProps> = (props) => {
 
     setIsConnecting(true);
     try {
+      // TODO: Use the previously created Verida client in the connect
       const [vContext, vAccount, vProfile] = await Verida.connect(
         config.veridaContextName,
         config.veridaEnv,
@@ -89,6 +108,7 @@ export const VeridaProvider: React.FC<VeridaProviderProps> = (props) => {
   }, [connect]);
 
   const contextValue: VeridaContextType = {
+    client,
     error,
     connect,
     disconnect,
