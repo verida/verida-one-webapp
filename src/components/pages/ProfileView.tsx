@@ -9,12 +9,12 @@ import {
   WalletAddressesSection,
 } from "components/organisms";
 import {
-  getCollectibles,
-  getFeaturedCollectibles,
-  getFeaturedLinks,
-  getLinks,
-  getSocialMediaLinks,
-  getWalletAddresses,
+  getMockCollectibles,
+  getMockFeaturedCollectibles,
+  getMockFeaturedLinks,
+  getMockLinks,
+  getMockSocialMediaLinks,
+  getMockWalletAddresses,
 } from "lib/utils";
 import {
   Collectible,
@@ -40,12 +40,12 @@ export const ProfileView: React.FC = () => {
 
   useEffect(() => {
     const getData = async () => {
-      setFeaturedCollectibles(await getFeaturedCollectibles(identity));
-      setFeaturedLinks(await getFeaturedLinks(identity));
-      setSocialMediaLinks(await getSocialMediaLinks(identity));
-      setCollectibles(await getCollectibles(identity));
-      setCustomLinks(await getLinks(identity));
-      setWalletAddresses(await getWalletAddresses(identity));
+      setFeaturedCollectibles(await getMockFeaturedCollectibles(identity));
+      setFeaturedLinks(await getMockFeaturedLinks(identity));
+      setSocialMediaLinks(await getMockSocialMediaLinks(identity));
+      setCollectibles(await getMockCollectibles(identity));
+      setCustomLinks(await getMockLinks(identity));
+      setWalletAddresses(await getMockWalletAddresses(identity));
     };
     void getData();
   }, [identity]);
@@ -54,7 +54,6 @@ export const ProfileView: React.FC = () => {
     data: identityInfo,
     isLoading: isLoadingIdentityInfo,
     isError: isErrorIdentityInfo,
-    error: errorIdentityInfo,
   } = useIdentityInfo();
 
   if (isLoadingIdentityInfo || !identityInfo) {
@@ -63,7 +62,7 @@ export const ProfileView: React.FC = () => {
   }
 
   if (isErrorIdentityInfo) {
-    console.error(errorIdentityInfo);
+    // TODO: Handle error state
     return null;
   }
 

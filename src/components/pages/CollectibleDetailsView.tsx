@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Collectible } from "lib/types";
 import { PageWrapper } from "components/molecules";
-import { getChainExplorerUrlForAddress, getCollectibles } from "lib/utils";
+import { getChainExplorerUrlForAddress, getMockCollectibles } from "lib/utils";
 import { AssetMedia, ButtonLink } from "components/atoms";
 import { useIntl } from "react-intl";
 import {
@@ -20,7 +20,7 @@ export const CollectibleDetailsView: React.FunctionComponent = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const collectibles = await getCollectibles(identity);
+      const collectibles = await getMockCollectibles(identity);
       const foundCollectible = collectibles.find(
         (item) =>
           item.chain === chain &&

@@ -4,7 +4,7 @@ import { profile as profile6529 } from "./data-6529";
 import { profile as profileJohnDoe } from "./data-johndoe";
 import { profile as profileRyan } from "./data-ryan";
 
-export const getIdentityProfile = async (
+export const getMockIdentityProfile = async (
   identityId?: string
 ): Promise<Profile> => {
   switch (identityId) {

@@ -1,47 +1,57 @@
 import {
   Collectible,
   CustomLink,
+  IdentityInfo,
   SocialMediaLink,
   WalletAddress,
 } from "lib/types";
-import { getIdentityProfile } from "mock/data";
+import { getMockIdentityProfile } from "mock/data";
 
-export const getWalletAddresses = async (
+export const getMockIdentityInfo = async (
+  identity?: string
+): Promise<IdentityInfo> => {
+  const { identityInfo } = await getMockIdentityProfile(identity);
+  return identityInfo;
+};
+
+export const getMockWalletAddresses = async (
   identity?: string
 ): Promise<WalletAddress[]> => {
-  const { walletAddresses } = await getIdentityProfile(identity);
+  const { walletAddresses } = await getMockIdentityProfile(identity);
   return walletAddresses;
 };
 
-export const getCollectibles = async (
+export const getMockCollectibles = async (
   identity?: string
 ): Promise<Collectible[]> => {
-  const { collectibles } = await getIdentityProfile(identity);
+  const { collectibles } = await getMockIdentityProfile(identity);
   return collectibles;
 };
 
-export const getFeaturedCollectibles = async (
+export const getMockFeaturedCollectibles = async (
   identity?: string
 ): Promise<Collectible[]> => {
-  const { featuredCollectibles } = await getIdentityProfile(identity);
+  const { featuredCollectibles } = await getMockIdentityProfile(identity);
   return featuredCollectibles;
 };
 
-export const getFeaturedLinks = async (
+export const getMockFeaturedLinks = async (
   identity?: string
 ): Promise<CustomLink[]> => {
-  const { featuredLinks } = await getIdentityProfile(identity);
+  const { featuredLinks } = await getMockIdentityProfile(identity);
   return featuredLinks;
 };
 
-export const getLinks = async (identity?: string): Promise<CustomLink[]> => {
-  const { links } = await getIdentityProfile(identity);
+export const getMockLinks = async (
+  identity?: string
+): Promise<CustomLink[]> => {
+  const { links } = await getMockIdentityProfile(identity);
   return links;
 };
 
-export const getSocialMediaLinks = async (
+export const getMockSocialMediaLinks = async (
   identity?: string
 ): Promise<SocialMediaLink[]> => {
-  const { socialMediaLinks } = await getIdentityProfile(identity);
+  const { socialMediaLinks } = await getMockIdentityProfile(identity);
   return socialMediaLinks;
 };
