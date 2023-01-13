@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import {
   CollectiblesSection,
   CustomLinksSection,
   FeaturedSection,
-  ProfileInfoSection,
+  IdentityInfoSection,
   SocialMediaSection,
   WalletAddressesSection,
 } from "components/organisms";
@@ -19,14 +20,13 @@ import {
 import {
   Collectible,
   CustomLink,
-  ProfileInfo,
+  IdentityInfo,
   SocialMediaLink,
   WalletAddress,
 } from "lib/types";
-import { useParams } from "react-router-dom";
 
 export const ProfileView: React.FC = () => {
-  const [profileInfo, setProfileInfo] = useState<ProfileInfo>({ name: "" });
+  const [identityInfo, setIdentityInfo] = useState<IdentityInfo>({ id: "" });
   const [featuredCollectibles, setFeaturedCollectibles] = useState<
     Collectible[]
   >([]);
@@ -42,7 +42,7 @@ export const ProfileView: React.FC = () => {
 
   useEffect(() => {
     const getData = async () => {
-      setProfileInfo(await getProfileInfo(identity));
+      setIdentityInfo(await getProfileInfo(identity));
       setFeaturedCollectibles(await getFeaturedCollectibles(identity));
       setFeaturedLinks(await getFeaturedLinks(identity));
       setSocialMediaLinks(await getSocialMediaLinks(identity));
@@ -56,7 +56,7 @@ export const ProfileView: React.FC = () => {
   return (
     <div>
       <div className="mb-7">
-        <ProfileInfoSection profileInfo={profileInfo} />
+        <IdentityInfoSection identityInfo={identityInfo} />
       </div>
       <div className="space-y-10">
         <FeaturedSection

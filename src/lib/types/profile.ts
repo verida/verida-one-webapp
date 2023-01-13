@@ -1,12 +1,7 @@
 import { Chains, SocialMedia } from "../constants";
+import { UserProfile } from "./verida";
 
-export interface VeridaProfile {
-  name: string;
-  avatar?: string;
-  description?: string;
-}
-
-export interface ProfileInfo extends VeridaProfile {
+export interface IdentityInfo extends UserProfile {
   veridaName?: string;
 }
 
@@ -51,7 +46,7 @@ export interface VeridaBadge {
 }
 
 export interface Profile {
-  profileInfo: ProfileInfo;
+  identityInfo: IdentityInfo;
   socialMediaLinks: SocialMediaLink[];
   featuredLinks: CustomLink[];
   links: CustomLink[];

@@ -5,7 +5,7 @@ import {
   Collectible,
   CustomLink,
   Profile,
-  ProfileInfo,
+  IdentityInfo,
   SocialMediaLink,
   WalletAddress,
 } from "lib/types";
@@ -19,7 +19,8 @@ import nftLens85835Image from "./images/ryan/nft-lens-85835.png";
 import nftArbitrum426456Image from "./images/ryan/nft-arbitrum-426456.png";
 import nftZerion5Image from "./images/ryan/nft-zerion-5.png";
 
-export const profileInfo: ProfileInfo = {
+export const identityInfo: IdentityInfo = {
+  id: "did:vda:123456",
   avatar: avatarImage,
   name: "Ryan Kris",
   veridaName: "@ryan",
@@ -201,7 +202,7 @@ export const collectibles: Collectible[] = [
 ];
 
 export const profile: Profile = {
-  profileInfo,
+  identityInfo,
   socialMediaLinks,
   featuredLinks,
   links,

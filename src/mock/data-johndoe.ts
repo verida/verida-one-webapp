@@ -5,14 +5,15 @@ import {
   Collectible,
   CustomLink,
   Profile,
-  ProfileInfo,
+  IdentityInfo,
   SocialMediaLink,
   WalletAddress,
 } from "lib/types";
 import avatarImage from "./images/johndoe/avatar-johndoe.png";
 import nftImage from "./images/johndoe/nft-johndoe.png";
 
-export const profileInfo: ProfileInfo = {
+export const identityInfo: IdentityInfo = {
+  id: "did:vda:123456",
   avatar: avatarImage,
   name: "John Doe",
   veridaName: "@johndoe",
@@ -263,7 +264,7 @@ export const collectibles: Collectible[] = [
 ];
 
 export const profile: Profile = {
-  profileInfo,
+  identityInfo,
   socialMediaLinks,
   featuredLinks,
   links,
