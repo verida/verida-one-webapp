@@ -1,12 +1,7 @@
 import { Chains, SocialMedia } from "../constants";
+import { VaultPublicProfile } from "./verida";
 
-export interface VeridaProfile {
-  name: string;
-  avatar?: string;
-  description?: string;
-}
-
-export interface ProfileInfo extends VeridaProfile {
+export interface IdentityInfo extends VaultPublicProfile {
   veridaName?: string;
 }
 
@@ -55,7 +50,7 @@ export interface Badge {
 }
 
 export interface Profile {
-  profileInfo: ProfileInfo;
+  identityInfo: IdentityInfo;
   socialMediaLinks: SocialMediaLink[];
   featuredLinks: CustomLink[];
   links: CustomLink[];

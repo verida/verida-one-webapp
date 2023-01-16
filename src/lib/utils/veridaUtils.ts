@@ -3,16 +3,19 @@ import {
   EnvironmentType,
   Context,
   Datastore,
+  Client,
 } from "@verida/client-ts";
 import { VaultAccount } from "@verida/account-web-vault";
-import { UserProfile } from "lib/types";
+import { VaultPublicProfile } from "lib/types";
 
 const connect = async (
   contextName: string,
   environment: EnvironmentType,
   logoUrl?: string,
   openUrl?: string
-): Promise<[context: Context, account: VaultAccount, profile: UserProfile]> => {
+): Promise<
+  [context: Context, account: VaultAccount, profile: VaultPublicProfile]
+> => {
   const account = new VaultAccount({
     request: {
       logoUrl,
@@ -35,28 +38,30 @@ const connect = async (
   }
 
   const did = await account.did();
-  const profile = await getPublicProfileInfo(context, did);
+  const client = context.getClient();
+  const profile = await getVaultPublicProfile(client, did);
 
   return [context, account, profile];
 };
 
-const getPublicProfileInfo = async (
-  context: Context,
+const getVaultPublicProfile = async (
+  client: Client,
   did: string
-): Promise<UserProfile> => {
-  const profile: UserProfile = {
+): Promise<VaultPublicProfile> => {
+  const profile: VaultPublicProfile = {
     id: did,
   };
 
-  const client = context.getClient();
   const profileInstance = await client.openPublicProfile(did, "Verida: Vault");
   if (profileInstance) {
     const profileData = (await profileInstance.getMany({}, {})) as {
       name?: string;
       avatar?: { uri: string };
+      description?: string;
     };
     profile.name = profileData?.name;
     profile.avatar = profileData?.avatar?.uri;
+    profile.description = profileData?.description;
   }
 
   return profile;
@@ -79,6 +84,6 @@ const disconnect = async (
 export const Verida = {
   connect,
   disconnect,
-  getPublicProfileInfo,
+  getVaultPublicProfile,
   openDatastore,
 };

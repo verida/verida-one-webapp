@@ -1,61 +1,26 @@
-import {
-  Badge,
-  Collectible,
-  CustomLink,
-  ProfileInfo,
-  SocialMediaLink,
-  WalletAddress,
-} from "lib/types";
-import { getIdentityProfile } from "mock/data";
+import { Client } from "@verida/client-ts";
+import { IdentityInfo } from "lib/types";
+import { Verida } from "./veridaUtils";
+import { getMockIdentityInfo } from "./mockProfileUtils";
 
-export const getProfileInfo = async (
-  identity?: string
-): Promise<ProfileInfo> => {
-  const { profileInfo } = await getIdentityProfile(identity);
-  return profileInfo;
-};
+export const getIdentityInfo = async (
+  veridaClient: Client,
+  did: string
+): Promise<IdentityInfo> => {
+  // TODO: Remove mock data when not needed anymore
+  if (!did.startsWith("did:vda")) {
+    return getMockIdentityInfo(did);
+  }
 
-export const getWalletAddresses = async (
-  identity?: string
-): Promise<WalletAddress[]> => {
-  const { walletAddresses } = await getIdentityProfile(identity);
-  return walletAddresses;
-};
+  const vaultPublicProfile = await Verida.getVaultPublicProfile(
+    veridaClient,
+    did
+  );
 
-export const getCollectibles = async (
-  identity?: string
-): Promise<Collectible[]> => {
-  const { collectibles } = await getIdentityProfile(identity);
-  return collectibles;
-};
+  const identityInfo: IdentityInfo = {
+    ...vaultPublicProfile,
+    veridaName: undefined, // TODO: Get verida name if claimed
+  };
 
-export const getFeaturedCollectibles = async (
-  identity?: string
-): Promise<Collectible[]> => {
-  const { featuredCollectibles } = await getIdentityProfile(identity);
-  return featuredCollectibles;
-};
-
-export const getFeaturedLinks = async (
-  identity?: string
-): Promise<CustomLink[]> => {
-  const { featuredLinks } = await getIdentityProfile(identity);
-  return featuredLinks;
-};
-
-export const getLinks = async (identity?: string): Promise<CustomLink[]> => {
-  const { links } = await getIdentityProfile(identity);
-  return links;
-};
-
-export const getSocialMediaLinks = async (
-  identity?: string
-): Promise<SocialMediaLink[]> => {
-  const { socialMediaLinks } = await getIdentityProfile(identity);
-  return socialMediaLinks;
-};
-
-export const getBadges = async (identity?: string): Promise<Badge[]> => {
-  const { badges } = await getIdentityProfile(identity);
-  return badges;
+  return identityInfo;
 };
