@@ -39,14 +39,6 @@
     "defaultMessage": "Go to profile",
     "description": "Label of the redirection link to go to the Profile poage"
   },
-  "BadgeListView.redirectionCardMessage": {
-    "defaultMessage": "This item doesn't exist or is not available",
-    "description": "Message of the redirection card indicating the badges has not been found."
-  },
-  "BadgeListView.redirectionCardTitle": {
-    "defaultMessage": "Item not found",
-    "description": "Title of the redirection card indicating the badge has not been found."
-  },
   "BadgesSection.sectionTitle": {
     "defaultMessage": "Badges",
     "description": "Title of the 'Badges' section in the 'Profile' page"
@@ -81,7 +73,7 @@
   },
   "CollectibleDetailsView.redirectionCardMessage": {
     "defaultMessage": "This item doesn't exist or is not available",
-    "description": "Message of the redirection card indicating the collectibles has not been found."
+    "description": "Message of the redirection card indicating the collectible has not been found."
   },
   "CollectibleDetailsView.redirectionCardTitle": {
     "defaultMessage": "Item not found",
@@ -100,12 +92,12 @@
     "description": "Label of the redirection link to go to the Profile poage"
   },
   "CollectibleListView.redirectionCardMessage": {
-    "defaultMessage": "This item doesn't exist or is not available",
-    "description": "Message of the redirection card indicating the collectibles has not been found."
+    "defaultMessage": "There are no collectibles to see",
+    "description": "Message of the redirection card indicating that there are no list of collectibles available."
   },
   "CollectibleListView.redirectionCardTitle": {
-    "defaultMessage": "Item not found",
-    "description": "Title of the redirection card indicating the collectible has not been found."
+    "defaultMessage": "It’s empty here",
+    "description": "Title of the redirection card indicating that there are no list of collectibles available."
   },
   "CollectiblesSection.sectionTitle": {
     "defaultMessage": "Collectibles",

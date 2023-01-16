@@ -50,7 +50,7 @@ export const CollectibleDetailsView: React.FunctionComponent = () => {
     id: "CollectibleDetailsView.redirectionCardMessage",
     defaultMessage: "This item doesn't exist or is not available",
     description:
-      "Message of the redirection card indicating the collectibles has not been found.",
+      "Message of the redirection card indicating the collectible has not been found.",
   });
 
   if (!collectible) {

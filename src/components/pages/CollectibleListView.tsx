@@ -28,21 +28,27 @@ export const CollectibleListView: React.FunctionComponent = () => {
 
   const redirectionCardTitle = i18n.formatMessage({
     id: "CollectibleListView.redirectionCardTitle",
-    defaultMessage: "Item not found",
+    defaultMessage: "It’s empty here",
     description:
-      "Title of the redirection card indicating the collectible has not been found.",
+      "Title of the redirection card indicating that there are no list of collectibles available.",
   });
 
   const redirectionCardMessage = i18n.formatMessage({
     id: "CollectibleListView.redirectionCardMessage",
-    defaultMessage: "This item doesn't exist or is not available",
+    defaultMessage: "There are no collectibles to see",
     description:
-      "Message of the redirection card indicating the collectibles has not been found.",
+      "Message of the redirection card indicating that there are no list of collectibles available.",
+  });
+
+  const pageTitle = i18n.formatMessage({
+    id: "CollectibleListView.pageTitle",
+    description: "Title of the 'Collectibles' page",
+    defaultMessage: "Collectibles",
   });
 
   if (!collectibles.length) {
     return (
-      <PageWrapper>
+      <PageWrapper title={pageTitle} badgeValue={`${collectibles.length}`}>
         <RedirectionCard
           redirectPath={redirectPath}
           title={redirectionCardTitle}
@@ -53,12 +59,6 @@ export const CollectibleListView: React.FunctionComponent = () => {
       </PageWrapper>
     );
   }
-
-  const pageTitle = i18n.formatMessage({
-    id: "CollectibleListView.pageTitle",
-    description: "Title of the 'Collectibles' page",
-    defaultMessage: "Collectibles",
-  });
 
   return (
     <PageWrapper title={pageTitle} badgeValue={collectibles.length}>
