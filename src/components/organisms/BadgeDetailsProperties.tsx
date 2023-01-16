@@ -28,17 +28,6 @@ export const BadgeDetailsProperties: React.FC<BadgeDetailsPropertiesProps> = (
     description: "Label of the 'owner' property for a badge",
   });
 
-  const proofOfLabelPropertyLabel = i18n.formatMessage(
-    {
-      id: "BadgeDetailsProperties.proofOfLabelPropertyLabel",
-      defaultMessage: "{proofLabel}",
-      description: "Label of the 'proofLabel' property for a badge",
-    },
-    {
-      proofLabel,
-    }
-  );
-
   const creatorWalletAddressPropertyLabel = i18n.formatMessage({
     id: "BadgeDetailsProperties.creatorWalletAddressPropertyLabel",
     defaultMessage: "Creator wallet address",
@@ -68,7 +57,7 @@ export const BadgeDetailsProperties: React.FC<BadgeDetailsPropertiesProps> = (
       value: contractAddress,
     },
     {
-      propertyLabel: proofOfLabelPropertyLabel,
+      propertyLabel: proofLabel,
       formattedValue: proofValue,
     },
   ];

@@ -15,21 +15,17 @@
     "defaultMessage": "Owner",
     "description": "Label of the 'owner' property for a badge"
   },
-  "BadgeDetailsProperties.proofOfLabelPropertyLabel": {
-    "defaultMessage": "{proofLabel}",
-    "description": "Label of the 'proofLabel' property for a badge"
-  },
-  "BadgeDetailsView.emptyBadgeDetailsMessage": {
-    "defaultMessage": "This item doesn't exist or is not available",
-    "description": "This message is used when the Badge is not found"
-  },
-  "BadgeDetailsView.emptyBadgeDetailsTitle": {
-    "defaultMessage": "Item not found",
-    "description": "This title is used when the Badge is not found"
-  },
-  "BadgeDetailsView.goToProfilePageLinkLabel": {
+  "BadgeDetailsView.redirectionCardButtonLabel": {
     "defaultMessage": "Go to profile",
-    "description": "Go to 'profile' page link label"
+    "description": "Label of the redirection link to go to the Profile poage"
+  },
+  "BadgeDetailsView.redirectionCardMessage": {
+    "defaultMessage": "This item doesn't exist or is not available",
+    "description": "Message of the redirection card indicating the badges has not been found."
+  },
+  "BadgeDetailsView.redirectionCardTitle": {
+    "defaultMessage": "Item not found",
+    "description": "Title of the redirection card indicating the badge has not been found."
   },
   "BadgeDetailsView.viewInExplorerButtonLabel": {
     "defaultMessage": "View in Explorer",

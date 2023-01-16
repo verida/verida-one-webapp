@@ -16,22 +16,24 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
   const i18n = useIntl();
   const redirectPath = identity ? `/${identity}` : `/`;
 
-  const assetEmptyCardButtonLabel = i18n.formatMessage({
-    id: "BadgeDetailsView.goToProfilePageLinkLabel",
-    description: "Go to 'profile' page link label",
+  const redirectionCardButtonLabel = i18n.formatMessage({
+    id: "BadgeDetailsView.redirectionCardButtonLabel",
+    description: "Label of the redirection link to go to the Profile poage",
     defaultMessage: "Go to profile",
   });
 
-  const emptyBadgeDetailsTitle = i18n.formatMessage({
-    id: "BadgeDetailsView.emptyBadgeDetailsTitle",
+  const redirectionCardTitle = i18n.formatMessage({
+    id: "BadgeDetailsView.redirectionCardTitle",
     defaultMessage: "Item not found",
-    description: "This title is used when the Badge is not found",
+    description:
+      "Title of the redirection card indicating the badge has not been found.",
   });
 
-  const emptyBadgeDetailsMessage = i18n.formatMessage({
-    id: "BadgeDetailsView.emptyBadgeDetailsMessage",
+  const redirectionCardMessage = i18n.formatMessage({
+    id: "BadgeDetailsView.redirectionCardMessage",
     defaultMessage: "This item doesn't exist or is not available",
-    description: "This message is used when the Badge is not found",
+    description:
+      "Message of the redirection card indicating the badges has not been found.",
   });
 
   useEffect(() => {
@@ -53,9 +55,9 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
       <PageWrapper>
         <RedirectionCard
           redirectPath={redirectPath}
-          title={emptyBadgeDetailsTitle}
-          message={emptyBadgeDetailsMessage}
-          buttonLabel={assetEmptyCardButtonLabel}
+          title={redirectionCardTitle}
+          message={redirectionCardMessage}
+          buttonLabel={redirectionCardButtonLabel}
           className="flex flex-grow flex-col justify-center"
         />
       </PageWrapper>

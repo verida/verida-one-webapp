@@ -9,7 +9,7 @@ type RedirectionCardProps = {
   buttonLabel: string;
 } & React.ComponentPropsWithRef<"div">;
 
-/** Card to display empty assets list or details in assets pages*/
+/** Card displaying a title, message and a redirection button*/
 export const RedirectionCard: React.FunctionComponent<RedirectionCardProps> = ({
   message,
   title,
@@ -17,6 +17,7 @@ export const RedirectionCard: React.FunctionComponent<RedirectionCardProps> = ({
   redirectPath,
   ...otherProps
 }) => {
+  // TODO: update the button to an internal button link when available
   return (
     <div {...otherProps}>
       <div className="flex flex-col items-center justify-center rounded-xl bg-gray-dark p-4">
