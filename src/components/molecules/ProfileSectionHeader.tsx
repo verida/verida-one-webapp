@@ -15,7 +15,7 @@ export const ProfileSectionHeader: React.FunctionComponent<
     <header className="mb-2 flex items-center justify-between space-x-1.5">
       <div className="flex items-center space-x-1">
         <h3 className="py-1.5 font-semibold">{title}</h3>
-        {badgeValue && <Badge value={badgeValue} />}
+        {badgeValue !== undefined && <Badge value={badgeValue} />}
       </div>
       {onClickMore && (
         <IconButton

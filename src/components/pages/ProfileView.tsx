@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
+  BadgesSection,
   CollectiblesSection,
   CustomLinksSection,
   FeaturedSection,
@@ -9,6 +10,7 @@ import {
   WalletAddressesSection,
 } from "components/organisms";
 import {
+  getMockBadges,
   getMockCollectibles,
   getMockFeaturedCollectibles,
   getMockFeaturedLinks,
@@ -17,6 +19,7 @@ import {
   getMockWalletAddresses,
 } from "lib/utils";
 import {
+  Badge,
   Collectible,
   CustomLink,
   SocialMediaLink,
@@ -33,6 +36,7 @@ export const ProfileView: React.FC = () => {
     []
   );
   const [collectibles, setCollectibles] = useState<Collectible[]>([]);
+  const [badges, setBadges] = useState<Badge[]>([]);
   const [customLinks, setCustomLinks] = useState<CustomLink[]>([]);
   const [walletAddresses, setWalletAddresses] = useState<WalletAddress[]>([]);
 
@@ -41,6 +45,7 @@ export const ProfileView: React.FC = () => {
   useEffect(() => {
     const getData = async () => {
       setFeaturedCollectibles(await getMockFeaturedCollectibles(identity));
+      setBadges(await getMockBadges(identity));
       setFeaturedLinks(await getMockFeaturedLinks(identity));
       setSocialMediaLinks(await getMockSocialMediaLinks(identity));
       setCollectibles(await getMockCollectibles(identity));
@@ -79,6 +84,7 @@ export const ProfileView: React.FC = () => {
         <SocialMediaSection socialMediaLinks={socialMediaLinks} />
         <CollectiblesSection collectibles={collectibles} />
         {/** FIXME: Find a way to overlap the collectibles list above the padding of the main container */}
+        <BadgesSection badges={badges} />
         <CustomLinksSection links={customLinks} />
         <WalletAddressesSection addresses={walletAddresses} />
       </div>

@@ -14,3 +14,4 @@ export * from "./WalletAddressCard";
 export * from "./AssetDetailsPropertyItem";
 export * from "./AssetDetailsPropertyList";
 export * from "./RedirectionCard";
+export * from "./BadgeCard";

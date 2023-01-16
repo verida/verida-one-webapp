@@ -31,12 +31,29 @@
     "defaultMessage": "View in Explorer",
     "description": "Label of the button to view an asset in a blockchain explorer."
   },
-  "BadgeListView.message": {
-    "defaultMessage": "Badge list"
+  "BadgeListView.pageTitle": {
+    "defaultMessage": "Badges",
+    "description": "Title of the 'Badges' page"
+  },
+  "BadgeListView.redirectionCardButtonLabel": {
+    "defaultMessage": "Go to profile",
+    "description": "Label of the redirection link to go to the Profile poage"
+  },
+  "BadgeListView.redirectionCardMessage": {
+    "defaultMessage": "There are no badges to see",
+    "description": "Message of the redirection card indicating the list of badges is empty."
+  },
+  "BadgeListView.redirectionCardTitle": {
+    "defaultMessage": "It's empty here",
+    "description": "Title of the redirection card indicating the list of badges is empty."
   },
   "BadgesSection.sectionTitle": {
     "defaultMessage": "Badges",
     "description": "Title of the 'Badges' section in the 'Profile' page"
+  },
+  "BadgesSection.showAllButtonLabel": {
+    "defaultMessage": "Show All",
+    "description": "Label of the button redirecting from the 'Badges' profile section to the 'Badges' page"
   },
   "CollectibleDetailsProperties.assetsIdPropertyLabel": {
     "defaultMessage": "Asset Id",
@@ -58,6 +75,18 @@
     "defaultMessage": "Owner",
     "description": "Label of the 'owner' property for a collectible"
   },
+  "CollectibleDetailsView.redirectionCardButtonLabel": {
+    "defaultMessage": "Go to profile",
+    "description": "Label of the redirection link to go to the Profile poage"
+  },
+  "CollectibleDetailsView.redirectionCardMessage": {
+    "defaultMessage": "This item doesn't exist or is not available",
+    "description": "Message of the redirection card indicating the collectible has not been found."
+  },
+  "CollectibleDetailsView.redirectionCardTitle": {
+    "defaultMessage": "Item not found",
+    "description": "Title of the redirection card indicating the collectible has not been found."
+  },
   "CollectibleDetailsView.viewInExplorerButtonLabel": {
     "defaultMessage": "View in Explorer",
     "description": "Label of the button to view an asset in a blockchain explorer."
@@ -65,6 +94,18 @@
   "CollectibleListView.pageTitle": {
     "defaultMessage": "Collectibles",
     "description": "Title of the 'Collectibles' page"
+  },
+  "CollectibleListView.redirectionCardButtonLabel": {
+    "defaultMessage": "Go to profile",
+    "description": "Label of the redirection link to go to the Profile poage"
+  },
+  "CollectibleListView.redirectionCardMessage": {
+    "defaultMessage": "There are no collectibles to see",
+    "description": "Message of the redirection card indicating the list of collectibles is empty."
+  },
+  "CollectibleListView.redirectionCardTitle": {
+    "defaultMessage": "It's empty here",
+    "description": "Title of the redirection card indicating the list of collectibles is empty."
   },
   "CollectiblesSection.sectionTitle": {
     "defaultMessage": "Collectibles",
