@@ -1,7 +1,7 @@
 import { PageWrapper, RedirectionCard } from "components/molecules";
 import { CollectibleGrid } from "components/organisms";
 import { Collectible } from "lib/types";
-import { getCollectibles } from "lib/utils";
+import { getMockCollectibles } from "lib/utils";
 import React, { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import { useParams } from "react-router-dom";
@@ -13,7 +13,7 @@ export const CollectibleListView: React.FunctionComponent = () => {
 
   useEffect(() => {
     const getData = async () => {
-      setCollectibles(await getCollectibles(identity));
+      setCollectibles(await getMockCollectibles(identity));
     };
     void getData();
   }, [identity]);

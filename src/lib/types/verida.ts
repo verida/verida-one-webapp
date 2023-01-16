@@ -1,4 +1,4 @@
-export type UserProfile = {
+export type VaultPublicProfile = {
   id: string;
   name?: string;
   avatar?: string;

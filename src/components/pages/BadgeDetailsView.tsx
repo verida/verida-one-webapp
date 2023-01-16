@@ -5,7 +5,7 @@ import {
   BadgeDetailsProperties,
 } from "components/organisms";
 import { Badge } from "lib/types";
-import { getBadges, getChainExplorerUrlForAddress } from "lib/utils";
+import { getMockBadges, getChainExplorerUrlForAddress } from "lib/utils";
 import React, { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import { useParams } from "react-router-dom";
@@ -38,7 +38,7 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const badges = await getBadges(identity);
+      const badges = await getMockBadges(identity);
       const foundBadge = badges.find(
         (item) =>
           item.chain === chain &&

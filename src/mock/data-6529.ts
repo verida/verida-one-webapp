@@ -6,7 +6,7 @@ import {
   Collectible,
   CustomLink,
   Profile,
-  ProfileInfo,
+  IdentityInfo,
   SocialMediaLink,
   WalletAddress,
 } from "lib/types";
@@ -21,7 +21,8 @@ import nftCryptoKitties29Image from "./images/6529/nft-cryptokitties-29.png";
 import nftPudgyPenguins2974Image from "./images/6529/nft-pudgypenguins-2974.png";
 import nftAzuki2146Image from "./images/6529/nft-azuki-2146.png";
 
-export const profileInfo: ProfileInfo = {
+export const identityInfo: IdentityInfo = {
+  id: "did:vda:123456",
   avatar: avatarImage,
   name: "6529",
   veridaName: "@punk6529",
@@ -244,7 +245,7 @@ export const collectibles: Collectible[] = [
 export const badges: Badge[] = [];
 
 export const profile: Profile = {
-  profileInfo,
+  identityInfo,
   socialMediaLinks,
   featuredLinks,
   links,

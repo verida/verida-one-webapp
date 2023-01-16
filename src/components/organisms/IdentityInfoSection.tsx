@@ -1,32 +1,32 @@
 import React from "react";
 import { IconButton, Icon, Avatar } from "components/atoms";
-import { ProfileInfo } from "lib/types";
+import { IdentityInfo } from "lib/types";
 
-type ProfileInfoSectionProps = {
-  profileInfo: ProfileInfo;
+type IdentityInfoSectionProps = {
+  identityInfo: IdentityInfo;
 };
 
 /** Section for the Profile page rendering the main information */
-export const ProfileInfoSection: React.FC<ProfileInfoSectionProps> = (
+export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
   props
 ) => {
-  const { profileInfo } = props;
+  const { identityInfo } = props;
 
   return (
     <section>
       <div className="flex items-start justify-between space-x-3">
         <div className="flex items-center">
           <Avatar
-            image={profileInfo.avatar}
-            alt={profileInfo.name}
+            image={identityInfo.avatar}
+            alt={identityInfo.name}
             size="large"
             className="mr-3"
           />
           <div className="flex flex-col items-start">
-            <h2 className="text-xl font-bold">{profileInfo.name}</h2>
-            {profileInfo.veridaName && (
+            <h2 className="text-xl font-bold">{identityInfo.name}</h2>
+            {identityInfo.veridaName && (
               <span className="font-normal text-primary/60">
-                {profileInfo.veridaName}
+                {identityInfo.veridaName}
               </span>
             )}
           </div>
@@ -36,8 +36,8 @@ export const ProfileInfoSection: React.FC<ProfileInfoSectionProps> = (
           <IconButton icon={<Icon type="more" />} />
         </div>
       </div>
-      {profileInfo.description && (
-        <p className="mt-4">{profileInfo.description}</p>
+      {identityInfo.description && (
+        <p className="mt-4">{identityInfo.description}</p>
       )}
     </section>
   );

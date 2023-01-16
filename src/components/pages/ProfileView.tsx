@@ -1,35 +1,34 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import {
   BadgesSection,
   CollectiblesSection,
   CustomLinksSection,
   FeaturedSection,
-  ProfileInfoSection,
+  IdentityInfoSection,
   SocialMediaSection,
   WalletAddressesSection,
 } from "components/organisms";
 import {
   getBadges,
-  getCollectibles,
-  getFeaturedCollectibles,
-  getFeaturedLinks,
-  getLinks,
+  getMockCollectibles,
+  getMockFeaturedCollectibles,
+  getMockFeaturedLinks,
+  getMockLinks,
   getProfileInfo,
-  getSocialMediaLinks,
-  getWalletAddresses,
+  getMockSocialMediaLinks,
+  getMockWalletAddresses,
 } from "lib/utils";
 import {
   Badge,
   Collectible,
   CustomLink,
-  ProfileInfo,
   SocialMediaLink,
   WalletAddress,
 } from "lib/types";
-import { useParams } from "react-router-dom";
+import { useIdentityInfo } from "lib/hooks";
 
 export const ProfileView: React.FC = () => {
-  const [profileInfo, setProfileInfo] = useState<ProfileInfo>({ name: "" });
   const [featuredCollectibles, setFeaturedCollectibles] = useState<
     Collectible[]
   >([]);
@@ -47,22 +46,37 @@ export const ProfileView: React.FC = () => {
   useEffect(() => {
     const getData = async () => {
       setProfileInfo(await getProfileInfo(identity));
-      setFeaturedCollectibles(await getFeaturedCollectibles(identity));
-      setFeaturedCollectibles(await getFeaturedCollectibles(identity));
-      setFeaturedLinks(await getFeaturedLinks(identity));
-      setSocialMediaLinks(await getSocialMediaLinks(identity));
-      setCollectibles(await getCollectibles(identity));
+      setFeaturedCollectibles(await getMockFeaturedCollectibles(identity));
       setBadges(await getBadges(identity));
-      setCustomLinks(await getLinks(identity));
-      setWalletAddresses(await getWalletAddresses(identity));
+      setFeaturedLinks(await getMockFeaturedLinks(identity));
+      setSocialMediaLinks(await getMockSocialMediaLinks(identity));
+      setCollectibles(await getMockCollectibles(identity));
+      setCustomLinks(await getMockLinks(identity));
+      setWalletAddresses(await getMockWalletAddresses(identity));
     };
     void getData();
   }, [identity]);
 
+  const {
+    data: identityInfo,
+    isLoading: isLoadingIdentityInfo,
+    isError: isErrorIdentityInfo,
+  } = useIdentityInfo();
+
+  if (isLoadingIdentityInfo || !identityInfo) {
+    // TODO: Handle loading state
+    return null;
+  }
+
+  if (isErrorIdentityInfo) {
+    // TODO: Handle error state
+    return null;
+  }
+
   return (
     <div>
       <div className="mb-7">
-        <ProfileInfoSection profileInfo={profileInfo} />
+        <IdentityInfoSection identityInfo={identityInfo} />
       </div>
       <div className="space-y-10">
         <FeaturedSection
