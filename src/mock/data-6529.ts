@@ -2,6 +2,7 @@
 
 import { Chains, SocialMedia } from "lib/constants";
 import {
+  Badge,
   Collectible,
   CustomLink,
   Profile,
@@ -240,6 +241,8 @@ export const collectibles: Collectible[] = [
   },
 ];
 
+export const badges: Badge[] = [];
+
 export const profile: Profile = {
   profileInfo,
   socialMediaLinks,
@@ -248,4 +251,5 @@ export const profile: Profile = {
   walletAddresses,
   featuredCollectibles,
   collectibles,
+  badges,
 };

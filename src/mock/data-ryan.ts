@@ -2,6 +2,7 @@
 
 import { Chains, SocialMedia } from "lib/constants";
 import {
+  Badge,
   Collectible,
   CustomLink,
   Profile,
@@ -18,6 +19,10 @@ import nftThorchain78Image from "./images/ryan/nft-thorchain-78.png";
 import nftLens85835Image from "./images/ryan/nft-lens-85835.png";
 import nftArbitrum426456Image from "./images/ryan/nft-arbitrum-426456.png";
 import nftZerion5Image from "./images/ryan/nft-zerion-5.png";
+import twitterAccountBadge from "./images/badges/twitter-account.png";
+import discordAccountBadge from "./images/badges/discord-account.png";
+import facebookAccountBadge from "./images/badges/facebook-account.png";
+import veridaIdentityBadge from "./images/badges/verida-identity.png";
 
 export const profileInfo: ProfileInfo = {
   avatar: avatarImage,
@@ -200,6 +205,57 @@ export const collectibles: Collectible[] = [
   },
 ];
 
+export const badges: Badge[] = [
+  {
+    chain: Chains.POLYGON,
+    contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD270",
+    tokenId: "twitter-account",
+    collectionLabel: "Verida Badges",
+    tokenLabel: "Twitter Account",
+    description: "",
+    ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
+    media: twitterAccountBadge,
+    proofLabel: "Twitter Account",
+    proofValue: "@RyanJKris",
+  },
+  {
+    chain: Chains.POLYGON,
+    contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD271",
+    tokenId: "verida-identity",
+    collectionLabel: "Verida Badges",
+    tokenLabel: "Verida Identity",
+    description: "",
+    ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
+    media: veridaIdentityBadge,
+    proofLabel: "Verida Identity",
+    proofValue: "ryan",
+  },
+  {
+    chain: Chains.POLYGON,
+    contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD272",
+    tokenId: "discord-account",
+    collectionLabel: "Verida Badges",
+    tokenLabel: "Discord Account",
+    description: "",
+    ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
+    media: discordAccountBadge,
+    proofLabel: "Discord Account",
+    proofValue: "ryan#7622",
+  },
+  {
+    chain: Chains.POLYGON,
+    contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD273",
+    tokenId: "facebook-account",
+    collectionLabel: "Verida Badges",
+    tokenLabel: "Facebook Account",
+    description: "",
+    ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
+    media: facebookAccountBadge,
+    proofLabel: "Facebook Account",
+    proofValue: "@RyanJKris",
+  },
+];
+
 export const profile: Profile = {
   profileInfo,
   socialMediaLinks,
@@ -208,4 +264,5 @@ export const profile: Profile = {
   walletAddresses,
   featuredCollectibles,
   collectibles,
+  badges,
 };

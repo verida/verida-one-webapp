@@ -41,13 +41,17 @@ export interface Collectible {
   priceUnit?: string;
   floorPrice?: number;
 }
-
-export interface VeridaBadge {
+export interface Badge {
   chain: Chains;
-  address: string;
+  contractAddress: string;
+  tokenId: string;
   collectionLabel: string;
-  itemLabel: string;
+  tokenLabel: string;
+  description?: string;
+  ownerAddress: string;
   media: string;
+  proofLabel: string; // Not sure, but assumed it would be something like "Twitter handle"/"Verida DID"/... in a user-friendly format
+  proofValue: string; // Not sure, but assumed it would be the actual value of the proof
 }
 
 export interface Profile {
@@ -58,4 +62,5 @@ export interface Profile {
   walletAddresses: WalletAddress[];
   featuredCollectibles: Collectible[];
   collectibles: Collectible[];
+  badges: Badge[];
 }

@@ -3,8 +3,33 @@
     "defaultMessage": "Description",
     "description": "Title above the description of an asset in the details page"
   },
-  "BadgeDetailsView.message": {
-    "defaultMessage": "Badge details"
+  "BadgeDetailsProperties.chainPropertyLabel": {
+    "defaultMessage": "Chain",
+    "description": "Label of the 'chain' property for a badge"
+  },
+  "BadgeDetailsProperties.creatorWalletAddressPropertyLabel": {
+    "defaultMessage": "Creator wallet address",
+    "description": "Label of the 'creatorWalletAddress' property for a badge"
+  },
+  "BadgeDetailsProperties.ownerPropertyLabel": {
+    "defaultMessage": "Owner",
+    "description": "Label of the 'owner' property for a badge"
+  },
+  "BadgeDetailsView.redirectionCardButtonLabel": {
+    "defaultMessage": "Go to profile",
+    "description": "Label of the redirection link to go to the Profile poage"
+  },
+  "BadgeDetailsView.redirectionCardMessage": {
+    "defaultMessage": "This item doesn't exist or is not available",
+    "description": "Message of the redirection card indicating the badges has not been found."
+  },
+  "BadgeDetailsView.redirectionCardTitle": {
+    "defaultMessage": "Item not found",
+    "description": "Title of the redirection card indicating the badge has not been found."
+  },
+  "BadgeDetailsView.viewInExplorerButtonLabel": {
+    "defaultMessage": "View in Explorer",
+    "description": "Label of the button to view an asset in a blockchain explorer."
   },
   "BadgeListView.message": {
     "defaultMessage": "Badge list"
