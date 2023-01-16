@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  BadgesSection,
   CollectiblesSection,
   CustomLinksSection,
   FeaturedSection,
@@ -8,6 +9,7 @@ import {
   WalletAddressesSection,
 } from "components/organisms";
 import {
+  getBadges,
   getCollectibles,
   getFeaturedCollectibles,
   getFeaturedLinks,
@@ -17,6 +19,7 @@ import {
   getWalletAddresses,
 } from "lib/utils";
 import {
+  Badge,
   Collectible,
   CustomLink,
   ProfileInfo,
@@ -35,6 +38,7 @@ export const ProfileView: React.FC = () => {
     []
   );
   const [collectibles, setCollectibles] = useState<Collectible[]>([]);
+  const [badges, setBadges] = useState<Badge[]>([]);
   const [customLinks, setCustomLinks] = useState<CustomLink[]>([]);
   const [walletAddresses, setWalletAddresses] = useState<WalletAddress[]>([]);
 
@@ -44,9 +48,11 @@ export const ProfileView: React.FC = () => {
     const getData = async () => {
       setProfileInfo(await getProfileInfo(identity));
       setFeaturedCollectibles(await getFeaturedCollectibles(identity));
+      setFeaturedCollectibles(await getFeaturedCollectibles(identity));
       setFeaturedLinks(await getFeaturedLinks(identity));
       setSocialMediaLinks(await getSocialMediaLinks(identity));
       setCollectibles(await getCollectibles(identity));
+      setBadges(await getBadges(identity));
       setCustomLinks(await getLinks(identity));
       setWalletAddresses(await getWalletAddresses(identity));
     };
@@ -63,6 +69,7 @@ export const ProfileView: React.FC = () => {
           collectibles={featuredCollectibles}
           links={featuredLinks}
         />
+        <BadgesSection badges={badges} />
         <SocialMediaSection socialMediaLinks={socialMediaLinks} />
         <CollectiblesSection collectibles={collectibles} />
         {/** FIXME: Find a way to overlap the collectibles list above the padding of the main container */}

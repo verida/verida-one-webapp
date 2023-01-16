@@ -1,19 +1,34 @@
-import React from "react";
+import { PageWrapper } from "components/molecules";
+import { BadgeGrid } from "components/organisms";
+import { Badge } from "lib/types";
+import { getBadges } from "lib/utils";
+import React, { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
+import { useParams } from "react-router-dom";
 
 export const BadgeListView: React.FunctionComponent = () => {
+  const [badges, setBadges] = useState<Badge[]>([]);
+
   const i18n = useIntl();
 
-  // Temporary message, to delete when implementing the component
-  // DO NOT ADD TO MESSAGES FILE
-  const message = i18n.formatMessage({
-    id: "BadgeListView.message",
-    defaultMessage: "Badge list",
+  const { identity } = useParams();
+
+  useEffect(() => {
+    const getData = async () => {
+      setBadges(await getBadges(identity));
+    };
+    void getData();
+  }, [identity]);
+
+  const pageTitle = i18n.formatMessage({
+    id: "BadgeListView.pageTitle",
+    description: "Title of the 'Badges' page",
+    defaultMessage: "Badges",
   });
 
   return (
-    <div className="flex flex-grow flex-col items-center space-y-12 p-8">
-      <p className="text-xl md:text-4xl">{message}</p>
-    </div>
+    <PageWrapper title={pageTitle} badgeValue={badges.length}>
+      <BadgeGrid className="pt-2" badges={badges} />
+    </PageWrapper>
   );
 };
