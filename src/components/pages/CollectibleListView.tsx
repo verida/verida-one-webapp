@@ -28,16 +28,16 @@ export const CollectibleListView: React.FunctionComponent = () => {
 
   const redirectionCardTitle = i18n.formatMessage({
     id: "CollectibleListView.redirectionCardTitle",
-    defaultMessage: "It’s empty here",
+    defaultMessage: "It's empty here",
     description:
-      "Title of the redirection card indicating that there are no list of collectibles available.",
+      "Title of the redirection card indicating that there is no list of collectibles available.",
   });
 
   const redirectionCardMessage = i18n.formatMessage({
     id: "CollectibleListView.redirectionCardMessage",
     defaultMessage: "There are no collectibles to see",
     description:
-      "Message of the redirection card indicating that there are no list of collectibles available.",
+      "Message of the redirection card indicating that there is no list of collectibles available.",
   });
 
   const pageTitle = i18n.formatMessage({
