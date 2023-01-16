@@ -1,6 +1,6 @@
 import { Button } from "components/atoms";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 
 type RedirectionCardProps = {
   title: string;
@@ -17,18 +17,25 @@ export const RedirectionCard: React.FunctionComponent<RedirectionCardProps> = ({
   redirectPath,
   ...otherProps
 }) => {
-  // TODO: update the button to an internal button link when available
+  const navigate = useNavigate();
+
+  const handleRedirectButtonClick = useCallback(() => {
+    navigate(redirectPath);
+  }, [navigate, redirectPath]);
+
   return (
     <div {...otherProps}>
       <div className="flex flex-col items-center justify-center rounded-xl bg-gray-dark p-4">
         <span className="mb-2 text-lg font-semibold">{title}</span>
         <p className="mb-4 text-sm">{message}</p>
         <div className="w-full">
-          <Link to={redirectPath}>
-            <Button variant="contained" size="large">
-              {buttonLabel}
-            </Button>
-          </Link>
+          <Button
+            variant="contained"
+            size="large"
+            onClick={handleRedirectButtonClick}
+          >
+            {buttonLabel}
+          </Button>
         </div>
       </div>
     </div>
