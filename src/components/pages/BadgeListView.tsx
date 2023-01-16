@@ -27,17 +27,17 @@ export const BadgeListView: React.FunctionComponent = () => {
   });
 
   const redirectionCardTitle = i18n.formatMessage({
-    id: "CollectibleListView.redirectionCardTitle",
+    id: "BadgeListView.redirectionCardTitle",
     defaultMessage: "It's empty here",
     description:
-      "Title of the redirection card indicating that there is no list of badges available.",
+      "Title of the redirection card indicating the list of badges is empty.",
   });
 
   const redirectionCardMessage = i18n.formatMessage({
-    id: "CollectibleListView.redirectionCardMessage",
+    id: "BadgeListView.redirectionCardMessage",
     defaultMessage: "There are no badges to see",
     description:
-      "Message of the redirection card indicating that there is no list of badges available.",
+      "Message of the redirection card indicating the list of badges is empty.",
   });
 
   const pageTitle = i18n.formatMessage({
@@ -46,9 +46,11 @@ export const BadgeListView: React.FunctionComponent = () => {
     defaultMessage: "Badges",
   });
 
-  if (!badges.length) {
-    return (
-      <PageWrapper title={pageTitle} badgeValue={`${badges.length}`}>
+  return (
+    <PageWrapper title={pageTitle} badgeValue={badges?.length}>
+      {badges?.length ? (
+        <BadgeGrid className="pt-2" badges={badges} />
+      ) : (
         <RedirectionCard
           redirectPath={redirectPath}
           title={redirectionCardTitle}
@@ -56,13 +58,7 @@ export const BadgeListView: React.FunctionComponent = () => {
           buttonLabel={redirectionCardButtonLabel}
           className="flex flex-grow flex-col justify-center"
         />
-      </PageWrapper>
-    );
-  }
-
-  return (
-    <PageWrapper title={pageTitle} badgeValue={badges.length}>
-      <BadgeGrid className="pt-2" badges={badges} />
+      )}
     </PageWrapper>
   );
 };

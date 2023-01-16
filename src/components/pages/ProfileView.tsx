@@ -83,8 +83,8 @@ export const ProfileView: React.FC = () => {
         />
         <SocialMediaSection socialMediaLinks={socialMediaLinks} />
         <CollectiblesSection collectibles={collectibles} />
-        <BadgesSection badges={badges} />
         {/** FIXME: Find a way to overlap the collectibles list above the padding of the main container */}
+        <BadgesSection badges={badges} />
         <CustomLinksSection links={customLinks} />
         <WalletAddressesSection addresses={walletAddresses} />
       </div>

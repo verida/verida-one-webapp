@@ -39,6 +39,14 @@
     "defaultMessage": "Go to profile",
     "description": "Label of the redirection link to go to the Profile poage"
   },
+  "BadgeListView.redirectionCardMessage": {
+    "defaultMessage": "There are no badges to see",
+    "description": "Message of the redirection card indicating the list of badges is empty."
+  },
+  "BadgeListView.redirectionCardTitle": {
+    "defaultMessage": "It's empty here",
+    "description": "Title of the redirection card indicating the list of badges is empty."
+  },
   "BadgesSection.sectionTitle": {
     "defaultMessage": "Badges",
     "description": "Title of the 'Badges' section in the 'Profile' page"
@@ -93,11 +101,11 @@
   },
   "CollectibleListView.redirectionCardMessage": {
     "defaultMessage": "There are no collectibles to see",
-    "description": "Message of the redirection card indicating that there are no list of collectibles available."
+    "description": "Message of the redirection card indicating the list of collectibles is empty."
   },
   "CollectibleListView.redirectionCardTitle": {
-    "defaultMessage": "It’s empty here",
-    "description": "Title of the redirection card indicating that there are no list of collectibles available."
+    "defaultMessage": "It's empty here",
+    "description": "Title of the redirection card indicating the list of collectibles is empty."
   },
   "CollectiblesSection.sectionTitle": {
     "defaultMessage": "Collectibles",

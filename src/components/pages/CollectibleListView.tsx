@@ -30,14 +30,14 @@ export const CollectibleListView: React.FunctionComponent = () => {
     id: "CollectibleListView.redirectionCardTitle",
     defaultMessage: "It's empty here",
     description:
-      "Title of the redirection card indicating that there is no list of collectibles available.",
+      "Title of the redirection card indicating the list of collectibles is empty.",
   });
 
   const redirectionCardMessage = i18n.formatMessage({
     id: "CollectibleListView.redirectionCardMessage",
     defaultMessage: "There are no collectibles to see",
     description:
-      "Message of the redirection card indicating that there is no list of collectibles available.",
+      "Message of the redirection card indicating the list of collectibles is empty.",
   });
 
   const pageTitle = i18n.formatMessage({
@@ -46,9 +46,11 @@ export const CollectibleListView: React.FunctionComponent = () => {
     defaultMessage: "Collectibles",
   });
 
-  if (!collectibles.length) {
-    return (
-      <PageWrapper title={pageTitle} badgeValue={`${collectibles.length}`}>
+  return (
+    <PageWrapper title={pageTitle} badgeValue={collectibles?.length}>
+      {collectibles?.length ? (
+        <CollectibleGrid className="pt-2" collectibles={collectibles} />
+      ) : (
         <RedirectionCard
           redirectPath={redirectPath}
           title={redirectionCardTitle}
@@ -56,13 +58,7 @@ export const CollectibleListView: React.FunctionComponent = () => {
           buttonLabel={redirectionCardButtonLabel}
           className="flex flex-grow flex-col justify-center"
         />
-      </PageWrapper>
-    );
-  }
-
-  return (
-    <PageWrapper title={pageTitle} badgeValue={collectibles.length}>
-      <CollectibleGrid className="pt-2" collectibles={collectibles} />
+      )}
     </PageWrapper>
   );
 };
