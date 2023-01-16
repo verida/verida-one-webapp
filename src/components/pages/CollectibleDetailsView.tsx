@@ -43,6 +43,19 @@ export const CollectibleDetailsView: React.FunctionComponent = () => {
       "Label of the button to view an asset in a blockchain explorer.",
   });
 
+  const viewInExplorerButton = (
+    <ButtonLink
+      url={getChainExplorerUrlForAddress(
+        collectible.chain,
+        collectible.ownerAddress
+      )}
+      target="_blank"
+      rel="noopener"
+    >
+      {viewInExplorerButtonLabel}
+    </ButtonLink>
+  );
+
   return (
     <PageWrapper>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -53,18 +66,7 @@ export const CollectibleDetailsView: React.FunctionComponent = () => {
             src={collectible.media}
             alt={collectible.tokenLabel}
           />
-          <div className="mt-6 hidden sm:block">
-            <ButtonLink
-              url={getChainExplorerUrlForAddress(
-                collectible.chain,
-                collectible.ownerAddress
-              )}
-              target="_blank"
-              rel="noopener"
-            >
-              {viewInExplorerButtonLabel}
-            </ButtonLink>
-          </div>
+          <div className="mt-6 hidden sm:block">{viewInExplorerButton}</div>
         </div>
         <div>
           <AssetDetailsMainInfo
@@ -79,16 +81,7 @@ export const CollectibleDetailsView: React.FunctionComponent = () => {
           {/* TODO: Place this button into a fixed bottom bar.
           see issue #41 https://github.com/verida/verida-one-webapp/issues/41
            */}
-          <ButtonLink
-            url={getChainExplorerUrlForAddress(
-              collectible.chain,
-              collectible.ownerAddress
-            )}
-            target="_blank"
-            rel="noopener"
-          >
-            {viewInExplorerButtonLabel}
-          </ButtonLink>
+          {viewInExplorerButton}
         </div>
       </div>
     </PageWrapper>

@@ -14,14 +14,14 @@ import { AppLayout } from "components/templates";
 /**
  * Routes
  *
- * /                                                       -> Home
- * /:identity                                              -> Profile
- * /:identity/collectibles                                 -> CollectibleList
- * /:identity/collectibles/:chain/:contractAddress/:tokenId-> CollectibleDetails
- * /:identity/badges                                       -> BadgeList
- * /:identity/badges/:badgeId                              -> BadgeDetails
+ * /                                                          -> Home
+ * /:identity                                                 -> Profile
+ * /:identity/collectibles                                    -> CollectibleList
+ * /:identity/collectibles/:chain/:contractAddress/:tokenId   -> CollectibleDetails
+ * /:identity/badges                                          -> BadgeList
+ * /:identity/badges/:chain/:contractAddress/:tokenId         -> BadgeDetails
  *
- * TODO: Strenghten with a list of routes as constant to be used throughout the app
+ * TODO: Strengthen with a list of routes as constant to be used throughout the app
  */
 
 export const App: React.FunctionComponent = () => {
@@ -45,7 +45,10 @@ export const App: React.FunctionComponent = () => {
             </Route>
             <Route path="badges">
               <Route index element={<BadgeListView />} />
-              <Route path=":badgeId" element={<BadgeDetailsView />} />
+              <Route
+                path=":chain/:contractAddress/:tokenId"
+                element={<BadgeDetailsView />}
+              />
             </Route>
           </Route>
         </Route>
