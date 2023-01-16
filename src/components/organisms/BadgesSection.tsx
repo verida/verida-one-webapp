@@ -4,7 +4,7 @@ import { BadgeCard, ProfileSectionWrapper } from "components/molecules";
 import { Badge } from "lib/types";
 import { Button } from "components/atoms";
 import { Link, useNavigate } from "react-router-dom";
-import { MAX_COLLECTIBLES_IN_PROFILE_SECTION } from "lib/constants";
+import { MAX_BADGES_IN_PROFILE_SECTION } from "lib/constants";
 
 type BadgesSectionProps = {
   badges: Badge[];
@@ -27,10 +27,7 @@ export const BadgesSection: React.FC<BadgesSectionProps> = ({ badges }) => {
     return null;
   }
 
-  const truncatedBadgeList = badges.slice(
-    0,
-    MAX_COLLECTIBLES_IN_PROFILE_SECTION
-  );
+  const truncatedBadgeList = badges.slice(0, MAX_BADGES_IN_PROFILE_SECTION);
   const hasMore = badges.length > truncatedBadgeList.length;
 
   const sectionTitle = i18n.formatMessage({
