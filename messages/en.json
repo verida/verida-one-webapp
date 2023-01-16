@@ -31,12 +31,17 @@
     "defaultMessage": "View in Explorer",
     "description": "Label of the button to view an asset in a blockchain explorer."
   },
-  "BadgeListView.message": {
-    "defaultMessage": "Badge list"
+  "BadgeListView.pageTitle": {
+    "defaultMessage": "Badges",
+    "description": "Title of the 'Badges' page"
   },
   "BadgesSection.sectionTitle": {
     "defaultMessage": "Badges",
     "description": "Title of the 'Badges' section in the 'Profile' page"
+  },
+  "BadgesSection.showAllButtonLabel": {
+    "defaultMessage": "Show All",
+    "description": "Label of the button redirecting from the 'Badges' profile section to the 'Badges' page"
   },
   "CollectibleDetailsProperties.assetsIdPropertyLabel": {
     "defaultMessage": "Asset Id",
