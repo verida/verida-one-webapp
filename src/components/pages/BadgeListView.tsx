@@ -1,7 +1,7 @@
 import { PageWrapper, RedirectionCard } from "components/molecules";
 import { BadgeGrid } from "components/organisms";
 import { Badge } from "lib/types";
-import { getBadges } from "lib/utils";
+import { getMockBadges } from "lib/utils";
 import React, { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import { useParams } from "react-router-dom";
@@ -15,7 +15,7 @@ export const BadgeListView: React.FunctionComponent = () => {
 
   useEffect(() => {
     const getData = async () => {
-      setBadges(await getBadges(identity));
+      setBadges(await getMockBadges(identity));
     };
     void getData();
   }, [identity]);

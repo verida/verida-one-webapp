@@ -10,12 +10,11 @@ import {
   WalletAddressesSection,
 } from "components/organisms";
 import {
-  getBadges,
+  getMockBadges,
   getMockCollectibles,
   getMockFeaturedCollectibles,
   getMockFeaturedLinks,
   getMockLinks,
-  getProfileInfo,
   getMockSocialMediaLinks,
   getMockWalletAddresses,
 } from "lib/utils";
@@ -45,9 +44,8 @@ export const ProfileView: React.FC = () => {
 
   useEffect(() => {
     const getData = async () => {
-      setProfileInfo(await getProfileInfo(identity));
       setFeaturedCollectibles(await getMockFeaturedCollectibles(identity));
-      setBadges(await getBadges(identity));
+      setBadges(await getMockBadges(identity));
       setFeaturedLinks(await getMockFeaturedLinks(identity));
       setSocialMediaLinks(await getMockSocialMediaLinks(identity));
       setCollectibles(await getMockCollectibles(identity));
