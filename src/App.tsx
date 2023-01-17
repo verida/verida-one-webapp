@@ -5,10 +5,14 @@ import {
   CollectibleDetailsView,
   CollectibleListView,
   HomeView,
-  NoProfileFoundView,
   ProfileView,
 } from "components/pages";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import {
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
 import { AppLayout } from "components/templates";
 
 /**
@@ -24,35 +28,31 @@ import { AppLayout } from "components/templates";
  * TODO: Strengthen with a list of routes as constant to be used throughout the app
  */
 
-export const App: React.FunctionComponent = () => {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<AppLayout />}>
-          <Route index element={<HomeView />} />
-          <Route path=":identity">
-            <Route
-              index
-              element={<ProfileView />}
-              errorElement={<NoProfileFoundView />}
-            />
-            <Route path="collectibles">
-              <Route index element={<CollectibleListView />} />
-              <Route
-                path=":chain/:contractAddress/:tokenId"
-                element={<CollectibleDetailsView />}
-              />
-            </Route>
-            <Route path="badges">
-              <Route index element={<BadgeListView />} />
-              <Route
-                path=":chain/:contractAddress/:tokenId"
-                element={<BadgeDetailsView />}
-              />
-            </Route>
-          </Route>
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<AppLayout />}>
+      <Route index element={<HomeView />} />
+      <Route path=":identity">
+        <Route index element={<ProfileView />} />
+        <Route path="collectibles">
+          <Route index element={<CollectibleListView />} />
+          <Route
+            path=":chain/:contractAddress/:tokenId"
+            element={<CollectibleDetailsView />}
+          />
         </Route>
-      </Routes>
-    </Router>
-  );
+        <Route path="badges">
+          <Route index element={<BadgeListView />} />
+          <Route
+            path=":chain/:contractAddress/:tokenId"
+            element={<BadgeDetailsView />}
+          />
+        </Route>
+      </Route>
+    </Route>
+  )
+);
+
+export const App: React.FunctionComponent = () => {
+  return <RouterProvider router={router} />;
 };
