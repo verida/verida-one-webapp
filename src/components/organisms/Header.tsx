@@ -3,6 +3,7 @@ import { useIntl } from "react-intl";
 import { IconButton, Icon, ButtonLink } from "components/atoms";
 import logo from "assets/images/verida_one_logo.png";
 import { Link } from "react-router-dom";
+import { config } from "lib/config";
 
 export const Header: React.FC = () => {
   const i18n = useIntl();
@@ -38,7 +39,9 @@ export const Header: React.FC = () => {
         </Link>
       </h1>
       <div className="flex items-center justify-between space-x-3">
-        <IconButton size="medium" icon={<Icon type="search" />} />
+        {config.features.isSearchEnabled && (
+          <IconButton size="medium" icon={<Icon type="search" />} />
+        )}
         {/* <Button size="medium">{connectButtonLabel}</Button> */}
         <ButtonLink
           url="https://www.verida.one/"
