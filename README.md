@@ -38,7 +38,7 @@ In a similar way as the development features, a set of mock data is available. I
 
 ### Linting and Formatting
 
-We use eslint for th elinting and prettier for the formatting.
+We use eslint for the linting and prettier for the formatting.
 
 Scripts are available to check and fix issues.
 
@@ -87,6 +87,12 @@ The message definition should always be copied into the json files in the messag
     "defaultMessage": "Submit"
   }
 }
+```
+
+You can run a dedicated script to extract all messages into the json file.
+
+```
+yarn run messages:extract
 ```
 
 See more information on the [react-intl documentation](https://formatjs.io/docs/getting-started/message-declaration).
