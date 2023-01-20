@@ -28,9 +28,13 @@ yarn run start
 
 ### Features in development
 
-Non production-ready features must be disabled in Production deployment. To ensure this, add a feature flag in `/lib/config`. It can be simply based on `process.env.NODE_ENV=development` or it can have a dedicated environment variable.
+Non production-ready features must be disabled in Production deployment. To ensure this, add a feature flag in `/lib/config`. It can be simply based on the existing `process.env.REACT_APP_ENABLE_DEV_FEATURES=true` or it can have a dedicated environment variable.
 
 Check for `.env.example` for the exact variables.
+
+### Mock data
+
+In a similar way as the development features, a set of mock data is available. It can be enabled by setting the environment variable `REACT_APP_ENABLE_MOCK_DATA=true`.
 
 ### Linting and Formatting
 
@@ -71,7 +75,7 @@ const SubmitButton = () => {
   });
 
   return <button>{buttonLabel}</button>;
-}
+};
 ```
 
 The message definition should always be copied into the json files in the messages folder (`messages/en.json`).

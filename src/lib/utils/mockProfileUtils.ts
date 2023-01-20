@@ -10,7 +10,7 @@ import { getMockIdentityProfile } from "mock/data";
 import { config } from "lib/config";
 
 function checkMockDataEnabled() {
-  if (!config.features.isMockDataEnabled) {
+  if (!config.isMockDataEnabled) {
     throw new Error("Mock data is not enabled");
   }
 }
