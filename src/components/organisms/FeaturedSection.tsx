@@ -7,7 +7,11 @@ import {
 } from "components/molecules";
 import { Collectible, CustomLink as CustomLinkType } from "lib/types";
 import { Link } from "react-router-dom";
-import { screenSizes } from "lib/constants";
+import {
+  screenSizes,
+  MAX_ASSETS_IN_FEATURED_SECTION,
+  MAX_LINKS_IN_FEATURED_SECTION,
+} from "lib/constants";
 
 type FeaturedSectionProps = {
   collectibles?: Collectible[];
@@ -40,23 +44,25 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = (props) => {
     <ProfileSectionWrapper title={sectionTitle}>
       <div className="flex flex-col space-y-3">
         <ul className="grid grid-cols-4 gap-2">
-          {collectibles?.map((collectible) => (
-            <li
-              key={`${collectible.chain}/${collectible.contractAddress}/${collectible.tokenId}`}
-            >
-              <Link
-                to={`collectibles/${collectible.chain}/${collectible.contractAddress}/${collectible.tokenId}`}
+          {collectibles
+            ?.slice(0, MAX_ASSETS_IN_FEATURED_SECTION)
+            .map((collectible) => (
+              <li
+                key={`${collectible.chain}/${collectible.contractAddress}/${collectible.tokenId}`}
               >
-                <CollectibleCard
-                  variant={mediaMatch ? "standard" : "compact"}
-                  collectible={collectible}
-                />
-              </Link>
-            </li>
-          ))}
+                <Link
+                  to={`collectibles/${collectible.chain}/${collectible.contractAddress}/${collectible.tokenId}`}
+                >
+                  <CollectibleCard
+                    variant={mediaMatch ? "standard" : "compact"}
+                    collectible={collectible}
+                  />
+                </Link>
+              </li>
+            ))}
         </ul>
         <ul className="space-y-2">
-          {links?.map((link) => (
+          {links?.slice(0, MAX_LINKS_IN_FEATURED_SECTION).map((link) => (
             <li key={link.url}>
               <CustomLink link={link} />
             </li>
