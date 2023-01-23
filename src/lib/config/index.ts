@@ -13,6 +13,15 @@ const veridaEnv: EnvironmentType =
 const veridaContextName = process.env.REACT_APP_VERIDA_APP_CONTEXT_NAME;
 const veridaLogoUrl = process.env.REACT_APP_VERIDA_APP_LOGO_URL;
 
+// Schemas
+// Set a fallback to avoid further issues.
+// TODO: set up a pre-build script validating env variables
+const schemasURL = {
+  profile:
+    process.env.REACT_APP_PROFILE_SCHEMA_URL ||
+    "https://common.schemas.verida.io/veridaOne/profile/v0.1.0/schema.json",
+};
+
 // Feature flags variables
 const isDevFeaturesEnabled =
   process.env.REACT_APP_ENABLE_DEV_FEATURES === "true";
@@ -33,6 +42,7 @@ export const config = {
   veridaEnv,
   veridaContextName,
   veridaLogoUrl,
+  schemasURL,
   features,
   isMockDataEnabled,
 };
