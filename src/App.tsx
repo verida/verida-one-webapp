@@ -14,6 +14,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { AppLayout } from "components/templates";
+import { ErrorBoundary, RouterErrorHandler } from "components/molecules";
 
 /**
  * Routes
@@ -30,7 +31,11 @@ import { AppLayout } from "components/templates";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<AppLayout />}>
+    <Route
+      path="/"
+      element={<AppLayout />}
+      errorElement={<RouterErrorHandler />}
+    >
       <Route index element={<HomeView />} />
       <Route path=":identity">
         <Route index element={<ProfileView />} />
@@ -54,5 +59,9 @@ const router = createBrowserRouter(
 );
 
 export const App: React.FunctionComponent = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <ErrorBoundary defaultFallbackCardClassName="h-screen w-screen flex flex-col items-center justify-center">
+      <RouterProvider router={router} />
+    </ErrorBoundary>
+  );
 };
