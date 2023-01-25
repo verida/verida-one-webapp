@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
+import { useIntl } from "react-intl";
 import {
   BadgesSection,
   CollectiblesSection,
@@ -26,7 +27,6 @@ import {
   WalletAddress,
 } from "lib/types";
 import { useIdentityInfo } from "lib/hooks";
-import { NoProfileFoundView } from "./NoProfileFoundView";
 
 export const ProfileView: React.FC = () => {
   const [featuredCollectibles, setFeaturedCollectibles] = useState<
@@ -41,7 +41,20 @@ export const ProfileView: React.FC = () => {
   const [customLinks, setCustomLinks] = useState<CustomLink[]>([]);
   const [walletAddresses, setWalletAddresses] = useState<WalletAddress[]>([]);
 
+  const i18n = useIntl();
   const { identity } = useParams();
+
+  const notSharingOtherPublicInformationMessage = i18n.formatMessage({
+    id: "ProfileView.notSharingPublicInformationMessage",
+    defaultMessage: "This user is not sharing other public information",
+    description: "Message to show user is not sharing other public information",
+  });
+
+  const {
+    data: identityInfo,
+    isLoading: isLoadingIdentityInfo,
+    isError: isErrorIdentityInfo,
+  } = useIdentityInfo();
 
   useEffect(() => {
     const getData = async () => {
@@ -53,22 +66,17 @@ export const ProfileView: React.FC = () => {
       setCustomLinks(await getMockLinks(identity));
       setWalletAddresses(await getMockWalletAddresses(identity));
     };
-    void getData();
-  }, [identity]);
 
-  const {
-    data: identityInfo,
-    isLoading: isLoadingIdentityInfo,
-    isError: isErrorIdentityInfo,
-  } = useIdentityInfo();
+    void getData();
+  }, [identity, isErrorIdentityInfo]);
 
   if (isLoadingIdentityInfo || !identityInfo) {
     // TODO: Handle loading state
     return null;
   }
 
-  if (!isErrorIdentityInfo) {
-    return <NoProfileFoundView />;
+  if (isErrorIdentityInfo) {
+    return <Navigate to="/profile-not-found" />;
   }
 
   return (
@@ -77,6 +85,12 @@ export const ProfileView: React.FC = () => {
         <IdentityInfoSection identityInfo={identityInfo} />
       </div>
       <div className="space-y-10">
+        {/* TODO: Update this message div  once data fetching strategies is completed for wallet data info  */}
+        <div className="flex flex-col items-center justify-center rounded-xl bg-gray p-4 ">
+          <p className="text-center text-sm text-white text-opacity-60">
+            {notSharingOtherPublicInformationMessage}
+          </p>
+        </div>
         <FeaturedSection
           collectibles={featuredCollectibles}
           links={featuredLinks}

@@ -187,6 +187,10 @@
     "defaultMessage": "Create your own profile",
     "description": "Call to action for viewer to create their own profile"
   },
+  "ProfileView.notSharingPublicInformationMessage": {
+    "defaultMessage": "This user is not sharing other public information",
+    "description": "Message to show user is not sharing other public information"
+  },
   "SocialMediaSection.sectionTitle": {
     "defaultMessage": "Socials",
     "description": "Title of the 'Socials' section in the 'Profile' page"

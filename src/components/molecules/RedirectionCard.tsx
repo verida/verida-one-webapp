@@ -27,7 +27,7 @@ export const RedirectionCard: React.FunctionComponent<RedirectionCardProps> = ({
     <div {...otherProps}>
       <div className="flex flex-col items-center justify-center rounded-xl bg-gray p-4">
         <span className="mb-2 text-lg font-semibold">{title}</span>
-        <p className="mb-4 text-sm">{message}</p>
+        <p className="mb-4 text-sm text-white text-opacity-60">{message}</p>
         <div className="w-full">
           <Button
             variant="contained"
