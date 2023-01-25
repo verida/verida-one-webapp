@@ -68,7 +68,7 @@ export const ProfileView: React.FC = () => {
     };
 
     void getData();
-  }, [identity, isErrorIdentityInfo]);
+  }, [identity]);
 
   if (isLoadingIdentityInfo || !identityInfo) {
     // TODO: Handle loading state
