@@ -6,21 +6,21 @@ export const NoProfileFoundView: React.FunctionComponent = () => {
   const i18n = useIntl();
 
   const redirectionCardTitle = i18n.formatMessage({
-    id: "NotProfileFoundView.redirectionCardTitle",
+    id: "NoProfileFoundView.redirectionCardTitle",
     defaultMessage: "Page not found",
     description:
       "The title of the redirection card indicating that the profile page could not be found",
   });
 
   const redirectCardMessage = i18n.formatMessage({
-    id: "NotProfileFoundView.redirectCardMessage",
+    id: "NoProfileFoundView.redirectCardMessage",
     defaultMessage: "The page you're looking for doesn't exist",
     description:
       "Message from the redirection card indicating that the profile page could not be found",
   });
 
   const redirectionCardButtonlabel = i18n.formatMessage({
-    id: "NotProfileFoundView.redirectionCardButtonlabel",
+    id: "NoProfileFoundView.redirectionCardButtonlabel",
     defaultMessage: "Verida One Home",
     description: "The label of the redirection link button to the home page",
   });
