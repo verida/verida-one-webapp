@@ -1,8 +1,9 @@
+import { WebUserProfile } from "@verida/account-web-vault";
 import { Chains, SocialMedia } from "../constants";
-import { VaultPublicProfile } from "./verida";
 
-export interface IdentityInfo extends VaultPublicProfile {
-  veridaName?: string;
+export interface IdentityInfo extends WebUserProfile {
+  did: string;
+  username?: string;
 }
 
 export interface Link {

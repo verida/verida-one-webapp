@@ -1,89 +1,49 @@
-import {
-  Network,
-  EnvironmentType,
-  Context,
-  Datastore,
-  Client,
-} from "@verida/client-ts";
-import { VaultAccount } from "@verida/account-web-vault";
-import { VaultPublicProfile } from "lib/types";
+import { Client } from "@verida/client-ts";
+import { WebUserProfile } from "@verida/account-web-vault";
+import { IdentityInfo } from "lib/types";
+import { getMockIdentityInfo } from "./mockProfileUtils";
 
-const connect = async (
-  contextName: string,
-  environment: EnvironmentType,
-  logoUrl?: string,
-  openUrl?: string
-): Promise<
-  [context: Context, account: VaultAccount, profile: VaultPublicProfile]
-> => {
-  const account = new VaultAccount({
-    request: {
-      logoUrl,
-      openUrl,
-    },
-  });
+export const getIdentityInfo = async (
+  veridaClient: Client,
+  identity: string
+): Promise<IdentityInfo> => {
+  if (!identity.startsWith("did:vda")) {
+    // TODO: Handle non did:vda identity (Verida Username or unsupported value)
 
-  const context = await Network.connect({
-    client: {
-      environment,
-    },
-    account: account,
-    context: {
-      name: contextName,
-    },
-  });
-
-  if (!context) {
-    throw new Error("Verida Authentication Cancelled");
+    // TODO: Remove mock data when not needed anymore
+    return getMockIdentityInfo(identity);
   }
 
-  const did = await account.did();
-  const client = context.getClient();
-  const profile = await getVaultPublicProfile(client, did);
+  // Identity is a did:vda
 
-  return [context, account, profile];
-};
+  const vaultPublicProfile = await getAnyPublicProfile(veridaClient, identity);
 
-const getVaultPublicProfile = async (
-  client: Client,
-  did: string
-): Promise<VaultPublicProfile> => {
-  const profile: VaultPublicProfile = {
-    id: did,
+  const identityInfo: IdentityInfo = {
+    ...vaultPublicProfile,
+    did: identity,
+    username: undefined, // TODO: Get verida username if claimed
   };
 
+  return identityInfo;
+};
+
+export const getAnyPublicProfile = async (
+  client: Client,
+  did: string
+): Promise<WebUserProfile> => {
   const profileInstance = await client.openPublicProfile(did, "Verida: Vault");
-  if (profileInstance) {
-    const profileData = (await profileInstance.getMany({}, {})) as {
-      name?: string;
-      avatar?: { uri: string };
-      description?: string;
-    };
-    profile.name = profileData?.name;
-    profile.avatar = profileData?.avatar?.uri;
-    profile.description = profileData?.description;
+  if (!profileInstance) {
+    throw new Error("No public profile exists for this did");
   }
 
-  return profile;
-};
-
-const openDatastore = async (
-  context: Context,
-  schemaURL: string
-): Promise<Datastore> => {
-  return await context.openDatastore(schemaURL);
-};
-
-const disconnect = async (
-  account: VaultAccount,
-  contextName?: string
-): Promise<void> => {
-  await account.disconnect(contextName);
-};
-
-export const Verida = {
-  connect,
-  disconnect,
-  getVaultPublicProfile,
-  openDatastore,
+  return {
+    avatarUri: (
+      (await profileInstance.get("avatar")) as { uri?: string } | undefined
+    )?.uri as string,
+    name: (await profileInstance.get("name")) as string | undefined,
+    country: (await profileInstance.get("country")) as string | undefined,
+    description: (await profileInstance.get("description")) as
+      | string
+      | undefined,
+  };
 };

@@ -1,18 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
+import { Client } from "@verida/client-ts";
 import { config } from "lib/config";
 import { getIdentityInfo } from "lib/utils";
 import { useParams } from "react-router-dom";
-import { useVerida } from "./useVerida";
+// import { useVerida } from "./useVerida";
+
+const client = new Client({
+  environment: config.veridaEnv,
+});
 
 export const useIdentityInfo = () => {
   const { identity } = useParams();
-  const { client } = useVerida();
+  // const { client } = useVerida();
 
   const identityInfoQuery = useQuery(
     ["IdentityInfo", { identity }],
-    () => getIdentityInfo(client, identity as string),
+    () => {
+      return getIdentityInfo(client, identity as string);
+    },
     {
-      enabled: !!identity,
+      enabled: !!identity && !!client,
     }
   );
 

@@ -15,11 +15,11 @@ interface Props {
 export const AppContextProvider: React.FunctionComponent<Props> = (props) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <VeridaProvider>
-        <IconProvider value={IconConfig}>
-          <IntlProvider>{props.children}</IntlProvider>
-        </IconProvider>
-      </VeridaProvider>
+      {/* <VeridaProvider> */}
+      <IconProvider value={IconConfig}>
+        <IntlProvider>{props.children}</IntlProvider>
+      </IconProvider>
+      {/* </VeridaProvider> */}
     </QueryClientProvider>
   );
 };

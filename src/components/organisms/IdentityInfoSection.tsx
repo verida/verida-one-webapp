@@ -17,16 +17,16 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
       <div className="flex items-start justify-between space-x-3">
         <div className="flex items-center">
           <Avatar
-            image={identityInfo.avatar}
+            image={identityInfo.avatarUri}
             alt={identityInfo.name}
             size="large"
             className="mr-3"
           />
           <div className="flex flex-col items-start">
             <h2 className="text-xl font-bold">{identityInfo.name}</h2>
-            {identityInfo.veridaName && (
+            {identityInfo.username && (
               <span className="font-normal text-primary/60">
-                {identityInfo.veridaName}
+                {identityInfo.username}
               </span>
             )}
           </div>

@@ -22,10 +22,10 @@ import nftPudgyPenguins2974Image from "./images/6529/nft-pudgypenguins-2974.png"
 import nftAzuki2146Image from "./images/6529/nft-azuki-2146.png";
 
 export const identityInfo: IdentityInfo = {
-  id: "did:vda:123456",
-  avatar: avatarImage,
+  did: "did:vda:123456",
+  avatarUri: avatarImage,
   name: "6529",
-  veridaName: "@punk6529",
+  username: "6529.vda",
   description: "NFT collector",
 };
 

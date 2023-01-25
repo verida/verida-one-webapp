@@ -1,4 +1,4 @@
-import { EnvironmentType } from "@verida/client-ts";
+import { EnvironmentType } from "@verida/types";
 
 // Application variables
 const appTitle = "Verida One";
