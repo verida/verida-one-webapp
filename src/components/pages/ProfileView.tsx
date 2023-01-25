@@ -26,6 +26,7 @@ import {
   WalletAddress,
 } from "lib/types";
 import { useIdentityInfo } from "lib/hooks";
+import { NoProfileFoundView } from "./NoProfileFoundView";
 
 export const ProfileView: React.FC = () => {
   const [featuredCollectibles, setFeaturedCollectibles] = useState<
@@ -66,9 +67,8 @@ export const ProfileView: React.FC = () => {
     return null;
   }
 
-  if (isErrorIdentityInfo) {
-    // TODO: Handle error state
-    return null;
+  if (!isErrorIdentityInfo) {
+    return <NoProfileFoundView />;
   }
 
   return (
