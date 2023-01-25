@@ -75,8 +75,8 @@ export const ProfileView: React.FC = () => {
     return null;
   }
 
-  if (isErrorIdentityInfo) {
-    return <Navigate to="/profile-not-found" />;
+  if (!isErrorIdentityInfo) {
+    return <Navigate to="/no-profile-found" />;
   }
 
   return (
