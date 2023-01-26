@@ -26,7 +26,12 @@ export const WalletAddressCard: React.FunctionComponent<
       >
         <div className="flex min-w-0 items-center space-x-2.5">
           <ChainIcon chain={address.chain} verified={address.verified} />
-          <span className="truncate font-semibold">{address.address}</span>
+          <div className="flex min-w-0 flex-col">
+            <span className="font-semibold">{address.label}</span>
+            <span className="truncate font-normal text-primary/60">
+              {address.address}
+            </span>
+          </div>
         </div>
         <div className="flex items-center justify-center space-x-3">
           <CopyToClipboardButton value={address.address} />
