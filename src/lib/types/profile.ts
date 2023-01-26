@@ -3,6 +3,7 @@ import { VaultPublicProfile } from "./verida";
 
 export interface IdentityInfo extends VaultPublicProfile {
   veridaName?: string;
+  did?: string;
 }
 
 export interface Link {
@@ -21,6 +22,7 @@ export interface SocialMediaLink extends Link {
 export interface WalletAddress {
   address: string;
   chain: Chains;
+  label?: string;
   verified?: boolean;
 }
 
