@@ -77,33 +77,45 @@ export const ProfileView: React.FC = () => {
   }
 
   if (isErrorIdentityInfo) {
-    // TODO: Ensure the error is about "Profile not found"
+    // TODO: Handle depending on error type
     return <NoProfileFoundView />;
   }
+
+  const hasProfileData =
+    featuredCollectibles?.length ||
+    featuredLinks?.length ||
+    socialMediaLinks?.length ||
+    collectibles?.length ||
+    badges?.length ||
+    customLinks?.length ||
+    walletAddresses?.length;
+  // TODO: Get this 'hasProfileData' from the hook fetching the data when implemented
 
   return (
     <div>
       <div className="mb-7">
         <IdentityInfoSection identityInfo={identityInfo} />
       </div>
-      <div className="space-y-10">
-        {/* TODO: Update this message div  once data fetching strategies is completed for wallet data info  */}
-        <div className="flex flex-col items-center justify-center rounded-xl bg-gray p-4 ">
-          <p className="text-center text-sm text-white text-opacity-60">
+      {hasProfileData ? (
+        <div className="space-y-10">
+          <FeaturedSection
+            collectibles={featuredCollectibles}
+            links={featuredLinks}
+          />
+          <SocialMediaSection socialMediaLinks={socialMediaLinks} />
+          <CollectiblesSection collectibles={collectibles} />
+          {/** FIXME: Find a way to overlap the collectibles list above the padding of the main container */}
+          <BadgesSection badges={badges} />
+          <CustomLinksSection links={customLinks} />
+          <WalletAddressesSection addresses={walletAddresses} />
+        </div>
+      ) : (
+        <div className="rounded-xl bg-gray p-4 ">
+          <p className="text-center text-sm text-primary/60">
             {notSharingOtherPublicInformationMessage}
           </p>
         </div>
-        <FeaturedSection
-          collectibles={featuredCollectibles}
-          links={featuredLinks}
-        />
-        <SocialMediaSection socialMediaLinks={socialMediaLinks} />
-        <CollectiblesSection collectibles={collectibles} />
-        {/** FIXME: Find a way to overlap the collectibles list above the padding of the main container */}
-        <BadgesSection badges={badges} />
-        <CustomLinksSection links={customLinks} />
-        <WalletAddressesSection addresses={walletAddresses} />
-      </div>
+      )}
       {/* TODO: Bring back the CTA when removed from the header */}
       {/* <div className="pt-10 pb-10">
         <ProfileCallToAction />

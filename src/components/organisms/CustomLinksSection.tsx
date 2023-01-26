@@ -13,7 +13,7 @@ export const CustomLinksSection: React.FC<LinkSectionProps> = (props) => {
 
   const i18n = useIntl();
 
-  if (!links || links.length === 0) {
+  if (!links?.length) {
     return null;
   }
 
