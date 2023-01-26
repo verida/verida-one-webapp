@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Navigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useIntl } from "react-intl";
 import {
   BadgesSection,
@@ -27,6 +27,7 @@ import {
   WalletAddress,
 } from "lib/types";
 import { useIdentityInfo } from "lib/hooks";
+import { NoProfileFoundView } from "./NoProfileFoundView";
 
 export const ProfileView: React.FC = () => {
   const [featuredCollectibles, setFeaturedCollectibles] = useState<
@@ -75,8 +76,9 @@ export const ProfileView: React.FC = () => {
     return null;
   }
 
-  if (!isErrorIdentityInfo) {
-    return <Navigate to="/no-profile-found" />;
+  if (isErrorIdentityInfo) {
+    // TODO: Ensure the error is about "Profile not found"
+    return <NoProfileFoundView />;
   }
 
   return (

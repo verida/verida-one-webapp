@@ -5,7 +5,6 @@ import {
   CollectibleDetailsView,
   CollectibleListView,
   HomeView,
-  NoProfileFoundView,
   ProfileView,
 } from "components/pages";
 import {
@@ -38,7 +37,6 @@ const router = createBrowserRouter(
       errorElement={<RouterErrorHandler />}
     >
       <Route index element={<HomeView />} />
-      <Route path="no-profile-found" element={<NoProfileFoundView />} />
       <Route path=":identity">
         <Route index element={<ProfileView />} />
         <Route path="collectibles">

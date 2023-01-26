@@ -7,7 +7,7 @@ module.exports = {
       "primary-inverse": "#000000",
       "background": "#0D0A27",
       "gray": "rgba(255, 255, 255, 0.05)",
-      "transparent": `rgba(17, 17, 17, 0.2)`,
+      "transparent": "rgba(17, 17, 17, 0.2)",
       "gray-dark": "rgba(255, 255, 255, 0.15)",
       "background-button": "rgba(255, 255, 255, 0.15)",
       "background-button-hover": "rgba(255, 255, 255, 0.3)",
