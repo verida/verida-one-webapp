@@ -45,10 +45,11 @@ export const ProfileView: React.FC = () => {
   const i18n = useIntl();
   const { identity } = useParams();
 
-  const notSharingOtherPublicInformationMessage = i18n.formatMessage({
-    id: "ProfileView.notSharingPublicInformationMessage",
+  const notProfileDataMessage = i18n.formatMessage({
+    id: "ProfileView.notProfileDataMessage",
     defaultMessage: "This user is not sharing other public information",
-    description: "Message to show user is not sharing other public information",
+    description:
+      "Message to show the identity has no Verida One profile information",
   });
 
   const { data: identityInfo, isError: isErrorIdentityInfo } =
@@ -100,7 +101,7 @@ export const ProfileView: React.FC = () => {
         ) : (
           <div className="rounded-xl bg-gray p-4 ">
             <p className="text-center text-sm text-primary/60">
-              {notSharingOtherPublicInformationMessage}
+              {notProfileDataMessage}
             </p>
           </div>
         )}

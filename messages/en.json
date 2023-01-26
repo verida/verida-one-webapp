@@ -172,24 +172,24 @@
     "description": "Alternate text for the logo image"
   },
   "NoProfileFoundView.redirectCardMessage": {
-    "defaultMessage": "The page you're looking for doesn't exist",
-    "description": "Message from the redirection card indicating that the profile page could not be found"
+    "defaultMessage": "The profile you're looking for doesn't exist",
+    "description": "Message from the redirection card indicating that the profile could not be found"
   },
   "NoProfileFoundView.redirectionCardButtonlabel": {
     "defaultMessage": "Verida One Home",
     "description": "The label of the redirection link button to the home page"
   },
   "NoProfileFoundView.redirectionCardTitle": {
-    "defaultMessage": "Page not found",
-    "description": "The title of the redirection card indicating that the profile page could not be found"
+    "defaultMessage": "Profile not found",
+    "description": "The title of the redirection card indicating that the profile could not be found"
   },
   "ProfileCallToAction.createOwnProfileMessage": {
     "defaultMessage": "Create your own profile",
     "description": "Call to action for viewer to create their own profile"
   },
-  "ProfileView.notSharingPublicInformationMessage": {
+  "ProfileView.notProfileDataMessage": {
     "defaultMessage": "This user is not sharing other public information",
-    "description": "Message to show user is not sharing other public information"
+    "description": "Message to show the identity has no Verida One profile information"
   },
   "SocialMediaSection.sectionTitle": {
     "defaultMessage": "Socials",
