@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useIntl } from "react-intl";
 import {
   BadgesSection,
   CollectiblesSection,
@@ -26,6 +27,7 @@ import {
   WalletAddress,
 } from "lib/types";
 import { useIdentityInfo } from "lib/hooks";
+import { NoProfileFoundView } from "./NoProfileFoundView";
 
 export const ProfileView: React.FC = () => {
   const [featuredCollectibles, setFeaturedCollectibles] = useState<
@@ -40,7 +42,18 @@ export const ProfileView: React.FC = () => {
   const [customLinks, setCustomLinks] = useState<CustomLink[]>([]);
   const [walletAddresses, setWalletAddresses] = useState<WalletAddress[]>([]);
 
+  const i18n = useIntl();
   const { identity } = useParams();
+
+  const notProfileDataMessage = i18n.formatMessage({
+    id: "ProfileView.notProfileDataMessage",
+    defaultMessage: "This user is not sharing other public information",
+    description:
+      "Message to show the identity has no Verida One profile information",
+  });
+
+  const { data: identityInfo, isError: isErrorIdentityInfo } =
+    useIdentityInfo();
 
   useEffect(() => {
     const getData = async () => {
@@ -52,46 +65,60 @@ export const ProfileView: React.FC = () => {
       setCustomLinks(await getMockLinks(identity));
       setWalletAddresses(await getMockWalletAddresses(identity));
     };
+
     void getData();
   }, [identity]);
 
-  const {
-    data: identityInfo,
-    isLoading: isLoadingIdentityInfo,
-    isError: isErrorIdentityInfo,
-  } = useIdentityInfo();
+  if (identityInfo) {
+    const hasProfileData =
+      featuredCollectibles?.length ||
+      featuredLinks?.length ||
+      socialMediaLinks?.length ||
+      collectibles?.length ||
+      badges?.length ||
+      customLinks?.length ||
+      walletAddresses?.length;
+    // TODO: Get this 'hasProfileData' from the hook fetching the data when implemented
 
-  if (isLoadingIdentityInfo || !identityInfo) {
-    // TODO: Handle loading state
-    return null;
+    return (
+      <div>
+        <div className="mb-7">
+          <IdentityInfoSection identityInfo={identityInfo} />
+        </div>
+        {hasProfileData ? (
+          <div className="space-y-10">
+            <FeaturedSection
+              collectibles={featuredCollectibles}
+              links={featuredLinks}
+            />
+            <SocialMediaSection socialMediaLinks={socialMediaLinks} />
+            <CollectiblesSection collectibles={collectibles} />
+            {/** FIXME: Find a way to overlap the collectibles list above the padding of the main container */}
+            <BadgesSection badges={badges} />
+            <CustomLinksSection links={customLinks} />
+            <WalletAddressesSection addresses={walletAddresses} />
+          </div>
+        ) : (
+          <div className="rounded-xl bg-gray p-4 ">
+            <p className="text-center text-sm text-primary/60">
+              {notProfileDataMessage}
+            </p>
+          </div>
+        )}
+        {/* TODO: Bring back the CTA when removed from the header */}
+        {/* <div className="pt-10 pb-10">
+        <ProfileCallToAction />
+      </div> */}
+      </div>
+    );
   }
 
   if (isErrorIdentityInfo) {
-    // TODO: Handle error state
-    return null;
+    // TODO: Handle depending on error type
+    return <NoProfileFoundView />;
   }
 
-  return (
-    <div>
-      <div className="mb-7">
-        <IdentityInfoSection identityInfo={identityInfo} />
-      </div>
-      <div className="space-y-10">
-        <FeaturedSection
-          collectibles={featuredCollectibles}
-          links={featuredLinks}
-        />
-        <SocialMediaSection socialMediaLinks={socialMediaLinks} />
-        <CollectiblesSection collectibles={collectibles} />
-        {/** FIXME: Find a way to overlap the collectibles list above the padding of the main container */}
-        <BadgesSection badges={badges} />
-        <CustomLinksSection links={customLinks} />
-        <WalletAddressesSection addresses={walletAddresses} />
-      </div>
-      {/* TODO: Bring back the CTA when removed from the header */}
-      {/* <div className="pt-10 pb-10">
-        <ProfileCallToAction />
-      </div> */}
-    </div>
-  );
+  // Loading state
+  // TODO: Handle loading state
+  return null;
 };

@@ -29,7 +29,7 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = (props) => {
 
   const i18n = useIntl();
 
-  if (collectibles?.length === 0 && links?.length === 0) {
+  if (!collectibles?.length && !links?.length) {
     return null;
   }
 
