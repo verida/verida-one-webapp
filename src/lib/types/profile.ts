@@ -21,6 +21,7 @@ export interface SocialMediaLink extends Link {
 export interface WalletAddress {
   address: string;
   chain: Chains;
+  label?: string;
   verified?: boolean;
 }
 

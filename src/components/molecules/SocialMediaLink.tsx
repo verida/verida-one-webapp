@@ -21,6 +21,7 @@ export const SocialMediaLink: React.FunctionComponent<SocialMediaLinkProps> = (
           url={link.url}
           icon={platformIcon}
           shape="circle"
+          size="large"
           target="_blank"
           rel="noopener"
         />
