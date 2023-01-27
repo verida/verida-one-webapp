@@ -43,7 +43,7 @@ type IconType = GenericIconType | SocialMediaIconType | ChainIconType;
 
 type IconProps = {
   type: IconType;
-  size?: number;
+  size?: number | string;
 } & Omit<React.ComponentPropsWithoutRef<typeof IconContainer>, "children">;
 
 export const Icon: React.FunctionComponent<IconProps> = (props) => {
