@@ -1,7 +1,7 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { IconButton, Icon, Avatar } from "components/atoms";
 import { IdentityInfo } from "lib/types";
-import { truncateProfileDid } from "lib/utils";
+import { truncateDid } from "lib/utils";
 
 type IdentityInfoSectionProps = {
   identityInfo: IdentityInfo;
@@ -13,10 +13,9 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
 ) => {
   const { identityInfo } = props;
 
-  const identityInfoDid = useMemo(
-    () => identityInfo.did && truncateProfileDid(identityInfo.did),
-    [identityInfo.did]
-  );
+  const displayedId = identityInfo.veridaName
+    ? identityInfo.veridaName
+    : truncateDid(identityInfo.id);
 
   return (
     <section>
@@ -25,7 +24,6 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
           image={identityInfo.avatar}
           alt={identityInfo.name}
           size="large"
-          className="mr-3"
         />
         <div className="flex items-center justify-between space-x-3">
           <IconButton icon={<Icon type="share" />} />
@@ -34,14 +32,7 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
       </div>
       <div className="mt-3">
         <h2 className="text-xl font-bold">{identityInfo.name}</h2>
-        {identityInfo.veridaName && (
-          <span className="font-normal text-primary/60">
-            {identityInfo.veridaName}
-          </span>
-        )}
-        {!identityInfo.veridaName && identityInfoDid && (
-          <span className="font-normal text-primary/60">{identityInfoDid}</span>
-        )}
+        <span className="font-normal text-primary/60">{displayedId}</span>
       </div>
       {identityInfo.description && (
         <p className="mt-3">{identityInfo.description}</p>
