@@ -10,7 +10,10 @@ const veridaEnv: EnvironmentType =
     : process.env.REACT_APP_VERIDA_ENV === "mainnet"
     ? EnvironmentType.MAINNET
     : EnvironmentType.TESTNET;
-const veridaContextName = process.env.REACT_APP_VERIDA_APP_CONTEXT_NAME;
+const veridaOneContextName = process.env.REACT_APP_VERIDA_ONE_CONTEXT_NAME;
+if (!veridaOneContextName) {
+  throw new Error("The Verida One context name is not defined");
+}
 const veridaLogoUrl = process.env.REACT_APP_VERIDA_APP_LOGO_URL;
 
 // Schemas
@@ -40,7 +43,7 @@ const isMockDataEnabled = process.env.REACT_APP_ENABLE_MOCK_DATA === "true";
 export const config = {
   appTitle,
   veridaEnv,
-  veridaContextName,
+  veridaOneContextName,
   veridaLogoUrl,
   schemasURL,
   features,
