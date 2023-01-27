@@ -14,6 +14,9 @@ export const WalletAddressCard: React.FunctionComponent<
 > = (props) => {
   const { address, ...otherProps } = props;
 
+  const mainInfo = address.label || address.address;
+  const secondaryInfo = address.label ? address.address : undefined;
+
   const explorerUrl = getChainExplorerUrlForAddress(
     address.chain,
     address.address
@@ -27,10 +30,17 @@ export const WalletAddressCard: React.FunctionComponent<
         <div className="flex min-w-0 items-center space-x-2.5">
           <ChainIcon chain={address.chain} verified={address.verified} />
           <div className="flex min-w-0 flex-col">
-            <span className="font-semibold">{address.label}</span>
-            <span className="truncate font-normal text-primary/60">
-              {address.address}
+            <span className="truncate font-semibold" title={mainInfo}>
+              {mainInfo}
             </span>
+            {secondaryInfo && (
+              <span
+                className="truncate font-normal text-primary/60"
+                title={secondaryInfo}
+              >
+                {secondaryInfo}
+              </span>
+            )}
           </div>
         </div>
         <div className="flex items-center justify-center space-x-3">
