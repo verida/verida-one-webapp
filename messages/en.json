@@ -119,6 +119,18 @@
     "defaultMessage": "Links",
     "description": "Title of the 'Links' section in the 'Profile' page"
   },
+  "ErrorFallbackCard.cardMessage": {
+    "defaultMessage": "If the error persists, try refreshing your browser and cleaning your browser's data.",
+    "description": "Message of the default error fallback card"
+  },
+  "ErrorFallbackCard.cardTtitle": {
+    "defaultMessage": "Oops, something went wrong!",
+    "description": "Title of the default error fallback card"
+  },
+  "ErrorFallbackCard.resetButtonLabel": {
+    "defaultMessage": "Try again",
+    "description": "Label of the 'Try Again' button displayed on the default error fallback card"
+  },
   "FeaturedSection.sectionTitle": {
     "defaultMessage": "Featured",
     "description": "Title of the 'Featured' section in the 'Profile' page"
@@ -159,12 +171,25 @@
     "defaultMessage": "Verida One Logo",
     "description": "Alternate text for the logo image"
   },
-  "NotProfileFoundView.message": {
-    "defaultMessage": "No Profile Found"
+  "NoProfileFoundView.redirectCardMessage": {
+    "defaultMessage": "The profile you're looking for doesn't exist",
+    "description": "Message from the redirection card indicating that the profile could not be found"
+  },
+  "NoProfileFoundView.redirectionCardButtonlabel": {
+    "defaultMessage": "Verida One Home",
+    "description": "The label of the redirection link button to the home page"
+  },
+  "NoProfileFoundView.redirectionCardTitle": {
+    "defaultMessage": "Profile not found",
+    "description": "The title of the redirection card indicating that the profile could not be found"
   },
   "ProfileCallToAction.createOwnProfileMessage": {
     "defaultMessage": "Create your own profile",
     "description": "Call to action for viewer to create their own profile"
+  },
+  "ProfileView.notProfileDataMessage": {
+    "defaultMessage": "This user is not sharing other public information",
+    "description": "Message to show the identity has no Verida One profile information"
   },
   "SocialMediaSection.sectionTitle": {
     "defaultMessage": "Socials",

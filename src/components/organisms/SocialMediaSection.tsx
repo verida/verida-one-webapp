@@ -13,7 +13,7 @@ export const SocialMediaSection: React.FC<SocialSectionProps> = (props) => {
 
   const i18n = useIntl();
 
-  if (!socialMediaLinks || socialMediaLinks.length === 0) {
+  if (!socialMediaLinks?.length) {
     return null;
   }
 

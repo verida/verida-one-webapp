@@ -25,8 +25,8 @@ import facebookAccountBadge from "./images/badges/facebook-account.png";
 import veridaIdentityBadge from "./images/badges/verida-identity.png";
 
 export const identityInfo: IdentityInfo = {
-  did: "did:vda:123456",
-  avatarUri: avatarImage,
+  did: "did:vda:0x4F984180236a323d90346e36D848792b26b4049E",
+  avatar: avatarImage,
   name: "Ryan Kris",
   username: "ryan.vda",
   description:

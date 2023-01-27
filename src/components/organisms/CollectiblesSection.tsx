@@ -27,7 +27,7 @@ export const CollectiblesSection: React.FC<CollectiblesSectionProps> = (
     navigate("collectibles");
   }, [navigate]);
 
-  if (!collectibles || collectibles.length === 0) {
+  if (!collectibles?.length) {
     return null;
   }
 

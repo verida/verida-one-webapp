@@ -22,8 +22,8 @@ import nftPudgyPenguins2974Image from "./images/6529/nft-pudgypenguins-2974.png"
 import nftAzuki2146Image from "./images/6529/nft-azuki-2146.png";
 
 export const identityInfo: IdentityInfo = {
-  did: "did:vda:123456",
-  avatarUri: avatarImage,
+  did: "did:vda:0x4F984180236a323d90346e36D848792b26b4049E",
+  avatar: avatarImage,
   name: "6529",
   username: "6529.vda",
   description: "NFT collector",
@@ -70,6 +70,7 @@ export const links: CustomLink[] = [
 
 export const walletAddresses: WalletAddress[] = [
   {
+    label: "Personal collection of the 6529 museum",
     address: "0xfD22004806A6846EA67ad883356be810F0428793",
     chain: Chains.ETHEREUM,
     verified: true,

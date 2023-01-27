@@ -23,7 +23,7 @@ export const BadgesSection: React.FC<BadgesSectionProps> = ({ badges }) => {
     navigate("badges");
   }, [navigate]);
 
-  if (!badges || badges.length === 0) {
+  if (!badges?.length) {
     return null;
   }
 
