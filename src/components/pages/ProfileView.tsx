@@ -52,24 +52,45 @@ export const ProfileView: React.FC = () => {
       "Message to show the identity has no Verida One profile information",
   });
 
-  const { data: identityInfo, isError: isErrorIdentityInfo } =
-    useIdentityInfo();
+  // TODO: Manage the loading of the different set of data (identity info and other information)
+  const {
+    data: identityInfo,
+    isLoading,
+    isError: isErrorIdentityInfo,
+  } = useIdentityInfo();
 
   useEffect(() => {
     const getData = async () => {
-      setFeaturedCollectibles(await getMockFeaturedCollectibles(identity));
-      setBadges(await getMockBadges(identity));
-      setFeaturedLinks(await getMockFeaturedLinks(identity));
-      setSocialMediaLinks(await getMockSocialMediaLinks(identity));
-      setCollectibles(await getMockCollectibles(identity));
-      setCustomLinks(await getMockLinks(identity));
-      setWalletAddresses(await getMockWalletAddresses(identity));
+      const [
+        _featuredCollectibles,
+        _featuredLinks,
+        _socialMediaLinks,
+        _collectibles,
+        _badges,
+        _customLinks,
+        _walletAddresses,
+      ] = await Promise.all([
+        getMockFeaturedCollectibles(identity),
+        getMockFeaturedLinks(identity),
+        getMockSocialMediaLinks(identity),
+        getMockCollectibles(identity),
+        getMockBadges(identity),
+        getMockLinks(identity),
+        getMockWalletAddresses(identity),
+      ]);
+      setFeaturedCollectibles(_featuredCollectibles);
+      setFeaturedLinks(_featuredLinks);
+      setSocialMediaLinks(_socialMediaLinks);
+      setCollectibles(_collectibles);
+      setBadges(_badges);
+      setCustomLinks(_customLinks);
+      setWalletAddresses(_walletAddresses);
     };
 
     void getData();
   }, [identity]);
 
-  if (identityInfo) {
+  if (identityInfo || isLoading) {
     const hasProfileData =
       featuredCollectibles?.length ||
       featuredLinks?.length ||
@@ -99,11 +120,15 @@ export const ProfileView: React.FC = () => {
             <WalletAddressesSection addresses={walletAddresses} />
           </div>
         ) : (
-          <div className="rounded-xl bg-gray p-4 ">
-            <p className="text-center text-sm text-primary/60">
-              {notProfileDataMessage}
-            </p>
-          </div>
+          <>
+            {!isLoading && (
+              <div className="rounded-xl bg-gray p-4 ">
+                <p className="text-center text-sm text-primary/60">
+                  {notProfileDataMessage}
+                </p>
+              </div>
+            )}
+          </>
         )}
         {/* TODO: Bring back the CTA when removed from the header */}
         {/* <div className="pt-10 pb-10">
@@ -118,7 +143,7 @@ export const ProfileView: React.FC = () => {
     return <NoProfileFoundView />;
   }
 
-  // Loading state
-  // TODO: Handle loading state
-  return null;
+  // At this point, there is no data, the data is not being loaded, there is no handled errors.
+  // So, throw an error that will be caught by the closest Error boundary.
+  throw new Error("Something went wrong");
 };
