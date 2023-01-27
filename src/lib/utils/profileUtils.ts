@@ -1,17 +1,29 @@
-/**
- * helper function to truncate a DID. it preserve the DID method.
- * ("did:vda:" + X characters of the identifier)
- *
- * @param did The DID to truncate.
- * @param idLength the number of characters to keep in the identifier. Optional, default is 8.
- * @returns The truncated DID.
- */
-export const truncateDid = (did: string, idLength = 8): string => {
-  const splittedDid = did.split(":");
-  const lastIndex = splittedDid.length - 1;
-  const publicAddress = splittedDid[lastIndex];
-  const truncatePublicAddress = publicAddress.slice(0, idLength);
-  splittedDid[lastIndex] = truncatePublicAddress;
+import { Client } from "@verida/client-ts";
+import { DID_VDA_METHOD } from "lib/constants";
+import { IdentityInfo } from "lib/types";
+import { getMockIdentityInfo } from "./mockProfileUtils";
+import { getAnyPublicProfile } from "./veridaUtils";
 
-  return `${splittedDid.join(":")}...`;
+export const getIdentityInfo = async (
+  veridaClient: Client,
+  identity: string
+): Promise<IdentityInfo> => {
+  if (!identity.startsWith(DID_VDA_METHOD)) {
+    // TODO: Handle non did:vda identity (Verida Username or unsupported value)
+
+    // TODO: Remove mock data when not needed anymore
+    return getMockIdentityInfo(identity);
+  }
+
+  // Identity is a did:vda
+
+  const vaultPublicProfile = await getAnyPublicProfile(veridaClient, identity);
+
+  const identityInfo: IdentityInfo = {
+    ...vaultPublicProfile,
+    did: identity,
+    username: undefined, // TODO: Get verida username if claimed
+  };
+
+  return identityInfo;
 };
