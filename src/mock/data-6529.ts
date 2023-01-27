@@ -23,7 +23,7 @@ import nftAzuki2146Image from "./images/6529/nft-azuki-2146.png";
 
 export const identityInfo: IdentityInfo = {
   did: "did:vda:0x4F984180236a323d90346e36D848792b26b4049E",
-  avatar: avatarImage,
+  avatarUri: avatarImage,
   name: "6529",
   username: "6529.vda",
   description: "NFT collector",
