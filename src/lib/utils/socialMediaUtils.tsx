@@ -4,7 +4,7 @@ import { SocialMedia } from "lib/constants";
 
 export const getSocialMediaLogo = (
   socialMedia: SocialMedia,
-  size?: number
+  size?: number | string
 ): React.ReactNode => {
   switch (socialMedia) {
     case SocialMedia.TWITTER:

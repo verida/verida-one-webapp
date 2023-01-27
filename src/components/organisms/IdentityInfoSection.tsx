@@ -23,7 +23,7 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
         <Avatar
           image={identityInfo.avatar}
           alt={identityInfo.name}
-          size="large"
+          className="h-16 sm:h-24" // TODO: Update tailwind config to have 6.5rem
         />
         <div className="flex items-center justify-between space-x-3">
           <IconButton icon={<Icon type="share" />} />

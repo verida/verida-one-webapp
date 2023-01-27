@@ -26,7 +26,10 @@ export const getChainLabel = (chain: Chains): string => {
   }
 };
 
-export const getChainLogo = (chain: Chains, size?: number): React.ReactNode => {
+export const getChainLogo = (
+  chain: Chains,
+  size?: number | string
+): React.ReactNode => {
   switch (chain) {
     case Chains.ALGORAND:
       return <Icon type="chain-algorand" size={size} />;
