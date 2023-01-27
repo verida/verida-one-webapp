@@ -1,17 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { Client } from "@verida/client-ts";
-import { config } from "lib/config";
 import { getIdentityInfo } from "lib/utils";
 import { useParams } from "react-router-dom";
-// import { useVerida } from "./useVerida";
-
-const client = new Client({
-  environment: config.veridaEnv,
-});
+import { useVerida } from "./useVerida";
 
 export const useIdentityInfo = () => {
   const { identity } = useParams();
-  // const { client } = useVerida();
+  const { client } = useVerida();
 
   const identityInfoQuery = useQuery(
     ["IdentityInfo", { identity }],
@@ -19,17 +13,9 @@ export const useIdentityInfo = () => {
       return getIdentityInfo(client, identity as string);
     },
     {
-      enabled: !!identity && !!client,
+      enabled: !!identity,
     }
   );
-
-  if (config.features.isQueryProfileEnabled) {
-    // TODO: Implement querying Verida One profile additional info
-  }
-
-  if (config.features.isFetchTokensEnabled) {
-    // TODO: Implement fetching tokens
-  }
 
   return identityInfoQuery;
 };

@@ -1,32 +1,19 @@
-import React, { useRef } from "react";
-import { WebUser } from "@verida/account-web-vault";
+import React from "react";
+import { Client } from "@verida/client-ts";
 import { config } from "lib/config";
 
-if (!config.veridaContextName) {
-  throw new Error("The Verida One context name is not defined");
-}
-
-const webUserInstance = new WebUser({
-  clientConfig: {
-    environment: config.veridaEnv,
-  },
-  contextConfig: {
-    name: config.veridaContextName,
-  },
-  accountConfig: {
-    request: {
-      logoUrl: config.veridaLogoUrl,
-      // TODO: Add openUrl when https://github.com/verida/vault-mobile/issues/663 is fixed
-    },
-  },
+const client = new Client({
+  environment: config.veridaEnv,
 });
 
+// TODO: Implement a context with WebUser when we will need to handle user connection
+// For the moment only a client is needed
 type VeridaContextType = {
-  webUserInstanceRef: React.MutableRefObject<WebUser>;
+  client: Client;
 };
 
 export const VeridaContext = React.createContext<VeridaContextType>({
-  webUserInstanceRef: { current: webUserInstance },
+  client,
 });
 
 interface VeridaProviderProps {
@@ -36,12 +23,10 @@ interface VeridaProviderProps {
 export const VeridaProvider: React.FunctionComponent<VeridaProviderProps> = (
   props
 ) => {
-  const webUserInstanceRef = useRef(webUserInstance);
-
   return (
     <VeridaContext.Provider
       value={{
-        webUserInstanceRef,
+        client,
       }}
     >
       {props.children}
