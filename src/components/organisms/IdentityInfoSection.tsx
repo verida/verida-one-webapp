@@ -45,7 +45,7 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
   return <IdentityInfoSectionSkeleton />;
 };
 
-function IdentityInfoSectionSkeleton() {
+const IdentityInfoSectionSkeleton: React.FunctionComponent = () => {
   return (
     <section className="animate-pulse">
       <SkeletonBase className="mr-3 aspect-square h-16 opacity-10 sm:h-24" />
@@ -63,4 +63,4 @@ function IdentityInfoSectionSkeleton() {
       </div>
     </section>
   );
-}
+};
