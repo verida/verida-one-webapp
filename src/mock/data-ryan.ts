@@ -25,10 +25,10 @@ import facebookAccountBadge from "./images/badges/facebook-account.png";
 import veridaIdentityBadge from "./images/badges/verida-identity.png";
 
 export const identityInfo: IdentityInfo = {
-  id: "did:vda:123456",
+  id: "did:vda:0x4F984180236a323d90346e36D848792b26b4049E",
   avatar: avatarImage,
   name: "Ryan Kris",
-  veridaName: "@ryan",
+  veridaName: "ryan.vda",
   description:
     "Cofounder @ Verida. Building web3 identity and personal data storage",
 };

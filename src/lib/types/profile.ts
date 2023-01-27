@@ -3,7 +3,6 @@ import { VaultPublicProfile } from "./verida";
 
 export interface IdentityInfo extends VaultPublicProfile {
   veridaName?: string;
-  did?: string;
 }
 
 export interface Link {
