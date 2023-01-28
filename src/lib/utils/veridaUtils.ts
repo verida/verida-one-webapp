@@ -2,6 +2,7 @@ import { Client } from "@verida/client-ts";
 import { WebUserProfile } from "@verida/account-web-vault";
 import { DID_VDA_METHOD } from "lib/constants";
 import { config } from "lib/config";
+import { ResolvedIdentity } from "lib/types";
 
 /**
  * /**
@@ -13,10 +14,12 @@ import { config } from "lib/config";
  * @param identity A username or DID.
  * @returns The resolved DID.
  */
-export const resolveIdentity = async (identity: string): Promise<string> => {
+export const resolveIdentity = async (
+  identity: string
+): Promise<ResolvedIdentity> => {
   if (identity.startsWith(DID_VDA_METHOD)) {
     // Identity is already a Verida DID
-    return Promise.resolve(identity);
+    return Promise.resolve({ did: identity });
   }
 
   if (identity.startsWith("did:")) {
@@ -24,9 +27,9 @@ export const resolveIdentity = async (identity: string): Promise<string> => {
     return Promise.reject(new Error("Unsupported DID method"));
   }
 
-  // Temporarily return the identity to use the mock data with it.
+  // TODO: Remove this check. Temporarily return the identity to use the mock data with it.
   if (config.isMockDataEnabled) {
-    return Promise.resolve(identity);
+    return Promise.resolve({ did: identity });
   }
 
   // TODO: Use the SDK to resolve Verida Username and return a Verida DID

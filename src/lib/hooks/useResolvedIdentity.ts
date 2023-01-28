@@ -17,6 +17,6 @@ export const useResolvedIdentity = (identity?: string) => {
 
   return {
     ...query,
-    did: data,
+    resolvedIdentity: data,
   };
 };

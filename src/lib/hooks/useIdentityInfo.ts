@@ -9,7 +9,7 @@ export const useIdentityInfo = () => {
   const { client } = useVerida();
 
   const {
-    did,
+    resolvedIdentity,
     isLoading: isLoadingResolvedIdentity,
     isError: isErrorResolvedIdentity,
     error: errorResolvedIdentity,
@@ -21,12 +21,12 @@ export const useIdentityInfo = () => {
     isError: isErrorIdentityInfo,
     error: errorIdentityInfo,
   } = useQuery(
-    queryKeys.identityInfo(did as string),
-    () => {
-      return getIdentityInfo(client, did as string);
+    queryKeys.identityInfo(resolvedIdentity?.did as string),
+    ({ queryKey: [{ did }] }) => {
+      return getIdentityInfo(client, did);
     },
     {
-      enabled: !!did,
+      enabled: !!resolvedIdentity?.did,
     }
   );
 
