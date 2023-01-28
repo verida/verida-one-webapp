@@ -3,7 +3,7 @@ import { resolveIdentity } from "lib/utils";
 import { queryKeys } from "lib/utils/queryUtils";
 
 export const useResolvedIdentity = (identity?: string) => {
-  const { data, ...query } = useQuery(
+  const query = useQuery(
     queryKeys.resolveIdentity(identity as string),
     ({ queryKey: [{ identity }] }) => {
       return resolveIdentity(identity);
@@ -12,11 +12,9 @@ export const useResolvedIdentity = (identity?: string) => {
       enabled: !!identity,
       staleTime: 1000 * 60 * 60, // The username is not changing frequently
       cacheTime: 1000 * 60 * 60,
+      // TODO: Potentially add a placeholder if its a DID, but there are impacts on the consumers of the data
     }
   );
 
-  return {
-    ...query,
-    resolvedIdentity: data,
-  };
+  return query;
 };

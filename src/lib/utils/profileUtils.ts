@@ -13,14 +13,12 @@ export const getIdentityInfo = async (
     return getMockIdentityInfo(did);
   }
 
-  // Identity is a did:vda
-
   const publicProfile = await getAnyPublicProfile(veridaClient, did);
 
+  // TODO: Deal with Verida Username
   const identityInfo: IdentityInfo = {
     ...publicProfile,
     did,
-    username: undefined, // TODO: Get verida username if claimed
   };
 
   return identityInfo;

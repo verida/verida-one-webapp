@@ -9,7 +9,7 @@ export const useIdentityInfo = () => {
   const { client } = useVerida();
 
   const {
-    resolvedIdentity,
+    data: resolvedIdentity,
     isLoading: isLoadingResolvedIdentity,
     isError: isErrorResolvedIdentity,
     error: errorResolvedIdentity,
