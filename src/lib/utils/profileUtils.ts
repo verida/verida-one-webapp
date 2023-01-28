@@ -6,22 +6,20 @@ import { getAnyPublicProfile } from "./veridaUtils";
 
 export const getIdentityInfo = async (
   veridaClient: Client,
-  identity: string
+  did: string
 ): Promise<IdentityInfo> => {
-  if (!identity.startsWith(DID_VDA_METHOD)) {
-    // TODO: Handle non did:vda identity (Verida Username or unsupported value)
-
-    // TODO: Remove mock data when not needed anymore
-    return getMockIdentityInfo(identity);
+  // TODO: Remove this check as it's only for mock data
+  if (!did.startsWith(DID_VDA_METHOD)) {
+    return getMockIdentityInfo(did);
   }
 
   // Identity is a did:vda
 
-  const vaultPublicProfile = await getAnyPublicProfile(veridaClient, identity);
+  const publicProfile = await getAnyPublicProfile(veridaClient, did);
 
   const identityInfo: IdentityInfo = {
-    ...vaultPublicProfile,
-    did: identity,
+    ...publicProfile,
+    did,
     username: undefined, // TODO: Get verida username if claimed
   };
 
