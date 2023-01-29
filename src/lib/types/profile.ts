@@ -1,25 +1,27 @@
-import { Chains, SocialMedia } from "../constants";
-import { IdentityInfo } from "./verida";
+import {
+  CustomLinkSchema,
+  FeaturedAssetSchema,
+  PlatformLinkSchema,
+  ProfileDataSchema,
+  VerificationProofSchema,
+  WalletAddressSchema,
+} from "lib/schema";
+import { z } from "zod";
+import { Chains } from "../constants";
 
-export interface Link {
-  url: string;
-}
+export type VerificationProof = z.infer<typeof VerificationProofSchema>;
 
-export interface CustomLink extends Link {
-  label: string;
-}
+export type CustomLink = z.infer<typeof CustomLinkSchema>;
 
-export interface SocialMediaLink extends Link {
-  platform: SocialMedia;
-  verified?: boolean;
-}
+export type PlatformLink = z.infer<typeof PlatformLinkSchema>;
 
-export interface WalletAddress {
-  address: string;
-  chain: Chains;
-  label?: string;
-  verified?: boolean;
-}
+export type WalletAddress = z.infer<typeof WalletAddressSchema>;
+
+export type FeaturedAsset = z.infer<typeof FeaturedAssetSchema>;
+
+export type ProfileData = z.infer<typeof ProfileDataSchema>;
+
+// ================
 
 export interface Collectible {
   chain: Chains;
@@ -44,15 +46,4 @@ export interface Badge {
   media: string;
   proofLabel: string; // Not sure, but assumed it would be something like "Twitter handle"/"Verida DID"/... in a user-friendly format
   proofValue: string; // Not sure, but assumed it would be the actual value of the proof
-}
-
-export interface Profile {
-  identityInfo: IdentityInfo;
-  socialMediaLinks: SocialMediaLink[];
-  featuredLinks: CustomLink[];
-  links: CustomLink[];
-  walletAddresses: WalletAddress[];
-  featuredCollectibles: Collectible[];
-  collectibles: Collectible[];
-  badges: Badge[];
 }
