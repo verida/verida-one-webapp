@@ -126,7 +126,7 @@ export const profileData: ProfileData = {
 
 export const collectibles: Collectible[] = [
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD270",
     tokenId: "78000313",
     collectionLabel: "Fidenza by Tyler Hobbs",
@@ -139,7 +139,7 @@ export const collectibles: Collectible[] = [
     floorPrice: 1000,
   },
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB",
     tokenId: "6529",
     collectionLabel: "CryptoPunks",
@@ -150,7 +150,7 @@ export const collectibles: Collectible[] = [
     floorPrice: 99,
   },
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D",
     tokenId: "4969",
     collectionLabel: "Bored Ape Yacht Club",
@@ -161,7 +161,7 @@ export const collectibles: Collectible[] = [
     floorPrice: 70,
   },
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0x06012c8cf97BEaD5deAe237070F9587f8E7A266d",
     tokenId: "29",
     collectionLabel: "CryptoKitties",
@@ -174,7 +174,7 @@ export const collectibles: Collectible[] = [
     floorPrice: 100,
   },
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB",
     tokenId: "4372",
     collectionLabel: "CryptoPunks",
@@ -185,7 +185,7 @@ export const collectibles: Collectible[] = [
     floorPrice: 44,
   },
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD270",
     tokenId: "78000119",
     collectionLabel: "Fidenza by Tyler Hobbs",
@@ -198,7 +198,7 @@ export const collectibles: Collectible[] = [
     floorPrice: 55,
   },
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0xBd3531dA5CF5857e7CfAA92426877b022e612cf8",
     tokenId: "2974",
     collectionLabel: "Pudgy Penguins",
@@ -211,7 +211,7 @@ export const collectibles: Collectible[] = [
     floorPrice: 25,
   },
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0xED5AF388653567Af2F388E6224dC7C4b3241C544",
     tokenId: "2146",
     collectionLabel: "Azuki",
@@ -222,7 +222,7 @@ export const collectibles: Collectible[] = [
     floorPrice: 18.99,
   },
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB",
     tokenId: "9082",
     collectionLabel: "CryptoPunks",

@@ -19,7 +19,7 @@ export const CollectibleDetailsView: React.FunctionComponent = () => {
   const { data: collectibles } = useCollectibles(walletAddresses);
   const collectible = collectibles?.find(
     (item) =>
-      item.chain === chain &&
+      item.chainId === chain &&
       item.contractAddress === contractAddress &&
       item.tokenId === tokenId
   );
@@ -70,7 +70,7 @@ export const CollectibleDetailsView: React.FunctionComponent = () => {
   const viewInExplorerButton = (
     <ButtonLink
       url={getChainExplorerUrlForAddress(
-        collectible.chain,
+        collectible.chainId,
         collectible.ownerAddress
       )}
       target="_blank"

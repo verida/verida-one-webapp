@@ -24,7 +24,7 @@ export type ProfileData = z.infer<typeof ProfileDataSchema>;
 // ================
 
 export interface Collectible {
-  chain: Chains;
+  chainId: Chains;
   contractAddress: string;
   tokenId: string;
   collectionLabel: string;
@@ -35,8 +35,9 @@ export interface Collectible {
   priceUnit?: string;
   floorPrice?: number;
 }
+
 export interface Badge {
-  chain: Chains;
+  chainId: Chains;
   contractAddress: string;
   tokenId: string;
   collectionLabel: string;

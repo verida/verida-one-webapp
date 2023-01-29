@@ -19,7 +19,7 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
   const { data: badges } = useBadges(walletAddresses);
   const badge = badges?.find(
     (item) =>
-      item.chain === chain &&
+      item.chainId === chain &&
       item.contractAddress === contractAddress &&
       item.tokenId === tokenId
   );
@@ -69,7 +69,7 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
 
   const viewInExplorerButton = (
     <ButtonLink
-      url={getChainExplorerUrlForAddress(badge.chain, badge.ownerAddress)}
+      url={getChainExplorerUrlForAddress(badge.chainId, badge.ownerAddress)}
       target="_blank"
       rel="noopener"
     >

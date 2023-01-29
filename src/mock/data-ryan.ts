@@ -90,7 +90,7 @@ export const profileData: ProfileData = {
 
 export const collectibles: Collectible[] = [
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0x10daa9f4c0f985430fde4959adb2c791ef2ccf83",
     tokenId: "10004",
     collectionLabel: "The Meta Key",
@@ -103,7 +103,7 @@ export const collectibles: Collectible[] = [
     floorPrice: 0.129,
   },
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0x22C1f6050E56d2876009903609a2cC3fEf83B415",
     tokenId: "12060",
     collectionLabel: "POAP",
@@ -115,7 +115,7 @@ export const collectibles: Collectible[] = [
     floorPrice: 0.0043,
   },
   {
-    chain: Chains.POLYGON,
+    chainId: Chains.POLYGON,
     contractAddress: "0xdb46d1dc155634fbc732f92e853b10b288ad5a1d",
     tokenId: "85835",
     collectionLabel: "Lens Protocol Profiles",
@@ -126,7 +126,7 @@ export const collectibles: Collectible[] = [
     media: nftLens85835Image,
   },
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0x05844e9aE606f9867ae2047c93cAc370d54Ab2E1",
     tokenId: "5766",
     collectionLabel: "AO ArtBall",
@@ -139,7 +139,7 @@ export const collectibles: Collectible[] = [
     floorPrice: 0.095,
   },
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0x5CC5B05a8A13E3fBDB0BB9FcCd98D38e50F90c38",
     tokenId: "31159",
     collectionLabel: "The Sandbox",
@@ -152,7 +152,7 @@ export const collectibles: Collectible[] = [
     floorPrice: 0.685,
   },
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0xb85070695a7599e3f6a8d46e8bd716d1923769b8",
     tokenId: "78",
     collectionLabel: "Thorchain Collectibles",
@@ -164,7 +164,7 @@ export const collectibles: Collectible[] = [
     floorPrice: 0.2,
   },
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0xfae39ec09730ca0f14262a636d2d7c5539353752",
     tokenId: "426456",
     collectionLabel: "Arbitrum Odyssey NFT",
@@ -175,7 +175,7 @@ export const collectibles: Collectible[] = [
     media: nftArbitrum426456Image,
   },
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0x74ee68a33f6c9f113e22b3b77418b75f85d07d22",
     tokenId: "5",
     collectionLabel: "Zerion Genesis Collection",
@@ -189,7 +189,7 @@ export const collectibles: Collectible[] = [
 
 export const badges: Badge[] = [
   {
-    chain: Chains.POLYGON,
+    chainId: Chains.POLYGON,
     contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD270",
     tokenId: "twitter-account",
     collectionLabel: "Verida Badges",
@@ -201,7 +201,7 @@ export const badges: Badge[] = [
     proofValue: "@RyanJKris",
   },
   {
-    chain: Chains.POLYGON,
+    chainId: Chains.POLYGON,
     contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD271",
     tokenId: "verida-identity",
     collectionLabel: "Verida Badges",
@@ -213,7 +213,7 @@ export const badges: Badge[] = [
     proofValue: "ryan",
   },
   {
-    chain: Chains.POLYGON,
+    chainId: Chains.POLYGON,
     contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD272",
     tokenId: "discord-account",
     collectionLabel: "Verida Badges",
@@ -225,7 +225,7 @@ export const badges: Badge[] = [
     proofValue: "ryan#7622",
   },
   {
-    chain: Chains.POLYGON,
+    chainId: Chains.POLYGON,
     contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD273",
     tokenId: "facebook-account",
     collectionLabel: "Verida Badges",

@@ -58,11 +58,11 @@ export const BadgesSection: React.FC<BadgesSectionProps> = ({ badges }) => {
       <ul className="grid snap-x snap-mandatory auto-cols-[160px] gap-2 overflow-x-auto max-sm:grid-flow-col sm:grid-cols-4">
         {truncatedBadgeList.map((badge) => (
           <li
-            key={`${badge.chain}/${badge.contractAddress}/${badge.tokenId}`}
+            key={`${badge.chainId}/${badge.contractAddress}/${badge.tokenId}`}
             className="snap-start transition-all"
           >
             <Link
-              to={`badges/${badge.chain}/${badge.contractAddress}/${badge.tokenId}`}
+              to={`badges/${badge.chainId}/${badge.contractAddress}/${badge.tokenId}`}
             >
               <BadgeCard variant="standard" badge={badge} />
             </Link>

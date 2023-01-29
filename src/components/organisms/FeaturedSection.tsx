@@ -48,10 +48,10 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = (props) => {
             ?.slice(0, MAX_ASSETS_IN_FEATURED_SECTION)
             .map((collectible) => (
               <li
-                key={`${collectible.chain}/${collectible.contractAddress}/${collectible.tokenId}`}
+                key={`${collectible.chainId}/${collectible.contractAddress}/${collectible.tokenId}`}
               >
                 <Link
-                  to={`collectibles/${collectible.chain}/${collectible.contractAddress}/${collectible.tokenId}`}
+                  to={`collectibles/${collectible.chainId}/${collectible.contractAddress}/${collectible.tokenId}`}
                 >
                   <CollectibleCard
                     variant={mediaMatch ? "standard" : "compact"}
