@@ -5,7 +5,7 @@ import {
   ProfileDataSchema,
   VerificationProofSchema,
   WalletAddressSchema,
-} from "lib/schema";
+} from "lib/schemas";
 import { z } from "zod";
 import { Chains } from "../constants";
 

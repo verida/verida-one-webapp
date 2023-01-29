@@ -1,7 +1,7 @@
 import { Client } from "@verida/client-ts";
 import { config } from "lib/config";
 import { DID_VDA_METHOD } from "lib/constants";
-import { ProfileDataSchema } from "lib/schema";
+import { ProfileDataSchema } from "lib/schemas";
 import { IdentityInfo, ProfileData, WalletAddress } from "lib/types";
 import {
   getMockBadges,
