@@ -1,15 +1,7 @@
 // Temporary data for development purpose
 
 import { Chains, SocialMedia } from "lib/constants";
-import {
-  Badge,
-  Collectible,
-  CustomLink,
-  Profile,
-  IdentityInfo,
-  SocialMediaLink,
-  WalletAddress,
-} from "lib/types";
+import { Badge, Collectible, IdentityInfo, ProfileData } from "lib/types";
 import avatarImage from "./images/6529/avatar-6529.jpg";
 import nftFidenza313Image from "./images/6529/nft-fidenza-313.png";
 import nftFidenza119Image from "./images/6529/nft-fidenza-119.png";
@@ -29,109 +21,108 @@ export const identityInfo: IdentityInfo = {
   description: "NFT collector",
 };
 
-export const socialMediaLinks: SocialMediaLink[] = [
-  {
-    platform: SocialMedia.TWITTER,
-    url: "https://twitter.com/punk6529",
-    verified: true,
-  },
-  {
-    platform: SocialMedia.DISCORD,
-    url: "https://discord.com/invite/join-om",
-    verified: false,
-  },
-];
-
-export const featuredLinks: CustomLink[] = [
-  {
-    label: "6529.io",
-    url: "https://6529.io/",
-  },
-  {
-    label: "6529 Museum District",
-    url: "https://oncyber.io/6529om",
-  },
-];
-
-export const links: CustomLink[] = [
-  {
-    label: "Personal collection on OpenSea",
-    url: "https://opensea.io/punk6529",
-  },
-  {
-    label: "6529 Museum on OpenSea",
-    url: "https://opensea.io/6529museum",
-  },
-  {
-    label: "The Memes by 6529 on OpenSea",
-    url: "https://opensea.io/collection/thememes6529",
-  },
-];
-
-export const walletAddresses: WalletAddress[] = [
-  {
-    label: "Personal collection of the 6529 museum",
-    address: "0xfD22004806A6846EA67ad883356be810F0428793",
-    chain: Chains.ETHEREUM,
-    verified: true,
-  },
-  {
-    address: "0xc6400A5584db71e41B0E5dFbdC769b54B91256CD",
-    chain: Chains.ETHEREUM,
-    verified: true,
-  },
-];
-
-export const featuredCollectibles: Collectible[] = [
-  {
-    chain: Chains.ETHEREUM,
-    contractAddress: "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB",
-    tokenId: "6529",
-    collectionLabel: "CryptoPunks",
-    tokenLabel: "CryptoPunk #6529",
-    ownerAddress: "0xc6400A5584db71e41B0E5dFbdC769b54B91256CD",
-    media: nftPunk6529Image,
-    priceUnit: "ETH",
-    floorPrice: 99,
-  },
-  {
-    chain: Chains.ETHEREUM,
-    contractAddress: "0x06012c8cf97BEaD5deAe237070F9587f8E7A266d",
-    tokenId: "29",
-    collectionLabel: "CryptoKitties",
-    tokenLabel: "Founder Cat #29",
-    description:
-      "Shalom! I'm Founder Cat #29. I enjoy hitting on yo' man, fighting the patriarchy, and riding unicorns. When no one's home, I invite my pals over and we listen to Rihanna. I look forward to chasing string with you.",
-    ownerAddress: "0xc6400A5584db71e41B0E5dFbdC769b54B91256CD",
-    media: nftCryptoKitties29Image,
-    priceUnit: "ETH",
-    floorPrice: 100,
-  },
-  {
-    chain: Chains.ETHEREUM,
-    contractAddress: "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB",
-    tokenId: "4372",
-    collectionLabel: "CryptoPunks",
-    tokenLabel: "CryptoPunk #4372",
-    ownerAddress: "0xc6400A5584db71e41B0E5dFbdC769b54B91256CD",
-    media: nftPunk4372Image,
-    priceUnit: "ETH",
-    floorPrice: 44,
-  },
-  {
-    chain: Chains.ETHEREUM,
-    contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD270",
-    tokenId: "78000313",
-    collectionLabel: "Fidenza by Tyler Hobbs",
-    tokenLabel: "Fidenza #313",
-    description:
-      "Fidenza is by far my most versatile algorithm to date. Although the program stays focused on structured curves and blocks, the varieties of scale, organization, texture, and color usage it can employ create a wide array of generative possibilities.",
-    ownerAddress: "0xc6400A5584db71e41B0E5dFbdC769b54B91256CD",
-    media: nftFidenza313Image,
-    priceUnit: "ETH",
-    floorPrice: 1000,
-  },
-];
+export const profileData: ProfileData = {
+  customLinks: [
+    {
+      label: "6529.io",
+      url: "https://6529.io/",
+      featured: true,
+      order: 1,
+    },
+    {
+      label: "6529 Museum District",
+      url: "https://oncyber.io/6529om",
+      featured: true,
+      order: 2,
+    },
+    {
+      label: "Personal collection on OpenSea",
+      url: "https://opensea.io/punk6529",
+      order: 3,
+    },
+    {
+      label: "6529 Museum on OpenSea",
+      url: "https://opensea.io/6529museum",
+      order: 4,
+    },
+    {
+      label: "The Memes by 6529 on OpenSea",
+      url: "https://opensea.io/collection/thememes6529",
+      order: 5,
+    },
+  ],
+  platformLinks: [
+    {
+      category: "socialMedia",
+      platform: SocialMedia.TWITTER,
+      accountId: "punk6529",
+      url: "https://twitter.com/punk6529",
+      verificationProof: {
+        type: "",
+        proof: "",
+      },
+      order: 1,
+    },
+    {
+      category: "socialMedia",
+      platform: SocialMedia.DISCORD,
+      accountId: "om",
+      url: "https://discord.com/invite/join-om",
+      order: 2,
+    },
+  ],
+  walletAddresses: [
+    {
+      chainId: Chains.ETHEREUM,
+      label: "Personal collection of the 6529 museum",
+      address: "0xfD22004806A6846EA67ad883356be810F0428793",
+      verificationProof: {
+        type: "",
+        proof: "",
+      },
+      order: 1,
+    },
+    {
+      chainId: Chains.ETHEREUM,
+      address: "0xc6400A5584db71e41B0E5dFbdC769b54B91256CD",
+      verificationProof: {
+        type: "",
+        proof: "",
+      },
+      order: 2,
+    },
+  ],
+  featureAssets: [
+    {
+      chainId: Chains.ETHEREUM,
+      contractAddress: "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB",
+      tokenId: "6529",
+      ownerAddress: "0xc6400A5584db71e41B0E5dFbdC769b54B91256CD",
+      order: 1,
+    },
+    {
+      chainId: Chains.ETHEREUM,
+      contractAddress: "0x06012c8cf97BEaD5deAe237070F9587f8E7A266d",
+      tokenId: "29",
+      ownerAddress: "0xc6400A5584db71e41B0E5dFbdC769b54B91256CD",
+      order: 2,
+    },
+    {
+      chainId: Chains.ETHEREUM,
+      contractAddress: "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB",
+      tokenId: "4372",
+      ownerAddress: "0xc6400A5584db71e41B0E5dFbdC769b54B91256CD",
+      order: 3,
+    },
+    {
+      chainId: Chains.ETHEREUM,
+      contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD270",
+      tokenId: "78000313",
+      ownerAddress: "0xc6400A5584db71e41B0E5dFbdC769b54B91256CD",
+      order: 4,
+    },
+  ],
+};
 
 export const collectibles: Collectible[] = [
   {
@@ -244,14 +235,3 @@ export const collectibles: Collectible[] = [
 ];
 
 export const badges: Badge[] = [];
-
-export const profile: Profile = {
-  identityInfo,
-  socialMediaLinks,
-  featuredLinks,
-  links,
-  walletAddresses,
-  featuredCollectibles,
-  collectibles,
-  badges,
-};
