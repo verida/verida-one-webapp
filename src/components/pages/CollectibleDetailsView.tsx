@@ -1,35 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
-import { Collectible } from "lib/types";
 import { PageWrapper, RedirectionCard } from "components/molecules";
-import { getChainExplorerUrlForAddress, getMockCollectibles } from "lib/utils";
+import { getChainExplorerUrlForAddress } from "lib/utils";
 import { AssetMedia, ButtonLink } from "components/atoms";
 import { useIntl } from "react-intl";
 import {
   AssetDetailsMainInfo,
   CollectibleDetailsProperties,
 } from "components/organisms";
+import { useCollectibles, useProfileData } from "lib/hooks";
 
 export const CollectibleDetailsView: React.FunctionComponent = () => {
-  const [collectible, setCollectible] = useState<Collectible | undefined>(
-    undefined
-  );
-  const { identity, chain, contractAddress, tokenId } = useParams();
   const i18n = useIntl();
+  const { identity, chain, contractAddress, tokenId } = useParams();
 
-  useEffect(() => {
-    const getData = async () => {
-      const collectibles = await getMockCollectibles(identity);
-      const foundCollectible = collectibles.find(
-        (item) =>
-          item.chain === chain &&
-          item.contractAddress === contractAddress &&
-          item.tokenId === tokenId
-      );
-      setCollectible(foundCollectible);
-    };
-    void getData();
-  }, [identity, chain, contractAddress, tokenId]);
+  const { data: profileData } = useProfileData(identity);
+  const walletAddresses = profileData?.walletAddresses;
+  const { data: collectibles } = useCollectibles(walletAddresses);
+  const collectible = collectibles?.find(
+    (item) =>
+      item.chain === chain &&
+      item.contractAddress === contractAddress &&
+      item.tokenId === tokenId
+  );
 
   const redirectPath = identity ? `/${identity}` : `/`;
 

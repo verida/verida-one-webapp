@@ -1,22 +1,17 @@
+import React from "react";
 import { PageWrapper, RedirectionCard } from "components/molecules";
 import { CollectibleGrid } from "components/organisms";
-import { Collectible } from "lib/types";
-import { getMockCollectibles } from "lib/utils";
-import React, { useEffect, useState } from "react";
+import { useCollectibles, useProfileData } from "lib/hooks";
 import { useIntl } from "react-intl";
 import { useParams } from "react-router-dom";
 
 export const CollectibleListView: React.FunctionComponent = () => {
-  const [collectibles, setCollectibles] = useState<Collectible[]>([]);
   const i18n = useIntl();
   const { identity } = useParams();
 
-  useEffect(() => {
-    const getData = async () => {
-      setCollectibles(await getMockCollectibles(identity));
-    };
-    void getData();
-  }, [identity]);
+  const { data: profileData } = useProfileData(identity);
+  const walletAddresses = profileData?.walletAddresses;
+  const { data: collectibles } = useCollectibles(walletAddresses);
 
   const redirectPath = identity ? `/${identity}` : `/`;
 
@@ -45,6 +40,9 @@ export const CollectibleListView: React.FunctionComponent = () => {
     description: "Title of the 'Collectibles' page",
     defaultMessage: "Collectibles",
   });
+
+  // TODO: Handle loading state
+  // TODO: Handle error state
 
   return (
     <PageWrapper title={pageTitle} badgeValue={collectibles?.length}>

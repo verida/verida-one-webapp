@@ -1,19 +1,29 @@
+import React from "react";
 import { AssetMedia, ButtonLink } from "components/atoms";
 import { RedirectionCard, PageWrapper } from "components/molecules";
 import {
   AssetDetailsMainInfo,
   BadgeDetailsProperties,
 } from "components/organisms";
-import { Badge } from "lib/types";
-import { getMockBadges, getChainExplorerUrlForAddress } from "lib/utils";
-import React, { useEffect, useState } from "react";
+import { useBadges, useProfileData } from "lib/hooks";
+import { getChainExplorerUrlForAddress } from "lib/utils";
 import { useIntl } from "react-intl";
 import { useParams } from "react-router-dom";
 
 export const BadgeDetailsView: React.FunctionComponent = () => {
-  const [badge, setBadge] = useState<Badge | undefined>(undefined);
-  const { identity, chain, contractAddress, tokenId } = useParams();
   const i18n = useIntl();
+  const { identity, chain, contractAddress, tokenId } = useParams();
+
+  const { data: profileData } = useProfileData(identity);
+  const walletAddresses = profileData?.walletAddresses;
+  const { data: badges } = useBadges(walletAddresses);
+  const badge = badges?.find(
+    (item) =>
+      item.chain === chain &&
+      item.contractAddress === contractAddress &&
+      item.tokenId === tokenId
+  );
+
   const redirectPath = identity ? `/${identity}` : `/`;
 
   const redirectionCardButtonLabel = i18n.formatMessage({
@@ -35,20 +45,6 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
     description:
       "Message of the redirection card indicating the badges has not been found.",
   });
-
-  useEffect(() => {
-    const getData = async () => {
-      const badges = await getMockBadges(identity);
-      const foundBadge = badges.find(
-        (item) =>
-          item.chain === chain &&
-          item.contractAddress === contractAddress &&
-          item.tokenId === tokenId
-      );
-      setBadge(foundBadge);
-    };
-    void getData();
-  }, [identity, chain, contractAddress, tokenId]);
 
   if (!badge) {
     return (
