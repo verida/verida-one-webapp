@@ -21,16 +21,21 @@ export const useWholeProfile = (identity?: string) => {
     isError: IsErrorProfileData,
   } = useProfileData(identity);
 
-  const featuredLinks = profileData?.customLinks?.filter(
-    (link) => !link.featured
+  const featuredLinks = profileData?.customLinks
+    ?.filter((link) => link.featured)
+    .sort((a, b) => a.order - b.order);
+
+  const customLinks = profileData?.customLinks
+    ?.filter((link) => !link.featured)
+    .sort((a, b) => a.order - b.order);
+
+  const socialMediaLinks = profileData?.platformLinks
+    ?.filter((link) => link.category === "socialMedia")
+    .sort((a, b) => a.order - b.order);
+
+  const walletAddresses = profileData?.walletAddresses?.sort(
+    (a, b) => a.order - b.order
   );
-  const customLinks = profileData?.customLinks?.filter(
-    (link) => !!link.featured
-  );
-  const socialMediaLinks = profileData?.platformLinks?.filter(
-    (link) => link.category === "socialMedia"
-  );
-  const walletAddresses = profileData?.walletAddresses;
 
   const {
     data: collectibles,
