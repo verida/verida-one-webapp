@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { getIdentityInfo, queryKeys } from "lib/utils";
-import { useParams } from "react-router-dom";
 import { useResolvedIdentity } from "./useResolvedIdentity";
 import { useVerida } from "./useVerida";
 
-export const useIdentityInfo = () => {
-  const { identity } = useParams();
+/**
+ * Hook querying the Verida public profile from an identity (DID or Username).
+ */
+export const useIdentityInfo = (identity?: string) => {
   const { client } = useVerida();
 
   const {
@@ -21,7 +22,7 @@ export const useIdentityInfo = () => {
     isError: isErrorIdentityInfo,
     error: errorIdentityInfo,
   } = useQuery(
-    queryKeys.identityInfo(resolvedIdentity?.did as string),
+    queryKeys.getIdentityInfo(resolvedIdentity?.did as string),
     ({ queryKey: [{ did }] }) => {
       return getIdentityInfo(client, did);
     },
