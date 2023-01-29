@@ -1,3 +1,4 @@
+import { filterFeaturedAssets } from "lib/utils";
 import { useBadges } from "./useBadges";
 import { useCollectibles } from "./useCollectibles";
 import { useIdentityInfo } from "./useIdentityInfo";
@@ -49,7 +50,11 @@ export const useWholeProfile = (identity?: string) => {
     isError: isErrorBadges,
   } = useBadges(walletAddresses);
 
-  // TODO: Extract featured assets
+  // TODO: Include Badges in extracting featured assets
+  const featuredCollectibles =
+    collectibles && profileData?.featureAssets
+      ? filterFeaturedAssets(collectibles, profileData?.featureAssets)
+      : undefined;
 
   return {
     identityInfo,
@@ -58,6 +63,7 @@ export const useWholeProfile = (identity?: string) => {
     profileData,
     hasProfileData,
     featuredLinks,
+    featuredCollectibles,
     customLinks,
     socialMediaLinks,
     walletAddresses,

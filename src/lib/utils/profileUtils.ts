@@ -2,7 +2,13 @@ import { Client } from "@verida/client-ts";
 import { config } from "lib/config";
 import { DID_VDA_METHOD } from "lib/constants";
 import { ProfileDataSchema } from "lib/schemas";
-import { IdentityInfo, ProfileData, WalletAddress } from "lib/types";
+import {
+  Collectible,
+  FeaturedAsset,
+  IdentityInfo,
+  ProfileData,
+  WalletAddress,
+} from "lib/types";
 import {
   getMockBadges,
   getMockCollectibles,
@@ -72,4 +78,23 @@ export const getBadges = async (walletAddresses: WalletAddress[]) => {
   }
 
   // TODO: Implement fetching badges
+};
+
+export const filterFeaturedAssets = (
+  collectibles: Collectible[],
+  featured: FeaturedAsset[]
+): Collectible[] => {
+  // TODO: Open up to a mix of Collectibles and Badges
+  return featured
+    .sort((a, b) => a.order - b.order)
+    .map((asset) => {
+      return collectibles.find((item) => {
+        return (
+          asset.chainId === item.chainId &&
+          asset.contractAddress === item.contractAddress &&
+          asset.tokenId === item.tokenId
+        );
+      });
+    })
+    .filter((item): item is Collectible => item !== undefined);
 };
