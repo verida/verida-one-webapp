@@ -1,5 +1,6 @@
 import { Client } from "@verida/client-ts";
 import { WebUserProfile } from "@verida/account-web-vault";
+import { DatastoreOpenConfig } from "@verida/types";
 import { DID_VDA_METHOD } from "lib/constants";
 import { config } from "lib/config";
 import { ResolvedIdentity } from "lib/types";
@@ -62,4 +63,25 @@ export const getAnyPublicProfile = async (
       | string
       | undefined,
   };
+};
+
+/**
+ * Open an external context and a data store of this context.
+ *
+ * @param client A Verida client.
+ * @param did A Verida DID.
+ * @param contextName The context name.
+ * @param schemaUri The schema of the datastore.
+ * @param datastoreConfig The optional configuration of the datastore.
+ * @returns the Datastore if it exists
+ */
+export const getExternalDatastore = async (
+  client: Client,
+  did: string,
+  contextName: string,
+  schemaUri: string,
+  datastoreConfig: DatastoreOpenConfig = {}
+) => {
+  const context = await client.openExternalContext(contextName, did);
+  return await context.openDatastore(schemaUri, datastoreConfig);
 };
