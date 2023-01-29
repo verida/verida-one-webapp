@@ -1,10 +1,10 @@
 import React from "react";
-import { SocialMediaLink as SocialMediaLinkType } from "lib/types";
+import { PlatformLink } from "lib/types";
 import { Icon, IconButtonLink } from "components/atoms";
 import { getSocialMediaLogo } from "lib/utils";
 
 type SocialMediaLinkProps = {
-  link: SocialMediaLinkType;
+  link: PlatformLink;
 } & Omit<React.ComponentPropsWithoutRef<"div">, "children">;
 
 export const SocialMediaLink: React.FunctionComponent<SocialMediaLinkProps> = (
@@ -25,7 +25,7 @@ export const SocialMediaLink: React.FunctionComponent<SocialMediaLinkProps> = (
           target="_blank"
           rel="noopener"
         />
-        {link.verified && (
+        {link.verificationProof && (
           <Icon
             type="verida-tick"
             size={16}

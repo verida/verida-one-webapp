@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { MAX_BADGES_IN_PROFILE_SECTION } from "lib/constants";
 
 type BadgesSectionProps = {
-  badges: Badge[];
+  badges?: Badge[];
 };
 
 /** Section for the Profile page rendering the list of Badges */

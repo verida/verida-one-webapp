@@ -1,10 +1,10 @@
 import React from "react";
 import { useIntl } from "react-intl";
-import { SocialMediaLink as SocialMediaLinkType } from "lib/types";
+import { PlatformLink } from "lib/types";
 import { ProfileSectionWrapper, SocialMediaLink } from "components/molecules";
 
 type SocialSectionProps = {
-  socialMediaLinks?: SocialMediaLinkType[];
+  socialMediaLinks?: PlatformLink[];
 };
 
 /** Section for the Profile page rendering the list of Social Media links */
