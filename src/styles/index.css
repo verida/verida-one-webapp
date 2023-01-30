@@ -19,7 +19,40 @@
 
   /* Badge Assets background image */
   .bg-badge {
-    background-image: url("./images/asset_background.png");
+    background-image: url("./images/asset-background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+
+  /** Custom Landing Page styles*/
+
+  .landing-page-heading {
+    background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.5) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .bg-herosection {
+    background-image: url("./images/hero-section-gradient.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .bg-showcase {
+    background-image: url("./images/showcase-gradient.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .bg-share-identity {
+    background-image: url("./images/share-identity-gradient.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .bg-curate-content {
+    background-image: url("./images/curate-content-gradient.png");
     background-repeat: no-repeat;
     background-size: cover;
   }
