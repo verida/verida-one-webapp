@@ -14,6 +14,7 @@ export const SocialMediaLink: React.FunctionComponent<SocialMediaLinkProps> = (
 
   const platformIcon = getSocialMediaLogo(link.platform);
 
+  // TODO: Consider verifying the proof rather than checking it exists.
   return (
     <div {...otherProps}>
       <div className="relative">
@@ -25,7 +26,7 @@ export const SocialMediaLink: React.FunctionComponent<SocialMediaLinkProps> = (
           target="_blank"
           rel="noopener"
         />
-        {link.verificationProof && (
+        {link.verificationProof?.proof && (
           <Icon
             type="verida-tick"
             size={16}

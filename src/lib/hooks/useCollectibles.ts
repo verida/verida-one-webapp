@@ -8,15 +8,13 @@ import { getCollectibles, queryKeys } from "lib/utils";
 export const useCollectibles = (walletAddresses?: WalletAddress[]) => {
   // TODO: Think about pagination if needed
 
-  const query = useQuery(
-    queryKeys.getCollectibles(walletAddresses as WalletAddress[]),
-    ({ queryKey: [{ walletAddresses }] }) => {
+  const query = useQuery({
+    queryKey: queryKeys.getCollectibles(walletAddresses as WalletAddress[]),
+    queryFn: ({ queryKey: [{ walletAddresses }] }) => {
       return getCollectibles(walletAddresses);
     },
-    {
-      enabled: !!walletAddresses,
-    }
-  );
+    enabled: !!walletAddresses,
+  });
 
   return query;
 };

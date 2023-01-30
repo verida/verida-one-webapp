@@ -59,7 +59,7 @@ export const profileData: ProfileData = {
       url: "https://twitter.com/punk6529",
       verificationProof: {
         type: "",
-        proof: "",
+        proof: "punk6529-verified",
       },
       order: 1,
     },
@@ -78,7 +78,7 @@ export const profileData: ProfileData = {
       address: "0xfD22004806A6846EA67ad883356be810F0428793",
       verificationProof: {
         type: "",
-        proof: "",
+        proof: "verified",
       },
       order: 1,
     },
@@ -87,7 +87,7 @@ export const profileData: ProfileData = {
       address: "0xc6400A5584db71e41B0E5dFbdC769b54B91256CD",
       verificationProof: {
         type: "",
-        proof: "",
+        proof: "verified",
       },
       order: 2,
     },

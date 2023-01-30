@@ -22,15 +22,13 @@ export const useProfileData = (identity?: string) => {
     isLoading: isLoadingProfileData,
     isError: isErrorProfileData,
     error: errorProfileData,
-  } = useQuery(
-    queryKeys.getProfileData(resolvedIdentity?.did as string),
-    ({ queryKey: [{ did }] }) => {
+  } = useQuery({
+    queryKey: queryKeys.getProfileData(resolvedIdentity?.did as string),
+    queryFn: ({ queryKey: [{ did }] }) => {
       return getProfileData(client, did);
     },
-    {
-      enabled: !!resolvedIdentity?.did,
-    }
-  );
+    enabled: !!resolvedIdentity?.did,
+  });
 
   const hasData =
     data?.platformLinks?.length ||

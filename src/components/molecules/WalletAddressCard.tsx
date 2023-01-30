@@ -22,6 +22,7 @@ export const WalletAddressCard: React.FunctionComponent<
     address.address
   );
 
+  // TODO: Consider verifying the proof rather than checking it exists.
   return (
     <div {...otherProps}>
       <div
@@ -30,7 +31,7 @@ export const WalletAddressCard: React.FunctionComponent<
         <div className="flex min-w-0 items-center space-x-2.5">
           <ChainIcon
             chain={address.chainId}
-            verified={!!address.verificationProof}
+            verified={!!address.verificationProof?.proof}
           />
           <div className="flex min-w-0 flex-col">
             <span className="truncate font-semibold" title={mainInfo}>

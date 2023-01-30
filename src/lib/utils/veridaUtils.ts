@@ -20,6 +20,7 @@ export const resolveIdentity = async (
 ): Promise<ResolvedIdentity> => {
   if (identity.startsWith(DID_VDA_METHOD)) {
     // Identity is already a Verida DID
+    // TODO: Check if there is a associated username and returned a full resolved identity
     return Promise.resolve({ did: identity });
   }
 
@@ -33,7 +34,7 @@ export const resolveIdentity = async (
     return Promise.resolve({ did: identity });
   }
 
-  // TODO: Use the SDK to resolve Verida Username and return a Verida DID
+  // TODO: Use the SDK to resolve the Verida Username and return both the DID and username in a resolved identity
   return Promise.reject(new Error("Not implemented"));
 };
 

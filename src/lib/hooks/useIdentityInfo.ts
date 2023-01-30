@@ -21,15 +21,13 @@ export const useIdentityInfo = (identity?: string) => {
     isLoading: isLoadingIdentityInfo,
     isError: isErrorIdentityInfo,
     error: errorIdentityInfo,
-  } = useQuery(
-    queryKeys.getIdentityInfo(resolvedIdentity?.did as string),
-    ({ queryKey: [{ did }] }) => {
+  } = useQuery({
+    queryKey: queryKeys.getIdentityInfo(resolvedIdentity?.did as string),
+    queryFn: ({ queryKey: [{ did }] }) => {
       return getIdentityInfo(client, did);
     },
-    {
-      enabled: !!resolvedIdentity?.did,
-    }
-  );
+    enabled: !!resolvedIdentity?.did,
+  });
 
   return {
     data,

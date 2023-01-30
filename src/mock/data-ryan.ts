@@ -47,7 +47,7 @@ export const profileData: ProfileData = {
       url: "https://twitter.com/RyanJKris",
       verificationProof: {
         type: "",
-        proof: "",
+        proof: "RyanJKris-verified",
       },
       order: 1,
     },
@@ -58,7 +58,7 @@ export const profileData: ProfileData = {
       address: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
       verificationProof: {
         type: "",
-        proof: "",
+        proof: "verified",
       },
       order: 1,
     },
