@@ -18,3 +18,5 @@ export * from "./RedirectionCard";
 export * from "./RouterErrorHandler";
 export * from "./SocialMediaLink";
 export * from "./WalletAddressCard";
+export * from "./LandingPageSectionContent";
+export * from "./LandingPageSectionWrapper";
