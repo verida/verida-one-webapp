@@ -9,10 +9,6 @@ import { IdentityInfo } from "lib/types";
 import { truncateDid } from "lib/utils";
 import { useIntl } from "react-intl";
 
-type shareItems = {
-  value?: string;
-};
-
 type ShareModalProps = {
   identityInfo: IdentityInfo;
   open: boolean;
@@ -33,7 +29,7 @@ export const ShareModal: React.FunctionComponent<ShareModalProps> = ({
     description: "Title for the share modal",
   });
 
-  const shareItems: shareItems[] = [
+  const shareItems = [
     {
       value: truncateDid(identityInfo.did),
     },
@@ -59,7 +55,7 @@ export const ShareModal: React.FunctionComponent<ShareModalProps> = ({
         ) : (
           <ShareProfileData
             QRlink=""
-            shareItems={shareItems as any[]}
+            shareItems={shareItems}
             username={identityInfo.username}
             handleShareProfileData={handleShareProfileData}
           />

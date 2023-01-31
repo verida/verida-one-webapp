@@ -1,4 +1,3 @@
-import { SocialMediaShareList } from './SocialMediaShareList';
 export * from "./AssetDetailsPropertyItem";
 export * from "./AssetDetailsPropertyList";
 export * from "./AssetPriceChip";

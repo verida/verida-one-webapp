@@ -4,7 +4,7 @@ import { Icon, IconButton } from "components/atoms";
 import { CopyToClipboardButton } from "./CopyToClipboardButton";
 
 type shareItems = {
-  value: string;
+  value: string | undefined;
 };
 
 type ShareProfileDataProps = {
@@ -39,7 +39,7 @@ export const ShareProfileData: React.FunctionComponent<
                 {item.value}
               </span>
               <div className="flex items-center justify-center space-x-3">
-                <CopyToClipboardButton value={item.value} />
+                <CopyToClipboardButton value={item?.value as string} />
                 <IconButton
                   size="small"
                   variant="text"
