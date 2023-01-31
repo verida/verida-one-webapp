@@ -24,3 +24,14 @@
     background-size: cover;
   }
 }
+
+
+@layer components {
+  .modal-container {
+    @apply fixed inset-0 z-[100] flex w-full flex-col items-center justify-center bg-background/80 backdrop-blur-[10px]
+  }
+
+  .modal-content {
+    @apply fixed bottom-0 w-full rounded-tl-3xl rounded-tr-3xl border border-solid border-gray-dark bg-background md:relative md:max-w-2xl md:rounded-3xl
+  }
+}

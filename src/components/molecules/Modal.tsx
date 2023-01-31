@@ -1,39 +1,43 @@
 import React from "react";
-import { Close } from "@icon-park/react";
+import { Icon, IconButton } from "components/atoms";
+import PortalWrapper from "./PortalWrapper";
 
 type ModalProps = {
-  title: string;
-  isOpen: boolean;
-  closeModal: () => void;
+  title?: string;
+  open: boolean;
+  handleCloseModal: () => void;
   children: React.ReactNode;
-};
+} & React.ComponentPropsWithRef<"div">;
 
-// TODO: To rework when needed
-export const Modal: React.FC<ModalProps> = ({
+export const Modal: React.FunctionComponent<ModalProps> = ({
   children,
   title,
-  isOpen,
-  closeModal,
+  open,
+  handleCloseModal,
 }) => {
-  if (!isOpen) {
+  if (!open) {
     return null;
   }
 
   return (
-    <div
-      hidden={isOpen}
-      className="fixed inset-0 z-[100] h-screen w-full overflow-y-auto overflow-x-hidden bg-background bg-opacity-80 p-4 md:flex md:items-center md:justify-center"
-    >
-      <div className="fixed bottom-0 left-0 w-full max-w-2xl rounded-tr-3xl rounded-tl-3xl border border-solid border-gray-dark bg-background md:relative md:mx-auto md:h-auto md:max-w-2xl md:rounded-3xl ">
-        <div className="relative bottom-0 rounded-lg shadow">
-          <div className="flex items-start justify-between rounded-t py-6 px-4">
+    <PortalWrapper>
+      <div className="modal-container">
+        <div className="modal-content">
+          <div className="flex items-center justify-between p-4 pt-6 md:p-8">
             <div />
-            <h3 className="text-lg font-semibold">{title}</h3>
-            <Close theme="outline" size="1.25em" onClick={closeModal} />
+            <span className="text-lg font-semibold leading-5">{title}</span>
+            <IconButton
+              size="small"
+              variant="text"
+              onClick={handleCloseModal}
+              icon={<Icon type="close" size={14} />}
+            />
           </div>
-          <div className="space-y-6 p-6">{children}</div>
+          <div className="flex flex-col justify-center p-4 md:p-8">
+            {children}
+          </div>
         </div>
       </div>
-    </div>
+    </PortalWrapper>
   );
 };
