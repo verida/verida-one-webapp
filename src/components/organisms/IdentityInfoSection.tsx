@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { IconButton, Icon, Avatar, SkeletonBase } from "components/atoms";
 import { IdentityInfo } from "lib/types";
 import { truncateDid } from "lib/utils";
+import { ShareModal } from "./ShareModal";
 
 type IdentityInfoSectionProps = {
   identityInfo?: IdentityInfo;
@@ -12,6 +13,11 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
   props
 ) => {
   const { identityInfo } = props;
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleModalToogle = useCallback(() => {
+    setOpenModal(!openModal);
+  }, [openModal]);
 
   if (identityInfo) {
     const displayedId = identityInfo.username
@@ -27,7 +33,11 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
             className="h-16 sm:h-24" // TODO: Update tailwind config to have 6.5rem
           />
           <div className="flex items-center justify-between space-x-3">
-            <IconButton icon={<Icon type="share" />} />
+            <ShareModal
+              open={openModal}
+              handleClose={handleModalToogle}
+              identityInfo={identityInfo}
+            />
             <IconButton icon={<Icon type="more" />} />
           </div>
         </div>

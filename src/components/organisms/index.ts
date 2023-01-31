@@ -12,3 +12,4 @@ export * from "./AssetDetailsMainInfo";
 export * from "./CollectibleDetailsProperties";
 export * from "./BadgeDetailsProperties";
 export * from "./BadgeGrid";
+export * from "./ShareModal";
