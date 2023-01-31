@@ -1,28 +1,38 @@
 import { useQuery } from "@tanstack/react-query";
-import { config } from "lib/config";
-import { getIdentityInfo } from "lib/utils";
-import { useParams } from "react-router-dom";
+import { getIdentityInfo, queryKeys } from "lib/utils";
+import { useResolvedIdentity } from "./useResolvedIdentity";
 import { useVerida } from "./useVerida";
 
-export const useIdentityInfo = () => {
-  const { identity } = useParams();
+/**
+ * Hook querying the Verida public profile from an identity (DID or Username).
+ */
+export const useIdentityInfo = (identity?: string) => {
   const { client } = useVerida();
 
-  const identityInfoQuery = useQuery(
-    ["IdentityInfo", { identity }],
-    () => getIdentityInfo(client, identity as string),
-    {
-      enabled: !!identity,
-    }
-  );
+  const {
+    data: resolvedIdentity,
+    isLoading: isLoadingResolvedIdentity,
+    isError: isErrorResolvedIdentity,
+    error: errorResolvedIdentity,
+  } = useResolvedIdentity(identity);
 
-  if (config.features.isQueryProfileEnabled) {
-    // TODO: Implement querying Verida One profile additional info
-  }
+  const {
+    data,
+    isLoading: isLoadingIdentityInfo,
+    isError: isErrorIdentityInfo,
+    error: errorIdentityInfo,
+  } = useQuery({
+    queryKey: queryKeys.getIdentityInfo(resolvedIdentity?.did as string),
+    queryFn: ({ queryKey: [{ did }] }) => {
+      return getIdentityInfo(client, did);
+    },
+    enabled: !!resolvedIdentity?.did,
+  });
 
-  if (config.features.isFetchTokensEnabled) {
-    // TODO: Implement fetching tokens
-  }
-
-  return identityInfoQuery;
+  return {
+    data,
+    isLoading: isLoadingIdentityInfo || isLoadingResolvedIdentity,
+    isError: isErrorIdentityInfo || isErrorResolvedIdentity,
+    error: errorIdentityInfo || errorResolvedIdentity,
+  };
 };

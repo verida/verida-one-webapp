@@ -66,11 +66,11 @@ export const CollectiblesSection: React.FC<CollectiblesSectionProps> = (
       <ul className="grid snap-x snap-mandatory auto-cols-[160px] gap-2 overflow-x-auto max-sm:grid-flow-col sm:grid-cols-4">
         {truncatedCollectiblesList.map((collectible) => (
           <li
-            key={`${collectible.chain}/${collectible.contractAddress}/${collectible.tokenId}`}
+            key={`${collectible.chainId}/${collectible.contractAddress}/${collectible.tokenId}`}
             className="snap-start transition-all"
           >
             <Link
-              to={`collectibles/${collectible.chain}/${collectible.contractAddress}/${collectible.tokenId}`}
+              to={`collectibles/${collectible.chainId}/${collectible.contractAddress}/${collectible.tokenId}`}
             >
               <CollectibleCard variant="standard" collectible={collectible} />
             </Link>

@@ -1,44 +1,100 @@
 import { Client } from "@verida/client-ts";
-import { IdentityInfo } from "lib/types";
-import { Verida } from "./veridaUtils";
-import { getMockIdentityInfo } from "./mockProfileUtils";
+import { config } from "lib/config";
+import { DID_VDA_METHOD } from "lib/constants";
+import { ProfileDataSchema } from "lib/schemas";
+import {
+  Collectible,
+  FeaturedAsset,
+  IdentityInfo,
+  ProfileData,
+  WalletAddress,
+} from "lib/types";
+import {
+  getMockBadges,
+  getMockCollectibles,
+  getMockIdentityInfo,
+  getMockProfileData,
+} from "mock";
+import { getAnyPublicProfile, getExternalDatastore } from "./veridaUtils";
 
 export const getIdentityInfo = async (
   veridaClient: Client,
   did: string
 ): Promise<IdentityInfo> => {
-  // TODO: Remove mock data when not needed anymore
-  if (!did.startsWith("did:vda")) {
+  // TODO: Remove this check as it's only for mock data
+  if (!did.startsWith(DID_VDA_METHOD)) {
     return getMockIdentityInfo(did);
   }
 
-  const vaultPublicProfile = await Verida.getVaultPublicProfile(
-    veridaClient,
-    did
-  );
+  const publicProfile = await getAnyPublicProfile(veridaClient, did);
 
+  // TODO: Deal with Verida Username
   const identityInfo: IdentityInfo = {
-    ...vaultPublicProfile,
-    veridaName: undefined, // TODO: Get verida name if claimed
+    ...publicProfile,
+    did,
   };
 
   return identityInfo;
 };
 
-/**
- * helper function to truncate a DID. it preserve the DID method.
- * ("did:vda:" + X characters of the identifier)
- *
- * @param did The DID to truncate.
- * @param idLength the number of characters to keep in the identifier. Optional, default is 8.
- * @returns The truncated DID.
- */
-export const truncateDid = (did: string, idLength = 8): string => {
-  const splittedDid = did.split(":");
-  const lastIndex = splittedDid.length - 1;
-  const publicAddress = splittedDid[lastIndex];
-  const truncatePublicAddress = publicAddress.slice(0, idLength);
-  splittedDid[lastIndex] = truncatePublicAddress;
+export const getProfileData = async (
+  veridaClient: Client,
+  did: string
+): Promise<ProfileData> => {
+  if (!did.startsWith(DID_VDA_METHOD)) {
+    return getMockProfileData(did);
+  }
 
-  return `${splittedDid.join(":")}...`;
+  const datastore = await getExternalDatastore(
+    veridaClient,
+    did,
+    config.veridaOneContextName,
+    config.schemasURL.profile
+  );
+
+  const profiles = await datastore.getMany({}, {});
+  if (profiles?.length > 0) {
+    const profileData = ProfileDataSchema.parse(profiles[0]);
+    // TODO: Handle errors on parse? Use safeParse?
+    return profileData;
+  }
+
+  throw new Error("No profile found");
+};
+
+export const getCollectibles = async (walletAddresses: WalletAddress[]) => {
+  if (walletAddresses) {
+    return getMockCollectibles();
+    // As we don't have the identity, we will have the default mock data (ryan)
+  }
+
+  // TODO: Implement fetching collectibles
+};
+
+export const getBadges = async (walletAddresses: WalletAddress[]) => {
+  if (walletAddresses) {
+    return getMockBadges();
+    // As we don't have the identity, we will have the default mock data (ryan)
+  }
+
+  // TODO: Implement fetching badges
+};
+
+export const filterFeaturedAssets = (
+  collectibles: Collectible[],
+  featured: FeaturedAsset[]
+): Collectible[] => {
+  // TODO: Open up to a mix of Collectibles and Badges
+  return featured
+    .sort((a, b) => a.order - b.order)
+    .map((asset) => {
+      return collectibles.find((item) => {
+        return (
+          asset.chainId === item.chainId &&
+          asset.contractAddress === item.contractAddress &&
+          asset.tokenId === item.tokenId
+        );
+      });
+    })
+    .filter((item): item is Collectible => item !== undefined);
 };

@@ -14,10 +14,10 @@ export const CollectibleGrid: React.FC<CollectibleGridProps> = (props) => {
       <ul className="grid grid-cols-2 gap-x-2 gap-y-4 sm:grid-cols-3 lg:grid-cols-4">
         {collectibles.map((collectible) => (
           <li
-            key={`${collectible.chain}/${collectible.contractAddress}/${collectible.tokenId}`}
+            key={`${collectible.chainId}/${collectible.contractAddress}/${collectible.tokenId}`}
           >
             <Link
-              to={`${collectible.chain}/${collectible.contractAddress}/${collectible.tokenId}`}
+              to={`${collectible.chainId}/${collectible.contractAddress}/${collectible.tokenId}`}
             >
               <CollectibleCard variant="standard" collectible={collectible} />
             </Link>

@@ -1,15 +1,7 @@
 // Temporary data for development purpose
 
 import { Chains, SocialMedia } from "lib/constants";
-import {
-  Badge,
-  Collectible,
-  CustomLink,
-  Profile,
-  IdentityInfo,
-  SocialMediaLink,
-  WalletAddress,
-} from "lib/types";
+import { Badge, Collectible, IdentityInfo, ProfileData } from "lib/types";
 import avatarImage from "./images/ryan/avatar-ryan.png";
 import nftMetakey10004Image from "./images/ryan/nft-metakey-10004.png";
 import nftAoArtBall5766Image from "./images/ryan/nft-ao-artball-5766.png";
@@ -25,91 +17,80 @@ import facebookAccountBadge from "./images/badges/facebook-account.png";
 import veridaIdentityBadge from "./images/badges/verida-identity.png";
 
 export const identityInfo: IdentityInfo = {
-  id: "did:vda:0x4F984180236a323d90346e36D848792b26b4049E",
-  avatar: avatarImage,
+  did: "did:vda:0x4F984180236a323d90346e36D848792b26b4049E",
+  avatarUri: avatarImage,
   name: "Ryan Kris",
-  veridaName: "ryan.vda",
+  username: "ryan.vda",
   description:
     "Cofounder @ Verida. Building web3 identity and personal data storage",
 };
 
-export const socialMediaLinks: SocialMediaLink[] = [
-  {
-    platform: SocialMedia.TWITTER,
-    url: "https://twitter.com/RyanJKris",
-    verified: true,
-  },
-  // {
-  //   platform: SocialMedia.DISCORD,
-  //   url: "https://discord.com/invite/join-om",  ryan#7622
-  //   verified: false,
-  // },
-];
-
-export const featuredLinks: CustomLink[] = [
-  {
-    label: "ryankris.com",
-    url: "https://www.ryankris.com/",
-  },
-];
-
-export const links: CustomLink[] = [
-  {
-    label: "Ryan on Medium",
-    url: "https://ryankris.medium.com/",
-  },
-];
-
-export const walletAddresses: WalletAddress[] = [
-  {
-    address: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
-    chain: Chains.ETHEREUM,
-    verified: true,
-  },
-];
-
-export const featuredCollectibles: Collectible[] = [
-  {
-    chain: Chains.ETHEREUM,
-    contractAddress: "0x10daa9f4c0f985430fde4959adb2c791ef2ccf83",
-    tokenId: "10004",
-    collectionLabel: "The Meta Key",
-    tokenLabel: "Metakey: Edition 4 - The Captain",
-    description:
-      "We are the Metakey — a platform-agnostic and massively interoperable web3 utility creator. Our core product is a single token that can integrate with multiple platforms and games to transform into avatars; weapons; vehicles; exp bonuses; grant access to virtual land and exclusive educational content; VIP experiences at virtual events; and much more.",
-    ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
-    media: nftMetakey10004Image,
-    priceUnit: "ETH",
-    floorPrice: 0.129,
-  },
-  {
-    chain: Chains.ETHEREUM,
-    contractAddress: "0x22C1f6050E56d2876009903609a2cC3fEf83B415",
-    tokenId: "12060",
-    collectionLabel: "POAP",
-    tokenLabel: "Bankless Member - 2020",
-    description: "The Proof of Attendance Protocole",
-    ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
-    media: nftPOAP12060Image,
-    priceUnit: "WETH",
-    floorPrice: 0.0043,
-  },
-  {
-    chain: Chains.POLYGON,
-    contractAddress: "0xdb46d1dc155634fbc732f92e853b10b288ad5a1d",
-    tokenId: "85835",
-    collectionLabel: "Lens Protocol Profiles",
-    tokenLabel: "@hotsauce.lens",
-    description:
-      "Planted in this collection, you’ll find all the Lens Protocol Profile NFTs that have been claimed so far. By owning a Lens Profile NFT, you are in control. You can choose where and how you use it. Welcome to a new era of decentralized social media, welcome to Lens!",
-    ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
-    media: nftLens85835Image,
-  },
-];
+export const profileData: ProfileData = {
+  customLinks: [
+    {
+      label: "ryankris.com",
+      url: "https://www.ryankris.com/",
+      featured: true,
+      order: 1,
+    },
+    {
+      label: "Ryan on Medium",
+      url: "https://ryankris.medium.com/",
+      order: 2,
+    },
+  ],
+  platformLinks: [
+    {
+      category: "socialMedia",
+      platform: SocialMedia.TWITTER,
+      accountId: "RyanJKris",
+      url: "https://twitter.com/RyanJKris",
+      verificationProof: {
+        type: "",
+        proof: "RyanJKris-verified",
+      },
+      order: 1,
+    },
+  ],
+  walletAddresses: [
+    {
+      chainId: Chains.ETHEREUM,
+      address: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
+      verificationProof: {
+        type: "",
+        proof: "verified",
+      },
+      order: 1,
+    },
+  ],
+  featureAssets: [
+    {
+      chainId: Chains.ETHEREUM,
+      contractAddress: "0x10daa9f4c0f985430fde4959adb2c791ef2ccf83",
+      tokenId: "10004",
+      ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
+      order: 1,
+    },
+    {
+      chainId: Chains.ETHEREUM,
+      contractAddress: "0x22C1f6050E56d2876009903609a2cC3fEf83B415",
+      tokenId: "12060",
+      ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
+      order: 2,
+    },
+    {
+      chainId: Chains.POLYGON,
+      contractAddress: "0xdb46d1dc155634fbc732f92e853b10b288ad5a1d",
+      tokenId: "85835",
+      ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
+      order: 3,
+    },
+  ],
+};
 
 export const collectibles: Collectible[] = [
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0x10daa9f4c0f985430fde4959adb2c791ef2ccf83",
     tokenId: "10004",
     collectionLabel: "The Meta Key",
@@ -122,7 +103,7 @@ export const collectibles: Collectible[] = [
     floorPrice: 0.129,
   },
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0x22C1f6050E56d2876009903609a2cC3fEf83B415",
     tokenId: "12060",
     collectionLabel: "POAP",
@@ -134,7 +115,7 @@ export const collectibles: Collectible[] = [
     floorPrice: 0.0043,
   },
   {
-    chain: Chains.POLYGON,
+    chainId: Chains.POLYGON,
     contractAddress: "0xdb46d1dc155634fbc732f92e853b10b288ad5a1d",
     tokenId: "85835",
     collectionLabel: "Lens Protocol Profiles",
@@ -145,7 +126,7 @@ export const collectibles: Collectible[] = [
     media: nftLens85835Image,
   },
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0x05844e9aE606f9867ae2047c93cAc370d54Ab2E1",
     tokenId: "5766",
     collectionLabel: "AO ArtBall",
@@ -158,7 +139,7 @@ export const collectibles: Collectible[] = [
     floorPrice: 0.095,
   },
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0x5CC5B05a8A13E3fBDB0BB9FcCd98D38e50F90c38",
     tokenId: "31159",
     collectionLabel: "The Sandbox",
@@ -171,7 +152,7 @@ export const collectibles: Collectible[] = [
     floorPrice: 0.685,
   },
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0xb85070695a7599e3f6a8d46e8bd716d1923769b8",
     tokenId: "78",
     collectionLabel: "Thorchain Collectibles",
@@ -183,7 +164,7 @@ export const collectibles: Collectible[] = [
     floorPrice: 0.2,
   },
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0xfae39ec09730ca0f14262a636d2d7c5539353752",
     tokenId: "426456",
     collectionLabel: "Arbitrum Odyssey NFT",
@@ -194,7 +175,7 @@ export const collectibles: Collectible[] = [
     media: nftArbitrum426456Image,
   },
   {
-    chain: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     contractAddress: "0x74ee68a33f6c9f113e22b3b77418b75f85d07d22",
     tokenId: "5",
     collectionLabel: "Zerion Genesis Collection",
@@ -208,7 +189,7 @@ export const collectibles: Collectible[] = [
 
 export const badges: Badge[] = [
   {
-    chain: Chains.POLYGON,
+    chainId: Chains.POLYGON,
     contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD270",
     tokenId: "twitter-account",
     collectionLabel: "Verida Badges",
@@ -220,7 +201,7 @@ export const badges: Badge[] = [
     proofValue: "@RyanJKris",
   },
   {
-    chain: Chains.POLYGON,
+    chainId: Chains.POLYGON,
     contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD271",
     tokenId: "verida-identity",
     collectionLabel: "Verida Badges",
@@ -232,7 +213,7 @@ export const badges: Badge[] = [
     proofValue: "ryan",
   },
   {
-    chain: Chains.POLYGON,
+    chainId: Chains.POLYGON,
     contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD272",
     tokenId: "discord-account",
     collectionLabel: "Verida Badges",
@@ -244,7 +225,7 @@ export const badges: Badge[] = [
     proofValue: "ryan#7622",
   },
   {
-    chain: Chains.POLYGON,
+    chainId: Chains.POLYGON,
     contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD273",
     tokenId: "facebook-account",
     collectionLabel: "Verida Badges",
@@ -256,14 +237,3 @@ export const badges: Badge[] = [
     proofValue: "@RyanJKris",
   },
 ];
-
-export const profile: Profile = {
-  identityInfo,
-  socialMediaLinks,
-  featuredLinks,
-  links,
-  walletAddresses,
-  featuredCollectibles,
-  collectibles,
-  badges,
-};

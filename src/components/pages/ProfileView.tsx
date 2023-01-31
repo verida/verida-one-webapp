@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
 import { useIntl } from "react-intl";
 import {
   BadgesSection,
@@ -10,40 +9,27 @@ import {
   SocialMediaSection,
   WalletAddressesSection,
 } from "components/organisms";
-import {
-  getMockBadges,
-  getMockCollectibles,
-  getMockFeaturedCollectibles,
-  getMockFeaturedLinks,
-  getMockLinks,
-  getMockSocialMediaLinks,
-  getMockWalletAddresses,
-} from "lib/utils";
-import {
-  Badge,
-  Collectible,
-  CustomLink,
-  SocialMediaLink,
-  WalletAddress,
-} from "lib/types";
-import { useIdentityInfo } from "lib/hooks";
+import { useWholeProfile } from "lib/hooks";
 import { NoProfileFoundView } from "./NoProfileFoundView";
+import { useParams } from "react-router-dom";
 
 export const ProfileView: React.FC = () => {
-  const [featuredCollectibles, setFeaturedCollectibles] = useState<
-    Collectible[]
-  >([]);
-  const [featuredLinks, setFeaturedLinks] = useState<CustomLink[]>([]);
-  const [socialMediaLinks, setSocialMediaLinks] = useState<SocialMediaLink[]>(
-    []
-  );
-  const [collectibles, setCollectibles] = useState<Collectible[]>([]);
-  const [badges, setBadges] = useState<Badge[]>([]);
-  const [customLinks, setCustomLinks] = useState<CustomLink[]>([]);
-  const [walletAddresses, setWalletAddresses] = useState<WalletAddress[]>([]);
-
   const i18n = useIntl();
   const { identity } = useParams();
+
+  const {
+    identityInfo,
+    isLoadingIdentityInfo,
+    isErrorIdentityInfo,
+    featuredLinks,
+    featuredCollectibles,
+    customLinks,
+    socialMediaLinks,
+    walletAddresses,
+    hasProfileData,
+    collectibles,
+    badges,
+  } = useWholeProfile(identity);
 
   const notProfileDataMessage = i18n.formatMessage({
     id: "ProfileView.notProfileDataMessage",
@@ -52,55 +38,7 @@ export const ProfileView: React.FC = () => {
       "Message to show the identity has no Verida One profile information",
   });
 
-  // TODO: Manage the loading of the different set of data (identity info and other information)
-  const {
-    data: identityInfo,
-    isLoading,
-    isError: isErrorIdentityInfo,
-  } = useIdentityInfo();
-
-  useEffect(() => {
-    const getData = async () => {
-      const [
-        _featuredCollectibles,
-        _featuredLinks,
-        _socialMediaLinks,
-        _collectibles,
-        _badges,
-        _customLinks,
-        _walletAddresses,
-      ] = await Promise.all([
-        getMockFeaturedCollectibles(identity),
-        getMockFeaturedLinks(identity),
-        getMockSocialMediaLinks(identity),
-        getMockCollectibles(identity),
-        getMockBadges(identity),
-        getMockLinks(identity),
-        getMockWalletAddresses(identity),
-      ]);
-      setFeaturedCollectibles(_featuredCollectibles);
-      setFeaturedLinks(_featuredLinks);
-      setSocialMediaLinks(_socialMediaLinks);
-      setCollectibles(_collectibles);
-      setBadges(_badges);
-      setCustomLinks(_customLinks);
-      setWalletAddresses(_walletAddresses);
-    };
-
-    void getData();
-  }, [identity]);
-
-  if (identityInfo || isLoading) {
-    const hasProfileData =
-      featuredCollectibles?.length ||
-      featuredLinks?.length ||
-      socialMediaLinks?.length ||
-      collectibles?.length ||
-      badges?.length ||
-      customLinks?.length ||
-      walletAddresses?.length;
-    // TODO: Get this 'hasProfileData' from the hook fetching the data when implemented
-
+  if (identityInfo || isLoadingIdentityInfo) {
     return (
       <div>
         <div className="mb-7">
@@ -121,7 +59,7 @@ export const ProfileView: React.FC = () => {
           </div>
         ) : (
           <>
-            {!isLoading && (
+            {!isLoadingIdentityInfo && (
               <div className="rounded-xl bg-gray p-4 ">
                 <p className="text-center text-sm text-primary/60">
                   {notProfileDataMessage}

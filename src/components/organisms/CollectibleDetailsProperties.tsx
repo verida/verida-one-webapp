@@ -14,7 +14,7 @@ export const CollectibleDetailsProperties: React.FC<
   const { collectible, ...divProps } = props;
 
   const {
-    chain,
+    chainId,
     contractAddress,
     tokenId,
     floorPrice,
@@ -60,8 +60,8 @@ export const CollectibleDetailsProperties: React.FC<
       propertyLabel: chainPropertyLabel,
       formattedValue: (
         <div className="flex items-center space-x-1">
-          {getChainLogo(chain, 14)}
-          <span>{getChainLabel(chain)}</span>
+          {getChainLogo(chainId, 14)}
+          <span>{getChainLabel(chainId)}</span>
         </div>
       ),
     },

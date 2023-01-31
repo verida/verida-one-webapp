@@ -17,3 +17,5 @@ export const MAX_ASSETS_IN_FEATURED_SECTION = 4;
 
 /** Max number of links displayed in the Featured section of the profile */
 export const MAX_LINKS_IN_FEATURED_SECTION = 2;
+
+export const DID_VDA_METHOD = "did:vda";

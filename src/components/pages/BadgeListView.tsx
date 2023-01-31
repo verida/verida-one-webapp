@@ -1,24 +1,19 @@
+import React from "react";
 import { PageWrapper, RedirectionCard } from "components/molecules";
 import { BadgeGrid } from "components/organisms";
-import { Badge } from "lib/types";
-import { getMockBadges } from "lib/utils";
-import React, { useEffect, useState } from "react";
+import { useBadges, useProfileData } from "lib/hooks";
 import { useIntl } from "react-intl";
 import { useParams } from "react-router-dom";
 
 export const BadgeListView: React.FunctionComponent = () => {
-  const [badges, setBadges] = useState<Badge[]>([]);
   const i18n = useIntl();
   const { identity } = useParams();
 
-  const redirectPath = identity ? `/${identity}` : `/`;
+  const { data: profileData } = useProfileData(identity);
+  const walletAddresses = profileData?.walletAddresses;
+  const { data: badges } = useBadges(walletAddresses);
 
-  useEffect(() => {
-    const getData = async () => {
-      setBadges(await getMockBadges(identity));
-    };
-    void getData();
-  }, [identity]);
+  const redirectPath = identity ? `/${identity}` : `/`;
 
   const redirectionCardButtonLabel = i18n.formatMessage({
     id: "BadgeListView.redirectionCardButtonLabel",
@@ -45,6 +40,9 @@ export const BadgeListView: React.FunctionComponent = () => {
     description: "Title of the 'Badges' page",
     defaultMessage: "Badges",
   });
+
+  // TODO: Handle loading state
+  // TODO: Handle error state
 
   return (
     <PageWrapper title={pageTitle} badgeValue={badges?.length}>

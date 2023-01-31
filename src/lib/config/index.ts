@@ -1,4 +1,4 @@
-import { EnvironmentType } from "@verida/client-ts";
+import { EnvironmentType } from "@verida/types";
 
 // Application variables
 const appTitle = "Verida One";
@@ -10,8 +10,20 @@ const veridaEnv: EnvironmentType =
     : process.env.REACT_APP_VERIDA_ENV === "mainnet"
     ? EnvironmentType.MAINNET
     : EnvironmentType.TESTNET;
-const veridaContextName = process.env.REACT_APP_VERIDA_APP_CONTEXT_NAME;
+const veridaOneContextName = process.env.REACT_APP_VERIDA_ONE_CONTEXT_NAME;
+if (!veridaOneContextName) {
+  throw new Error("The Verida One context name is not defined");
+}
 const veridaLogoUrl = process.env.REACT_APP_VERIDA_APP_LOGO_URL;
+
+// Schemas
+// Set a fallback to avoid further issues.
+// TODO: set up a pre-build script validating env variables
+const schemasURL = {
+  profile:
+    process.env.REACT_APP_PROFILE_SCHEMA_URL ||
+    "https://common.schemas.verida.io/veridaOne/profile/v0.1.0/schema.json",
+};
 
 // Feature flags variables
 const isDevFeaturesEnabled =
@@ -31,8 +43,9 @@ const isMockDataEnabled = process.env.REACT_APP_ENABLE_MOCK_DATA === "true";
 export const config = {
   appTitle,
   veridaEnv,
-  veridaContextName,
+  veridaOneContextName,
   veridaLogoUrl,
+  schemasURL,
   features,
   isMockDataEnabled,
 };

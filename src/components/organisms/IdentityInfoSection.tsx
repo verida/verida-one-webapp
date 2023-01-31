@@ -14,15 +14,15 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
   const { identityInfo } = props;
 
   if (identityInfo) {
-    const displayedId = identityInfo.veridaName
-      ? identityInfo.veridaName
-      : truncateDid(identityInfo.id);
+    const displayedId = identityInfo.username
+      ? identityInfo.username
+      : truncateDid(identityInfo.did);
 
     return (
       <section>
         <div className="flex items-end justify-between">
           <Avatar
-            image={identityInfo.avatar}
+            image={identityInfo.avatarUri}
             alt={identityInfo.name}
             className="h-16 sm:h-24" // TODO: Update tailwind config to have 6.5rem
           />
