@@ -1,4 +1,7 @@
 import { Client } from "@verida/client-ts";
+import {
+  DatabasePermissionOptionsEnum,
+} from "@verida/types";
 import { config } from "lib/config";
 import { DID_VDA_METHOD } from "lib/constants";
 import { ProfileDataSchema } from "lib/schemas";
@@ -41,6 +44,8 @@ export const getProfileData = async (
   veridaClient: Client,
   did: string
 ): Promise<ProfileData> => {
+  // Note: This gets called a lot, should be wrapped in async and cached for the current request, similar to WebUser
+  console.log(`getProfileData(${did})`);
   if (!did.startsWith(DID_VDA_METHOD)) {
     return getMockProfileData(did);
   }
@@ -49,17 +54,32 @@ export const getProfileData = async (
     veridaClient,
     did,
     config.veridaOneContextName,
-    config.schemasURL.profile
+    config.schemasURL.profile,
+    {
+      permissions: {
+        write: DatabasePermissionOptionsEnum.OWNER,
+        read: DatabasePermissionOptionsEnum.PUBLIC,
+      },
+      readOnly: true,
+    }
   );
 
-  const profiles = await datastore.getMany({}, {});
-  if (profiles?.length > 0) {
-    const profileData = ProfileDataSchema.parse(profiles[0]);
-    // TODO: Handle errors on parse? Use safeParse?
-    return profileData;
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const profile = await datastore.get("public", {});
+    console.log("profile");
+    console.log(profile);
+    return <ProfileData>profile;
+  } catch (err: any) {
+    console.log(err);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    if (err.error === "not_found") {
+      throw new Error("No profile found");
+    } else {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/restrict-template-expressions
+      throw new Error(`Unknown error: ${err.message}`);
+    }
   }
-
-  throw new Error("No profile found");
 };
 
 export const getCollectibles = async (walletAddresses: WalletAddress[]) => {

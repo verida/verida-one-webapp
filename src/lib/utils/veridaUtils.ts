@@ -84,5 +84,5 @@ export const getExternalDatastore = async (
   datastoreConfig: DatastoreOpenConfig = {}
 ) => {
   const context = await client.openExternalContext(contextName, did);
-  return await context.openDatastore(schemaUri, datastoreConfig);
+  return await context.openExternalDatastore(schemaUri, did, datastoreConfig);
 };
