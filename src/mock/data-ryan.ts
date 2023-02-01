@@ -1,6 +1,6 @@
 // Temporary data for development purpose
 
-import { Chains, SocialMedia } from "lib/constants";
+import { Chains, PlatformLinkCategories, SocialMedia } from "lib/constants";
 import { Badge, Collectible, IdentityInfo, ProfileData } from "lib/types";
 import avatarImage from "./images/ryan/avatar-ryan.png";
 import nftMetakey10004Image from "./images/ryan/nft-metakey-10004.png";
@@ -41,7 +41,7 @@ export const profileData: ProfileData = {
   ],
   platformLinks: [
     {
-      category: "socialMedia",
+      category: PlatformLinkCategories.SOCIAL,
       platform: SocialMedia.TWITTER,
       accountId: "RyanJKris",
       url: "https://twitter.com/RyanJKris",

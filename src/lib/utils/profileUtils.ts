@@ -1,9 +1,7 @@
 import { Client } from "@verida/client-ts";
-import {
-  DatabasePermissionOptionsEnum,
-} from "@verida/types";
+import { DatabasePermissionOptionsEnum } from "@verida/types";
 import { config } from "lib/config";
-import { DID_VDA_METHOD } from "lib/constants";
+import { DID_VDA_METHOD, VERIDA_ONE_PROFILE_RECORD_ID } from "lib/constants";
 import { ProfileDataSchema } from "lib/schemas";
 import {
   Collectible,
@@ -44,8 +42,6 @@ export const getProfileData = async (
   veridaClient: Client,
   did: string
 ): Promise<ProfileData> => {
-  // Note: This gets called a lot, should be wrapped in async and cached for the current request, similar to WebUser
-  console.log(`getProfileData(${did})`);
   if (!did.startsWith(DID_VDA_METHOD)) {
     return getMockProfileData(did);
   }
@@ -64,22 +60,14 @@ export const getProfileData = async (
     }
   );
 
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const profile = await datastore.get("public", {});
-    console.log("profile");
-    console.log(profile);
-    return <ProfileData>profile;
-  } catch (err: any) {
-    console.log(err);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    if (err.error === "not_found") {
-      throw new Error("No profile found");
-    } else {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/restrict-template-expressions
-      throw new Error(`Unknown error: ${err.message}`);
-    }
-  }
+  const profileRecord = (await datastore.get(
+    VERIDA_ONE_PROFILE_RECORD_ID,
+    {}
+  )) as ProfileData;
+  return ProfileDataSchema.parse(profileRecord);
+  // TODO: Try catch errors and identity the type of error to handle it specifically
+  // For the moment, there is no specific handling of the errors, so there is no point of catching and identifying them.
+  // Later the best way will likely be to wrap them in app-specific Errors, such as new ProfileNotFoundError(), or new ProfileNotValidError().
 };
 
 export const getCollectibles = async (walletAddresses: WalletAddress[]) => {

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Chains, SocialMedia } from "lib/constants";
+import { Chains, SocialMedia, PlatformLinkCategories } from "lib/constants";
 
 export const VerificationProofSchema = z.object({
   type: z.string(), // TODO: Enum?
@@ -14,7 +14,7 @@ export const CustomLinkSchema = z.object({
 });
 
 export const PlatformLinkSchema = z.object({
-  category: z.enum(["socialMedia"]), // TODO: Enum?
+  category: z.nativeEnum(PlatformLinkCategories),
   platform: z.nativeEnum(SocialMedia),
   accountId: z.string(),
   avatarUrl: z.string().optional(),
@@ -39,9 +39,11 @@ export const FeaturedAssetSchema = z.object({
   order: z.number().default(999),
 });
 
-export const ProfileDataSchema = z.object({
-  customLinks: z.array(CustomLinkSchema).optional(),
-  platformLinks: z.array(PlatformLinkSchema).optional(),
-  walletAddresses: z.array(WalletAddressSchema).optional(),
-  featureAssets: z.array(FeaturedAssetSchema).optional(),
-});
+export const ProfileDataSchema = z
+  .object({
+    customLinks: z.array(CustomLinkSchema).optional(),
+    platformLinks: z.array(PlatformLinkSchema).optional(),
+    walletAddresses: z.array(WalletAddressSchema).optional(),
+    featureAssets: z.array(FeaturedAssetSchema).optional(),
+  })
+  .passthrough();

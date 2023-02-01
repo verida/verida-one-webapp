@@ -22,8 +22,9 @@ export const getChainLabel = (chain: Chains): string => {
     case Chains.POLYGON:
       return chainLabels[chain];
     default:
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      throw new Error(`Chain not supported (${chain})`);
+      throw new Error(
+        `Chain not supported${chain ? ` (${chain as string})` : ""}`
+      );
   }
 };
 
