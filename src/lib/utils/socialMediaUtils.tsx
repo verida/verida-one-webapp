@@ -1,6 +1,13 @@
 import React from "react";
 import { Icon } from "components/atoms";
-import { SocialMedia } from "lib/constants";
+import {
+  EMAIL_URL,
+  FACEBOOK_URL,
+  SocialMedia,
+  TELEGRAM_URL,
+  TWITTER_URL,
+  WHATSAPP_URL,
+} from "lib/constants";
 
 export const getSocialMediaLogo = (
   socialMedia: SocialMedia,
@@ -11,6 +18,27 @@ export const getSocialMediaLogo = (
       return <Icon type="social-twitter" size={size} />;
     case SocialMedia.DISCORD:
       return <Icon type="social-discord" size={size} />;
+    default:
+      throw new Error("Social Media not supported");
+  }
+};
+
+export const getSocialMediaShareUrl = (
+  socialMedia: SocialMedia,
+  url: string,
+  title: string
+): string => {
+  switch (socialMedia) {
+    case SocialMedia.TWITTER:
+      return `${TWITTER_URL}/share?url=${url}&text=${title}`;
+    case SocialMedia.FACEBOOK:
+      return `${FACEBOOK_URL}/sharer.php?u=${url}&t=${title}`;
+    case SocialMedia.TELEGRAM:
+      return `${TELEGRAM_URL}/share/?url=${url}&text=${title}`;
+    case SocialMedia.WHATSAPP:
+      return `${WHATSAPP_URL}/send?text=${title}${url}`;
+    case SocialMedia.EMAIL:
+      return `${EMAIL_URL}/mail/u/0/?fs=1&tf=cm&source=mailto&su=${title}&body=${url}`;
     default:
       throw new Error("Social Media not supported");
   }
