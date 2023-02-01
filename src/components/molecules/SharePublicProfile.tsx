@@ -42,12 +42,14 @@ export const SharePublicProfile: React.FunctionComponent<
     [handleFallbackProfileSharing, socialMediaShareTitle]
   );
 
-  const shareItems = [
+  const identityInfoList = [
     {
-      value: truncateDid(identityInfo.did),
+      value: identityInfo.did,
+      formattedValue: truncateDid(identityInfo.did),
     },
     {
       value: identityInfo.username as string,
+      formattedValue: identityInfo.username as string,
     },
   ];
 
@@ -59,7 +61,7 @@ export const SharePublicProfile: React.FunctionComponent<
         </div>
         <span className="mt-1 text-gray-light">{profileUsernameUrl}</span>
       </div>
-      {shareItems
+      {identityInfoList
         .filter((item) => item.value)
         .map((item) => (
           <div
@@ -67,11 +69,11 @@ export const SharePublicProfile: React.FunctionComponent<
             key={item.value}
           >
             <div className="flex items-center justify-between">
-              <span className="text-sm font-semibold" title={item.value}>
-                {item.value}
+              <span className="text-sm font-semibold">
+                {item.formattedValue}
               </span>
               <div className="flex items-center justify-center space-x-3">
-                <CopyToClipboardButton value={item?.value} />
+                <CopyToClipboardButton value={item.value} />
                 <IconButton
                   size="small"
                   variant="text"
