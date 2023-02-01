@@ -13,11 +13,21 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
   props
 ) => {
   const { identityInfo } = props;
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(true);
+  const [isFallbackProfileShare, setIsFallbackProfileShare] = useState(false);
 
-  const handleModalToogle = useCallback(() => {
-    setOpenModal(!openModal);
-  }, [openModal]);
+  const handleCloseModal = useCallback(() => {
+    setOpenModal(false);
+    setIsFallbackProfileShare(false);
+  }, []);
+
+  const handleOpenModal = useCallback(() => {
+    setOpenModal(true);
+  }, []);
+
+  const handleFallbackProfileSharing = useCallback(() => {
+    setIsFallbackProfileShare(true);
+  }, []);
 
   if (identityInfo) {
     const displayedId = identityInfo.username
@@ -35,8 +45,11 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
           <div className="flex items-center justify-between space-x-3">
             <ShareModal
               open={openModal}
-              handleClose={handleModalToogle}
               identityInfo={identityInfo}
+              handleCloseModal={handleCloseModal}
+              handleOpenModal={handleOpenModal}
+              isFallbackProfileShare={isFallbackProfileShare}
+              handleFallbackProfileSharing={handleFallbackProfileSharing}
             />
             <IconButton icon={<Icon type="more" />} />
           </div>

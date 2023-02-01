@@ -1,27 +1,31 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { Icon, IconButton } from "components/atoms";
 import {
   Modal,
-  ShareProfileData,
-  SocialMediaShareList,
+  PublicProfileSharingList,
+  SharePublicProfile,
 } from "components/molecules";
 import { IdentityInfo } from "lib/types";
-import { truncateDid } from "lib/utils";
 import { useIntl } from "react-intl";
 
 type ShareModalProps = {
   identityInfo: IdentityInfo;
   open: boolean;
-  handleClose: () => void;
+  handleCloseModal: () => void;
+  handleOpenModal: () => void;
+  isFallbackProfileShare: boolean;
+  handleFallbackProfileSharing: () => void;
 };
 
 export const ShareModal: React.FunctionComponent<ShareModalProps> = ({
   open,
   identityInfo,
-  handleClose,
+  handleCloseModal,
+  handleOpenModal,
+  isFallbackProfileShare,
+  handleFallbackProfileSharing,
 }) => {
   const i18n = useIntl();
-  const [hasSharePopUp, setSharePopUp] = useState(false);
 
   const shareModalTitle = i18n.formatMessage({
     id: "ShareModal.shareModalTitle",
@@ -29,35 +33,20 @@ export const ShareModal: React.FunctionComponent<ShareModalProps> = ({
     description: "Title for the share modal",
   });
 
-  const shareItems = [
-    {
-      value: truncateDid(identityInfo.did),
-    },
-    {
-      value: identityInfo.username,
-    },
-  ];
-
-  const handleShareProfileData = useCallback(() => {
-    setSharePopUp(true);
-  }, []);
-
   return (
     <div>
-      <IconButton icon={<Icon type="share" />} onClick={handleClose} />
+      <IconButton icon={<Icon type="share" />} onClick={handleOpenModal} />
       <Modal
         open={open}
-        title={hasSharePopUp ? shareModalTitle : identityInfo.name}
-        handleCloseModal={handleClose}
+        title={isFallbackProfileShare ? shareModalTitle : identityInfo.name}
+        handleClose={handleCloseModal}
       >
-        {hasSharePopUp ? (
-          <SocialMediaShareList />
+        {isFallbackProfileShare ? (
+          <PublicProfileSharingList identityInfo={identityInfo} />
         ) : (
-          <ShareProfileData
-            QRlink=""
-            shareItems={shareItems}
-            username={identityInfo.username}
-            handleShareProfileData={handleShareProfileData}
+          <SharePublicProfile
+            identityInfo={identityInfo}
+            handleFallbackProfileSharing={handleFallbackProfileSharing}
           />
         )}
       </Modal>

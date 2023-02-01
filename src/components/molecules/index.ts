@@ -19,5 +19,5 @@ export * from "./RouterErrorHandler";
 export * from "./SocialMediaLink";
 export * from "./WalletAddressCard";
 export * from "./PortalWrapper";
-export * from "./ShareProfileData";
-export * from "./SocialMediaShareList";
+export * from "./SharePublicProfile";
+export * from "./PublicProfileSharingList";
