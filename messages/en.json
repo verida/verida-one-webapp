@@ -159,17 +159,9 @@
     "defaultMessage": "Create your profile",
     "description": "Label of the CTA button in the Header to create a profile"
   },
-  "Header.logoAlt": {
-    "defaultMessage": "Verida One Logo",
-    "description": "Alternate text for the logo image"
-  },
   "HomeView.ComingSoon": {
     "defaultMessage": "Coming Soon",
     "description": "Message stating that the app will be available soon"
-  },
-  "HomeView.LogoAlt": {
-    "defaultMessage": "Verida One Logo",
-    "description": "Alternate text for the logo image"
   },
   "NoProfileFoundView.redirectCardMessage": {
     "defaultMessage": "The profile you're looking for doesn't exist",
@@ -190,6 +182,42 @@
   "ProfileView.notProfileDataMessage": {
     "defaultMessage": "This user is not sharing other public information",
     "description": "Message to show the identity has no Verida One profile information"
+  },
+  "PublicProfileSharingList.copyLinkLabel": {
+    "defaultMessage": "Copy link",
+    "description": "Label of the copy link"
+  },
+  "PublicProfileSharingList.shareViaEmailTitle": {
+    "defaultMessage": "Share via Email",
+    "description": "Email Social Media Sharing Title"
+  },
+  "PublicProfileSharingList.shareViaMessengerTitle": {
+    "defaultMessage": "Share via Messenger",
+    "description": "Messenger Social Media Sharing Title"
+  },
+  "PublicProfileSharingList.shareViaTelegramTitle": {
+    "defaultMessage": "Share via Telegram",
+    "description": "Telegram Social Media Sharing Title"
+  },
+  "PublicProfileSharingList.shareViaTwitterTitle": {
+    "defaultMessage": "Share via Twitter",
+    "description": "Twitter Social Media Sharing Title"
+  },
+  "PublicProfileSharingList.shareViaWhatsAppTitle": {
+    "defaultMessage": "Share via WhatsApp",
+    "description": "WhatsApp Social Media Sharing Title"
+  },
+  "PublicProfileSharingList.socialMediaShareTitle": {
+    "defaultMessage": "Checkout my verida one profile",
+    "description": "Title for the social media sharing"
+  },
+  "ShareModal.shareModalTitle": {
+    "defaultMessage": "Share",
+    "description": "Title for the share modal"
+  },
+  "SharePublicProfile.socialMediaShareTitle": {
+    "defaultMessage": "Checkout my verida one profile",
+    "description": "Title for the social media sharing"
   },
   "SocialMediaSection.sectionTitle": {
     "defaultMessage": "Socials",
