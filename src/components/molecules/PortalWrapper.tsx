@@ -5,7 +5,7 @@ type PortalWrapperProps = {
   children: React.ReactNode;
 };
 
-//TODO: improve to handle other components intended to be rendered outside the parent component.
+//TODO: improve to dynamically handle other components intended to be rendered into a diifferent DOM.
 const PortalWrapper: React.FunctionComponent<PortalWrapperProps> = ({
   children,
 }) => {

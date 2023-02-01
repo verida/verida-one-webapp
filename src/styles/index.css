@@ -26,8 +26,9 @@
 }
 
 @layer components {
+  /**App Modal styling*/
   .modal-container {
-    @apply fixed inset-0 z-[100] flex w-full flex-col items-center justify-center bg-background/80 backdrop-blur-[10px];
+    @apply absolute inset-0 z-[100] min-h-full flex items-center justify-center bg-background/80 backdrop-blur-[10px];
   }
 
   .modal-content {
