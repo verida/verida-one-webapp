@@ -1,7 +1,13 @@
 // Temporary data for development purpose
 
-import { Chains, PlatformLinkCategories, SocialMedia } from "lib/constants";
-import { Badge, Collectible, IdentityInfo, ProfileData } from "lib/types";
+import { PlatformLinkCategories, SocialMedia } from "lib/constants";
+import {
+  Badge,
+  Chains,
+  Collectible,
+  IdentityInfo,
+  ProfileData,
+} from "lib/types";
 import avatarImage from "./images/6529/avatar-6529.jpg";
 import nftFidenza313Image from "./images/6529/nft-fidenza-313.png";
 import nftFidenza119Image from "./images/6529/nft-fidenza-119.png";

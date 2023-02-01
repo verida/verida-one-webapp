@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { Chains, SocialMedia, PlatformLinkCategories } from "lib/constants";
+import { SocialMedia, PlatformLinkCategories } from "lib/constants";
+import { Chains } from "lib/types";
 
 export const VerificationProofSchema = z.object({
   type: z.string(), // TODO: Enum?

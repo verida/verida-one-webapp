@@ -7,7 +7,7 @@ import {
   WalletAddressSchema,
 } from "lib/schemas";
 import { z } from "zod";
-import { Chains } from "../constants";
+import { Chains } from "./chains";
 
 export type VerificationProof = z.infer<typeof VerificationProofSchema>;
 
