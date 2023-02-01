@@ -13,7 +13,7 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
   props
 ) => {
   const { identityInfo } = props;
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
   const [isFallbackProfileShare, setIsFallbackProfileShare] = useState(false);
 
   const handleCloseModal = useCallback(() => {
