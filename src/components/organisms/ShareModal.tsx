@@ -1,5 +1,4 @@
 import React from "react";
-import { Icon, IconButton } from "components/atoms";
 import {
   Modal,
   PublicProfileSharingList,
@@ -12,7 +11,6 @@ type ShareModalProps = {
   identityInfo: IdentityInfo;
   open: boolean;
   handleCloseModal: () => void;
-  handleOpenModal: () => void;
   isFallbackProfileShare: boolean;
   handleFallbackProfileSharing: () => void;
 };
@@ -21,7 +19,6 @@ export const ShareModal: React.FunctionComponent<ShareModalProps> = ({
   open,
   identityInfo,
   handleCloseModal,
-  handleOpenModal,
   isFallbackProfileShare,
   handleFallbackProfileSharing,
 }) => {
@@ -35,7 +32,6 @@ export const ShareModal: React.FunctionComponent<ShareModalProps> = ({
 
   return (
     <div>
-      <IconButton icon={<Icon type="share" />} onClick={handleOpenModal} />
       <Modal
         open={open}
         title={isFallbackProfileShare ? shareModalTitle : identityInfo.name}

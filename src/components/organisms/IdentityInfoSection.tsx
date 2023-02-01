@@ -43,13 +43,9 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
             className="h-16 sm:h-24" // TODO: Update tailwind config to have 6.5rem
           />
           <div className="flex items-center justify-between space-x-3">
-            <ShareModal
-              open={openModal}
-              identityInfo={identityInfo}
-              handleCloseModal={handleCloseModal}
-              handleOpenModal={handleOpenModal}
-              isFallbackProfileShare={isFallbackProfileShare}
-              handleFallbackProfileSharing={handleFallbackProfileSharing}
+            <IconButton
+              icon={<Icon type="share" />}
+              onClick={handleOpenModal}
             />
             <IconButton icon={<Icon type="more" />} />
           </div>
@@ -61,6 +57,13 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
         {identityInfo.description && (
           <p className="mt-3">{identityInfo.description}</p>
         )}
+        <ShareModal
+          open={openModal}
+          identityInfo={identityInfo}
+          handleCloseModal={handleCloseModal}
+          isFallbackProfileShare={isFallbackProfileShare}
+          handleFallbackProfileSharing={handleFallbackProfileSharing}
+        />
       </section>
     );
   }
