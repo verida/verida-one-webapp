@@ -3,6 +3,7 @@ import { IconButton, Icon, Avatar, SkeletonBase } from "components/atoms";
 import { IdentityInfo } from "lib/types";
 import { truncateDid } from "lib/utils";
 import { ShareModal } from "./ShareModal";
+import { config } from "lib/config";
 
 type IdentityInfoSectionProps = {
   identityInfo?: IdentityInfo;
@@ -37,11 +38,13 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
             className="h-16 sm:h-24" // TODO: Update tailwind config to have 6.5rem
           />
           <div className="flex items-center justify-between space-x-3">
-            <IconButton
-              icon={<Icon type="share" />}
-              onClick={handleOpenModal}
-            />
-            <IconButton icon={<Icon type="more" />} />
+            {config.features.isSharingEnabled && (
+              <IconButton
+                icon={<Icon type="share" />}
+                onClick={handleOpenModal}
+              />
+            )}
+            {/* <IconButton icon={<Icon type="more" />} /> */}
           </div>
         </div>
         <div className="mt-3">

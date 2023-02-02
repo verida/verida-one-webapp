@@ -1,6 +1,7 @@
 import { Client } from "@verida/client-ts";
+import { DatabasePermissionOptionsEnum } from "@verida/types";
 import { config } from "lib/config";
-import { DID_VDA_METHOD } from "lib/constants";
+import { DID_VDA_METHOD, VERIDA_ONE_PROFILE_RECORD_ID } from "lib/constants";
 import { ProfileDataSchema } from "lib/schemas";
 import {
   Collectible,
@@ -49,17 +50,24 @@ export const getProfileData = async (
     veridaClient,
     did,
     config.veridaOneContextName,
-    config.schemasURL.profile
+    config.schemasURL.profile,
+    {
+      permissions: {
+        write: DatabasePermissionOptionsEnum.OWNER,
+        read: DatabasePermissionOptionsEnum.PUBLIC,
+      },
+      readOnly: true,
+    }
   );
 
-  const profiles = await datastore.getMany({}, {});
-  if (profiles?.length > 0) {
-    const profileData = ProfileDataSchema.parse(profiles[0]);
-    // TODO: Handle errors on parse? Use safeParse?
-    return profileData;
-  }
-
-  throw new Error("No profile found");
+  const profileRecord = (await datastore.get(
+    VERIDA_ONE_PROFILE_RECORD_ID,
+    {}
+  )) as ProfileData;
+  return ProfileDataSchema.parse(profileRecord);
+  // TODO: Try catch errors and identity the type of error to handle it specifically
+  // For the moment, there is no specific handling of the errors, so there is no point of catching and identifying them.
+  // Later the best way will likely be to wrap them in app-specific Errors, such as new ProfileNotFoundError(), or new ProfileNotValidError().
 };
 
 export const getCollectibles = async (walletAddresses: WalletAddress[]) => {

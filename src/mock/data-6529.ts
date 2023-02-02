@@ -1,7 +1,13 @@
 // Temporary data for development purpose
 
-import { Chains, SocialMedia } from "lib/constants";
-import { Badge, Collectible, IdentityInfo, ProfileData } from "lib/types";
+import { PlatformLinkCategories, SocialMedia } from "lib/constants";
+import {
+  Badge,
+  Chains,
+  Collectible,
+  IdentityInfo,
+  ProfileData,
+} from "lib/types";
 import avatarImage from "./images/6529/avatar-6529.jpg";
 import nftFidenza313Image from "./images/6529/nft-fidenza-313.png";
 import nftFidenza119Image from "./images/6529/nft-fidenza-119.png";
@@ -53,7 +59,7 @@ export const profileData: ProfileData = {
   ],
   platformLinks: [
     {
-      category: "socialMedia",
+      category: PlatformLinkCategories.SOCIAL,
       platform: SocialMedia.TWITTER,
       accountId: "punk6529",
       url: "https://twitter.com/punk6529",
@@ -64,7 +70,7 @@ export const profileData: ProfileData = {
       order: 1,
     },
     {
-      category: "socialMedia",
+      category: PlatformLinkCategories.SOCIAL,
       platform: SocialMedia.DISCORD,
       accountId: "om",
       url: "https://discord.com/invite/join-om",
