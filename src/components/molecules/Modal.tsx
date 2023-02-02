@@ -42,13 +42,14 @@ export const Modal: React.FunctionComponent<ModalProps> = ({
 
   return (
     <PortalWrapper>
-      <div className="fixed inset-0 z-[100] flex min-h-full w-full  flex-col items-center justify-center bg-background/80 backdrop-blur-[10px]">
+      <div className="fixed inset-0 z-50 flex min-h-full w-full bg-background/80 backdrop-blur-[10px]" />
+      <div className="fixed bottom-0 z-50 mx-auto w-full md:inset-0 md:flex md:max-w-2xl md:items-center md:justify-center">
         <div
-          aria-labelledby={title}
           role="dialog"
           id={modalId}
           aria-modal="true"
-          className="fixed bottom-0 w-full rounded-tl-3xl rounded-tr-3xl border border-solid border-gray-dark bg-background md:relative md:max-w-2xl md:rounded-3xl"
+          aria-labelledby={title}
+          className="rounded-tl-3xl rounded-tr-3xl border border-solid border-gray-dark bg-background md:rounded-3xl"
         >
           <div className="flex items-center justify-between px-4 pt-6 md:px-8 md:pt-8">
             <div />
