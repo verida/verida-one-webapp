@@ -10,9 +10,9 @@ export enum Chains {
   ETHEREUM_GOERLI = "eip155:5",
   POLYGON = "eip155:137",
   POLYGON_MUMBAI = "eip155:80001",
-  ALGORAND = "algorand:SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9",
-  ALGORAND_TESTNET = "algorand:SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9",
-  NEAR = "near:testnet",
+  ALGORAND = "algorand:wGHE2Pwdvd7S12BL5FaOP20EGYesN73k",
+  ALGORAND_TESTNET = "algorand:SGO1GKSzyE7IEPItTxCByw9x8FmnrCDe",
+  NEAR = "near:mainnet",
   NEAR_TESTNET = "near:testnet",
 }
 
