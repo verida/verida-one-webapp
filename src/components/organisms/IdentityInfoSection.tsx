@@ -14,19 +14,13 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
 ) => {
   const { identityInfo } = props;
   const [openModal, setOpenModal] = useState(false);
-  const [isFallbackProfileShare, setIsFallbackProfileShare] = useState(false);
 
   const handleCloseModal = useCallback(() => {
     setOpenModal(false);
-    setIsFallbackProfileShare(false);
   }, []);
 
   const handleOpenModal = useCallback(() => {
     setOpenModal(true);
-  }, []);
-
-  const handleFallbackProfileSharing = useCallback(() => {
-    setIsFallbackProfileShare(true);
   }, []);
 
   if (identityInfo) {
@@ -61,8 +55,6 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
           open={openModal}
           identityInfo={identityInfo}
           handleCloseModal={handleCloseModal}
-          isFallbackProfileShare={isFallbackProfileShare}
-          handleFallbackProfileSharing={handleFallbackProfileSharing}
         />
       </section>
     );

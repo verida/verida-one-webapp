@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   PublicProfileSharingList,
@@ -6,22 +6,20 @@ import {
 } from "components/molecules";
 import { IdentityInfo } from "lib/types";
 import { useIntl } from "react-intl";
+import { useCallback } from "react";
 
 type ShareModalProps = {
   identityInfo: IdentityInfo;
   open: boolean;
   handleCloseModal: () => void;
-  isFallbackProfileShare: boolean;
-  handleFallbackProfileSharing: () => void;
 };
 
 export const ShareModal: React.FunctionComponent<ShareModalProps> = ({
   open,
   identityInfo,
   handleCloseModal,
-  isFallbackProfileShare,
-  handleFallbackProfileSharing,
 }) => {
+  const [isFallbackProfileShare, setIsFallbackProfileShare] = useState(false);
   const i18n = useIntl();
 
   const shareModalTitle = i18n.formatMessage({
@@ -30,22 +28,29 @@ export const ShareModal: React.FunctionComponent<ShareModalProps> = ({
     description: "Title for the share modal",
   });
 
+  const handleFallbackProfileSharing = useCallback(() => {
+    setIsFallbackProfileShare(true);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setIsFallbackProfileShare(false);
+    handleCloseModal();
+  }, [handleCloseModal]);
+
   return (
-    <div>
-      <Modal
-        open={open}
-        title={isFallbackProfileShare ? shareModalTitle : identityInfo.name}
-        handleClose={handleCloseModal}
-      >
-        {isFallbackProfileShare ? (
-          <PublicProfileSharingList identityInfo={identityInfo} />
-        ) : (
-          <SharePublicProfile
-            identityInfo={identityInfo}
-            handleFallbackProfileSharing={handleFallbackProfileSharing}
-          />
-        )}
-      </Modal>
-    </div>
+    <Modal
+      open={open}
+      title={isFallbackProfileShare ? shareModalTitle : identityInfo.name}
+      handleClose={handleClose}
+    >
+      {isFallbackProfileShare ? (
+        <PublicProfileSharingList identityInfo={identityInfo} />
+      ) : (
+        <SharePublicProfile
+          identityInfo={identityInfo}
+          handleFallbackProfileSharing={handleFallbackProfileSharing}
+        />
+      )}
+    </Modal>
   );
 };

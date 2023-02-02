@@ -4,7 +4,7 @@ import { Icon } from "components/atoms";
 import { CopyToClipboardButton } from "./CopyToClipboardButton";
 import { getSocialMediaShareUrl } from "lib/utils";
 import { IdentityInfo } from "lib/types";
-import { SocialMedia, VERIDA_ONE_URL } from "lib/constants";
+import { SocialMedia } from "lib/constants";
 
 type PublicProfileSharingListProps = {
   identityInfo: IdentityInfo;
@@ -14,7 +14,7 @@ export const PublicProfileSharingList: React.FunctionComponent<
 > = ({ identityInfo }) => {
   const i18n = useIntl();
 
-  const socialMediaShareUrl = `${VERIDA_ONE_URL}/${identityInfo.did}`;
+  const socialMediaShareUrl = `${window.origin}/${identityInfo.did}`;
 
   const shareViaTelegramTitle = i18n.formatMessage({
     id: "PublicProfileSharingList.shareViaTelegramTitle",

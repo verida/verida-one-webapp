@@ -1,11 +1,9 @@
 import React, { useCallback } from "react";
 import QRCode from "react-qr-code";
 import { useIntl } from "react-intl";
-import { Icon, IconButton } from "components/atoms";
-import { CopyToClipboardButton } from "./CopyToClipboardButton";
 import { removeURLSubString, shareProfile, truncateDid } from "lib/utils";
-import { VERIDA_NETWORK_EXPLORER_URL, VERIDA_ONE_URL } from "lib/constants";
 import { IdentityInfo } from "lib/types";
+import { SharePublicProfileCard } from "./SharePublicProfileCard";
 
 type SharePublicProfileProps = {
   identityInfo: IdentityInfo;
@@ -16,9 +14,10 @@ export const SharePublicProfile: React.FunctionComponent<
   SharePublicProfileProps
 > = ({ identityInfo, handleFallbackProfileSharing }) => {
   const i18n = useIntl();
+  const veridaOneUrl = window.origin;
 
-  const profileDidUrl = `${VERIDA_NETWORK_EXPLORER_URL}/${identityInfo.did}`;
-  const profileUsernameUrl = `${removeURLSubString(VERIDA_ONE_URL)}/${
+  const profileDidUrl = `${veridaOneUrl}/${identityInfo.did}`;
+  const profileUsernameUrl = `${removeURLSubString(veridaOneUrl)}/${
     identityInfo.username || truncateDid(identityInfo.did)
   }`;
 
@@ -31,7 +30,7 @@ export const SharePublicProfile: React.FunctionComponent<
   const handleShareProfile = useCallback(
     async (info: string) => {
       const response = await shareProfile({
-        url: `${VERIDA_ONE_URL}/${info}`,
+        url: `${veridaOneUrl}/${info}`,
         title: socialMediaShareTitle,
       });
 
@@ -39,19 +38,8 @@ export const SharePublicProfile: React.FunctionComponent<
         handleFallbackProfileSharing();
       }
     },
-    [handleFallbackProfileSharing, socialMediaShareTitle]
+    [handleFallbackProfileSharing, socialMediaShareTitle, veridaOneUrl]
   );
-
-  const identityInfoList = [
-    {
-      value: identityInfo.did,
-      formattedValue: truncateDid(identityInfo.did),
-    },
-    {
-      value: identityInfo.username as string,
-      formattedValue: identityInfo.username as string,
-    },
-  ];
 
   return (
     <div>
@@ -61,29 +49,10 @@ export const SharePublicProfile: React.FunctionComponent<
         </div>
         <span className="mt-1 text-gray-light">{profileUsernameUrl}</span>
       </div>
-      {identityInfoList
-        .filter((item) => item.value)
-        .map((item) => (
-          <div
-            className={`mb-2 rounded-xl bg-gray-dark py-3 px-4`}
-            key={item.value}
-          >
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-semibold">
-                {item.formattedValue}
-              </span>
-              <div className="flex items-center justify-center space-x-3">
-                <CopyToClipboardButton value={item.value} />
-                <IconButton
-                  size="small"
-                  variant="text"
-                  icon={<Icon type="share" />}
-                  onClick={() => void handleShareProfile(item.value)}
-                />
-              </div>
-            </div>
-          </div>
-        ))}
+      <SharePublicProfileCard
+        identityInfo={identityInfo}
+        handleShareProfile={handleShareProfile}
+      />
     </div>
   );
 };

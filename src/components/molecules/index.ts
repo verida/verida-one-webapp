@@ -21,3 +21,4 @@ export * from "./WalletAddressCard";
 export * from "./PortalWrapper";
 export * from "./SharePublicProfile";
 export * from "./PublicProfileSharingList";
+export * from "./SharePublicProfileCard";
