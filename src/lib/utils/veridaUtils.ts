@@ -6,7 +6,6 @@ import { config } from "lib/config";
 import { ResolvedIdentity } from "lib/types";
 
 /**
- * /**
  * Resolve an identity by returning the Verida DID of a username, or itself if already a Verida DID.
  * Throw an Error if identity is an unsupported DID or if the username cannot be resolved (not found).
  *
@@ -84,5 +83,6 @@ export const getExternalDatastore = async (
   datastoreConfig: DatastoreOpenConfig = {}
 ) => {
   const context = await client.openExternalContext(contextName, did);
-  return await context.openDatastore(schemaUri, datastoreConfig);
+  return await context.openExternalDatastore(schemaUri, did, datastoreConfig);
+  // TODO: catch error and return a dedicated error (context not found, ...)
 };

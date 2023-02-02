@@ -1,7 +1,7 @@
 import React from "react";
 import { Chip } from "components/atoms";
-import { Chains } from "lib/constants";
 import { getChainLogo } from "lib/utils";
+import { Chains } from "lib/types";
 
 type AssetPriceChipVariant = "compact" | "standard";
 

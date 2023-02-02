@@ -1,4 +1,5 @@
 export * from "./chains";
+export * from "./profile";
 export * from "./socialMedia";
 export * from "./tailwind";
 export * from "./url";
@@ -18,4 +19,8 @@ export const MAX_ASSETS_IN_FEATURED_SECTION = 4;
 /** Max number of links displayed in the Featured section of the profile */
 export const MAX_LINKS_IN_FEATURED_SECTION = 2;
 
+/** Verida DID method */
 export const DID_VDA_METHOD = "did:vda";
+
+/** Id of the default Verida One record in the "profiles" datastore */
+export const VERIDA_ONE_PROFILE_RECORD_ID = "public";

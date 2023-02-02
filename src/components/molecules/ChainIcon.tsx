@@ -1,7 +1,7 @@
 import React from "react";
 import { ChainIconContainer, Icon } from "components/atoms";
 import { getChainLogo } from "lib/utils";
-import { Chains } from "lib/constants";
+import { Chains } from "lib/types";
 
 type ChainIconProps = {
   chain: Chains;
