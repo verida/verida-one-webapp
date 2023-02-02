@@ -38,7 +38,7 @@ export const getSocialMediaShareUrl = (
     case SocialMedia.WHATSAPP:
       return `${WHATSAPP_URL}/send?text=${title}${url}`;
     case SocialMedia.EMAIL:
-      return `${EMAIL_URL}/mail/u/0/?fs=1&tf=cm&source=mailto&su=${title}&body=${url}`;
+      return `${EMAIL_URL}&subject=${title}&body=${url}`;
     default:
       throw new Error("Social Media not supported");
   }
