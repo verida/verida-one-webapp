@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useId } from "react";
 import { Icon, IconButton } from "components/atoms";
 import { PortalWrapper } from "./PortalWrapper";
 import { useEffect } from "react";
@@ -6,7 +6,7 @@ import { useEffect } from "react";
 type ModalProps = {
   title?: string;
   open: boolean;
-  handleClose: () => void;
+  onClose: () => void;
   children: React.ReactNode;
 };
 
@@ -17,17 +17,19 @@ export const Modal: React.FunctionComponent<ModalProps> = ({
   children,
   title,
   open,
-  handleClose,
-  ...otherProps
+  onClose,
 }) => {
+  const labelId = useId();
+
   const handleCloseOnEscapeKey = useCallback(
     (event: KeyboardEvent) => {
       if (event.key === KEY_NAME_ESC) {
-        handleClose();
+        onClose();
       }
     },
-    [handleClose]
+    [onClose]
   );
+
   useEffect(() => {
     document.body.addEventListener(KEY_EVENT_TYPE, handleCloseOnEscapeKey);
     return () => {
@@ -41,31 +43,30 @@ export const Modal: React.FunctionComponent<ModalProps> = ({
 
   return (
     <PortalWrapper>
-      <div className="fixed inset-0 z-50 flex min-h-full w-full bg-background/80 backdrop-blur-[10px]" />
       <div
-        className="relative"
-        aria-labelledby={title}
+        className="fixed inset-0 z-50 bg-background/80 backdrop-blur-[10px]"
+        onClick={onClose}
+      />
+      <div
+        className="fixed bottom-0 z-50 w-full rounded-t-3xl border border-solid border-gray-dark bg-background sm:bottom-auto sm:top-1/2 sm:left-1/2 sm:max-w-2xl sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-b-3xl"
+        aria-labelledby={labelId}
         role="dialog"
         aria-modal="true"
       >
-        <div className="fixed inset-0 z-50 overflow-y-auto">
-          <div className="z-50 flex min-h-full w-full items-end justify-center text-center sm:items-center sm:p-0">
-            <div className="relative w-full  overflow-hidden rounded-lg rounded-tl-3xl rounded-tr-3xl border border-solid border-gray-dark bg-background text-left shadow-xl transition-all sm:my-8 sm:max-w-lg md:rounded-3xl">
-              <div className="flex items-center justify-between px-4 pt-6 md:px-8 md:pt-8">
-                <div />
-                <span className="text-lg font-semibold leading-5">{title}</span>
-                <IconButton
-                  size="small"
-                  variant="text"
-                  onClick={handleClose}
-                  icon={<Icon type="close" size={14} />}
-                />
-              </div>
-              <div className="flex flex-col justify-center p-4 md:p-8">
-                {children}
-              </div>
-            </div>
+        <div className="relative overflow-hidden p-4 pt-6 sm:p-8">
+          <div className="mb-8 flex items-center justify-between sm:mb-10">
+            <div className="w-5" />
+            <h1 className="text-lg font-semibold leading-5" id={labelId}>
+              {title}
+            </h1>
+            <IconButton
+              size="no-margin"
+              variant="text"
+              onClick={onClose}
+              icon={<Icon type="close" size={20} />}
+            />
           </div>
+          <div>{children}</div>
         </div>
       </div>
     </PortalWrapper>

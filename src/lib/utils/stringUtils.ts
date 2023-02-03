@@ -15,13 +15,3 @@ export const truncateDid = (did: string, idLength = 8): string => {
 
   return `${splittedDid.join(":")}...`;
 };
-
-/**
- * helper function to remove url substring (https://www.).
- * @param url
- * @returns {string}
- */
-
-export const removeURLSubString = (url: string): string => {
-  return url.replace("https://www.", "");
-};

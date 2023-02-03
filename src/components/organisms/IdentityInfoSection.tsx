@@ -14,14 +14,14 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
   props
 ) => {
   const { identityInfo } = props;
-  const [openModal, setOpenModal] = useState(false);
+  const [openShareModal, setOpenShareModal] = useState(false);
 
-  const handleCloseModal = useCallback(() => {
-    setOpenModal(false);
+  const handleCloseShareModal = useCallback(() => {
+    setOpenShareModal(false);
   }, []);
 
-  const handleOpenModal = useCallback(() => {
-    setOpenModal(true);
+  const handleOpenShareModal = useCallback(() => {
+    setOpenShareModal(true);
   }, []);
 
   if (identityInfo) {
@@ -39,10 +39,17 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
           />
           <div className="flex items-center justify-between space-x-3">
             {config.features.isSharingEnabled && (
-              <IconButton
-                icon={<Icon type="share" />}
-                onClick={handleOpenModal}
-              />
+              <>
+                <IconButton
+                  icon={<Icon type="share" />}
+                  onClick={handleOpenShareModal}
+                />
+                <ShareModal
+                  identityInfo={identityInfo}
+                  open={openShareModal}
+                  onClose={handleCloseShareModal}
+                />
+              </>
             )}
             {/* <IconButton icon={<Icon type="more" />} /> */}
           </div>
@@ -54,11 +61,6 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
         {identityInfo.description && (
           <p className="mt-3">{identityInfo.description}</p>
         )}
-        <ShareModal
-          open={openModal}
-          identityInfo={identityInfo}
-          handleCloseModal={handleCloseModal}
-        />
       </section>
     );
   }
