@@ -41,17 +41,22 @@ export const getSocialMediaShareUrl = (
   content: string,
   title: string
 ): string => {
+  const encodedTitle = encodeURI(title);
+  const encodedContent = encodeURI(content);
+
+  const combinedText = `${encodedTitle}%0A%0A${encodedContent}`;
+
   switch (socialMedia) {
     case SocialMedia.TWITTER:
-      return `${TWITTER_URL}/share?url=${content}&text=${title}`;
+      return `${TWITTER_URL}/intent/tweet?text=${combinedText}`;
     case SocialMedia.FACEBOOK:
-      return `${FACEBOOK_URL}/sharer.php?u=${content}&t=${title}`;
+      return `${FACEBOOK_URL}/sharer/sharer.php?u=${encodedContent}&t=${encodedTitle}`;
     case SocialMedia.TELEGRAM:
-      return `${TELEGRAM_URL}/share/?url=${content}&text=${title}`;
+      return `${TELEGRAM_URL}/share/?url=${encodedContent}&text=${encodedTitle}`;
     case SocialMedia.WHATSAPP:
-      return `${WHATSAPP_URL}/send?text=${title}${content}`;
+      return `${WHATSAPP_URL}/send?phone=&text=${combinedText}`;
     case SocialMedia.EMAIL:
-      return `${EMAIL_URL}&subject=${title}&body=${content}`;
+      return `${EMAIL_URL}?to=&subject=${encodedTitle}&body=${encodedContent}`;
     default:
       throw new Error("Social Media not supported");
   }

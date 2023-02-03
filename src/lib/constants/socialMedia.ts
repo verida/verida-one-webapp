@@ -17,7 +17,7 @@ export const socialMediaLabels = {
 };
 
 export const TELEGRAM_URL = "https://telegram.me";
-export const WHATSAPP_URL = "https://web.whatsapp.com";
+export const WHATSAPP_URL = "https://api.whatsapp.com";
 export const TWITTER_URL = "https://twitter.com";
 export const FACEBOOK_URL = "https://facebook.com";
 export const EMAIL_URL = "mailto:";
