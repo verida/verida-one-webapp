@@ -9,6 +9,7 @@ type PageHeaderProps = {
 
 export const PageHeader: React.FunctionComponent<PageHeaderProps> = (props) => {
   const { badgeValue, title, onBackClick } = props;
+
   return (
     <header className="mb-4 flex items-center justify-between">
       <IconButton
@@ -20,7 +21,7 @@ export const PageHeader: React.FunctionComponent<PageHeaderProps> = (props) => {
       {(title || badgeValue) && (
         <div className="flex items-center space-x-1">
           {title && <h2 className={`text-xl font-bold`}>{title}</h2>}
-          {badgeValue && <Badge value={badgeValue} />}
+          {badgeValue !== undefined && <Badge value={badgeValue} />}
         </div>
       )}
       <div className="w-8" />

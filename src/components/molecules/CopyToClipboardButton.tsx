@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useState } from "react";
 
 type CopyToClipboardButtonProps = {
   value: string;
-  iconSize?: number;
+  iconSize?: number | string;
 } & React.ComponentPropsWithRef<"div">;
 
 export const CopyToClipboardButton: React.FunctionComponent<

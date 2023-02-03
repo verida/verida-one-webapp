@@ -1,78 +1,87 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useIntl } from "react-intl";
 import {
+  BadgesSection,
   CollectiblesSection,
   CustomLinksSection,
   FeaturedSection,
-  ProfileInfoSection,
+  IdentityInfoSection,
   SocialMediaSection,
   WalletAddressesSection,
 } from "components/organisms";
-import {
-  getCollectibles,
-  getFeaturedCollectibles,
-  getFeaturedLinks,
-  getLinks,
-  getProfileInfo,
-  getSocialMediaLinks,
-  getWalletAddresses,
-} from "lib/utils";
-import {
-  Collectible,
-  CustomLink,
-  ProfileInfo,
-  SocialMediaLink,
-  WalletAddress,
-} from "lib/types";
+import { useWholeProfile } from "lib/hooks";
+import { NoProfileFoundView } from "./NoProfileFoundView";
 import { useParams } from "react-router-dom";
 
 export const ProfileView: React.FC = () => {
-  const [profileInfo, setProfileInfo] = useState<ProfileInfo>({ name: "" });
-  const [featuredCollectibles, setFeaturedCollectibles] = useState<
-    Collectible[]
-  >([]);
-  const [featuredLinks, setFeaturedLinks] = useState<CustomLink[]>([]);
-  const [socialMediaLinks, setSocialMediaLinks] = useState<SocialMediaLink[]>(
-    []
-  );
-  const [collectibles, setCollectibles] = useState<Collectible[]>([]);
-  const [customLinks, setCustomLinks] = useState<CustomLink[]>([]);
-  const [walletAddresses, setWalletAddresses] = useState<WalletAddress[]>([]);
-
+  const i18n = useIntl();
   const { identity } = useParams();
 
-  useEffect(() => {
-    const getData = async () => {
-      setProfileInfo(await getProfileInfo(identity));
-      setFeaturedCollectibles(await getFeaturedCollectibles(identity));
-      setFeaturedLinks(await getFeaturedLinks(identity));
-      setSocialMediaLinks(await getSocialMediaLinks(identity));
-      setCollectibles(await getCollectibles(identity));
-      setCustomLinks(await getLinks(identity));
-      setWalletAddresses(await getWalletAddresses(identity));
-    };
-    void getData();
-  }, [identity]);
+  const {
+    identityInfo,
+    isLoadingIdentityInfo,
+    isErrorIdentityInfo,
+    featuredLinks,
+    featuredCollectibles,
+    customLinks,
+    socialMediaLinks,
+    walletAddresses,
+    hasProfileData,
+    collectibles,
+    badges,
+  } = useWholeProfile(identity);
 
-  return (
-    <div>
-      <div className="mb-7">
-        <ProfileInfoSection profileInfo={profileInfo} />
-      </div>
-      <div className="space-y-10">
-        <FeaturedSection
-          collectibles={featuredCollectibles}
-          links={featuredLinks}
-        />
-        <SocialMediaSection socialMediaLinks={socialMediaLinks} />
-        <CollectiblesSection collectibles={collectibles} />
-        {/** FIXME: Find a way to overlap the collectibles list above the padding of the main container */}
-        <CustomLinksSection links={customLinks} />
-        <WalletAddressesSection addresses={walletAddresses} />
-      </div>
-      {/* TODO: Bring back the CTA when removed from the header */}
-      {/* <div className="pt-10 pb-10">
+  const notProfileDataMessage = i18n.formatMessage({
+    id: "ProfileView.notProfileDataMessage",
+    defaultMessage: "This user is not sharing other public information",
+    description:
+      "Message to show the identity has no Verida One profile information",
+  });
+
+  if (identityInfo || isLoadingIdentityInfo) {
+    return (
+      <div>
+        <div className="mb-7">
+          <IdentityInfoSection identityInfo={identityInfo} />
+        </div>
+        {hasProfileData ? (
+          <div className="space-y-10">
+            <FeaturedSection
+              collectibles={featuredCollectibles}
+              links={featuredLinks}
+            />
+            <SocialMediaSection socialMediaLinks={socialMediaLinks} />
+            <CollectiblesSection collectibles={collectibles} />
+            {/** FIXME: Find a way to overlap the collectibles list above the padding of the main container */}
+            <BadgesSection badges={badges} />
+            <CustomLinksSection links={customLinks} />
+            <WalletAddressesSection addresses={walletAddresses} />
+          </div>
+        ) : (
+          <>
+            {!isLoadingIdentityInfo && (
+              <div className="rounded-xl bg-gray p-4 ">
+                <p className="text-center text-sm text-primary/60">
+                  {notProfileDataMessage}
+                </p>
+              </div>
+            )}
+          </>
+        )}
+        {/* TODO: Bring back the CTA when removed from the header */}
+        {/* <div className="pt-10 pb-10">
         <ProfileCallToAction />
       </div> */}
-    </div>
-  );
+      </div>
+    );
+  }
+
+  if (isErrorIdentityInfo) {
+    // TODO: Handle depending on error type
+    return <NoProfileFoundView />;
+  }
+
+  // At this point, there is no data, the data is not being loaded, there is no handled errors.
+  // So, throw an error that will be caught by the closest Error boundary.
+  throw new Error("Something went wrong");
 };

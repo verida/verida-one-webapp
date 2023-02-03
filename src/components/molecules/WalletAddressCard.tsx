@@ -14,19 +14,38 @@ export const WalletAddressCard: React.FunctionComponent<
 > = (props) => {
   const { address, ...otherProps } = props;
 
+  const mainInfo = address.label || address.address;
+  const secondaryInfo = address.label ? address.address : undefined;
+
   const explorerUrl = getChainExplorerUrlForAddress(
-    address.chain,
+    address.chainId,
     address.address
   );
 
+  // TODO: Consider verifying the proof rather than checking it exists.
   return (
     <div {...otherProps}>
       <div
         className={`flex items-center justify-between rounded-xl bg-gray-dark py-2 px-4`}
       >
         <div className="flex min-w-0 items-center space-x-2.5">
-          <ChainIcon chain={address.chain} verified={address.verified} />
-          <span className="truncate font-semibold">{address.address}</span>
+          <ChainIcon
+            chain={address.chainId}
+            verified={!!address.verificationProof?.proof}
+          />
+          <div className="flex min-w-0 flex-col">
+            <span className="truncate font-semibold" title={mainInfo}>
+              {mainInfo}
+            </span>
+            {secondaryInfo && (
+              <span
+                className="truncate font-normal text-primary/60"
+                title={secondaryInfo}
+              >
+                {secondaryInfo}
+              </span>
+            )}
+          </div>
         </div>
         <div className="flex items-center justify-center space-x-3">
           <CopyToClipboardButton value={address.address} />

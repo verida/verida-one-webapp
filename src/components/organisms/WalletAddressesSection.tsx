@@ -13,7 +13,7 @@ export const WalletAddressesSection: React.FC<WalletSectionProps> = (props) => {
 
   const i18n = useIntl();
 
-  if (!addresses || addresses.length === 0) {
+  if (!addresses?.length) {
     return null;
   }
 

@@ -1,36 +1,32 @@
-import { Chains, SocialMedia } from "../constants";
+import {
+  CustomLinkSchema,
+  FeaturedAssetSchema,
+  PlatformLinkSchema,
+  ProfileDataSchema,
+  VerificationProofSchema,
+  WalletAddressSchema,
+} from "lib/schemas";
+import { z } from "zod";
+import { Chains } from "./chains";
 
-export interface VeridaProfile {
-  name: string;
-  avatar?: string;
-  description?: string;
-}
+export type VerificationProof = z.infer<typeof VerificationProofSchema>;
 
-export interface ProfileInfo extends VeridaProfile {
-  veridaName?: string;
-}
+export type CustomLink = z.infer<typeof CustomLinkSchema>;
 
-export interface Link {
-  url: string;
-}
+export type PlatformLink = z.infer<typeof PlatformLinkSchema>;
 
-export interface CustomLink extends Link {
-  label: string;
-}
+export type WalletAddress = z.infer<typeof WalletAddressSchema>;
 
-export interface SocialMediaLink extends Link {
-  platform: SocialMedia;
-  verified?: boolean;
-}
+export type FeaturedAsset = z.infer<typeof FeaturedAssetSchema>;
 
-export interface WalletAddress {
-  address: string;
-  chain: Chains;
-  verified?: boolean;
-}
+export type ProfileData = z.infer<typeof ProfileDataSchema>;
+
+// ================
+
+// TODO: Update Collectible and Badge types following what is returned by the API, when available.
 
 export interface Collectible {
-  chain: Chains;
+  chainId: Chains;
   contractAddress: string;
   tokenId: string;
   collectionLabel: string;
@@ -42,20 +38,15 @@ export interface Collectible {
   floorPrice?: number;
 }
 
-export interface VeridaBadge {
-  chain: Chains;
-  address: string;
+export interface Badge {
+  chainId: Chains;
+  contractAddress: string;
+  tokenId: string;
   collectionLabel: string;
-  itemLabel: string;
+  tokenLabel: string;
+  description?: string;
+  ownerAddress: string;
   media: string;
-}
-
-export interface Profile {
-  profileInfo: ProfileInfo;
-  socialMediaLinks: SocialMediaLink[];
-  featuredLinks: CustomLink[];
-  links: CustomLink[];
-  walletAddresses: WalletAddress[];
-  featuredCollectibles: Collectible[];
-  collectibles: Collectible[];
+  proofLabel: string; // Not sure, but assumed it would be something like "Twitter handle"/"Verida DID"/... in a user-friendly format
+  proofValue: string; // Not sure, but assumed it would be the actual value of the proof
 }
