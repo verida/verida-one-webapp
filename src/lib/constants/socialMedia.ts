@@ -4,8 +4,17 @@ export enum SocialMedia {
   TELEGRAM = "telegram",
   WHATSAPP = "whatsapp",
   FACEBOOK = "facebook",
-  EMAIL = "mail", // Remove from social media types ?
+  EMAIL = "email", // Remove from social media types ?
 }
+
+export const socialMediaLabels = {
+  [SocialMedia.TWITTER]: "Twitter",
+  [SocialMedia.DISCORD]: "Discord",
+  [SocialMedia.TELEGRAM]: "Telegram",
+  [SocialMedia.WHATSAPP]: "Whatsapp",
+  [SocialMedia.FACEBOOK]: "Facebook",
+  [SocialMedia.EMAIL]: "Email", // Remove from social media types ?
+};
 
 export const TELEGRAM_URL = "https://telegram.me";
 export const WHATSAPP_URL = "https://web.whatsapp.com";
