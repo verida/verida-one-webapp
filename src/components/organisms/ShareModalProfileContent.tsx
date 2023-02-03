@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import QRCode from "react-qr-code";
 import { useIntl } from "react-intl";
-import { shareProfile } from "lib/utils";
+import { hasWebShare, shareProfile } from "lib/utils";
 import { IdentityInfo } from "lib/types";
 import { ShareInfoCard } from "components/molecules";
 
@@ -43,11 +43,11 @@ export const ShareModalProfileContent: React.FunctionComponent<
 
   const handleClickShare = useCallback(
     async (data: ShareData) => {
-      const success = await shareProfile(data);
-
-      if (!success) {
-        handleFallbackSharing(data);
+      if (!hasWebShare()) {
+        return handleFallbackSharing(data);
       }
+
+      await shareProfile(data);
     },
     [handleFallbackSharing]
   );
