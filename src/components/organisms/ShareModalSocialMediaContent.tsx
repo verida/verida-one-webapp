@@ -44,7 +44,7 @@ export const ShareModalSocialMediaContent: React.FunctionComponent<
   return (
     <ul className="flex flex-col  space-y-2">
       {platforms.map((platform) => (
-        <li className="py-2 px-2" key={platform}>
+        <li className="p-2" key={platform}>
           <a
             className="flex items-center hover:text-primary/60"
             target="_blank"
@@ -64,7 +64,7 @@ export const ShareModalSocialMediaContent: React.FunctionComponent<
           </a>
         </li>
       ))}
-      <li className="py-2 px-2">
+      <li className="p-2">
         <div className="flex items-center">
           <CopyToClipboardButton value={contentToShare} size="no-margin" />
           <span className="ml-4 font-semibold">{copyContentLabel}</span>
