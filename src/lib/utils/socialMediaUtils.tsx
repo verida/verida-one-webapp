@@ -3,6 +3,7 @@ import { Icon } from "components/atoms";
 import {
   EMAIL_URL,
   FACEBOOK_URL,
+  LINKEDIN_URL,
   SocialMedia,
   socialMediaLabels,
   TELEGRAM_URL,
@@ -31,6 +32,8 @@ export const getSocialMediaLogo = (
       return <Icon type="social-twitter" size={size} />;
     case SocialMedia.WHATSAPP:
       return <Icon type="social-whatsapp" size={size} />;
+    case SocialMedia.LINKEDIN:
+      return <Icon type="social-linkedin" size={size} />;
     default:
       throw new Error("Social Media not supported");
   }
@@ -43,7 +46,6 @@ export const getSocialMediaShareUrl = (
 ): string => {
   const encodedTitle = encodeURI(title);
   const encodedContent = encodeURI(content);
-
   const combinedText = `${encodedTitle}%0A%0A${encodedContent}`;
 
   switch (socialMedia) {
@@ -57,6 +59,8 @@ export const getSocialMediaShareUrl = (
       return `${WHATSAPP_URL}/send?phone=&text=${combinedText}`;
     case SocialMedia.EMAIL:
       return `${EMAIL_URL}?to=&subject=${encodedTitle}&body=${encodedContent}`;
+    case SocialMedia.LINKEDIN:
+      return `${LINKEDIN_URL}/sharing/share-offsite/?url=${encodedContent}`;
     default:
       throw new Error("Social Media not supported");
   }
