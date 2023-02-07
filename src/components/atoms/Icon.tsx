@@ -14,9 +14,10 @@ import {
 } from "@icon-park/react";
 import { ReactComponent as Share } from "assets/icons/share.svg";
 import { ReactComponent as Outside } from "assets/icons/outside.svg";
-import { ReactComponent as Messenger } from "assets/icons/messenger.svg";
-import { ReactComponent as Whatsapp } from "assets/icons/whatsapp.svg";
-import { ReactComponent as Mail } from "assets/icons/mail.svg";
+import { ReactComponent as Messenger } from "assets/logos/socialMedia/messenger.svg";
+import { ReactComponent as Whatsapp } from "assets/logos/socialMedia/whatsapp.svg";
+import { ReactComponent as LinkedIn } from "assets/logos/socialMedia/linkedin.svg";
+import { ReactComponent as Mail } from "assets/logos/socialMedia/mail.svg";
 import { ReactComponent as VeridaTick } from "assets/icons/verida_tick.svg";
 import { ReactComponent as Algorand } from "assets/logos/chains/algorand.svg";
 import { ReactComponent as Ethereum } from "assets/logos/chains/ethereum.svg";
@@ -45,7 +46,8 @@ type SocialMediaIconType =
   | "social-telegram"
   | "social-whatsapp"
   | "social-email"
-  | "social-messenger";
+  | "social-messenger"
+  | "social-linkedin";
 type ChainIconType =
   | "chain-algorand"
   | "chain-ethereum"
@@ -146,10 +148,17 @@ export const Icon: React.FunctionComponent<IconProps> = (props) => {
           <Mail height={size} width={size} />
         </IconContainer>
       );
+    case "social-linkedin":
+      return (
+        <IconContainer {...otherProps}>
+          <LinkedIn height={size} width={size} />
+        </IconContainer>
+      );
     case "social-twitter":
       return <Twitter size={size} {...otherProps} />;
     case "social-telegram":
       return <Telegram size={size} {...otherProps} />;
+
     default:
       throw new Error("A supported type must be defined for the icon");
   }
