@@ -42,9 +42,9 @@ export const ShareModalSocialMediaContent: React.FunctionComponent<
   ];
 
   return (
-    <ul className="flex flex-col  space-y-2">
+    <ul className="flex flex-col space-y-2">
       {platforms.map((platform) => (
-        <li className="p-2" key={platform}>
+        <li className="py-2.5 px-2" key={platform}>
           <a
             className="flex items-center hover:text-primary/60"
             target="_blank"
@@ -55,7 +55,7 @@ export const ShareModalSocialMediaContent: React.FunctionComponent<
               contentTitle
             )}
           >
-            <span className="mb-1">{getSocialMediaLogo(platform)}</span>
+            {getSocialMediaLogo(platform)}
             <span className="ml-4 font-semibold">
               {i18n.formatMessage(socialMediaActionLabel, {
                 platformLabel: getSocialMediaLabel(platform),
@@ -64,7 +64,7 @@ export const ShareModalSocialMediaContent: React.FunctionComponent<
           </a>
         </li>
       ))}
-      <li className="p-2">
+      <li className="py-2.5 px-2">
         <div className="flex items-center">
           <CopyToClipboardButton value={contentToShare} size="no-margin" />
           <span className="ml-4 font-semibold">{copyContentLabel}</span>
