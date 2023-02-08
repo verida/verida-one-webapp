@@ -33,11 +33,13 @@ export const ShareModalSocialMediaContent: React.FunctionComponent<
     description: "Label of the action to copy the content to the clipboard",
   });
 
+  // TODO: Hanlde social platform constraint when sharing (url required, etc.)
   const platforms = [
     SocialMedia.TELEGRAM,
+    // SocialMedia.FACEBOOK, // Only accept URL
     SocialMedia.TWITTER,
     SocialMedia.WHATSAPP,
-    SocialMedia.LINKEDIN,
+    // SocialMedia.LINKEDIN, // Only accept URL
     SocialMedia.EMAIL,
   ];
 
@@ -66,6 +68,7 @@ export const ShareModalSocialMediaContent: React.FunctionComponent<
       ))}
       <li className="py-2.5 px-2">
         <div className="flex items-center">
+          {/* TODO: Update the copy to clipboard to be consistent with the others share options, ie: click on the whole link, not just the button */}
           <CopyToClipboardButton value={contentToShare} size="no-margin" />
           <span className="ml-4 font-semibold">{copyContentLabel}</span>
         </div>
