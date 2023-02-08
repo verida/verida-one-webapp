@@ -159,17 +159,9 @@
     "defaultMessage": "Create your profile",
     "description": "Label of the CTA button in the Header to create a profile"
   },
-  "Header.logoAlt": {
-    "defaultMessage": "Verida One Logo",
-    "description": "Alternate text for the logo image"
-  },
   "HomeView.ComingSoon": {
     "defaultMessage": "Coming Soon",
     "description": "Message stating that the app will be available soon"
-  },
-  "HomeView.LogoAlt": {
-    "defaultMessage": "Verida One Logo",
-    "description": "Alternate text for the logo image"
   },
   "NoProfileFoundView.redirectCardMessage": {
     "defaultMessage": "The profile you're looking for doesn't exist",
@@ -190,6 +182,26 @@
   "ProfileView.notProfileDataMessage": {
     "defaultMessage": "This user is not sharing other public information",
     "description": "Message to show the identity has no Verida One profile information"
+  },
+  "ShareModal.shareModalTitle": {
+    "defaultMessage": "Share",
+    "description": "Title for the share modal"
+  },
+  "ShareModalProfileContent.didShareTitle": {
+    "defaultMessage": "Here is my Verida DID",
+    "description": "Title used in the native sharing function for the DID"
+  },
+  "ShareModalProfileContent.profileUrlShareTitle": {
+    "defaultMessage": "Checkout my Verida One profile",
+    "description": "Title used in the native sharing function for the profile URL"
+  },
+  "ShareModalSocialMediaContent.copyContentLabel": {
+    "defaultMessage": "Copy to clipboard",
+    "description": "Label of the action to copy the content to the clipboard"
+  },
+  "ShareModalSocialMediaContent.socialMediaActionLabel": {
+    "defaultMessage": "Share via {platformLabel}",
+    "description": "Label of the action to share content via a certain platform"
   },
   "SocialMediaSection.sectionTitle": {
     "defaultMessage": "Socials",

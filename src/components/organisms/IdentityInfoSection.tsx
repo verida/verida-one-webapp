@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { IconButton, Icon, Avatar, SkeletonBase } from "components/atoms";
 import { IdentityInfo } from "lib/types";
 import { truncateDid } from "lib/utils";
+import { ShareModal } from "./ShareModal";
 import { config } from "lib/config";
 
 type IdentityInfoSectionProps = {
@@ -13,6 +14,15 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
   props
 ) => {
   const { identityInfo } = props;
+  const [openShareModal, setOpenShareModal] = useState(false);
+
+  const handleCloseShareModal = useCallback(() => {
+    setOpenShareModal(false);
+  }, []);
+
+  const handleOpenShareModal = useCallback(() => {
+    setOpenShareModal(true);
+  }, []);
 
   if (identityInfo) {
     const displayedId = identityInfo.username
@@ -29,7 +39,17 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
           />
           <div className="flex items-center justify-between space-x-3">
             {config.features.isSharingEnabled && (
-              <IconButton icon={<Icon type="share" />} />
+              <>
+                <IconButton
+                  icon={<Icon type="share" />}
+                  onClick={handleOpenShareModal}
+                />
+                <ShareModal
+                  identityInfo={identityInfo}
+                  open={openShareModal}
+                  onClose={handleCloseShareModal}
+                />
+              </>
             )}
             {/* <IconButton icon={<Icon type="more" />} /> */}
           </div>

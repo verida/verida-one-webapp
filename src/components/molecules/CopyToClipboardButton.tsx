@@ -6,12 +6,13 @@ import React, { useCallback, useEffect, useState } from "react";
 type CopyToClipboardButtonProps = {
   value: string;
   iconSize?: number | string;
-} & React.ComponentPropsWithRef<"div">;
+} & React.ComponentPropsWithRef<"div"> &
+  Pick<React.ComponentPropsWithRef<typeof IconButton>, "size">;
 
 export const CopyToClipboardButton: React.FunctionComponent<
   CopyToClipboardButtonProps
 > = (props) => {
-  const { value, iconSize, ...divProps } = props;
+  const { value, iconSize, size = "small", ...divProps } = props;
 
   const [copied, setCopied] = useState(false);
 
@@ -44,13 +45,13 @@ export const CopyToClipboardButton: React.FunctionComponent<
     <div {...divProps}>
       {copied ? (
         <IconButton
-          size="small"
+          size={size}
           variant="text"
           icon={<Icon type="check" size={iconSize} />}
         />
       ) : (
         <IconButton
-          size="small"
+          size={size}
           variant="text"
           icon={<Icon type="copy" size={iconSize} />}
           onClick={handleCopy}
