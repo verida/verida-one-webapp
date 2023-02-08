@@ -12,7 +12,7 @@ export const socialMediaLabels = {
   [SocialMedia.TWITTER]: "Twitter",
   [SocialMedia.DISCORD]: "Discord",
   [SocialMedia.TELEGRAM]: "Telegram",
-  [SocialMedia.WHATSAPP]: "Whatsapp",
+  [SocialMedia.WHATSAPP]: "WhatsApp",
   [SocialMedia.FACEBOOK]: "Facebook",
   [SocialMedia.LINKEDIN]: "LinkedIn",
   [SocialMedia.EMAIL]: "Email", // Remove from social media types ?
