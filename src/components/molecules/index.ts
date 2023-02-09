@@ -20,3 +20,6 @@ export * from "./RouterErrorHandler";
 export * from "./ShareInfoCard";
 export * from "./SocialMediaLink";
 export * from "./WalletAddressCard";
+export * from "./SearchResultItem";
+export * from "./NoProfileDataCard";
+export * from "./SearchInputField";

@@ -6,3 +6,4 @@ export * from "./useProfileData";
 export * from "./useResolvedIdentity";
 export * from "./useVerida";
 export * from "./useWholeProfile";
+export * from "./useDebounce";

@@ -15,3 +15,5 @@ export * from "./ShareModalProfileContent";
 export * from "./ShareModalSocialMediaContent";
 export * from "./SocialMediaSection";
 export * from "./WalletAddressesSection";
+export * from "./SearchBar";
+export * from "./SearchResult";
