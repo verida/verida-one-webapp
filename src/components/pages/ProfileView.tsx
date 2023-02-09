@@ -12,6 +12,7 @@ import {
 import { useWholeProfile } from "lib/hooks";
 import { NoProfileFoundView } from "./NoProfileFoundView";
 import { useParams } from "react-router-dom";
+import { MetaTags } from "components/atoms";
 
 export const ProfileView: React.FC = () => {
   const i18n = useIntl();
@@ -40,39 +41,42 @@ export const ProfileView: React.FC = () => {
 
   if (identityInfo || isLoadingIdentityInfo) {
     return (
-      <div>
-        <div className="mb-7">
-          <IdentityInfoSection identityInfo={identityInfo} />
-        </div>
-        {hasProfileData ? (
-          <div className="space-y-10">
-            <FeaturedSection
-              collectibles={featuredCollectibles}
-              links={featuredLinks}
-            />
-            <SocialMediaSection socialMediaLinks={socialMediaLinks} />
-            <CollectiblesSection collectibles={collectibles} />
-            {/** FIXME: Find a way to overlap the collectibles list above the padding of the main container */}
-            <BadgesSection badges={badges} />
-            <CustomLinksSection links={customLinks} />
-            <WalletAddressesSection addresses={walletAddresses} />
+      <>
+        <MetaTags title={identityInfo?.name} />
+        <div>
+          <div className="mb-7">
+            <IdentityInfoSection identityInfo={identityInfo} />
           </div>
-        ) : (
-          <>
-            {!isLoadingIdentityInfo && (
-              <div className="rounded-xl bg-gray p-4 ">
-                <p className="text-center text-sm text-primary/60">
-                  {notProfileDataMessage}
-                </p>
-              </div>
-            )}
-          </>
-        )}
-        {/* TODO: Bring back the CTA when removed from the header */}
-        {/* <div className="pt-10 pb-10">
+          {hasProfileData ? (
+            <div className="space-y-10">
+              <FeaturedSection
+                collectibles={featuredCollectibles}
+                links={featuredLinks}
+              />
+              <SocialMediaSection socialMediaLinks={socialMediaLinks} />
+              <CollectiblesSection collectibles={collectibles} />
+              {/** FIXME: Find a way to overlap the collectibles list above the padding of the main container */}
+              <BadgesSection badges={badges} />
+              <CustomLinksSection links={customLinks} />
+              <WalletAddressesSection addresses={walletAddresses} />
+            </div>
+          ) : (
+            <>
+              {!isLoadingIdentityInfo && (
+                <div className="rounded-xl bg-gray p-4 ">
+                  <p className="text-center text-sm text-primary/60">
+                    {notProfileDataMessage}
+                  </p>
+                </div>
+              )}
+            </>
+          )}
+          {/* TODO: Bring back the CTA when removed from the header */}
+          {/* <div className="pt-10 pb-10">
         <ProfileCallToAction />
       </div> */}
-      </div>
+        </div>
+      </>
     );
   }
 
