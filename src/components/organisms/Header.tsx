@@ -47,11 +47,7 @@ export const Header: React.FC = () => {
           </div>
         </Link>
       </h1>
-      {isSearch && (
-        <div className="max-w-screen-sm flex-grow">
-          <SearchBar onCloseSearchBar={handleCloseSearchBar} />
-        </div>
-      )}
+      {isSearch && <SearchBar onCloseSearchBar={handleCloseSearchBar} />}
       <div
         className={`${searchMobileViewVisibility} flex items-center justify-between space-x-3`}
       >

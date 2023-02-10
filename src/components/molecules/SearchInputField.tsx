@@ -26,15 +26,15 @@ export const SearchInputField: React.FunctionComponent<
   });
   return (
     <div {...otherProps}>
-      <div className="flex items-center">
+      <div className="flex items-center bg-background/80 px-3 py-3 backdrop-blur-[10px] md:bg-transparent md:p-0">
         <Icon className="mr-2 md:hidden" type="arrow-left" onClick={onClose} />
-        <div className="gray-dark flex-grow rounded-xl border border-solid border-gray-dark md:bg-white/10">
-          <div className="bg-inherit flex w-full items-center justify-between py-2.5 px-3">
+        <div className="gray-dark flex-grow  rounded-xl border border-solid border-gray-dark md:bg-white/10">
+          <div className="flex items-center justify-between py-2.5 px-3">
             <Icon type="search" className="mr-2.5 hidden md:block" />
             <input
               type="text"
               onChange={onSearch}
-              className="flex-grow bg-transparent text-sm outline-none disabled:opacity-10"
+              className="flex-grow bg-white/0 text-sm outline-none disabled:opacity-10"
               placeholder={searchInputPlaceholder}
             />
             {identityField && (

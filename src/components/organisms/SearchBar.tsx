@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { SearchResult } from "./SearchResult";
 import { useDebounce, useIdentityInfo } from "lib/hooks";
-import { SearchInputField } from "components/molecules";
+import { PortalWrapper, SearchInputField } from "components/molecules";
 
 type SearchBarProps = {
   onCloseSearchBar: () => void;
@@ -29,18 +29,20 @@ export const SearchBar: React.FunctionComponent<SearchBarProps> = ({
   const handleClearInput = useCallback(() => setIdentityField(undefined), []);
 
   return (
-    <div>
-      <SearchInputField
-        onClose={onClose}
-        onSearch={handleSearch}
-        identityField={identityField}
-        onClearSearchField={handleClearInput}
-      />
+    <PortalWrapper>
+      <div className="fixed inset-0 z-50 w-full sm:left-1/2 sm:top-0 sm:max-w-screen-sm sm:-translate-x-1/2 md:mt-2.5 md:w-2/4">
+        <SearchInputField
+          onClose={onClose}
+          onSearch={handleSearch}
+          identityField={identityField}
+          onClearSearchField={handleClearInput}
+        />
+      </div>
       <SearchResult
         data={data}
         isLoading={isLoading}
         onCloseSearchBar={onClose}
       />
-    </div>
+    </PortalWrapper>
   );
 };
