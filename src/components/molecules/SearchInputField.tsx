@@ -1,4 +1,4 @@
-import { Icon } from "components/atoms";
+import { Icon, IconButton } from "components/atoms";
 import React from "react";
 import { useIntl } from "react-intl";
 
@@ -6,7 +6,7 @@ type SearchInputFieldProps = {
   onClose: () => void;
   onSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClearSearchField: () => void;
-  identityField: string | undefined;
+  identityFieldValue: string | undefined;
 } & React.ComponentPropsWithRef<"div">;
 
 export const SearchInputField: React.FunctionComponent<
@@ -14,7 +14,7 @@ export const SearchInputField: React.FunctionComponent<
 > = ({
   onClose,
   onSearch,
-  identityField,
+  identityFieldValue,
   onClearSearchField,
   ...otherProps
 }) => {
@@ -26,19 +26,31 @@ export const SearchInputField: React.FunctionComponent<
   });
   return (
     <div {...otherProps}>
-      <div className="flex items-center bg-background/80 px-3 py-3 backdrop-blur-[10px] md:bg-transparent md:p-0">
-        <Icon className="mr-2 md:hidden" type="arrow-left" onClick={onClose} />
-        <div className="gray-dark flex-grow  rounded-xl border border-solid border-gray-dark md:bg-white/10">
+      <div className="flex items-center bg-background/80 px-3 py-2.5 backdrop-blur-[10px] sm:bg-background/10 sm:p-0">
+        <IconButton
+          className="mr-2 sm:hidden"
+          size="no-margin"
+          variant="text"
+          icon={<Icon type="arrow-left" />}
+          onClick={onClose}
+        />
+        <div className="gray-dark flex-grow  rounded-xl border border-solid border-gray-dark sm:bg-white/10">
           <div className="flex items-center justify-between py-2.5 px-3">
-            <Icon type="search" className="mr-2.5 hidden md:block" />
+            <Icon type="search" className="mr-2.5 hidden sm:block" />
             <input
               type="text"
               onChange={onSearch}
+              value={identityFieldValue}
               className="flex-grow bg-white/0 text-sm outline-none disabled:opacity-10"
               placeholder={searchInputPlaceholder}
             />
-            {identityField && (
-              <Icon type="close" onClick={onClearSearchField} />
+            {identityFieldValue && (
+              <IconButton
+                size="no-margin"
+                variant="text"
+                icon={<Icon type="close" />}
+                onClick={onClearSearchField}
+              />
             )}
           </div>
         </div>

@@ -6,15 +6,15 @@ type SearchResultItemProps = {
   avatar?: string;
   name?: string;
   did: string;
-  onClickedItem: (arg: string) => void;
+  onClickedItem: (arg?: string) => void;
 } & React.ComponentPropsWithRef<"div">;
 
 export const SearchResultItem: React.FunctionComponent<
   SearchResultItemProps
 > = ({ avatar, name, did, onClickedItem, ...otherProps }) => {
   const handleClickedItem = useCallback(() => {
-    onClickedItem(did);
-  }, [did, onClickedItem]);
+    onClickedItem(name);
+  }, [name, onClickedItem]);
   return (
     <div {...otherProps}>
       <div className="flex cursor-pointer" onClick={handleClickedItem}>

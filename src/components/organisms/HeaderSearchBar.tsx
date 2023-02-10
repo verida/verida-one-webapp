@@ -6,35 +6,37 @@ import { PortalWrapper, SearchInputField } from "components/molecules";
 type HeaderSearchBarProps = {
   onCloseSearchBar: () => void;
 };
-// Delay time in milliseconds to make request to the profile  datastore
+// Delay time in milliseconds to make request to the profile datastore
 const DEBOUNCE_DELAY = 1000;
 export const HeaderSearchBar: React.FunctionComponent<HeaderSearchBarProps> = ({
   onCloseSearchBar,
 }) => {
-  const [identityField, setIdentityField] = useState<string | undefined>(
-    undefined
-  );
-  const IdentityQuery = useDebounce(identityField, DEBOUNCE_DELAY);
-  const { data, isLoading } = useIdentityInfo(IdentityQuery);
+  const [identityFieldValue, setIdentityFieldValue] = useState("");
+  const IdentityQuery = useDebounce<string>(identityFieldValue, DEBOUNCE_DELAY);
+
+  const identityInfoQuery = IdentityQuery !== "" ? IdentityQuery : undefined;
+  const { data, isLoading } = useIdentityInfo(identityInfoQuery);
 
   const onClose = useCallback(() => {
-    setIdentityField(undefined);
+    setIdentityFieldValue("");
     onCloseSearchBar();
   }, [onCloseSearchBar]);
 
   const handleSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setIdentityField(e.target.value);
+    if (e.target.value !== "") {
+      setIdentityFieldValue(e.target.value);
+    }
   }, []);
 
-  const handleClearInput = useCallback(() => setIdentityField(undefined), []);
+  const handleClearInput = useCallback(() => setIdentityFieldValue(""), []);
 
   return (
     <PortalWrapper>
-      <div className="fixed inset-0 z-50 w-full sm:left-1/2 sm:top-0 sm:max-w-screen-sm sm:-translate-x-1/2 md:mt-2.5 md:w-2/4">
+      <div className="fixed inset-0 z-50 w-full sm:left-1/2 sm:top-3 sm:mt-0 sm:w-2/4 sm:max-w-screen-sm sm:-translate-x-1/2">
         <SearchInputField
           onClose={onClose}
           onSearch={handleSearch}
-          identityField={identityField}
+          identityFieldValue={identityFieldValue}
           onClearSearchField={handleClearInput}
         />
       </div>
@@ -42,6 +44,7 @@ export const HeaderSearchBar: React.FunctionComponent<HeaderSearchBarProps> = ({
         data={data}
         isLoading={isLoading}
         onCloseSearchBar={onClose}
+        identityFieldValue={identityFieldValue}
       />
     </PortalWrapper>
   );
