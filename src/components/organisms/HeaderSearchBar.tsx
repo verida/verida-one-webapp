@@ -3,12 +3,12 @@ import { SearchResult } from "./SearchResult";
 import { useDebounce, useIdentityInfo } from "lib/hooks";
 import { PortalWrapper, SearchInputField } from "components/molecules";
 
-type SearchBarProps = {
+type HeaderSearchBarProps = {
   onCloseSearchBar: () => void;
 };
 // Delay time in milliseconds to make request to the profile  datastore
 const DEBOUNCE_DELAY = 1000;
-export const SearchBar: React.FunctionComponent<SearchBarProps> = ({
+export const HeaderSearchBar: React.FunctionComponent<HeaderSearchBarProps> = ({
   onCloseSearchBar,
 }) => {
   const [identityField, setIdentityField] = useState<string | undefined>(

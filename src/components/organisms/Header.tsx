@@ -4,7 +4,7 @@ import { IconButton, Icon, ButtonLink } from "components/atoms";
 import { ReactComponent as VeridaOneLogo } from "assets/images/verida_one_logo.svg";
 import { Link } from "react-router-dom";
 import { config } from "lib/config";
-import { SearchBar } from "./SearchBar";
+import { HeaderSearchBar } from "./HeaderSearchBar";
 
 export const Header: React.FC = () => {
   const i18n = useIntl();
@@ -47,7 +47,7 @@ export const Header: React.FC = () => {
           </div>
         </Link>
       </h1>
-      {isSearch && <SearchBar onCloseSearchBar={handleCloseSearchBar} />}
+      {isSearch && <HeaderSearchBar onCloseSearchBar={handleCloseSearchBar} />}
       <div
         className={`${searchMobileViewVisibility} flex items-center justify-between space-x-3`}
       >
