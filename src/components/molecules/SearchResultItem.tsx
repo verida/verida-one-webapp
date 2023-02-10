@@ -6,6 +6,7 @@ type SearchResultItemProps = {
   avatar?: string;
   name?: string;
   did: string;
+  username?: string;
   onClickedItem: (arg?: string) => void;
 } & React.ComponentPropsWithRef<"div">;
 

@@ -8,13 +8,13 @@ import { HeaderSearchBar } from "./HeaderSearchBar";
 
 export const Header: React.FC = () => {
   const i18n = useIntl();
-  const [isSearch, setIsSearchBarOpen] = useState(false);
+  const [searchBarOpenStatus, setSearchBarOpenStatus] = useState(false);
 
-  const handleOpenSearchBar = useCallback(() => {
-    setIsSearchBarOpen(true);
+  const handleManageSearchBarOpening = useCallback(() => {
+    setSearchBarOpenStatus(true);
   }, []);
-  const handleCloseSearchBar = useCallback(() => {
-    setIsSearchBarOpen(false);
+  const handleManageSearchBarClosing = useCallback(() => {
+    setSearchBarOpenStatus(false);
   }, []);
 
   // TODO: Remove the create your profile CTA when implementing the Connect
@@ -36,7 +36,9 @@ export const Header: React.FC = () => {
   // TODO: Follow the Figma design downsizing the logo and the button internal padding on small viewport (keep current size on large one)
 
   // Classname style to hide the logo and create profile button so that the search bar takes full width on mobile view
-  const searchMobileViewVisibility = isSearch ? `hidden md:block` : "";
+  const searchMobileViewVisibility = searchBarOpenStatus
+    ? `hidden md:block`
+    : "";
 
   return (
     <header className="box-border flex items-center justify-between space-x-2 border-b border-solid border-gray-dark bg-background px-4 py-3 opacity-80 md:px-6">
@@ -47,15 +49,17 @@ export const Header: React.FC = () => {
           </div>
         </Link>
       </h1>
-      {isSearch && <HeaderSearchBar onCloseSearchBar={handleCloseSearchBar} />}
+      {searchBarOpenStatus && (
+        <HeaderSearchBar onCloseSearchBar={handleManageSearchBarClosing} />
+      )}
       <div
         className={`${searchMobileViewVisibility} flex items-center justify-between space-x-3`}
       >
-        {config.features.isSearchEnabled && !isSearch && (
+        {config.features.isSearchEnabled && !searchBarOpenStatus && (
           <IconButton
             size="medium"
             icon={<Icon type="search" />}
-            onClick={handleOpenSearchBar}
+            onClick={handleManageSearchBarOpening}
           />
         )}
         {/* <Button size="medium">{connectButtonLabel}</Button> */}

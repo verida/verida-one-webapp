@@ -45,7 +45,7 @@ export const SearchResult: React.FunctionComponent<SearchResultProps> = ({
       <>
         <div
           onClick={onCloseSearchBar}
-          className="sm:bg-inherit e fixed inset-0 top-[62px] z-50 h-screen bg-background/80 backdrop-blur-[10px] sm:top-16   sm:bg-background/10 sm:backdrop-blur-0"
+          className="sm:bg-inherit e fixed inset-0 top-[62px] z-50 h-screen bg-background/80 backdrop-blur-[10px] sm:top-16 sm:bg-background/10 sm:backdrop-blur-0"
         />
         <div className="fixed top-0 z-50 mt-16 w-full border-t border-solid border-gray-dark sm:left-1/2 sm:top-0 sm:mx-auto sm:w-2/4 sm:max-w-screen-sm sm:-translate-x-1/2 sm:rounded-xl sm:bg-background/80 sm:backdrop-blur-[10px]">
           <div className="relative overflow-hidden p-4">
@@ -57,6 +57,7 @@ export const SearchResult: React.FunctionComponent<SearchResultProps> = ({
                   did={data?.did}
                   name={data?.name}
                   avatar={data?.avatarUri}
+                  username={data?.username}
                   onClickedItem={handleProfileNavigation}
                 />
               </div>
@@ -68,6 +69,8 @@ export const SearchResult: React.FunctionComponent<SearchResultProps> = ({
       </>
     );
   }
+
+  //TODO handle error state
 
   return null;
 };
