@@ -35,13 +35,18 @@ export const Header: React.FC = () => {
   // TODO: Update Tailwind config to allow spacing of 2.75 for the padding bottom
   // TODO: Follow the Figma design downsizing the logo and the button internal padding on small viewport (keep current size on large one)
 
-  // Classname style to hide the logo and create profile button so that the search bar takes full width on mobile view
+  // Classname style to hide (display none) the logo and create profile button so that the search bar takes full width on mobile view
   const searchMobileViewVisibility = searchBarOpenStatus
-    ? `hidden md:block`
+    ? `hidden sm:block`
     : "";
 
+  //Classname to give heaader a fixed hieght because the header search bar has its position as :fixed
+  const fixedHeightForMobileHeader = searchBarOpenStatus ? "h-16" : "";
+
   return (
-    <header className="box-border flex items-center justify-between space-x-2 border-b border-solid border-gray-dark bg-background px-4 py-3 opacity-80 md:px-6">
+    <header
+      className={`${fixedHeightForMobileHeader} box-border flex items-center justify-between space-x-2 border-b border-solid border-gray-dark bg-background/80 px-4 py-3 backdrop-blur-[10px] md:px-6`}
+    >
       <h1 className={searchMobileViewVisibility}>
         <Link to="/">
           <div className="h-10">
@@ -49,8 +54,12 @@ export const Header: React.FC = () => {
           </div>
         </Link>
       </h1>
+      <HeaderSearchBar className="hidden lg:block" />
       {searchBarOpenStatus && (
-        <HeaderSearchBar onCloseSearchBar={handleManageSearchBarClosing} />
+        <HeaderSearchBar
+          className="lg:hidden"
+          onCloseSearchBar={handleManageSearchBarClosing}
+        />
       )}
       <div
         className={`${searchMobileViewVisibility} flex items-center justify-between space-x-3`}
@@ -58,6 +67,7 @@ export const Header: React.FC = () => {
         {config.features.isSearchEnabled && !searchBarOpenStatus && (
           <IconButton
             size="medium"
+            className="lg:hidden"
             icon={<Icon type="search" />}
             onClick={handleManageSearchBarOpening}
           />

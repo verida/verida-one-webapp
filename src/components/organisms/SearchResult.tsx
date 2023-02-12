@@ -6,17 +6,17 @@ import { useNavigate } from "react-router-dom";
 import { SearchResultItem, NoProfileDataCard } from "components/molecules";
 
 type SearchResultProps = {
-  data?: IdentityInfo;
   isLoading: boolean;
+  result: IdentityInfo | undefined;
   identityFieldValue: string;
-  onCloseSearchBar: () => void;
+  onClose: () => void;
 };
 
 export const SearchResult: React.FunctionComponent<SearchResultProps> = ({
-  data,
+  result,
   isLoading,
   identityFieldValue,
-  onCloseSearchBar,
+  onClose,
 }) => {
   const i18n = useIntl();
   const navigate = useNavigate();
@@ -29,35 +29,32 @@ export const SearchResult: React.FunctionComponent<SearchResultProps> = ({
 
   const handleProfileNavigation = useCallback(
     (identity?: string) => {
-      onCloseSearchBar();
+      onClose();
       if (identity) {
         navigate(`/${identity}`);
       }
     },
-    [navigate, onCloseSearchBar]
+    [navigate, onClose]
   );
 
   // check if weather the data is available or loading state is true and identityFieldValue is not an empty string
-  const isSearchInProgress = data || (isLoading && identityFieldValue !== "");
+  const isSearchInProgress = result || (isLoading && identityFieldValue !== "");
 
   if (isSearchInProgress) {
     return (
       <>
-        <div
-          onClick={onCloseSearchBar}
-          className="sm:bg-inherit e fixed inset-0 top-[62px] z-50 h-screen bg-background/80 backdrop-blur-[10px] sm:top-16 sm:bg-background/10 sm:backdrop-blur-0"
-        />
-        <div className="fixed top-0 z-50 mt-16 w-full border-t border-solid border-gray-dark sm:left-1/2 sm:top-0 sm:mx-auto sm:w-2/4 sm:max-w-screen-sm sm:-translate-x-1/2 sm:rounded-xl sm:bg-background/80 sm:backdrop-blur-[10px]">
-          <div className="relative overflow-hidden p-4">
+        <div className="sm:bg-inherit fixed inset-0 top-[62px] h-screen bg-background/80 backdrop-blur-[10px] sm:top-16 sm:bg-background/10 sm:backdrop-blur-0" />
+        <div className="bg-inherit fixed top-0 z-50 mt-16 w-full sm:left-1/2 sm:top-0 sm:mx-auto sm:max-w-screen-sm sm:-translate-x-1/2 sm:px-4">
+          <div className="relative z-50 overflow-hidden p-4 sm:rounded-xl sm:bg-background/80 sm:backdrop-blur-[10px]">
             {isLoading ? (
               <SearchResultSkeleton />
-            ) : data ? (
+            ) : result ? (
               <div className="space-y-6">
                 <SearchResultItem
-                  did={data?.did}
-                  name={data?.name}
-                  avatar={data?.avatarUri}
-                  username={data?.username}
+                  did={result?.did}
+                  name={result?.name}
+                  avatar={result?.avatarUri}
+                  username={result?.username}
                   onClickedItem={handleProfileNavigation}
                 />
               </div>

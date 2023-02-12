@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useIntl } from "react-intl";
 
 type SearchInputFieldProps = {
-  onClose: () => void;
+  onClose?: () => void;
   onSearch: (arg: string) => void;
 } & React.ComponentPropsWithRef<"div">;
 
@@ -25,12 +25,11 @@ export const SearchInputField: React.FunctionComponent<
 
   const clearSearchField = () => {
     setSearchValue("");
-    onSearch("");
   };
 
   return (
     <div {...otherProps}>
-      <div className="flex items-center bg-background/80 px-3 py-2.5 backdrop-blur-[10px] sm:bg-background/10 sm:p-0">
+      <div className="flex items-center px-3 py-2.5 sm:bg-white/0 sm:p-0">
         <IconButton
           variant="text"
           size="no-margin"
@@ -38,7 +37,7 @@ export const SearchInputField: React.FunctionComponent<
           className="mr-2 sm:hidden"
           icon={<Icon type="arrow-left" />}
         />
-        <div className="gray-dark flex-grow  rounded-xl border border-solid border-gray-dark sm:bg-white/10">
+        <div className="gray-dark flex-grow rounded-xl border border-solid border-gray-dark sm:bg-white/10">
           <div className="flex items-center justify-between py-2.5 px-3">
             <Icon type="search" className="mr-2.5 hidden sm:block" />
             <input
