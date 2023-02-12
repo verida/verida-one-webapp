@@ -40,7 +40,7 @@ export const Header: React.FC = () => {
     ? `hidden sm:block`
     : "";
 
-  //Classname to give heaader a fixed hieght because the header search bar has its position as :fixed
+  //Classname to give heaader a fixed hieght when search bar status is "true" because the header search bar has its position as :fixed
   const fixedHeightForMobileHeader = searchBarOpenStatus ? "h-16" : "";
 
   return (
