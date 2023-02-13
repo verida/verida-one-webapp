@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import fs from "fs";
 import { titleRegExp, urlRegExp, defaultTitle, defaultUrl } from "./meta.mjs";
+import { getNameFromIdentity } from "./verida.mjs";
 
 console.debug("Starting server");
 
@@ -23,9 +24,14 @@ app.engine("html", (filePath, options, callback) => {
 app.set("views", path.join(process.cwd(), "build"));
 app.set("view engine", "html");
 
-app.get("/*", function (req, res) {
-  // TODO: Get the identity param from request and fetch information
+app.get("/*", async function (req, res) {
+  let identityName = undefined;
+  const paths = req.path.split("/");
+  // The identity param, if exists, is the second items in the split
+  identityName = await getNameFromIdentity(paths[1]);
+
   res.render("index", {
+    title: identityName ? `${identityName} - ${defaultTitle}` : undefined,
     url: `${req.protocol}://${req.headers.host}${req.originalUrl}`,
   });
 });
