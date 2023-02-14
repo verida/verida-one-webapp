@@ -1,30 +1,31 @@
-import { Icon, IconButton } from "components/atoms";
-import React, { useState } from "react";
+import React from "react";
 import { useIntl } from "react-intl";
+import { Icon, IconButton } from "components/atoms";
 
 type SearchInputFieldProps = {
+  query: string;
+  onQueryUpdate: (newQuery: string) => void;
   onClose?: () => void;
-  onSearch: (arg: string) => void;
 } & React.ComponentPropsWithRef<"div">;
 
 export const SearchInputField: React.FunctionComponent<
   SearchInputFieldProps
-> = ({ onClose, onSearch, ...otherProps }) => {
-  const [searchValue, setSearchValue] = useState("");
+> = (props) => {
+  const { query, onClose, onQueryUpdate, ...otherProps } = props;
   const i18n = useIntl();
+
   const searchInputPlaceholder = i18n.formatMessage({
     id: "SearchInputField.searchInputPlaceholder",
     description: "Placeholder for the search bar input field",
-    defaultMessage: "Search username, public name, DID",
+    defaultMessage: "Search DID",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
-    onSearch(e.target.value);
+    onQueryUpdate(e.target.value);
   };
 
-  const clearSearchField = () => {
-    setSearchValue("");
+  const handleClear = () => {
+    onQueryUpdate("");
   };
 
   return (
@@ -42,19 +43,19 @@ export const SearchInputField: React.FunctionComponent<
             <Icon type="search" className="mr-2.5 hidden sm:block" />
             <input
               type="text"
-              value={searchValue}
+              value={query}
               onChange={handleInputChange}
               placeholder={searchInputPlaceholder}
               className="flex-grow bg-white/0 text-sm outline-none disabled:opacity-10"
             />
-            {searchValue && (
+            {query ? (
               <IconButton
                 variant="text"
                 size="no-margin"
                 icon={<Icon type="close" />}
-                onClick={clearSearchField}
+                onClick={handleClear}
               />
-            )}
+            ) : null}
           </div>
         </div>
       </div>

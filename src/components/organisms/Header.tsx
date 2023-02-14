@@ -13,6 +13,7 @@ export const Header: React.FC = () => {
   const handleManageSearchBarOpening = useCallback(() => {
     setSearchBarOpenStatus(true);
   }, []);
+
   const handleManageSearchBarClosing = useCallback(() => {
     setSearchBarOpenStatus(false);
   }, []);
@@ -58,7 +59,7 @@ export const Header: React.FC = () => {
       {searchBarOpenStatus && (
         <HeaderSearchBar
           className="lg:hidden"
-          onCloseSearchBar={handleManageSearchBarClosing}
+          onClose={handleManageSearchBarClosing}
         />
       )}
       <div

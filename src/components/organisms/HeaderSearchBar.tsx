@@ -1,69 +1,44 @@
-import React, { useCallback, useRef, useEffect, useState } from "react";
+import React, { useCallback } from "react";
 import { SearchResult } from "./SearchResult";
 import { useSearchIdentity } from "lib/hooks";
-import { PortalWrapper, SearchInputField } from "components/molecules";
-import { IdentityInfo } from "lib/types";
+import { SearchInputField } from "components/molecules";
 
 type HeaderSearchBarProps = {
-  onCloseSearchBar?: () => void;
+  onClose?: () => void;
 } & Pick<React.ComponentPropsWithRef<"div">, "className">;
 
-// Delay time in milliseconds to make request to the profile datastore
-const REQUEST_DELAY = 400;
-const EVENT_CLICK = "click";
-
 export const HeaderSearchBar: React.FunctionComponent<HeaderSearchBarProps> = ({
-  onCloseSearchBar,
+  onClose,
   className,
 }) => {
-  const [result, setResult] = useState<IdentityInfo | undefined>(undefined);
-  const resultDivRef = useRef<HTMLDivElement>(null);
-  const { data, isLoading, handleSearch, identityFieldValue } =
-    useSearchIdentity(REQUEST_DELAY);
+  const { query, setQuery, isSearching, results } = useSearchIdentity();
 
-  const onClose = useCallback(() => {
-    if (onCloseSearchBar) {
-      onCloseSearchBar();
+  const handleClose = useCallback(() => {
+    if (onClose) {
+      onClose();
     }
-  }, [onCloseSearchBar]);
-
-  useEffect(() => {
-    setResult(data);
-    const handleCloseResult = (event: MouseEvent) => {
-      if (
-        resultDivRef.current &&
-        resultDivRef.current.contains(event.target as Node)
-      ) {
-        setResult(undefined);
-      }
-    };
-    document.addEventListener(EVENT_CLICK, handleCloseResult);
-    return () => {
-      document.removeEventListener(EVENT_CLICK, handleCloseResult);
-    };
-  }, [data]);
+  }, [onClose]);
 
   const customClass = className || "";
 
   return (
     <>
-      <div>
-        <div
-          className={`${customClass} fixed inset-0 z-50 w-full sm:left-1/2 sm:top-[11.5px] sm:max-w-screen-sm sm:-translate-x-1/2 sm:px-4`}
-        >
-          <SearchInputField onClose={onClose} onSearch={handleSearch} />
-        </div>
+      <div
+        className={`${customClass} fixed inset-0 z-50 w-full sm:left-1/2 sm:top-[11.5px] sm:max-w-screen-sm sm:-translate-x-1/2 sm:px-4`}
+      >
+        <SearchInputField
+          query={query}
+          onQueryUpdate={setQuery}
+          onClose={handleClose}
+        />
       </div>
-      <PortalWrapper>
-        <div ref={resultDivRef}>
-          <SearchResult
-            result={result}
-            onClose={onClose}
-            isLoading={isLoading}
-            identityFieldValue={identityFieldValue}
-          />
-        </div>
-      </PortalWrapper>
+      {query ? (
+        <SearchResult
+          results={results}
+          onClose={handleClose}
+          isSearching={isSearching}
+        />
+      ) : null}
     </>
   );
 };

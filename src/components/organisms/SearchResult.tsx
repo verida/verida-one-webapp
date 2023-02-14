@@ -1,85 +1,91 @@
-import { SkeletonBase } from "components/atoms";
 import { IdentityInfo } from "lib/types";
 import React, { useCallback } from "react";
 import { useIntl } from "react-intl";
 import { useNavigate } from "react-router-dom";
-import { SearchResultItem, NoProfileDataCard } from "components/molecules";
+import {
+  SearchResultItem,
+  NoSearchResultItem,
+  SearchResultItemSkeleton,
+  PortalWrapper,
+} from "components/molecules";
 
 type SearchResultProps = {
-  isLoading: boolean;
-  result: IdentityInfo | undefined;
-  identityFieldValue: string;
+  isSearching: boolean;
+  results?: IdentityInfo[];
   onClose: () => void;
 };
 
-export const SearchResult: React.FunctionComponent<SearchResultProps> = ({
-  result,
-  isLoading,
-  identityFieldValue,
-  onClose,
-}) => {
+export const SearchResult: React.FunctionComponent<SearchResultProps> = (
+  props
+) => {
+  const { results, isSearching, onClose } = props;
+
   const i18n = useIntl();
   const navigate = useNavigate();
-  const noProfileMessage = i18n.formatMessage({
-    id: "SearchResult.noProfileMessage",
+
+  const handleItemClick = useCallback(
+    (identity: string) => {
+      onClose();
+      navigate(`/${identity}`);
+    },
+    [navigate, onClose]
+  );
+
+  const noSearchResultMessage = i18n.formatMessage({
+    id: "SearchResult.noSearchResultMessage",
     defaultMessage: "No profile found",
     description:
       "Message indicating that no profiles were found in the search list",
   });
 
-  const handleProfileNavigation = useCallback(
-    (identity?: string) => {
-      onClose();
-      if (identity) {
-        navigate(`/${identity}`);
-      }
-    },
-    [navigate, onClose]
+  return (
+    <SearchResultWrapper onClickAway={onClose}>
+      {results && results.length > 0 ? (
+        <ul className="flex flex-col space-y-6">
+          {results.map((resultItem) => (
+            <li key={resultItem.did}>
+              <SearchResultItem
+                did={resultItem.did}
+                name={resultItem?.name}
+                avatar={resultItem?.avatarUri}
+                username={resultItem?.username}
+                onClick={() =>
+                  handleItemClick(resultItem?.username || resultItem.did)
+                }
+              />
+            </li>
+          ))}
+        </ul>
+      ) : isSearching ? (
+        <SearchResultItemSkeleton />
+      ) : (
+        <NoSearchResultItem message={noSearchResultMessage} />
+      )}
+    </SearchResultWrapper>
   );
-
-  // check if weather the data is available or loading state is true and identityFieldValue is not an empty string
-  const isSearchInProgress = result || (isLoading && identityFieldValue !== "");
-
-  if (isSearchInProgress) {
-    return (
-      <>
-        <div className="sm:bg-inherit fixed inset-0 top-[62px] h-screen bg-background/80 backdrop-blur-[10px] sm:top-16 sm:bg-background/10 sm:backdrop-blur-0" />
-        <div className="bg-inherit fixed top-0 z-50 mt-16 w-full sm:left-1/2 sm:top-0 sm:mx-auto sm:max-w-screen-sm sm:-translate-x-1/2 sm:px-4">
-          <div className="relative z-50 overflow-hidden p-4 sm:rounded-xl sm:bg-background/80 sm:backdrop-blur-[10px]">
-            {isLoading ? (
-              <SearchResultSkeleton />
-            ) : result ? (
-              <div className="space-y-6">
-                <SearchResultItem
-                  did={result?.did}
-                  name={result?.name}
-                  avatar={result?.avatarUri}
-                  username={result?.username}
-                  onClickedItem={handleProfileNavigation}
-                />
-              </div>
-            ) : (
-              <NoProfileDataCard message={noProfileMessage} />
-            )}
-          </div>
-        </div>
-      </>
-    );
-  }
-
-  //TODO handle error state
-
-  return null;
 };
 
-const SearchResultSkeleton: React.FunctionComponent = () => {
+type SearchResultWrapperProps = {
+  children: React.ReactNode;
+  onClickAway: () => void;
+};
+
+const SearchResultWrapper: React.FunctionComponent<SearchResultWrapperProps> = (
+  props
+) => {
+  const { children, onClickAway } = props;
+
   return (
-    <div className="flex animate-pulse">
-      <SkeletonBase className="mr-3 aspect-square h-10 opacity-10 sm:h-16" />
-      <div className="flex flex-col space-y-2">
-        <SkeletonBase className="h-4 w-32 opacity-5" />
-        <SkeletonBase className="block h-4 w-24 opacity-5" />
+    <PortalWrapper>
+      <div
+        className="fixed inset-0 mt-16 bg-background/80 backdrop-blur-[10px] sm:bg-background/0 sm:backdrop-blur-0"
+        onClick={onClickAway}
+      />
+      <div className="fixed top-0 z-50 mt-16 w-full sm:left-1/2 sm:max-w-screen-sm sm:-translate-x-1/2 sm:px-4">
+        <div className="relative p-4 sm:rounded-xl sm:border sm:border-solid sm:border-gray-dark sm:bg-background/80 sm:backdrop-blur-[10px]">
+          {children}
+        </div>
       </div>
-    </div>
+    </PortalWrapper>
   );
 };

@@ -1,11 +1,11 @@
 import React from "react";
 
-type NoProfileDataCardProps = {
+type NoSearchResultItemProps = {
   message: string;
 } & React.ComponentPropsWithRef<"div">;
 
-export const NoProfileDataCard: React.FunctionComponent<
-  NoProfileDataCardProps
+export const NoSearchResultItem: React.FunctionComponent<
+  NoSearchResultItemProps
 > = ({ message, ...otherProps }) => {
   return (
     <div {...otherProps}>

@@ -1,22 +1,23 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { useDebounce } from "./useDebounce";
 import { useIdentityInfo } from "./useIdentityInfo";
 
-// Currently search for exact did entered into the search iput field
-export const useSearchIdentity = (delay: number) => {
-  const [identityFieldValue, setIdentityFieldValue] = useState("");
-  const IdentityQuery = useDebounce<string>(identityFieldValue, delay);
+// Delay time in milliseconds to make request to the profile datastore
+const REQUEST_DELAY = 500;
 
-  const identityInfoQuery = IdentityQuery !== "" ? IdentityQuery : undefined;
-  const { data, isLoading } = useIdentityInfo(identityInfoQuery);
+// Currently search for exact did entered into the search input field
+export const useSearchIdentity = () => {
+  const [query, setQuery] = useState("");
+  const debouncedQuery = useDebounce<string>(query, REQUEST_DELAY);
+  const identityQuery = debouncedQuery !== "" ? debouncedQuery : undefined;
 
-  const handleSearch = useCallback((query: string) => {
-    setIdentityFieldValue(query);
-  }, []);
+  // Currently getting the information of a single DID
+  const { data, isLoading } = useIdentityInfo(identityQuery);
+
   return {
-    data,
-    isLoading,
-    handleSearch,
-    identityFieldValue,
+    results: data ? [data] : undefined,
+    isSearching: isLoading && query !== "",
+    setQuery,
+    query,
   };
 };
