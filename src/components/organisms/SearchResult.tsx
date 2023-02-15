@@ -1,7 +1,6 @@
 import { IdentityInfo } from "lib/types";
-import React, { useCallback } from "react";
+import React from "react";
 import { useIntl } from "react-intl";
-import { useNavigate } from "react-router-dom";
 import {
   SearchResultItem,
   NoSearchResultItem,
@@ -12,24 +11,16 @@ import {
 type SearchResultProps = {
   isSearching: boolean;
   results?: IdentityInfo[];
-  onClose: () => void;
+  onClickResultItem: (identity: string) => void;
+  onClickAway: () => void;
 };
 
 export const SearchResult: React.FunctionComponent<SearchResultProps> = (
   props
 ) => {
-  const { results, isSearching, onClose } = props;
+  const { results, isSearching, onClickResultItem, onClickAway } = props;
 
   const i18n = useIntl();
-  const navigate = useNavigate();
-
-  const handleItemClick = useCallback(
-    (identity: string) => {
-      onClose();
-      navigate(`/${identity}`);
-    },
-    [navigate, onClose]
-  );
 
   const noSearchResultMessage = i18n.formatMessage({
     id: "SearchResult.noSearchResultMessage",
@@ -39,7 +30,7 @@ export const SearchResult: React.FunctionComponent<SearchResultProps> = (
   });
 
   return (
-    <SearchResultWrapper onClickAway={onClose}>
+    <SearchResultWrapper onClickAway={onClickAway}>
       {results && results.length > 0 ? (
         <ul className="flex flex-col space-y-6">
           {results.map((resultItem) => (
@@ -50,7 +41,7 @@ export const SearchResult: React.FunctionComponent<SearchResultProps> = (
                 avatar={resultItem?.avatarUri}
                 username={resultItem?.username}
                 onClick={() =>
-                  handleItemClick(resultItem?.username || resultItem.did)
+                  onClickResultItem(resultItem?.username || resultItem.did)
                 }
               />
             </li>

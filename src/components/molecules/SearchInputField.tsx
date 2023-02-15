@@ -3,15 +3,26 @@ import { useIntl } from "react-intl";
 import { Icon, IconButton } from "components/atoms";
 
 type SearchInputFieldProps = {
+  inputRef: React.RefObject<HTMLInputElement>;
   query: string;
   onQueryUpdate: (newQuery: string) => void;
-  onClose?: () => void;
+  onClear: () => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
 } & React.ComponentPropsWithRef<"div">;
 
 export const SearchInputField: React.FunctionComponent<
   SearchInputFieldProps
 > = (props) => {
-  const { query, onClose, onQueryUpdate, ...otherProps } = props;
+  const {
+    inputRef,
+    query,
+    onQueryUpdate,
+    onClear,
+    onFocus,
+    onBlur,
+    ...otherProps
+  } = props;
   const i18n = useIntl();
 
   const searchInputPlaceholder = i18n.formatMessage({
@@ -24,39 +35,29 @@ export const SearchInputField: React.FunctionComponent<
     onQueryUpdate(e.target.value);
   };
 
-  const handleClear = () => {
-    onQueryUpdate("");
-  };
-
   return (
     <div {...otherProps}>
-      <div className="flex items-center px-3 py-2.5 sm:bg-white/0 sm:p-0">
-        <IconButton
-          variant="text"
-          size="no-margin"
-          onClick={onClose}
-          className="mr-2 sm:hidden"
-          icon={<Icon type="arrow-left" />}
-        />
-        <div className="gray-dark flex-grow rounded-xl border border-solid border-gray-dark sm:bg-white/10">
-          <div className="flex items-center justify-between py-2.5 px-3">
-            <Icon type="search" className="mr-2.5 hidden sm:block" />
-            <input
-              type="text"
-              value={query}
-              onChange={handleInputChange}
-              placeholder={searchInputPlaceholder}
-              className="flex-grow bg-white/0 text-sm outline-none disabled:opacity-10"
+      <div className="gray-dark box-border rounded-xl border border-solid border-gray-dark sm:border-none sm:bg-white/10">
+        <div className="flex items-center justify-between space-x-2 py-[calc(0.625rem_-_1px)] px-3 sm:py-2.5">
+          <Icon type="search" className="hidden text-gray-light sm:block" />
+          <input
+            ref={inputRef}
+            type="text"
+            value={query}
+            onChange={handleInputChange}
+            placeholder={searchInputPlaceholder}
+            className="flex-grow bg-white/0 text-sm outline-none disabled:opacity-10"
+            onFocus={onFocus}
+            onBlur={onBlur}
+          />
+          {query ? (
+            <IconButton
+              variant="text"
+              size="no-margin"
+              icon={<Icon type="close" className="text-gray-light" />}
+              onClick={onClear}
             />
-            {query ? (
-              <IconButton
-                variant="text"
-                size="no-margin"
-                icon={<Icon type="close" />}
-                onClick={handleClear}
-              />
-            ) : null}
-          </div>
+          ) : null}
         </div>
       </div>
     </div>

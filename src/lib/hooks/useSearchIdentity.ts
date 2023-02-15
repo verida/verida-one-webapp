@@ -3,7 +3,7 @@ import { useDebounce } from "./useDebounce";
 import { useIdentityInfo } from "./useIdentityInfo";
 
 // Delay time in milliseconds to make request to the profile datastore
-const REQUEST_DELAY = 500;
+const REQUEST_DELAY = 1000;
 
 // Currently search for exact did entered into the search input field
 export const useSearchIdentity = () => {
