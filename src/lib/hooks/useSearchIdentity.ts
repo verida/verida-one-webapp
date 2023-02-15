@@ -12,11 +12,14 @@ export const useSearchIdentity = () => {
   const identityQuery = debouncedQuery !== "" ? debouncedQuery : undefined;
 
   // Currently getting the information of a single DID
-  const { data, isLoading } = useIdentityInfo(identityQuery);
+  const { data, isLoading, isError } = useIdentityInfo(identityQuery);
+
+  // In case of error, currently returning a empty array of results, so the UI will simply shows "No profile found".
+  // TODO: Handle errors?
 
   return {
-    results: data ? [data] : undefined,
-    isSearching: isLoading && query !== "",
+    results: isError ? [] : data ? [data] : undefined,
+    isSearching: isError ? false : isLoading && query !== "",
     setQuery,
     query,
   };

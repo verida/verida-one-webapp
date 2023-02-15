@@ -49,8 +49,6 @@ export const Header: React.FC = () => {
   const hideWhenSearch = isSearchOpen ? `hidden sm:block` : "";
   const searchVisibility = isSearchOpen ? "col-span-full" : "hidden";
 
-  // grid-cols-[1fr_minmax(min-content,696px)_1fr]
-  // grid-cols-[minmax(165px,_1fr)_minmax(min-content,696px)_minmax(165px,_1fr)]
   return (
     <header
       className={`grid grid-cols-[minmax(165px,_1fr)_minmax(min-content,696px)_minmax(165px,_1fr)] border-b border-solid border-gray-dark bg-background/80 px-4 pt-3 pb-[calc(0.75rem_-_1px)] backdrop-blur-[10px] sm:px-6`}
