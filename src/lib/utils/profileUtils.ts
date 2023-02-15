@@ -71,21 +71,25 @@ export const getProfileData = async (
 };
 
 export const getCollectibles = async (walletAddresses: WalletAddress[]) => {
+  // TODO: Remove use of mock data
   if (walletAddresses) {
     return getMockCollectibles();
     // As we don't have the identity, we will have the default mock data (ryan)
   }
 
-  // TODO: Implement fetching collectibles
+  // TODO: Implement fetching collectibles, use config.features.isFetchTokensEnabled until completed
+  return Promise.resolve([]);
 };
 
 export const getBadges = async (walletAddresses: WalletAddress[]) => {
+  // TODO: Remove use of mock data
   if (walletAddresses) {
     return getMockBadges();
     // As we don't have the identity, we will have the default mock data (ryan)
   }
 
-  // TODO: Implement fetching badges
+  // TODO: Implement fetching badges, use config.features.isFetchTokensEnabled until completed
+  return Promise.resolve([]);
 };
 
 export const filterFeaturedAssets = (

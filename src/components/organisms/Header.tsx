@@ -81,7 +81,9 @@ export const Header: React.FC = () => {
           icon={<Icon type="search" />}
           onClick={handleOpenSearchButton}
         />
-        {/* <Button size="medium">{connectButtonLabel}</Button> */}
+        {/* {config.features.isVeridaConnectEnabled && (
+          <Button size="medium">{connectButtonLabel}</Button>
+        )} */}
         <ButtonLink
           url="https://www.verida.one/"
           target="_blank"
