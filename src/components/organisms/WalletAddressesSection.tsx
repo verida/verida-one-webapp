@@ -27,7 +27,7 @@ export const WalletAddressesSection: React.FC<WalletSectionProps> = (props) => {
     <ProfileSectionWrapper title={sectionTitle}>
       <ul className="space-y-2">
         {addresses.map((address) => (
-          <li key={address.address}>
+          <li key={`${address.chainId}:${address.address}`}>
             <WalletAddressCard address={address} />
           </li>
         ))}
