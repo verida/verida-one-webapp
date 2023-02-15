@@ -184,10 +184,10 @@
     "description": "Message to show the identity has no Verida One profile information"
   },
   "SearchInputField.searchInputPlaceholder": {
-    "defaultMessage": "Search username, public name, DID",
+    "defaultMessage": "Search DID",
     "description": "Placeholder for the search bar input field"
   },
-  "SearchResult.noProfileMessage": {
+  "SearchResult.noSearchResultMessage": {
     "defaultMessage": "No profile found",
     "description": "Message indicating that no profiles were found in the search list"
   },
