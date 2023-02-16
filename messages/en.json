@@ -147,10 +147,6 @@
     "defaultMessage": "Documentation",
     "description": "Label of the 'Documentation' Link in the footer section"
   },
-  "Footer.logoAlt": {
-    "defaultMessage": "Verida One Logo",
-    "description": "Alternate text for the footer logo image"
-  },
   "Footer.termsAndConditionLinkLabel": {
     "defaultMessage": "Terms & Conditions",
     "description": "Label of the 'Terms and Condition' Link in the footer footer section"
