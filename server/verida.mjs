@@ -49,6 +49,9 @@ export const getNameFromIdentity = async (identity) => {
   if (!identity) {
     return undefined;
   }
+
+  // TODO: Introduce caching
+
   try {
     const resolvedIdentity = await resolveIdentity(identity);
     if (!resolvedIdentity?.did) {

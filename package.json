@@ -22,6 +22,7 @@
     "@verida/client-ts": "^2.0.2",
     "@verida/types": "^2.0.2",
     "autoprefixer": "^10.4.13",
+    "cors": "^2.8.5",
     "crypto-browserify": "^3.12.0",
     "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.5.0",
