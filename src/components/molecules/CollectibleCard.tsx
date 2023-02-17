@@ -26,7 +26,7 @@ export const CollectibleCard: React.FC<CollectibleCardProps> = (props) => {
             <div className="absolute bottom-0 left-0 ml-1 mb-1 max-w-full pr-2">
               <AssetPriceChip
                 variant={variant}
-                chain={collectible.chain}
+                chain={collectible.chainId}
                 price={collectible.floorPrice}
                 unit={collectible.priceUnit}
               />

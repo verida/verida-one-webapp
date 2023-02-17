@@ -1,17 +1,35 @@
-import React from "react";
+import React, { useState, useCallback, useRef } from "react";
 import { useIntl } from "react-intl";
 import { IconButton, Icon, ButtonLink } from "components/atoms";
-import logo from "assets/images/verida_one_logo.png";
-import { Link } from "react-router-dom";
+import { ReactComponent as VeridaOneLogo } from "assets/images/verida_one_logo.svg";
+import { Link, useNavigate } from "react-router-dom";
+import { HeaderSearchBar } from "./HeaderSearchBar";
 
 export const Header: React.FC = () => {
   const i18n = useIntl();
+  const [isSearchOpen, setSearchOpen] = useState(false);
 
-  const logoAlt = i18n.formatMessage({
-    id: "Header.logoAlt",
-    description: "Alternate text for the logo image",
-    defaultMessage: "Verida One Logo",
-  });
+  const navigate = useNavigate();
+
+  const searchFieldRef = useRef<HTMLInputElement>(null);
+
+  const handleOpenSearchButton = useCallback(() => {
+    setSearchOpen(true);
+    // Give the time for the input to be visible, otherwise focus has no effect
+    setTimeout(() => searchFieldRef.current?.focus(), 500);
+  }, []);
+
+  const handleCloseSearchButton = useCallback(() => {
+    setSearchOpen(false);
+  }, []);
+
+  const handleClickSearchResultItem = useCallback(
+    (identity: string) => {
+      navigate(`/${identity}`);
+      setSearchOpen(false);
+    },
+    [navigate]
+  );
 
   // TODO: Remove the create your profile CTA when implementing the Connect
   // const connectButtonLabel = i18n.formatMessage({
@@ -26,25 +44,50 @@ export const Header: React.FC = () => {
     defaultMessage: "Create your profile",
   });
 
-  /** Header height is based on its content (h-10) + padding (py-3) + the border bottom.
-   * Because of this border of 1px, the padding bottom should be py-[3 - '1px']. */
-  // TODO: Update Tailwind config to allow spacing of 2.75 for the padding bottom
   // TODO: Follow the Figma design downsizing the logo and the button internal padding on small viewport (keep current size on large one)
+
+  const hideWhenSearch = isSearchOpen ? `hidden sm:block` : "";
+  const searchVisibility = isSearchOpen ? "col-span-full" : "hidden";
+
   return (
-    <header className="box-border flex items-center justify-between border-b border-solid border-gray-dark bg-background px-4 py-3 opacity-80">
-      <h1>
+    <header
+      className={`grid grid-cols-[minmax(165px,_1fr)_minmax(min-content,696px)_minmax(165px,_1fr)] border-b border-solid border-gray-dark bg-background/80 px-4 pt-3 pb-[calc(0.75rem_-_1px)] backdrop-blur-[10px] sm:px-6`}
+    >
+      <h1 className={`col-start-1 justify-self-start ${hideWhenSearch}`}>
         <Link to="/">
-          <img src={logo} alt={logoAlt} className="h-10" />
+          <div className="aspect-[10/3] h-10">
+            <VeridaOneLogo height="100%" width="100%" />
+          </div>
         </Link>
       </h1>
-      <div className="flex items-center justify-between space-x-3">
-        <IconButton size="medium" icon={<Icon type="search" />} />
-        {/* <Button size="medium">{connectButtonLabel}</Button> */}
+      <div
+        className={`${searchVisibility} flex sm:col-auto sm:col-start-2 sm:block sm:max-w-screen-sm sm:px-4`}
+      >
+        <HeaderSearchBar
+          inputRef={searchFieldRef}
+          className="flex-grow sm:bg-white/0"
+          onClickResultItem={handleClickSearchResultItem}
+          onClickBack={handleCloseSearchButton}
+        />
+      </div>
+      <div
+        className={`col-start-3 flex items-center justify-between justify-self-end ${hideWhenSearch}`}
+      >
+        <IconButton
+          size="medium"
+          className="mr-3 sm:hidden"
+          icon={<Icon type="search" />}
+          onClick={handleOpenSearchButton}
+        />
+        {/* {config.features.isVeridaConnectEnabled && (
+          <Button size="medium">{connectButtonLabel}</Button>
+        )} */}
         <ButtonLink
           url="https://www.verida.one/"
           target="_blank"
           rel="noopener"
           size="medium"
+          className="whitespace-nowrap"
         >
           {createYourProfileButtonLabel}
         </ButtonLink>

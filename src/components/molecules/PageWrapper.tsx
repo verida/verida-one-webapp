@@ -5,11 +5,12 @@ import { PageHeader } from "./PageHeader";
 type PageWrapperProps = {
   title?: string;
   badgeValue?: string | number;
-} & React.ComponentPropsWithoutRef<"div">;
+  children: React.ReactNode;
+};
 
 /** Assets Page wrapper to wrapper badge-list, collectibles lists page */
 export const PageWrapper: React.FC<PageWrapperProps> = (props) => {
-  const { children, title, badgeValue, ...otherProps } = props;
+  const { children, title, badgeValue } = props;
   const navigate = useNavigate();
 
   const handleGoBackNavigation = () => {
@@ -21,13 +22,13 @@ export const PageWrapper: React.FC<PageWrapperProps> = (props) => {
   }
 
   return (
-    <div {...otherProps}>
+    <div className="flex flex-grow flex-col">
       <PageHeader
         title={title}
         badgeValue={badgeValue}
         onBackClick={handleGoBackNavigation}
       />
-      <div>{children}</div>
+      <div className="flex flex-grow flex-col">{children}</div>
     </div>
   );
 };

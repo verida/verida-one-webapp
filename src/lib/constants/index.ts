@@ -1,6 +1,9 @@
 export * from "./chains";
+export * from "./meta";
+export * from "./profile";
 export * from "./socialMedia";
 export * from "./tailwind";
+export * from "./url";
 
 /** Duration in ms for which the icon stating the text has been copied to the clipboard is displayed */
 export const COPIED_TO_CLIPBOARD_ICON_TIMEOUT = 2000;
@@ -8,15 +11,17 @@ export const COPIED_TO_CLIPBOARD_ICON_TIMEOUT = 2000;
 /** Max number of Collectibles displayed in the profile section. A "Show All" button redirecting to the Collectibles page must be displayed if the total is more than this max value*/
 export const MAX_COLLECTIBLES_IN_PROFILE_SECTION = 8;
 
-/** URL of the CTA 'Create your own profile' in the footer */
-export const CTA_CREATE_OWN_PROFILE_URL = "https://verida.io";
+/** Max number of badges displayed in the profile section. If the sum exceeds this maximum, a "Show All" button that directs to the badges page must appear.*/
+export const MAX_BADGES_IN_PROFILE_SECTION = 8;
 
-/** URL of verida one docs */
-export const VERIDA_ONE_DOCUMENTATION_URL = "https://docs.verida.one";
+/** Max number of assets displayed in the Featured section of the profile */
+export const MAX_ASSETS_IN_FEATURED_SECTION = 4;
 
-/** URL of verida terms & condition page */
-export const VERIDA_TERMS_AND_CONDITIONS_URL =
-  "https://www.verida.io/terms-and-conditions";
+/** Max number of links displayed in the Featured section of the profile */
+export const MAX_LINKS_IN_FEATURED_SECTION = 2;
 
-/** URL of verida network site */
-export const VERIDA_NETWORK_URL = "https://www.verida.network";
+/** Verida DID method */
+export const DID_VDA_METHOD = "did:vda";
+
+/** Id of the default Verida One record in the "profiles" datastore */
+export const VERIDA_ONE_PROFILE_RECORD_ID = "public";

@@ -1,19 +1,39 @@
 import React from "react";
+import { RedirectionCard } from "components/molecules";
 import { useIntl } from "react-intl";
 
 export const NoProfileFoundView: React.FunctionComponent = () => {
   const i18n = useIntl();
 
-  // Temporary message, to delete when implementing the component
-  // DO NOT ADD TO MESSAGES FILE
-  const message = i18n.formatMessage({
-    id: "NotProfileFoundView.message",
-    defaultMessage: "No Profile Found",
+  const redirectionCardTitle = i18n.formatMessage({
+    id: "NoProfileFoundView.redirectionCardTitle",
+    defaultMessage: "Profile not found",
+    description:
+      "The title of the redirection card indicating that the profile could not be found",
+  });
+
+  const redirectCardMessage = i18n.formatMessage({
+    id: "NoProfileFoundView.redirectCardMessage",
+    defaultMessage: "The profile you're looking for doesn't exist",
+    description:
+      "Message from the redirection card indicating that the profile could not be found",
+  });
+
+  const redirectionCardButtonlabel = i18n.formatMessage({
+    id: "NoProfileFoundView.redirectionCardButtonlabel",
+    defaultMessage: "Verida One Home",
+    description: "The label of the redirection link button to the home page",
   });
 
   return (
-    <div className="flex flex-grow flex-col items-center space-y-12 p-8">
-      <p className="text-xl md:text-4xl">{message}</p>
+    <div className="flex flex-grow flex-col">
+      <RedirectionCard
+        redirectPath="/"
+        title={redirectionCardTitle}
+        message={redirectCardMessage}
+        buttonLabel={redirectionCardButtonlabel}
+        className="flex flex-grow flex-col justify-center"
+      />
     </div>
   );
 };

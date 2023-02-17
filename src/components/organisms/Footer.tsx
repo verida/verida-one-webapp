@@ -45,8 +45,8 @@ export const Footer: React.FunctionComponent = () => {
   );
 
   return (
-    <footer className="flex flex-col items-center justify-center space-y-3 border-t border-solid border-gray-dark py-4 px-6 text-gray-light md:flex-row md:justify-between">
-      <div className="flex flex-col justify-center md:order-2">
+    <footer className="flex flex-col items-center justify-center space-y-3 border-t border-solid border-gray-dark py-4 px-6 text-gray-light sm:flex-row sm:justify-between">
+      <div className="flex flex-col justify-center sm:order-2">
         <a
           className="flex flex-col items-center"
           href={VERIDA_NETWORK_URL}
@@ -59,8 +59,8 @@ export const Footer: React.FunctionComponent = () => {
           <img src={logo} alt={footerLogoAlt} className="h-[26px]" />
         </a>
       </div>
-      <div className="md:order-3 md:flex-1">
-        <div className="flex flex-col items-center space-y-3 md:flex-row md:justify-end md:space-x-4 md:space-y-0">
+      <div className="sm:order-3 sm:flex-1">
+        <div className="flex flex-col items-center space-y-3 sm:flex-row sm:justify-end sm:space-x-4 sm:space-y-0">
           <a
             href={VERIDA_ONE_DOCUMENTATION_URL}
             target="_blank"
@@ -79,7 +79,7 @@ export const Footer: React.FunctionComponent = () => {
           </a>
         </div>
       </div>
-      <div className="md:order-1 md:flex-1">
+      <div className="sm:order-1 sm:flex-1">
         <span>{copyrightMessage}</span>
       </div>
     </footer>

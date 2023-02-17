@@ -1,15 +1,34 @@
-import { ArrowRight } from "@icon-park/react";
-import React from "react";
+import React, { useCallback } from "react";
 import { useIntl } from "react-intl";
-import { Link } from "react-router-dom";
+import { BadgeCard, ProfileSectionWrapper } from "components/molecules";
+import { Badge } from "lib/types";
+import { Button } from "components/atoms";
+import { Link, useNavigate } from "react-router-dom";
+import { MAX_BADGES_IN_PROFILE_SECTION } from "lib/constants";
 
-type BadgeSectionProps = {
-  data?: [];
+type BadgesSectionProps = {
+  badges?: Badge[];
 };
 
-// TODO: To rework when needed
-export const BadgesSection: React.FC<BadgeSectionProps> = ({ data = [] }) => {
+/** Section for the Profile page rendering the list of Badges */
+export const BadgesSection: React.FC<BadgesSectionProps> = ({ badges }) => {
   const i18n = useIntl();
+  const navigate = useNavigate();
+
+  const handleClickMore = useCallback(() => {
+    navigate("badges");
+  }, [navigate]);
+
+  const handleClickShowAll = useCallback(() => {
+    navigate("badges");
+  }, [navigate]);
+
+  if (!badges?.length) {
+    return null;
+  }
+
+  const truncatedBadgeList = badges.slice(0, MAX_BADGES_IN_PROFILE_SECTION);
+  const hasMore = badges.length > truncatedBadgeList.length;
 
   const sectionTitle = i18n.formatMessage({
     id: "BadgesSection.sectionTitle",
@@ -17,21 +36,48 @@ export const BadgesSection: React.FC<BadgeSectionProps> = ({ data = [] }) => {
     defaultMessage: "Badges",
   });
 
-  //TODO: Implement Badges hexagon UI
+  const showAllButtonLabel = i18n.formatMessage({
+    id: "BadgesSection.showAllButtonLabel",
+    description:
+      "Label of the button redirecting from the 'Badges' profile section to the 'Badges' page",
+    defaultMessage: "Show All",
+  });
+
+  const showAllButton = (
+    <Button size="large" onClick={handleClickShowAll} className="h-full">
+      {showAllButtonLabel}
+    </Button>
+  );
 
   return (
-    <section>
-      <div className="mb-3.5 flex items-center justify-between">
-        <div className="flex items-center">
-          <h3 className="mr-1.5 font-semibold ">{sectionTitle}</h3>
-          <span className="rounded bg-gray-dark p-0.5 text-[11px]">
-            {data.length}
-          </span>
-        </div>
-        <Link to="/" className="mr-2">
-          <ArrowRight />
-        </Link>
-      </div>
-    </section>
+    <ProfileSectionWrapper
+      title={sectionTitle}
+      badgeValue={badges.length}
+      onClickMore={handleClickMore}
+    >
+      <ul className="grid snap-x snap-mandatory auto-cols-[160px] gap-2 overflow-x-auto max-sm:grid-flow-col sm:grid-cols-4">
+        {truncatedBadgeList.map((badge) => (
+          <li
+            key={`${badge.chainId}/${badge.contractAddress}/${badge.tokenId}`}
+            className="snap-start transition-all"
+          >
+            <Link
+              to={`badges/${badge.chainId}/${badge.contractAddress}/${badge.tokenId}`}
+            >
+              <BadgeCard variant="standard" badge={badge} />
+            </Link>
+          </li>
+        ))}
+        {hasMore && (
+          <li
+            key="showAllButton"
+            className="aspect-square snap-start transition-all sm:hidden"
+          >
+            {showAllButton}
+          </li>
+        )}
+      </ul>
+      {hasMore && <div className="mt-4 max-sm:hidden">{showAllButton}</div>}
+    </ProfileSectionWrapper>
   );
 };
