@@ -1,9 +1,9 @@
 import React, { useCallback } from "react";
 import { useIntl } from "react-intl";
-import { BadgeCard, ProfileSectionWrapper } from "components/molecules";
+import { BadgeMosaicItem, ProfileSectionWrapper } from "components/molecules";
 import { Badge } from "lib/types";
-import { Button } from "components/atoms";
-import { Link, useNavigate } from "react-router-dom";
+import { Button, HexagonBase } from "components/atoms";
+import { useNavigate } from "react-router-dom";
 import { MAX_BADGES_IN_PROFILE_SECTION } from "lib/constants";
 
 type BadgesSectionProps = {
@@ -54,30 +54,30 @@ export const BadgesSection: React.FC<BadgesSectionProps> = ({ badges }) => {
       title={sectionTitle}
       badgeValue={badges.length}
       onClickMore={handleClickMore}
+      style={{ marginBottom: "-1rem" }}
     >
-      <ul className="grid snap-x snap-mandatory auto-cols-[160px] gap-2 overflow-x-auto max-sm:grid-flow-col sm:grid-cols-4">
-        {truncatedBadgeList.map((badge) => (
-          <li
-            key={`${badge.chainId}/${badge.contractAddress}/${badge.tokenId}`}
-            className="snap-start transition-all"
-          >
-            <Link
+      <div className="overflow-x-auto">
+        <ul className="mx-auto mt-24 grid w-[85.5%] grid-cols-[repeat(4,_minmax(153.2675px,_1fr))] content-start gap-0 pb-4 sm:w-[92.33%]">
+          {truncatedBadgeList.map((badge) => (
+            <BadgeMosaicItem
+              key={`${badge.chainId}/${badge.contractAddress}/${badge.tokenId}`}
+              badge={badge}
               to={`badges/${badge.chainId}/${badge.contractAddress}/${badge.tokenId}`}
+              disableShadow // FIXME: Enable shadow under tiles by fixing edges underlapping
+            />
+          ))}
+          {/* FIXME: Use rounded hexagonal shape, see HexagonBase */}
+          {hasMore && (
+            <li
+              key="showAllButton"
+              className="relative -ml-[16.666%] w-[133.333%] odd:-mt-[59.11%] sm:hidden"
             >
-              <BadgeCard variant="standard" badge={badge} />
-            </Link>
-          </li>
-        ))}
-        {hasMore && (
-          <li
-            key="showAllButton"
-            className="aspect-square snap-start transition-all sm:hidden"
-          >
-            {showAllButton}
-          </li>
-        )}
-      </ul>
-      {hasMore && <div className="mt-4 max-sm:hidden">{showAllButton}</div>}
+              <HexagonBase className=" w-full">{showAllButton}</HexagonBase>
+            </li>
+          )}
+        </ul>
+        {hasMore && <div className="my-4 max-sm:hidden">{showAllButton}</div>}
+      </div>
     </ProfileSectionWrapper>
   );
 };

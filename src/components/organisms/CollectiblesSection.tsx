@@ -62,8 +62,9 @@ export const CollectiblesSection: React.FC<CollectiblesSectionProps> = (
       title={sectionTitle}
       badgeValue={collectibles.length}
       onClickMore={handleClickMore}
+      style={{ marginBottom: "-1rem" }}
     >
-      <ul className="grid snap-x snap-mandatory auto-cols-[160px] gap-2 overflow-x-auto max-sm:grid-flow-col sm:grid-cols-4">
+      <ul className="grid snap-x snap-mandatory auto-cols-[160px] gap-2 overflow-x-auto pb-4  max-sm:grid-flow-col sm:grid-cols-4">
         {truncatedCollectiblesList.map((collectible) => (
           <li
             key={`${collectible.chainId}/${collectible.contractAddress}/${collectible.tokenId}`}
@@ -85,7 +86,7 @@ export const CollectiblesSection: React.FC<CollectiblesSectionProps> = (
           </li>
         )}
       </ul>
-      {hasMore && <div className="mt-4 max-sm:hidden">{showAllButton}</div>}
+      {hasMore && <div className="my-4 max-sm:hidden">{showAllButton}</div>}
     </ProfileSectionWrapper>
   );
 };
