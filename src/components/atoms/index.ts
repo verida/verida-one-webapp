@@ -7,6 +7,7 @@ export * from "./ButtonLink";
 export * from "./ButtonLinkBase";
 export * from "./ChainIconContainer";
 export * from "./Chip";
+export * from "./HexagonBase";
 export * from "./Icon";
 export * from "./IconButton";
 export * from "./IconButtonLink";

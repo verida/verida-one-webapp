@@ -16,6 +16,7 @@ module.exports = {
       "error": "#CE4B46",
       "green": "#13ce66",
       "gray-light": "#9D9D9D",
+      "badge-purple": "#7703D1",
       "verida-blue": "#37D5C7",
       "verida-purple": "#5354D1",
     },
