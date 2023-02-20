@@ -288,4 +288,16 @@ export const badges: Badge[] = [
     proofLabel: "Facebook Account",
     proofValue: "@RyanJKris",
   },
+  {
+    chainId: Chains.POLYGON,
+    contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD270",
+    tokenId: "twitter-account-3",
+    collectionLabel: "Verida Badges",
+    tokenLabel: "Twitter Account",
+    description: "",
+    ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
+    media: twitterAccountBadge,
+    proofLabel: "Twitter Account",
+    proofValue: "@RyanJKris",
+  },
 ];

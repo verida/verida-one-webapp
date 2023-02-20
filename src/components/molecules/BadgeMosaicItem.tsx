@@ -13,10 +13,11 @@ export const BadgeMosaicItem: React.FunctionComponent<HexagonProps> = (
   props
 ) => {
   const { badge, to, disableShadow = false, ...otherProps } = props;
+
   return (
     <li
       {...otherProps}
-      className="relative -ml-[calc(0.5/3_*_100%)] w-[calc(4/3_*_100%)] odd:-mt-[59.11%]"
+      className="relative w-[calc(4/3_*_100%)] -translate-x-[calc(1/8_*_100%)] odd:-translate-y-1/2"
     >
       <HexagonBase className="flex items-center justify-center">
         <Link to={to} className="h-full w-full">

@@ -57,26 +57,43 @@ export const BadgesSection: React.FC<BadgesSectionProps> = ({ badges }) => {
       style={{ marginBottom: "-1rem" }}
     >
       <div className="overflow-x-auto">
-        <ul className="mx-auto mt-24 grid w-[85.5%] grid-cols-[repeat(4,_minmax(153.27333px,_1fr))] pb-4 sm:w-[calc(2.77/3_*_100%)]">
-          {/* TODO: Try using a CSS variable to get the value of the container width instead of the hardcoded value */}
-          {truncatedBadgeList.map((badge) => (
-            <BadgeMosaicItem
-              key={`${badge.chainId}/${badge.contractAddress}/${badge.tokenId}`}
-              badge={badge}
-              to={`badges/${badge.chainId}/${badge.contractAddress}/${badge.tokenId}`}
-              disableShadow // FIXME: Enable shadow under tiles by fixing edges underlapping
-            />
-          ))}
-          {/* FIXME: Use rounded hexagonal shape, see HexagonBase */}
-          {hasMore && (
-            <li
-              key="showAllButton"
-              className="relative -ml-[calc(0.5/3_*_100%)] w-[calc(4/3_*_100%)] odd:-mt-[59.11%] sm:hidden"
-            >
-              <HexagonBase className=" w-full">{showAllButton}</HexagonBase>
-            </li>
-          )}
-        </ul>
+        <div className="min-w-[664px] pb-4">
+          <ul
+            className={`mx-auto mt-[calc(1.73205/13_*_100%)] grid w-[calc(12/13_*_100%)] sm:mt-[calc(1.73205/13_*_100%)] sm:grid-cols-4 ${
+              hasMore
+                ? "grid-cols-[repeat(5,_calc(3/13_*_664px))]"
+                : "grid-cols-4"
+            }`}
+          >
+            {truncatedBadgeList.map((badge) => (
+              <BadgeMosaicItem
+                key={`${badge.chainId}/${badge.contractAddress}/${badge.tokenId}`}
+                badge={badge}
+                to={`badges/${badge.chainId}/${badge.contractAddress}/${badge.tokenId}`}
+                disableShadow // FIXME: Enable shadow under tiles by fixing edges underlapping
+              />
+            ))}
+            {/* FIXME: Use rounded hexagonal shape, see HexagonBase */}
+            {hasMore && (
+              <>
+                <li
+                  key="placeholder"
+                  className="relative col-start-5 col-end-5 row-start-1 row-end-1 w-[calc(4/3_*_100%)] -translate-x-[calc(1/8_*_100%)] -translate-y-1/2 sm:hidden"
+                >
+                  <HexagonBase className="w-full"></HexagonBase>
+                </li>
+                <li
+                  key="showAllButton"
+                  className="relative w-[calc(4/3_*_100%)] -translate-x-[calc(1/8_*_100%)] -translate-y-1/2 sm:hidden"
+                >
+                  <HexagonBase rounded className="w-full">
+                    {showAllButton}
+                  </HexagonBase>
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
         {hasMore && <div className="my-4 max-sm:hidden">{showAllButton}</div>}
       </div>
     </ProfileSectionWrapper>
