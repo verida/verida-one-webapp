@@ -56,7 +56,6 @@ export const CollectiblesSection: React.FC<CollectiblesSectionProps> = (
     </Button>
   );
 
-  // TODO: Handle click on collectible when collectible page implemented
   return (
     <ProfileSectionWrapper
       title={sectionTitle}
@@ -64,7 +63,7 @@ export const CollectiblesSection: React.FC<CollectiblesSectionProps> = (
       onClickMore={handleClickMore}
       style={{ marginBottom: "-1rem" }}
     >
-      <ul className="grid snap-x snap-mandatory auto-cols-[160px] gap-2 overflow-x-auto pb-4  max-sm:grid-flow-col sm:grid-cols-4">
+      <ul className="grid snap-x snap-mandatory auto-cols-[160px] gap-2 overflow-x-auto pb-4 max-sm:grid-flow-col sm:grid-cols-4">
         {truncatedCollectiblesList.map((collectible) => (
           <li
             key={`${collectible.chainId}/${collectible.contractAddress}/${collectible.tokenId}`}

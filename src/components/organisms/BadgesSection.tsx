@@ -57,7 +57,8 @@ export const BadgesSection: React.FC<BadgesSectionProps> = ({ badges }) => {
       style={{ marginBottom: "-1rem" }}
     >
       <div className="overflow-x-auto">
-        <ul className="mx-auto mt-24 grid w-[85.5%] grid-cols-[repeat(4,_minmax(153.2675px,_1fr))] content-start gap-0 pb-4 sm:w-[92.33%]">
+        <ul className="mx-auto mt-24 grid w-[85.5%] grid-cols-[repeat(4,_minmax(153.27333px,_1fr))] pb-4 sm:w-[calc(2.77/3_*_100%)]">
+          {/* TODO: Try using a CSS variable to get the value of the container width instead of the hardcoded value */}
           {truncatedBadgeList.map((badge) => (
             <BadgeMosaicItem
               key={`${badge.chainId}/${badge.contractAddress}/${badge.tokenId}`}
@@ -70,7 +71,7 @@ export const BadgesSection: React.FC<BadgesSectionProps> = ({ badges }) => {
           {hasMore && (
             <li
               key="showAllButton"
-              className="relative -ml-[16.666%] w-[133.333%] odd:-mt-[59.11%] sm:hidden"
+              className="relative -ml-[calc(0.5/3_*_100%)] w-[calc(4/3_*_100%)] odd:-mt-[59.11%] sm:hidden"
             >
               <HexagonBase className=" w-full">{showAllButton}</HexagonBase>
             </li>

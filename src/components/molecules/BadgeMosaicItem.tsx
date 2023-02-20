@@ -16,14 +16,14 @@ export const BadgeMosaicItem: React.FunctionComponent<HexagonProps> = (
   return (
     <li
       {...otherProps}
-      className="relative -ml-[16.666%] w-[133.333%] odd:-mt-[59.11%]"
+      className="relative -ml-[calc(0.5/3_*_100%)] w-[calc(4/3_*_100%)] odd:-mt-[59.11%]"
     >
       <HexagonBase className="flex items-center justify-center">
-        <Link to={to} className="aspect-[inherit]">
+        <Link to={to} className="h-full w-full">
           <img
             src={badge.media}
             alt={badge.tokenLabel}
-            className="aspect-[inherit] object-cover"
+            className="h-full w-full object-cover"
           />
         </Link>
       </HexagonBase>
