@@ -1,5 +1,5 @@
 import { Client } from "@verida/client-ts";
-import { WebUserProfile } from "@verida/account-web-vault";
+import { WebUserProfile } from "@verida/web-helpers";
 import { DatastoreOpenConfig } from "@verida/types";
 import { DID_VDA_METHOD } from "lib/constants";
 import { config } from "lib/config";
