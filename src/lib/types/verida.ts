@@ -1,4 +1,4 @@
-import { WebUserProfile } from "@verida/account-web-vault";
+import { WebUserProfile } from "@verida/web-helpers";
 
 export interface ResolvedIdentity {
   did: string;

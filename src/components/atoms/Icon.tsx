@@ -7,11 +7,17 @@ import {
   More,
   Right,
   User,
+  Close,
   ArrowRight,
   ArrowLeft,
+  Telegram,
 } from "@icon-park/react";
 import { ReactComponent as Share } from "assets/icons/share.svg";
 import { ReactComponent as Outside } from "assets/icons/outside.svg";
+import { ReactComponent as Messenger } from "assets/logos/socialMedia/messenger.svg";
+import { ReactComponent as Whatsapp } from "assets/logos/socialMedia/whatsapp.svg";
+import { ReactComponent as LinkedIn } from "assets/logos/socialMedia/linkedin.svg";
+import { ReactComponent as Mail } from "assets/logos/socialMedia/mail.svg";
 import { ReactComponent as VeridaTick } from "assets/icons/verida_tick.svg";
 import { ReactComponent as Algorand } from "assets/logos/chains/algorand.svg";
 import { ReactComponent as Ethereum } from "assets/logos/chains/ethereum.svg";
@@ -24,6 +30,7 @@ import { ReactComponent as Discord } from "assets/logos/socialMedia/discord.svg"
 type GenericIconType =
   | "user"
   | "check"
+  | "close"
   | "share"
   | "copy"
   | "outside"
@@ -33,7 +40,14 @@ type GenericIconType =
   | "arrow-right"
   | "arrow-left"
   | "verida-tick";
-type SocialMediaIconType = "social-twitter" | "social-discord";
+type SocialMediaIconType =
+  | "social-twitter"
+  | "social-discord"
+  | "social-telegram"
+  | "social-whatsapp"
+  | "social-email"
+  | "social-messenger"
+  | "social-linkedin";
 type ChainIconType =
   | "chain-algorand"
   | "chain-ethereum"
@@ -66,6 +80,8 @@ export const Icon: React.FunctionComponent<IconProps> = (props) => {
       return <User size={size} {...otherProps} />;
     case "copy":
       return <Copy size={size} {...otherProps} />;
+    case "close":
+      return <Close size={size} {...otherProps} />;
     case "check":
       return <Check size={size} {...otherProps} />;
     case "search":
@@ -114,8 +130,35 @@ export const Icon: React.FunctionComponent<IconProps> = (props) => {
           <Discord height={size} width={size} />
         </IconContainer>
       );
+    case "social-whatsapp":
+      return (
+        <IconContainer {...otherProps}>
+          <Whatsapp height={size} width={size} />
+        </IconContainer>
+      );
+    case "social-messenger":
+      return (
+        <IconContainer {...otherProps}>
+          <Messenger height={size} width={size} />
+        </IconContainer>
+      );
+    case "social-email":
+      return (
+        <IconContainer {...otherProps}>
+          <Mail height={size} width={size} />
+        </IconContainer>
+      );
+    case "social-linkedin":
+      return (
+        <IconContainer {...otherProps}>
+          <LinkedIn height={size} width={size} />
+        </IconContainer>
+      );
     case "social-twitter":
       return <Twitter size={size} {...otherProps} />;
+    case "social-telegram":
+      return <Telegram size={size} {...otherProps} />;
+
     default:
       throw new Error("A supported type must be defined for the icon");
   }

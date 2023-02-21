@@ -1,6 +1,6 @@
 import React from "react";
 import { useIntl } from "react-intl";
-import logo from "assets/images/verida_network_logo.png";
+import { ReactComponent as VeridaNetworkLogo } from "assets/images/verida_network_logo.svg";
 import {
   VERIDA_NETWORK_URL,
   VERIDA_ONE_DOCUMENTATION_URL,
@@ -29,12 +29,6 @@ export const Footer: React.FunctionComponent = () => {
       "Label of the 'Terms and Condition' Link in the footer footer section",
   });
 
-  const footerLogoAlt = i18n.formatMessage({
-    id: "Footer.logoAlt",
-    description: "Alternate text for the footer logo image",
-    defaultMessage: "Verida One Logo",
-  });
-
   const copyrightMessage = i18n.formatMessage(
     {
       id: "Footer.copyrightMessage",
@@ -45,8 +39,8 @@ export const Footer: React.FunctionComponent = () => {
   );
 
   return (
-    <footer className="flex flex-col items-center justify-center space-y-3 border-t border-solid border-gray-dark py-4 px-6 text-gray-light md:flex-row md:justify-between">
-      <div className="flex flex-col justify-center md:order-2">
+    <footer className="flex flex-col items-center justify-center space-y-3 border-t border-solid border-gray-dark py-4 px-6 text-gray-light sm:flex-row sm:justify-between">
+      <div className="flex flex-col justify-center sm:order-2">
         <a
           className="flex flex-col items-center"
           href={VERIDA_NETWORK_URL}
@@ -56,11 +50,13 @@ export const Footer: React.FunctionComponent = () => {
           <span className="mb-1 place-content-center text-center">
             {builtOnLabel}
           </span>
-          <img src={logo} alt={footerLogoAlt} className="h-[26px]" />
+          <div className="aspect-[9/3] h-6">
+            <VeridaNetworkLogo height="100%" width="100%" />
+          </div>
         </a>
       </div>
-      <div className="md:order-3 md:flex-1">
-        <div className="flex flex-col items-center space-y-3 md:flex-row md:justify-end md:space-x-4 md:space-y-0">
+      <div className="sm:order-3 sm:flex-1">
+        <div className="flex flex-col items-center space-y-3 sm:flex-row sm:justify-end sm:space-x-4 sm:space-y-0">
           <a
             href={VERIDA_ONE_DOCUMENTATION_URL}
             target="_blank"
@@ -79,7 +75,7 @@ export const Footer: React.FunctionComponent = () => {
           </a>
         </div>
       </div>
-      <div className="md:order-1 md:flex-1">
+      <div className="sm:order-1 sm:flex-1">
         <span>{copyrightMessage}</span>
       </div>
     </footer>

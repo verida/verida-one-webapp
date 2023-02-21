@@ -30,11 +30,9 @@ const isDevFeaturesEnabled =
   process.env.REACT_APP_ENABLE_DEV_FEATURES === "true";
 
 const features = {
-  // This object allows a management per feature, with dedicated env var if needed
-  isSearchEnabled: isDevFeaturesEnabled,
-  isSharingEnabled: isDevFeaturesEnabled,
+  // This object allows a management per feature
+  // Add dedicated feature env var if needed
   isVeridaConnectEnabled: isDevFeaturesEnabled,
-  isQueryProfileEnabled: isDevFeaturesEnabled,
   isFetchTokensEnabled: isDevFeaturesEnabled,
 };
 

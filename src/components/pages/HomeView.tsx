@@ -13,8 +13,8 @@ export const HomeView: React.FunctionComponent = () => {
 
   return (
     <div className="flex flex-grow flex-col items-center justify-center space-y-12 p-8">
-      <div className="w-full">
-        <VeridaOneLogo height="auto" width="100%" />
+      <div className="aspect-[10/3] w-full">
+        <VeridaOneLogo height="100%" width="100%" />
       </div>
       <p className="text-xl md:text-4xl">{comingSoonMessage}</p>
     </div>
