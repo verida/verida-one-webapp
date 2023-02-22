@@ -1,7 +1,7 @@
 import React from "react";
 
 type SkeletonBaseProps = {
-  rounded?: "rounded-full" | "rounded-lg" | "rounded-xl";
+  rounded?: "rounded-full" | "rounded-lg" | "rounded-xl" | "rounded-none";
 } & React.ComponentPropsWithoutRef<"div">;
 
 export const SkeletonBase: React.FunctionComponent<SkeletonBaseProps> = (

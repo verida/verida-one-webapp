@@ -45,15 +45,11 @@ export const CollectibleListView: React.FunctionComponent = () => {
     defaultMessage: "Collectibles",
   });
 
-  // TODO: Handle loading state
-  // TODO: Handle error state
-
   if (collectibles || isLoading) {
     return (
       <PageWrapper title={pageTitle} badgeValue={collectibles?.length}>
         {collectibles?.length || isLoading ? (
-          // <CollectibleGrid className="pt-2" collectibles={collectibles} />
-          <CollectibleGrid className="pt-2" collectibles={undefined} />
+          <CollectibleGrid className="pt-2" collectibles={collectibles} />
         ) : (
           <RedirectionCard
             redirectPath={redirectPath}
