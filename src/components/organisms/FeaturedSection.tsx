@@ -12,6 +12,7 @@ import {
   MAX_ASSETS_IN_FEATURED_SECTION,
   MAX_LINKS_IN_FEATURED_SECTION,
 } from "lib/constants";
+import { SkeletonBase } from "components/atoms";
 
 type FeaturedSectionProps = {
   collectibles?: Collectible[];
@@ -70,5 +71,39 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = (props) => {
         </ul>
       </div>
     </ProfileSectionWrapper>
+  );
+};
+
+export const FeaturedSectionSkeleton: React.FunctionComponent = () => {
+  return (
+    <div className="animate-pulse">
+      <SkeletonBase className="mb-3 h-4 w-1/3 opacity-10" />
+      <div className="flex flex-col space-y-3">
+        <ul className="grid grid-cols-4 gap-2">
+          {Array(MAX_ASSETS_IN_FEATURED_SECTION)
+            .fill("")
+            .map((_, index) => (
+              <li key={index}>
+                <SkeletonBase
+                  rounded="rounded-lg"
+                  className="aspect-square w-full opacity-5"
+                />
+              </li>
+            ))}
+        </ul>
+        <ul className="space-y-2">
+          {Array(MAX_LINKS_IN_FEATURED_SECTION)
+            .fill("")
+            .map((_, index) => (
+              <li key={index}>
+                <SkeletonBase
+                  rounded="rounded-lg"
+                  className="h-14 w-full opacity-5"
+                />
+              </li>
+            ))}
+        </ul>
+      </div>
+    </div>
   );
 };
