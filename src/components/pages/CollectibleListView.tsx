@@ -11,7 +11,11 @@ export const CollectibleListView: React.FunctionComponent = () => {
 
   const { data: profileData } = useProfileData(identity);
   const walletAddresses = profileData?.walletAddresses;
-  const { data: collectibles } = useCollectibles(walletAddresses);
+  const {
+    data: collectibles,
+    isLoading,
+    isError,
+  } = useCollectibles(walletAddresses);
 
   const redirectPath = identity ? `/${identity}` : `/`;
 
@@ -41,14 +45,28 @@ export const CollectibleListView: React.FunctionComponent = () => {
     defaultMessage: "Collectibles",
   });
 
-  // TODO: Handle loading state
-  // TODO: Handle error state
+  if (collectibles || isLoading) {
+    return (
+      <PageWrapper title={pageTitle} badgeValue={collectibles?.length}>
+        {collectibles?.length || isLoading ? (
+          <CollectibleGrid className="pt-2" collectibles={collectibles} />
+        ) : (
+          <RedirectionCard
+            redirectPath={redirectPath}
+            title={redirectionCardTitle}
+            message={redirectionCardMessage}
+            buttonLabel={redirectionCardButtonLabel}
+            className="flex flex-grow flex-col justify-center"
+          />
+        )}
+      </PageWrapper>
+    );
+  }
 
-  return (
-    <PageWrapper title={pageTitle} badgeValue={collectibles?.length}>
-      {collectibles?.length ? (
-        <CollectibleGrid className="pt-2" collectibles={collectibles} />
-      ) : (
+  if (isError) {
+    // TODO: Handle depending on error type
+    return (
+      <PageWrapper title={pageTitle} badgeValue={0}>
         <RedirectionCard
           redirectPath={redirectPath}
           title={redirectionCardTitle}
@@ -56,7 +74,12 @@ export const CollectibleListView: React.FunctionComponent = () => {
           buttonLabel={redirectionCardButtonLabel}
           className="flex flex-grow flex-col justify-center"
         />
-      )}
-    </PageWrapper>
-  );
+      </PageWrapper>
+    );
+  }
+
+  // At this point, there is no data, the data is not being loaded, there is no handled errors.
+  // So, throw an error that will be caught by the closest Error boundary.
+  // TODO: Re-throw the error from the query after cleaning it
+  throw new Error("Something went wrong");
 };

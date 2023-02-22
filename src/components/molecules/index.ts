@@ -1,5 +1,6 @@
 export * from "./AssetDetailsPropertyItem";
 export * from "./AssetDetailsPropertyList";
+export * from "./AssetDetailsViewSkeleton";
 export * from "./AssetPriceChip";
 export * from "./BadgeMosaicItem";
 export * from "./ChainIcon";

@@ -1,7 +1,7 @@
 import React from "react";
 import { AssetPriceChip } from "components/molecules";
 import { Collectible } from "lib/types";
-import { AssetMedia } from "components/atoms";
+import { AssetMedia, SkeletonBase } from "components/atoms";
 
 type CollectibleCardProps = {
   collectible: Collectible;
@@ -41,6 +41,33 @@ export const CollectibleCard: React.FC<CollectibleCardProps> = (props) => {
             <p className="w-full font-bold line-clamp-2">
               {collectible.tokenLabel}
             </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+type CollectibleCardSkeletonProps = {
+  variant?: "standard" | "compact";
+} & Omit<React.ComponentPropsWithoutRef<"div">, "children">;
+
+export const CollectibleCardSkeleton: React.FunctionComponent<
+  CollectibleCardSkeletonProps
+> = (props) => {
+  const { variant = "standard", ...otherProps } = props;
+
+  return (
+    <div {...otherProps}>
+      <div className="flex animate-pulse flex-col items-start space-y-2">
+        <SkeletonBase
+          rounded="rounded-xl"
+          className="aspect-square w-full opacity-5"
+        />
+        {variant !== "compact" && (
+          <div className="flex w-full max-w-full flex-col items-start space-y-2">
+            <SkeletonBase className="h-4 w-3/4 opacity-5" />
+            <SkeletonBase className="h-4 w-full opacity-10" />
           </div>
         )}
       </div>

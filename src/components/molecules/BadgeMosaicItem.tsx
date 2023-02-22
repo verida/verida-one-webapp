@@ -1,4 +1,4 @@
-import { HexagonBase } from "components/atoms";
+import { HexagonBase, SkeletonBase } from "components/atoms";
 import { Badge } from "lib/types";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -33,6 +33,24 @@ export const BadgeMosaicItem: React.FunctionComponent<HexagonProps> = (
           <HexagonBase className="w-full bg-badge-purple" />
         </div>
       )}
+    </li>
+  );
+};
+
+export const BadgeMosaicItemSkeleton: React.FunctionComponent<
+  Omit<React.ComponentPropsWithoutRef<"li">, "className">
+> = (props) => {
+  return (
+    <li
+      {...props}
+      className="relative w-[calc(4/3_*_100%)] -translate-x-[calc(1/8_*_100%)] odd:-translate-y-1/2"
+    >
+      <HexagonBase className="w-full">
+        <SkeletonBase
+          rounded="rounded-none"
+          className="h-full w-full opacity-5"
+        />
+      </HexagonBase>
     </li>
   );
 };
