@@ -1,6 +1,10 @@
 import React from "react";
 import { AssetMedia, ButtonLink } from "components/atoms";
-import { RedirectionCard, PageWrapper } from "components/molecules";
+import {
+  RedirectionCard,
+  PageWrapper,
+  AssetDetailsViewSkeleton,
+} from "components/molecules";
 import {
   AssetDetailsMainInfo,
   BadgeDetailsProperties,
@@ -16,7 +20,7 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
 
   const { data: profileData } = useProfileData(identity);
   const walletAddresses = profileData?.walletAddresses;
-  const { data: badges } = useBadges(walletAddresses);
+  const { data: badges, isLoading, isError } = useBadges(walletAddresses);
   const badge = badges?.find(
     (item) =>
       item.chainId === chain &&
@@ -46,7 +50,67 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
       "Message of the redirection card indicating the badges has not been found.",
   });
 
-  if (!badge) {
+  const viewInExplorerButtonLabel = i18n.formatMessage({
+    id: "BadgeDetailsView.viewInExplorerButtonLabel",
+    defaultMessage: "View in Explorer",
+    description:
+      "Label of the button to view an asset in a blockchain explorer.",
+  });
+
+  if (badge) {
+    const viewInExplorerButton = (
+      <ButtonLink
+        url={getChainExplorerUrlForAddress(badge.chainId, badge.ownerAddress)}
+        target="_blank"
+        rel="noopener"
+      >
+        {viewInExplorerButtonLabel}
+      </ButtonLink>
+    );
+
+    return (
+      <PageWrapper>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            <div className="bg-badge flex items-center justify-center rounded-xl p-10">
+              <AssetMedia
+                className="w-full"
+                aspect="aspect-auto"
+                src={badge.media}
+                alt={badge.tokenLabel}
+              />
+            </div>
+            <div className="mt-6 hidden sm:block">{viewInExplorerButton}</div>
+          </div>
+          <div>
+            <AssetDetailsMainInfo
+              className="mb-4"
+              collectionLabel={badge.collectionLabel}
+              tokenLabel={badge.tokenLabel}
+              description={badge.description}
+            />
+            <BadgeDetailsProperties badge={badge} />
+          </div>
+          <div className="sm:hidden md:mt-0">
+            {/* TODO: Place this button into a fixed bottom bar.
+          see issue #41 https://github.com/verida/verida-one-webapp/issues/41
+           */}
+            {viewInExplorerButton}
+          </div>
+        </div>
+      </PageWrapper>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <PageWrapper>
+        <AssetDetailsViewSkeleton />
+      </PageWrapper>
+    );
+  }
+
+  if (isError || !badge) {
     return (
       <PageWrapper>
         <RedirectionCard
@@ -60,48 +124,8 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
     );
   }
 
-  const viewInExplorerButtonLabel = i18n.formatMessage({
-    id: "BadgeDetailsView.viewInExplorerButtonLabel",
-    defaultMessage: "View in Explorer",
-    description:
-      "Label of the button to view an asset in a blockchain explorer.",
-  });
-
-  const viewInExplorerButton = (
-    <ButtonLink
-      url={getChainExplorerUrlForAddress(badge.chainId, badge.ownerAddress)}
-      target="_blank"
-      rel="noopener"
-    >
-      {viewInExplorerButtonLabel}
-    </ButtonLink>
-  );
-
-  return (
-    <PageWrapper>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <div>
-          <div className="bg-badge flex items-center justify-center rounded-xl p-10">
-            <AssetMedia
-              className="w-full"
-              aspect="aspect-auto"
-              src={badge.media}
-              alt={badge.tokenLabel}
-            />
-          </div>
-          <div className="mt-6 hidden sm:block">{viewInExplorerButton}</div>
-        </div>
-        <div>
-          <AssetDetailsMainInfo
-            className="mb-4"
-            collectionLabel={badge.collectionLabel}
-            tokenLabel={badge.tokenLabel}
-            description={badge.description}
-          />
-          <BadgeDetailsProperties badge={badge} />
-        </div>
-        <div className="sm:hidden md:mt-0">{viewInExplorerButton}</div>
-      </div>
-    </PageWrapper>
-  );
+  // At this point, there is no data, the data is not being loaded, there is no handled errors.
+  // So, throw an error that will be caught by the closest Error boundary.
+  // TODO: Re-throw the error from the query after cleaning it
+  throw new Error("Something went wrong");
 };

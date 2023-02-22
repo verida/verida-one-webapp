@@ -75,5 +75,6 @@ export const BadgeListView: React.FunctionComponent = () => {
 
   // At this point, there is no data, the data is not being loaded, there is no handled errors.
   // So, throw an error that will be caught by the closest Error boundary.
+  // TODO: Re-throw the error from the query after cleaning it
   throw new Error("Something went wrong");
 };
