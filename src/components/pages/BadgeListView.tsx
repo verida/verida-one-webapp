@@ -1,6 +1,6 @@
 import React from "react";
 import { PageWrapper, RedirectionCard } from "components/molecules";
-import { BadgeGrid } from "components/organisms";
+import { BadgeMosaic } from "components/organisms";
 import { useBadges, useProfileData } from "lib/hooks";
 import { useIntl } from "react-intl";
 import { useParams } from "react-router-dom";
@@ -47,7 +47,7 @@ export const BadgeListView: React.FunctionComponent = () => {
   return (
     <PageWrapper title={pageTitle} badgeValue={badges?.length}>
       {badges?.length ? (
-        <BadgeGrid className="pt-2" badges={badges} />
+        <BadgeMosaic className="pt-2" badges={badges} />
       ) : (
         <RedirectionCard
           redirectPath={redirectPath}

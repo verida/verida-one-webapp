@@ -1,9 +1,9 @@
 import React, { useCallback } from "react";
 import { useIntl } from "react-intl";
-import { BadgeCard, ProfileSectionWrapper } from "components/molecules";
+import { BadgeMosaicItem, ProfileSectionWrapper } from "components/molecules";
 import { Badge } from "lib/types";
-import { Button } from "components/atoms";
-import { Link, useNavigate } from "react-router-dom";
+import { Button, HexagonBase } from "components/atoms";
+import { useNavigate } from "react-router-dom";
 import { MAX_BADGES_IN_PROFILE_SECTION } from "lib/constants";
 
 type BadgesSectionProps = {
@@ -54,30 +54,48 @@ export const BadgesSection: React.FC<BadgesSectionProps> = ({ badges }) => {
       title={sectionTitle}
       badgeValue={badges.length}
       onClickMore={handleClickMore}
+      style={{ marginBottom: "-1rem" }}
     >
-      <ul className="grid snap-x snap-mandatory auto-cols-[160px] gap-2 overflow-x-auto max-sm:grid-flow-col sm:grid-cols-4">
-        {truncatedBadgeList.map((badge) => (
-          <li
-            key={`${badge.chainId}/${badge.contractAddress}/${badge.tokenId}`}
-            className="snap-start transition-all"
+      <div className="overflow-x-auto">
+        <div className="min-w-[664px] pb-4">
+          <ul
+            className={`mx-auto mt-[calc(1.73205/13_*_100%)] grid w-[calc(12/13_*_100%)] sm:mt-[calc(1.73205/13_*_100%)] sm:grid-cols-4 ${
+              hasMore
+                ? "grid-cols-[repeat(5,_calc(3/13_*_664px))]"
+                : "grid-cols-4"
+            }`}
           >
-            <Link
-              to={`badges/${badge.chainId}/${badge.contractAddress}/${badge.tokenId}`}
-            >
-              <BadgeCard variant="standard" badge={badge} />
-            </Link>
-          </li>
-        ))}
-        {hasMore && (
-          <li
-            key="showAllButton"
-            className="aspect-square snap-start transition-all sm:hidden"
-          >
-            {showAllButton}
-          </li>
-        )}
-      </ul>
-      {hasMore && <div className="mt-4 max-sm:hidden">{showAllButton}</div>}
+            {truncatedBadgeList.map((badge) => (
+              <BadgeMosaicItem
+                key={`${badge.chainId}/${badge.contractAddress}/${badge.tokenId}`}
+                badge={badge}
+                to={`badges/${badge.chainId}/${badge.contractAddress}/${badge.tokenId}`}
+                disableShadow // FIXME: Enable shadow under tiles by fixing edges underlapping
+              />
+            ))}
+            {/* FIXME: Use rounded hexagonal shape, see HexagonBase */}
+            {hasMore && (
+              <>
+                <li
+                  key="placeholder"
+                  className="relative col-start-5 col-end-5 row-start-1 row-end-1 w-[calc(4/3_*_100%)] -translate-x-[calc(1/8_*_100%)] -translate-y-1/2 sm:hidden"
+                >
+                  <HexagonBase className="w-full"></HexagonBase>
+                </li>
+                <li
+                  key="showAllButton"
+                  className="relative w-[calc(4/3_*_100%)] -translate-x-[calc(1/8_*_100%)] -translate-y-1/2 sm:hidden"
+                >
+                  <HexagonBase rounded className="w-full">
+                    {showAllButton}
+                  </HexagonBase>
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
+        {hasMore && <div className="my-4 max-sm:hidden">{showAllButton}</div>}
+      </div>
     </ProfileSectionWrapper>
   );
 };
