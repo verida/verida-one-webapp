@@ -70,16 +70,17 @@ export const getCollectibles = async (
   walletAddresses: WalletAddress[],
   abortSignal?: AbortSignal
 ) => {
-  if (!walletAddresses || walletAddresses.length === 0) {
-    return [];
-  }
-
   // Filter and format the address for the API
   const addresses = walletAddresses
     .filter((address) =>
       walletProviderSupportedChainsForNft.includes(address.chainId)
     )
     .map((address) => `${address.chainId}:${address.address}`);
+
+  if (addresses.length === 0) {
+    return [];
+  }
+
   return await getNfts(addresses, abortSignal);
 };
 
