@@ -14,6 +14,7 @@ export const useCollectibles = (walletAddresses?: WalletAddress[]) => {
       return getCollectibles(walletAddresses, signal);
     },
     enabled: !!walletAddresses,
+    // Fine-tune the stale time and cache time if needed
   });
 
   return query;

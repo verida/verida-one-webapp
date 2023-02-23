@@ -6,6 +6,7 @@ type BadgeMosaicProps = {
   badges?: Badge[];
 } & React.ComponentPropsWithoutRef<"div">;
 
+/** Component rendering the Badges in a honeycomb pattern or mosaic. */
 export const BadgeMosaic: React.FunctionComponent<BadgeMosaicProps> = (
   props
 ) => {

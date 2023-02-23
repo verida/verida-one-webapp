@@ -23,7 +23,7 @@ export type ProfileData = z.infer<typeof ProfileDataSchema>;
 
 // ================
 
-// TODO: Update Collectible and Badge types following what is returned by the API, when available.
+// TODO: Update Badge types following what is returned by the API, when available.
 
 export interface Badge {
   chain_id: Chains;

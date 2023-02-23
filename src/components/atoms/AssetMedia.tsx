@@ -6,6 +6,7 @@ type AssetMediaProps = {
   radius?: "rounded-lg" | "rounded-xl";
 } & React.ComponentPropsWithoutRef<"div">;
 
+/** Component displaying the media of an asset (Colelctible or Badge), only images are supported for the moment. */
 export const AssetMedia: React.FunctionComponent<AssetMediaProps> = (props) => {
   const {
     source,

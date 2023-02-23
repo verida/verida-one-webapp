@@ -8,6 +8,7 @@ type BadgeDetailsPropertiesProps = {
   badge: Badge;
 } & React.ComponentPropsWithRef<"div">;
 
+/** Comnponent displaying the properties of a Badge. */
 export const BadgeDetailsProperties: React.FC<BadgeDetailsPropertiesProps> = (
   props
 ) => {

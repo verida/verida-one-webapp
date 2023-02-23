@@ -8,6 +8,7 @@ type CollectibleDetailsPropertiesProps = {
   collectible: NftToken;
 } & React.ComponentPropsWithRef<"div">;
 
+/** Comnponent displaying the properties of a Collectible. */
 export const CollectibleDetailsProperties: React.FC<
   CollectibleDetailsPropertiesProps
 > = (props) => {

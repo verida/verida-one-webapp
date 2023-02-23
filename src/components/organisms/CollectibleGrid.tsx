@@ -7,6 +7,7 @@ type CollectibleGridProps = {
   collectibles?: NftToken[];
 } & React.ComponentPropsWithoutRef<"div">;
 
+/** Component rendering the list of Collectibles */
 export const CollectibleGrid: React.FC<CollectibleGridProps> = (props) => {
   const { collectibles, ...containerProps } = props;
 
