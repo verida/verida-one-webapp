@@ -9,7 +9,7 @@ export const NoSearchResultItem: React.FunctionComponent<
 > = ({ message, ...otherProps }) => {
   return (
     <div {...otherProps}>
-      <div className="rounded-xl bg-gray p-4">
+      <div className="rounded-lg bg-gray p-4.5">
         <p className="text-center text-sm text-primary/60">{message}</p>
       </div>
     </div>
