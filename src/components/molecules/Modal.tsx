@@ -54,13 +54,13 @@ export const Modal: React.FunctionComponent<ModalProps> = ({
         aria-modal="true"
       >
         <div className="relative overflow-hidden p-4 pt-6 sm:p-8">
-          <div className="mb-8 flex items-center justify-between sm:mb-10">
-            <div className="w-5" />
+          <div className="mb-5 flex items-center justify-between sm:mb-8">
+            <div className="w-8" />
             <h1 className="text-lg font-semibold leading-5" id={labelId}>
               {title}
             </h1>
             <IconButton
-              size="no-margin"
+              size="small"
               variant="text"
               onClick={onClose}
               icon={<Icon type="close" size={20} />}
