@@ -69,7 +69,7 @@ export const Header: React.FC = () => {
       >
         <HeaderSearchBar
           inputRef={searchFieldRef}
-          className="flex-grow sm:bg-white/0"
+          className="flex-grow"
           onClickResultItem={handleClickSearchResultItem}
           onClickBack={handleCloseSearchButton}
         />

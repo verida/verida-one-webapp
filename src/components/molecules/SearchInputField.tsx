@@ -28,7 +28,7 @@ export const SearchInputField: React.FunctionComponent<
   const searchInputPlaceholder = i18n.formatMessage({
     id: "SearchInputField.searchInputPlaceholder",
     description: "Placeholder for the search bar input field",
-    defaultMessage: "Search DID",
+    defaultMessage: "Search a DID",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,30 +37,31 @@ export const SearchInputField: React.FunctionComponent<
 
   return (
     <div {...otherProps}>
-      <div className="gray-dark box-border rounded-xl border border-solid border-gray-dark sm:border-none sm:bg-white/10">
-        <div className="flex items-center justify-between space-x-2 py-[calc(0.625rem_-_1px)] px-3 sm:py-2.5">
-          <Icon type="search" className="hidden text-gray-light sm:block" />
-          <input
-            ref={inputRef}
-            type="text"
-            value={query}
-            onChange={handleInputChange}
-            placeholder={searchInputPlaceholder}
-            className="flex-grow bg-white/0 text-sm outline-none disabled:opacity-10"
-            onFocus={onFocus}
-            onBlur={onBlur}
+      <div className="relative">
+        <Icon
+          type="search"
+          className="absolute top-1/2 left-3 hidden -translate-y-1/2 text-gray-light sm:block"
+        />
+        <input
+          ref={inputRef}
+          type="text"
+          value={query}
+          onChange={handleInputChange}
+          placeholder={searchInputPlaceholder}
+          className="w-full rounded-xl border border-solid border-transparent bg-primary-10 py-[calc(0.625rem_-_1px)] pl-3 pr-10 text-base leading-5 hover:border-primary-15 focus:border-primary-15 focus:bg-[inherit] focus:outline-none sm:pl-10"
+          onFocus={onFocus}
+          onBlur={onBlur}
+        />
+        {query ? (
+          <IconButton
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-light hover:text-[inherit]"
+            variant="text"
+            size="no-margin"
+            disableHover
+            icon={<Icon type="close" />}
+            onClick={onClear}
           />
-          {query ? (
-            <IconButton
-              className="text-gray-light hover:text-[inherit]"
-              variant="text"
-              size="no-margin"
-              disableHover
-              icon={<Icon type="close" />}
-              onClick={onClear}
-            />
-          ) : null}
-        </div>
+        ) : null}
       </div>
     </div>
   );

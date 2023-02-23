@@ -9,7 +9,7 @@ export const Chip: React.FunctionComponent<ChipProps> = (props) => {
   return (
     <div
       {...otherProps}
-      className={`rounded-full bg-transparent p-1 backdrop-blur-xs ${className}`}
+      className={`bg-translucent rounded-full p-1 backdrop-blur-xs ${className}`}
     >
       {children}
     </div>
