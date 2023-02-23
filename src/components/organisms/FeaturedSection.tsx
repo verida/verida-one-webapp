@@ -44,31 +44,35 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = (props) => {
   return (
     <ProfileSectionWrapper title={sectionTitle}>
       <div className="flex flex-col space-y-3">
-        <ul className="grid grid-cols-4 gap-2">
-          {collectibles
-            ?.slice(0, MAX_ASSETS_IN_FEATURED_SECTION)
-            .map((collectible) => (
-              <li
-                key={`${collectible.chainId}/${collectible.contractAddress}/${collectible.tokenId}`}
-              >
-                <Link
-                  to={`collectibles/${collectible.chainId}/${collectible.contractAddress}/${collectible.tokenId}`}
+        {collectibles?.length ? (
+          <ul className="grid grid-cols-4 gap-2">
+            {collectibles
+              .slice(0, MAX_ASSETS_IN_FEATURED_SECTION)
+              .map((collectible) => (
+                <li
+                  key={`${collectible.chainId}/${collectible.contractAddress}/${collectible.tokenId}`}
                 >
-                  <CollectibleCard
-                    variant={mediaMatch ? "standard" : "compact"}
-                    collectible={collectible}
-                  />
-                </Link>
+                  <Link
+                    to={`collectibles/${collectible.chainId}/${collectible.contractAddress}/${collectible.tokenId}`}
+                  >
+                    <CollectibleCard
+                      variant={mediaMatch ? "standard" : "compact"}
+                      collectible={collectible}
+                    />
+                  </Link>
+                </li>
+              ))}
+          </ul>
+        ) : null}
+        {links?.length ? (
+          <ul className="space-y-2">
+            {links.slice(0, MAX_LINKS_IN_FEATURED_SECTION).map((link) => (
+              <li key={link.url}>
+                <CustomLink link={link} />
               </li>
             ))}
-        </ul>
-        <ul className="space-y-2">
-          {links?.slice(0, MAX_LINKS_IN_FEATURED_SECTION).map((link) => (
-            <li key={link.url}>
-              <CustomLink link={link} />
-            </li>
-          ))}
-        </ul>
+          </ul>
+        ) : null}
       </div>
     </ProfileSectionWrapper>
   );
