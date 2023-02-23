@@ -52,9 +52,11 @@ export const SearchInputField: React.FunctionComponent<
           />
           {query ? (
             <IconButton
+              className="text-gray-light hover:text-[inherit]"
               variant="text"
               size="no-margin"
-              icon={<Icon type="close" className="text-gray-light" />}
+              disableHover
+              icon={<Icon type="close" />}
               onClick={onClear}
             />
           ) : null}
