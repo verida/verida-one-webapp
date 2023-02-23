@@ -1,6 +1,7 @@
 import React from "react";
 import { NftToken } from "lib/types";
 import { AssetMedia, SkeletonBase } from "components/atoms";
+import { AssetMediaChip } from "./AssetMediaChip";
 
 type CollectibleCardProps = {
   collectible: NftToken;
@@ -22,6 +23,9 @@ export const CollectibleCard: React.FC<CollectibleCardProps> = (props) => {
             alt={collectible.metadata.name || "Collectible"}
             radius={variant === "compact" ? "rounded-lg" : "rounded-xl"}
           />
+          <div className="absolute bottom-0 left-0 ml-1 mb-1 max-w-full pr-2">
+            <AssetMediaChip variant={variant} chain={collectible.chain_id} />
+          </div>
         </div>
         {variant !== "compact" && (
           <div className="flex max-w-full flex-col items-start">
