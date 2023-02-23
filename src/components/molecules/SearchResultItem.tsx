@@ -18,7 +18,7 @@ export const SearchResultItem: React.FunctionComponent<
     <div {...otherProps}>
       <button
         className="flex w-full cursor-pointer rounded-lg p-2 hover:bg-gray-dark active:bg-gray-dark"
-        onClick={() => onClick()}
+        onClick={onClick}
       >
         <Avatar className="mr-3 aspect-square h-10" image={avatar} alt={name} />
         <div className="flex min-w-0 flex-col">
