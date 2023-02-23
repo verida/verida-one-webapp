@@ -29,11 +29,7 @@ export const NftTokenSchema = z
     owner_address: z.string(),
     token_address: z.string(),
     token_id: z.string(),
-    amount: z.number().nullable(),
-    contract_type: z.string().nullable(),
     name: z.string().nullable(),
-    symbol: z.string().nullable(),
-    minter_address: z.string().nullable(),
     metadata: NftMetadataSchema,
     isSBT: z.boolean().default(false),
   })
@@ -41,8 +37,8 @@ export const NftTokenSchema = z
 
 export const NftListApiResponseSchema = z
   .object({
-    status: z.enum(["sucess", "error"]),
+    status: z.enum(["success", "error"]),
     data: z.array(NftTokenSchema).nullable(),
-    error: z.string().nullable(),
+    error: z.string().nullish(),
   })
   .passthrough();
