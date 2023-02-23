@@ -10,12 +10,8 @@ import {
   ProfileData,
   WalletAddress,
 } from "lib/types";
-import {
-  getMockBadges,
-  getMockCollectibles,
-  getMockIdentityInfo,
-  getMockProfileData,
-} from "mock";
+import { getMockBadges, getMockIdentityInfo, getMockProfileData } from "mock";
+import { getNfts, walletProviderSupportedChainsForNft } from "lib/api";
 import { getAnyPublicProfile, getExternalDatastore } from "./veridaUtils";
 
 export const getIdentityInfo = async (
@@ -70,25 +66,30 @@ export const getProfileData = async (
   // Later the best way will likely be to wrap them in app-specific Errors, such as new ProfileNotFoundError(), or new ProfileNotValidError().
 };
 
-export const getCollectibles = async (walletAddresses: WalletAddress[]) => {
-  // TODO: Remove use of mock data
-  if (walletAddresses) {
-    return getMockCollectibles();
-    // As we don't have the identity, we will have the default mock data (ryan)
+export const getCollectibles = async (
+  walletAddresses: WalletAddress[],
+  abortSignal?: AbortSignal
+) => {
+  if (!walletAddresses || walletAddresses.length === 0) {
+    return [];
   }
 
-  // TODO: Implement fetching collectibles, use config.features.isFetchTokensEnabled until completed
-  return Promise.resolve([]);
+  // Filter and format the address for the API
+  const addresses = walletAddresses
+    .filter((address) =>
+      walletProviderSupportedChainsForNft.includes(address.chainId)
+    )
+    .map((address) => `${address.chainId}:${address.address}`);
+  return await getNfts(addresses, abortSignal);
 };
 
 export const getBadges = async (walletAddresses: WalletAddress[]) => {
   // TODO: Remove use of mock data
   if (walletAddresses) {
     return getMockBadges();
-    // As we don't have the identity, we will have the default mock data (ryan)
   }
 
-  // TODO: Implement fetching badges, use config.features.isFetchTokensEnabled until completed
+  // TODO: Implement fetching badges
   return Promise.resolve([]);
 };
 

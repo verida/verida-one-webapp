@@ -10,8 +10,8 @@ export const useCollectibles = (walletAddresses?: WalletAddress[]) => {
 
   const query = useQuery({
     queryKey: queryKeys.getCollectibles(walletAddresses as WalletAddress[]),
-    queryFn: ({ queryKey: [{ walletAddresses }] }) => {
-      return getCollectibles(walletAddresses);
+    queryFn: ({ queryKey: [{ walletAddresses }], signal }) => {
+      return getCollectibles(walletAddresses, signal);
     },
     enabled: !!walletAddresses,
   });

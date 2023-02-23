@@ -37,7 +37,6 @@ const features = {
   // This object allows a management per feature
   // Add dedicated feature env var if needed
   isVeridaConnectEnabled: isDevFeaturesEnabled,
-  isFetchTokensEnabled: isDevFeaturesEnabled,
 };
 
 const isMockDataEnabled = process.env.REACT_APP_ENABLE_MOCK_DATA === "true";
