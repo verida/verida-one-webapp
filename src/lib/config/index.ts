@@ -25,6 +25,10 @@ const schemasURL = {
     "https://common.schemas.verida.io/veridaOne/profile/v0.1.0/schema.json",
 };
 
+// API
+const walletProviderApiBaseUrl =
+  process.env.REACT_APP_WALLET_PROVIDER_API_BASE_URL;
+
 // Feature flags variables
 const isDevFeaturesEnabled =
   process.env.REACT_APP_ENABLE_DEV_FEATURES === "true";
@@ -44,6 +48,7 @@ export const config = {
   veridaOneContextName,
   veridaLogoUrl,
   schemasURL,
+  walletProviderApiBaseUrl,
   features,
   isMockDataEnabled,
 };
