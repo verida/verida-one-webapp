@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useRef } from "react";
 import { useIntl } from "react-intl";
 import { IconButton, Icon, ButtonLink } from "components/atoms";
+import { ReactComponent as VeridaOneLogoWithText } from "assets/images/verida_one_logo_with_text.svg";
 import { ReactComponent as VeridaOneLogo } from "assets/images/verida_one_logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { HeaderSearchBar } from "./HeaderSearchBar";
@@ -55,8 +56,11 @@ export const Header: React.FC = () => {
     >
       <h1 className={`col-start-1 justify-self-start ${hideWhenSearch}`}>
         <Link to="/">
-          <div className="aspect-[10/3] h-10">
+          <div className="aspect-[10/6.97] h-10 sm:hidden">
             <VeridaOneLogo height="100%" width="100%" />
+          </div>
+          <div className="hidden aspect-[10/3] h-10 sm:block">
+            <VeridaOneLogoWithText height="100%" width="100%" />
           </div>
         </Link>
       </h1>

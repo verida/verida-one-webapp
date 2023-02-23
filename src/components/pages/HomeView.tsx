@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as VeridaOneLogo } from "assets/images/verida_one_logo.svg";
+import { ReactComponent as VeridaOneLogo } from "assets/images/verida_one_logo_with_text.svg";
 import { useIntl } from "react-intl";
 
 export const HomeView: React.FunctionComponent = () => {
