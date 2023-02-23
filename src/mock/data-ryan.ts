@@ -44,8 +44,8 @@ export const profileData: ProfileData = {
   ],
   walletAddresses: [
     {
-      chainId: Chains.ETHEREUM,
-      address: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
+      chainId: Chains.ETHEREUM_GOERLI,
+      address: "0xff71512c84096f55cdf5c5f3d3c6ace99b56fef0",
       verificationProof: {
         type: "",
         proof: "verified",
@@ -55,25 +55,11 @@ export const profileData: ProfileData = {
   ],
   featureAssets: [
     {
-      chainId: Chains.ETHEREUM,
-      contractAddress: "0x10daa9f4c0f985430fde4959adb2c791ef2ccf83",
-      tokenId: "10004",
-      ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
+      chainId: Chains.ETHEREUM_GOERLI,
+      contractAddress: "0x2e60f8f0ded025c41454e151f75c300fba3bc62b",
+      tokenId: "3",
+      ownerAddress: "0xff71512c84096f55cdf5c5f3d3c6ace99b56fef0",
       order: 1,
-    },
-    {
-      chainId: Chains.ETHEREUM,
-      contractAddress: "0x22C1f6050E56d2876009903609a2cC3fEf83B415",
-      tokenId: "12060",
-      ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
-      order: 2,
-    },
-    {
-      chainId: Chains.POLYGON,
-      contractAddress: "0xdb46d1dc155634fbc732f92e853b10b288ad5a1d",
-      tokenId: "85835",
-      ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
-      order: 3,
     },
   ],
 };
