@@ -67,10 +67,6 @@
     "defaultMessage": "Creator wallet address",
     "description": "Label of the 'creatorWalletAddress' property for a collectible"
   },
-  "CollectibleDetailsProperties.floorPricePropertyLabel": {
-    "defaultMessage": "Floor price",
-    "description": "Label of the 'floorPrice' property for a collectible"
-  },
   "CollectibleDetailsProperties.ownerPropertyLabel": {
     "defaultMessage": "Owner",
     "description": "Label of the 'owner' property for a collectible"
