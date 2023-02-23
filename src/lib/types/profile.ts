@@ -1,3 +1,4 @@
+import { z } from "zod";
 import {
   CustomLinkSchema,
   FeaturedAssetSchema,
@@ -6,7 +7,6 @@ import {
   VerificationProofSchema,
   WalletAddressSchema,
 } from "lib/schemas";
-import { z } from "zod";
 import { Chains } from "./chains";
 
 export type VerificationProof = z.infer<typeof VerificationProofSchema>;
