@@ -2,9 +2,9 @@ import React from "react";
 import { useIntl } from "react-intl";
 
 type AssetDetailCardProps = {
-  collectionLabel?: string;
-  tokenLabel?: string;
-  description?: string;
+  collectionLabel?: string | null;
+  tokenLabel?: string | null;
+  description?: string | null;
 } & React.ComponentPropsWithRef<"div">;
 
 export const AssetDetailsMainInfo: React.FC<AssetDetailCardProps> = (props) => {

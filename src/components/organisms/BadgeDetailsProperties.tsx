@@ -12,8 +12,8 @@ export const BadgeDetailsProperties: React.FC<BadgeDetailsPropertiesProps> = (
   props
 ) => {
   const { badge, ...divProps } = props;
-  const { chainId, contractAddress, proofValue, ownerAddress, proofLabel } =
-    badge;
+  const { chain_id, token_address, metadata, owner_address } = badge;
+  const { proofLabel, proofValue } = metadata;
   const i18n = useIntl();
 
   const chainPropertyLabel = i18n.formatMessage({
@@ -39,22 +39,22 @@ export const BadgeDetailsProperties: React.FC<BadgeDetailsPropertiesProps> = (
       propertyLabel: chainPropertyLabel,
       formattedValue: (
         <div className="flex items-center space-x-1">
-          {getChainLogo(chainId, 14)}
-          <span>{getChainLabel(chainId)}</span>
+          {getChainLogo(chain_id, 14)}
+          <span>{getChainLabel(chain_id)}</span>
         </div>
       ),
     },
     {
       propertyLabel: ownerPropertyLabel,
-      formattedValue: ownerAddress,
+      formattedValue: owner_address,
       enableCopyToClipboard: true,
-      value: ownerAddress,
+      value: owner_address,
     },
     {
       propertyLabel: creatorWalletAddressPropertyLabel,
-      formattedValue: contractAddress,
+      formattedValue: token_address,
       enableCopyToClipboard: true,
-      value: contractAddress,
+      value: token_address,
     },
     {
       propertyLabel: proofLabel,

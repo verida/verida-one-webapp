@@ -21,9 +21,9 @@ export const BadgeMosaic: React.FunctionComponent<BadgeMosaicProps> = (
         <ul className="mx-auto mt-[calc(1.73205/7_*_100%)] grid w-[calc(6/7_*_100%)] grid-cols-2 sm:mt-[calc(1.73205/13_*_100%)] sm:w-[calc(12/13_*_100%)] sm:grid-cols-4">
           {badges.map((badge) => (
             <BadgeMosaicItem
-              key={`${badge.chainId}/${badge.contractAddress}/${badge.tokenId}`}
+              key={`${badge.chain_id}/${badge.token_address}/${badge.token_id}`}
               badge={badge}
-              to={`${badge.chainId}/${badge.contractAddress}/${badge.tokenId}`}
+              to={`${badge.chain_id}/${badge.token_address}/${badge.token_id}`}
             />
           ))}
         </ul>

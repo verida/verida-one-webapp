@@ -1,29 +1,34 @@
 import React from "react";
 
 type AssetMediaProps = {
-  src: string; // Making src mandatory
-  alt: string; // Making alt mandatory
+  source?: string | null;
+  alt?: string;
   radius?: "rounded-lg" | "rounded-xl";
-  aspect?: "aspect-auto" | "aspect-square";
-} & Omit<React.ComponentPropsWithoutRef<"img">, "src" | "alt">;
+} & React.ComponentPropsWithoutRef<"div">;
 
 export const AssetMedia: React.FunctionComponent<AssetMediaProps> = (props) => {
   const {
-    src,
+    source,
     alt,
     radius = "rounded-xl",
-    aspect = "aspect-square",
     className = "",
-    ...otherProps
+    ...divProps
   } = props;
 
-  // TODO: Add an intermediary div/span to avoid classes conflicts?
   return (
-    <img
-      {...otherProps}
-      src={src}
-      alt={alt}
-      className={`w-full object-cover ${aspect} ${radius} ${className}`}
-    />
+    <div {...divProps} className={`${className} ${radius}`}>
+      {
+        source ? (
+          <img
+            src={source}
+            alt={alt || "Asset"}
+            className={`h-full w-full object-cover ${radius}`}
+          />
+        ) : (
+          <div className={`bg-asset-media aspect-square w-full ${radius}`} />
+        )
+        // TODO: Do we display a generic image if there is no media in the asset?
+      }
+    </div>
   );
 };

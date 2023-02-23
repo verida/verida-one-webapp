@@ -1,11 +1,11 @@
-import { AssetPropertyInfo, Collectible } from "lib/types";
+import { AssetPropertyInfo, NftToken } from "lib/types";
 import React from "react";
 import { useIntl } from "react-intl";
 import { getChainLabel, getChainLogo } from "lib/utils";
 import { AssetDetailsPropertyList } from "components/molecules";
 
 type CollectibleDetailsPropertiesProps = {
-  collectible: Collectible;
+  collectible: NftToken;
 } & React.ComponentPropsWithRef<"div">;
 
 export const CollectibleDetailsProperties: React.FC<
@@ -13,14 +13,7 @@ export const CollectibleDetailsProperties: React.FC<
 > = (props) => {
   const { collectible, ...divProps } = props;
 
-  const {
-    chainId,
-    contractAddress,
-    tokenId,
-    floorPrice,
-    priceUnit,
-    ownerAddress,
-  } = collectible;
+  const { chain_id, owner_address, token_address, token_id } = collectible;
 
   const i18n = useIntl();
 
@@ -34,12 +27,6 @@ export const CollectibleDetailsProperties: React.FC<
     id: "CollectibleDetailsProperties.ownerPropertyLabel",
     defaultMessage: "Owner",
     description: "Label of the 'owner' property for a collectible",
-  });
-
-  const floorPricePropertyLabel = i18n.formatMessage({
-    id: "CollectibleDetailsProperties.floorPricePropertyLabel",
-    defaultMessage: "Floor price",
-    description: "Label of the 'floorPrice' property for a collectible",
   });
 
   const assetsIdPropertyLabel = i18n.formatMessage({
@@ -60,33 +47,28 @@ export const CollectibleDetailsProperties: React.FC<
       propertyLabel: chainPropertyLabel,
       formattedValue: (
         <div className="flex items-center space-x-1">
-          {getChainLogo(chainId, 14)}
-          <span>{getChainLabel(chainId)}</span>
+          {getChainLogo(chain_id, 14)}
+          <span>{getChainLabel(chain_id)}</span>
         </div>
       ),
     },
     {
       propertyLabel: ownerPropertyLabel,
-      formattedValue: ownerAddress,
+      formattedValue: owner_address,
       enableCopyToClipboard: true,
-      value: ownerAddress,
-    },
-    {
-      propertyLabel: floorPricePropertyLabel,
-      formattedValue:
-        floorPrice && priceUnit ? `${floorPrice} ${priceUnit}` : undefined,
+      value: owner_address,
     },
     {
       propertyLabel: assetsIdPropertyLabel,
-      formattedValue: tokenId,
+      formattedValue: token_id,
       enableCopyToClipboard: true,
-      value: tokenId,
+      value: token_id,
     },
     {
       propertyLabel: creatorWalletAddressPropertyLabel,
-      formattedValue: contractAddress,
+      formattedValue: token_address,
       enableCopyToClipboard: true,
-      value: contractAddress,
+      value: token_address,
     },
   ];
 

@@ -1,10 +1,9 @@
 import React from "react";
-import { AssetPriceChip } from "components/molecules";
-import { Collectible } from "lib/types";
+import { NftToken } from "lib/types";
 import { AssetMedia, SkeletonBase } from "components/atoms";
 
 type CollectibleCardProps = {
-  collectible: Collectible;
+  collectible: NftToken;
   variant?: "standard" | "compact";
 } & Omit<React.ComponentPropsWithoutRef<"div">, "children">;
 
@@ -16,31 +15,26 @@ export const CollectibleCard: React.FC<CollectibleCardProps> = (props) => {
   return (
     <div {...otherProps}>
       <div className="flex flex-col items-start space-y-2">
-        <div className="relative">
+        <div className="relative w-full">
           <AssetMedia
-            src={collectible.media}
-            alt={collectible.tokenLabel}
+            className="aspect-square w-full"
+            source={collectible.metadata.image}
+            alt={collectible.metadata.name || "Collectible"}
             radius={variant === "compact" ? "rounded-lg" : "rounded-xl"}
           />
-          {collectible.floorPrice && collectible.priceUnit && (
-            <div className="absolute bottom-0 left-0 ml-1 mb-1 max-w-full pr-2">
-              <AssetPriceChip
-                variant={variant}
-                chain={collectible.chainId}
-                price={collectible.floorPrice}
-                unit={collectible.priceUnit}
-              />
-            </div>
-          )}
         </div>
         {variant !== "compact" && (
           <div className="flex max-w-full flex-col items-start">
-            <p className="w-full truncate text-primary/60">
-              {collectible.collectionLabel}
-            </p>
-            <p className="w-full font-bold line-clamp-2">
-              {collectible.tokenLabel}
-            </p>
+            {collectible.name ? (
+              <p className="w-full truncate text-primary/60">
+                {collectible.name}
+              </p>
+            ) : null}
+            {collectible.metadata.name ? (
+              <p className="w-full font-bold line-clamp-2">
+                {collectible.metadata.name}
+              </p>
+            ) : null}
           </div>
         )}
       </div>

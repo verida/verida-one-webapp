@@ -67,9 +67,9 @@ export const BadgesSection: React.FC<BadgesSectionProps> = ({ badges }) => {
           >
             {truncatedBadgeList.map((badge) => (
               <BadgeMosaicItem
-                key={`${badge.chainId}/${badge.contractAddress}/${badge.tokenId}`}
+                key={`${badge.chain_id}/${badge.token_address}/${badge.token_id}`}
                 badge={badge}
-                to={`badges/${badge.chainId}/${badge.contractAddress}/${badge.tokenId}`}
+                to={`badges/${badge.chain_id}/${badge.token_address}/${badge.token_id}`}
                 disableShadow // FIXME: Enable shadow under tiles by fixing edges underlapping
               />
             ))}

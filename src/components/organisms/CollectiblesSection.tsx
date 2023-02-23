@@ -1,13 +1,13 @@
 import React, { useCallback } from "react";
 import { useIntl } from "react-intl";
 import { CollectibleCard, ProfileSectionWrapper } from "components/molecules";
-import { Collectible } from "lib/types";
+import { NftToken } from "lib/types";
 import { Button } from "components/atoms";
 import { Link, useNavigate } from "react-router-dom";
 import { MAX_COLLECTIBLES_IN_PROFILE_SECTION } from "lib/constants";
 
 type CollectiblesSectionProps = {
-  collectibles?: Collectible[];
+  collectibles?: NftToken[];
 };
 
 /** Section for the Profile page rendering the list of Collectibles */
@@ -66,11 +66,11 @@ export const CollectiblesSection: React.FC<CollectiblesSectionProps> = (
       <ul className="grid snap-x snap-mandatory auto-cols-[160px] gap-2 overflow-x-auto pb-4 max-sm:grid-flow-col sm:grid-cols-4">
         {truncatedCollectiblesList.map((collectible) => (
           <li
-            key={`${collectible.chainId}/${collectible.contractAddress}/${collectible.tokenId}`}
+            key={`${collectible.chain_id}/${collectible.token_address}/${collectible.token_id}`}
             className="snap-start transition-all"
           >
             <Link
-              to={`collectibles/${collectible.chainId}/${collectible.contractAddress}/${collectible.tokenId}`}
+              to={`collectibles/${collectible.chain_id}/${collectible.token_address}/${collectible.token_id}`}
             >
               <CollectibleCard variant="standard" collectible={collectible} />
             </Link>
