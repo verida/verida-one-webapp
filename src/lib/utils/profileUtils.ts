@@ -4,7 +4,7 @@ import { config } from "lib/config";
 import { DID_VDA_METHOD, VERIDA_ONE_PROFILE_RECORD_ID } from "lib/constants";
 import { ProfileDataSchema } from "lib/schemas";
 import {
-  Collectible,
+  NftToken,
   FeaturedAsset,
   IdentityInfo,
   ProfileData,
@@ -24,7 +24,7 @@ export const getIdentityInfo = async (
 ): Promise<IdentityInfo> => {
   // TODO: Remove this check as it's only for mock data
   if (!did.startsWith(DID_VDA_METHOD)) {
-    return getMockIdentityInfo(did);
+    return getMockIdentityInfo();
   }
 
   const publicProfile = await getAnyPublicProfile(veridaClient, did);
@@ -43,7 +43,7 @@ export const getProfileData = async (
   did: string
 ): Promise<ProfileData> => {
   if (!did.startsWith(DID_VDA_METHOD)) {
-    return getMockProfileData(did);
+    return getMockProfileData();
   }
 
   const datastore = await getExternalDatastore(
@@ -93,20 +93,20 @@ export const getBadges = async (walletAddresses: WalletAddress[]) => {
 };
 
 export const filterFeaturedAssets = (
-  collectibles: Collectible[],
+  collectibles: NftToken[],
   featured: FeaturedAsset[]
-): Collectible[] => {
+): NftToken[] => {
   // TODO: Open up to a mix of Collectibles and Badges
   return featured
     .sort((a, b) => a.order - b.order)
     .map((asset) => {
       return collectibles.find((item) => {
         return (
-          asset.chainId === item.chainId &&
-          asset.contractAddress === item.contractAddress &&
-          asset.tokenId === item.tokenId
+          asset.chainId === item.chain_id &&
+          asset.contractAddress === item.token_address &&
+          asset.tokenId === item.token_id
         );
       });
     })
-    .filter((item): item is Collectible => item !== undefined);
+    .filter((item): item is NftToken => item !== undefined);
 };
