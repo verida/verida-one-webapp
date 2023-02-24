@@ -40,7 +40,6 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = (props) => {
     defaultMessage: "Featured",
   });
 
-  // TODO: Handle click on collectible when collectible page implemented
   return (
     <ProfileSectionWrapper title={sectionTitle}>
       <div className="flex flex-col space-y-3">
