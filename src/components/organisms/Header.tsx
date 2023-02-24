@@ -17,7 +17,10 @@ export const Header: React.FC = () => {
   const handleOpenSearchButton = useCallback(() => {
     setSearchOpen(true);
     // Give the time for the input to be visible, otherwise focus has no effect
-    setTimeout(() => searchFieldRef.current?.focus(), 500);
+    setTimeout(() => {
+      searchFieldRef.current?.focus();
+      // iOS has an issue with programmatic focus on input, focus works but it doesn't open the keyboard, no clear solution.
+    }, 50);
   }, []);
 
   const handleCloseSearchButton = useCallback(() => {
