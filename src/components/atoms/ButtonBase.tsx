@@ -8,6 +8,7 @@ type ButtonBaseProps = {
   variant?: ButtonVariant;
   size?: ButtonSize;
   shape?: ButtonShape;
+  disableHover?: boolean;
 } & Omit<React.ComponentPropsWithoutRef<"button">, "type">;
 
 export const ButtonBase: React.FunctionComponent<ButtonBaseProps> = (props) => {
@@ -15,6 +16,7 @@ export const ButtonBase: React.FunctionComponent<ButtonBaseProps> = (props) => {
     variant = "contained",
     size = "medium",
     shape = "standard",
+    disableHover = false,
     children,
     className = "",
     ...otherProps
@@ -36,7 +38,11 @@ export const ButtonBase: React.FunctionComponent<ButtonBaseProps> = (props) => {
 
   const background =
     variant === "text"
-      ? "hover:bg-background-button"
+      ? disableHover
+        ? ""
+        : "hover:bg-background-button"
+      : disableHover
+      ? ""
       : "bg-background-button hover:bg-background-button-hover";
 
   return (

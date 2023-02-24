@@ -180,7 +180,7 @@
     "description": "Message to show the identity has no Verida One profile information"
   },
   "SearchInputField.searchInputPlaceholder": {
-    "defaultMessage": "Search DID",
+    "defaultMessage": "Search for a DID",
     "description": "Placeholder for the search bar input field"
   },
   "SearchResult.noSearchResultMessage": {

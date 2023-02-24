@@ -1,7 +1,7 @@
 import React from "react";
 
 type ButtonVariant = "text" | "contained";
-type ButtonLinkSize = "small" | "medium" | "large" | "xlarge";
+type ButtonLinkSize = "no-margin" | "small" | "medium" | "large" | "xlarge";
 type ButtonLinkShape = "standard" | "square" | "circle";
 
 type ButtonLinkBaseProps = {
@@ -25,7 +25,9 @@ export const ButtonLinkBase: React.FunctionComponent<ButtonLinkBaseProps> = (
   } = props;
 
   const padding =
-    size === "small"
+    size === "no-margin"
+      ? `p-0`
+      : size === "small"
       ? `py-1.5 ${shape === "standard" ? "px-2" : "px-1.5"}`
       : size === "xlarge"
       ? `py-4.5 ${shape === "standard" ? "px-5" : "px-4.5"} w-full`
@@ -33,7 +35,12 @@ export const ButtonLinkBase: React.FunctionComponent<ButtonLinkBaseProps> = (
       ? `py-3.5 ${shape === "standard" ? "px-4" : "px-3.5"} w-full`
       : `py-2.5 ${shape === "standard" ? "px-4" : "px-2.5"}`;
 
-  const radius = shape === "circle" ? "rounded-full" : "rounded-xl";
+  const radius =
+    shape === "circle"
+      ? "rounded-full"
+      : size === "no-margin" || size === "small"
+      ? "rounded-lg"
+      : "rounded-xl";
 
   const background =
     variant === "text"

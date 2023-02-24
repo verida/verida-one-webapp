@@ -1,4 +1,5 @@
 export * from "./chains";
+export * from "./events";
 export * from "./meta";
 export * from "./profile";
 export * from "./socialMedia";
