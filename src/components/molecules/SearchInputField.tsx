@@ -28,7 +28,7 @@ export const SearchInputField: React.FunctionComponent<
   const searchInputPlaceholder = i18n.formatMessage({
     id: "SearchInputField.searchInputPlaceholder",
     description: "Placeholder for the search bar input field",
-    defaultMessage: "Search a DID",
+    defaultMessage: "Search for a DID",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
