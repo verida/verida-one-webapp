@@ -5,7 +5,7 @@ import {
   CustomLink,
   ProfileSectionWrapper,
 } from "components/molecules";
-import { Collectible, CustomLink as CustomLinkType } from "lib/types";
+import { NftToken, CustomLink as CustomLinkType } from "lib/types";
 import { Link } from "react-router-dom";
 import {
   screenSizes,
@@ -15,7 +15,7 @@ import {
 import { SkeletonBase } from "components/atoms";
 
 type FeaturedSectionProps = {
-  collectibles?: Collectible[];
+  collectibles?: NftToken[];
   links?: CustomLinkType[];
 };
 
@@ -40,7 +40,6 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = (props) => {
     defaultMessage: "Featured",
   });
 
-  // TODO: Handle click on collectible when collectible page implemented
   return (
     <ProfileSectionWrapper title={sectionTitle}>
       <div className="flex flex-col space-y-3">
@@ -50,10 +49,10 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = (props) => {
               .slice(0, MAX_ASSETS_IN_FEATURED_SECTION)
               .map((collectible) => (
                 <li
-                  key={`${collectible.chainId}/${collectible.contractAddress}/${collectible.tokenId}`}
+                  key={`${collectible.chain_id}/${collectible.token_address}/${collectible.token_id}`}
                 >
                   <Link
-                    to={`collectibles/${collectible.chainId}/${collectible.contractAddress}/${collectible.tokenId}`}
+                    to={`collectibles/${collectible.chain_id}/${collectible.token_address}/${collectible.token_id}`}
                   >
                     <CollectibleCard
                       variant={mediaMatch ? "standard" : "compact"}

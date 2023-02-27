@@ -22,8 +22,8 @@ export const BadgeMosaicItem: React.FunctionComponent<HexagonProps> = (
       <HexagonBase className="flex items-center justify-center">
         <Link to={to} className="h-full w-full">
           <img
-            src={badge.media}
-            alt={badge.tokenLabel}
+            src={badge.metadata.image}
+            alt={badge.metadata.name || "Collectible"}
             className="h-full w-full object-cover"
           />
         </Link>

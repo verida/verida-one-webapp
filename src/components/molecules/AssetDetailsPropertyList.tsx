@@ -16,14 +16,7 @@ export const AssetDetailsPropertyList: React.FC<
       <ul className="space-y-4">
         {properties.map((property) => (
           <li key={property.propertyLabel}>
-            <AssetDetailsPropertyItem
-              label={property.propertyLabel}
-              valueToCopyToClipboard={
-                property.enableCopyToClipboard ? property.value : undefined
-              }
-            >
-              {property.formattedValue}
-            </AssetDetailsPropertyItem>
+            <AssetDetailsPropertyItem assetProperty={property} />
           </li>
         ))}
       </ul>

@@ -17,8 +17,8 @@
     background-size: cover, cover;
   }
 
-  /* Badge Assets background image */
-  .bg-badge {
+  /* Assets background image */
+  .bg-asset-media {
     background-image: url("./images/asset_background.png");
     background-repeat: no-repeat;
     background-size: cover;

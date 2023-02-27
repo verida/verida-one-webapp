@@ -27,9 +27,9 @@ export const CollectibleDetailsView: React.FunctionComponent = () => {
   } = useCollectibles(walletAddresses);
   const collectible = collectibles?.find(
     (item) =>
-      item.chainId === chain &&
-      item.contractAddress === contractAddress &&
-      item.tokenId === tokenId
+      item.chain_id === chain &&
+      item.token_address === contractAddress &&
+      item.token_id === tokenId
   );
 
   const redirectPath = identity ? `/${identity}` : `/`;
@@ -65,8 +65,8 @@ export const CollectibleDetailsView: React.FunctionComponent = () => {
     const viewInExplorerButton = (
       <ButtonLink
         url={getChainExplorerUrlForAddress(
-          collectible.chainId,
-          collectible.ownerAddress
+          collectible.chain_id,
+          collectible.owner_address
         )}
         target="_blank"
         rel="noopener"
@@ -78,21 +78,19 @@ export const CollectibleDetailsView: React.FunctionComponent = () => {
     return (
       <PageWrapper>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <div className="">
+          <div className="flex flex-col space-y-6">
             <AssetMedia
-              className="w-full"
-              aspect="aspect-auto"
-              src={collectible.media}
-              alt={collectible.tokenLabel}
+              source={collectible.metadata.image}
+              alt={collectible.metadata.name || "Collectible"}
             />
-            <div className="mt-6 hidden sm:block">{viewInExplorerButton}</div>
+            <div className="hidden sm:block">{viewInExplorerButton}</div>
           </div>
           <div>
             <AssetDetailsMainInfo
               className="mb-4"
-              collectionLabel={collectible.collectionLabel}
-              tokenLabel={collectible.tokenLabel}
-              description={collectible.description}
+              collectionLabel={collectible.name}
+              tokenLabel={collectible.metadata.name}
+              description={collectible.metadata.description}
             />
             <CollectibleDetailsProperties collectible={collectible} />
           </div>

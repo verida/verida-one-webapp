@@ -8,7 +8,7 @@
     "description": "Label of the 'chain' property for a badge"
   },
   "BadgeDetailsProperties.creatorWalletAddressPropertyLabel": {
-    "defaultMessage": "Creator wallet address",
+    "defaultMessage": "Creator",
     "description": "Label of the 'creatorWalletAddress' property for a badge"
   },
   "BadgeDetailsProperties.ownerPropertyLabel": {
@@ -64,12 +64,8 @@
     "description": "Label of the 'chain' property for a collectible"
   },
   "CollectibleDetailsProperties.creatorWalletAddressPropertyLabel": {
-    "defaultMessage": "Creator wallet address",
+    "defaultMessage": "Creator",
     "description": "Label of the 'creatorWalletAddress' property for a collectible"
-  },
-  "CollectibleDetailsProperties.floorPricePropertyLabel": {
-    "defaultMessage": "Floor price",
-    "description": "Label of the 'floorPrice' property for a collectible"
   },
   "CollectibleDetailsProperties.ownerPropertyLabel": {
     "defaultMessage": "Owner",

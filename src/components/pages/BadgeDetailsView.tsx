@@ -23,9 +23,9 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
   const { data: badges, isLoading, isError } = useBadges(walletAddresses);
   const badge = badges?.find(
     (item) =>
-      item.chainId === chain &&
-      item.contractAddress === contractAddress &&
-      item.tokenId === tokenId
+      item.chain_id === chain &&
+      item.token_address === contractAddress &&
+      item.token_id === tokenId
   );
 
   const redirectPath = identity ? `/${identity}` : `/`;
@@ -60,7 +60,7 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
   if (badge) {
     const viewInExplorerButton = (
       <ButtonLink
-        url={getChainExplorerUrlForAddress(badge.chainId, badge.ownerAddress)}
+        url={getChainExplorerUrlForAddress(badge.chain_id, badge.owner_address)}
         target="_blank"
         rel="noopener"
       >
@@ -71,23 +71,20 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
     return (
       <PageWrapper>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <div>
-            <div className="bg-badge flex items-center justify-center rounded-xl p-10">
-              <AssetMedia
-                className="w-full"
-                aspect="aspect-auto"
-                src={badge.media}
-                alt={badge.tokenLabel}
-              />
-            </div>
-            <div className="mt-6 hidden sm:block">{viewInExplorerButton}</div>
+          <div className="flex flex-col space-y-6">
+            <AssetMedia
+              className="bg-asset-media p-3"
+              source={badge.metadata.image}
+              alt={badge.metadata.name || "Badge"}
+            />
+            <div className="hidden sm:block">{viewInExplorerButton}</div>
           </div>
           <div>
             <AssetDetailsMainInfo
               className="mb-4"
-              collectionLabel={badge.collectionLabel}
-              tokenLabel={badge.tokenLabel}
-              description={badge.description}
+              collectionLabel={badge.name}
+              tokenLabel={badge.metadata.name}
+              description={badge.metadata.description}
             />
             <BadgeDetailsProperties badge={badge} />
           </div>
