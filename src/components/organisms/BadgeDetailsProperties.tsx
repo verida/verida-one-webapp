@@ -31,35 +31,41 @@ export const BadgeDetailsProperties: React.FC<BadgeDetailsPropertiesProps> = (
 
   const creatorWalletAddressPropertyLabel = i18n.formatMessage({
     id: "BadgeDetailsProperties.creatorWalletAddressPropertyLabel",
-    defaultMessage: "Creator wallet address",
+    defaultMessage: "Creator",
     description: "Label of the 'creatorWalletAddress' property for a badge",
   });
+
+  const chainLabel = getChainLabel(chain_id);
 
   const properties: AssetPropertyInfo[] = [
     {
       propertyLabel: chainPropertyLabel,
-      formattedValue: (
-        <div className="flex items-center space-x-1">
-          {getChainLogo(chain_id, 14)}
-          <span>{getChainLabel(chain_id)}</span>
-        </div>
+      valueToDisplay: (
+        <span className="flex items-center">
+          <span className="px-1.5">{getChainLogo(chain_id, 14)}</span>
+          <span className="truncate">{chainLabel}</span>
+        </span>
       ),
+      valueForTitle: chainLabel,
     },
     {
       propertyLabel: ownerPropertyLabel,
-      formattedValue: owner_address,
+      valueToDisplay: <span title={owner_address}>{owner_address}</span>,
+      valueForTitle: owner_address,
       enableCopyToClipboard: true,
-      value: owner_address,
+      valueToCopy: owner_address,
     },
     {
       propertyLabel: creatorWalletAddressPropertyLabel,
-      formattedValue: token_address,
+      valueToDisplay: token_address,
+      valueForTitle: token_address,
       enableCopyToClipboard: true,
-      value: token_address,
+      valueToCopy: token_address,
     },
     {
       propertyLabel: proofLabel,
-      formattedValue: proofValue,
+      valueToDisplay: proofValue,
+      valueForTitle: proofValue,
     },
   ];
 
