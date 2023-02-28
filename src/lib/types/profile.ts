@@ -1,3 +1,4 @@
+import { z } from "zod";
 import {
   CustomLinkSchema,
   FeaturedAssetSchema,
@@ -6,7 +7,6 @@ import {
   VerificationProofSchema,
   WalletAddressSchema,
 } from "lib/schemas";
-import { z } from "zod";
 import { Chains } from "./chains";
 
 export type VerificationProof = z.infer<typeof VerificationProofSchema>;
@@ -23,30 +23,20 @@ export type ProfileData = z.infer<typeof ProfileDataSchema>;
 
 // ================
 
-// TODO: Update Collectible and Badge types following what is returned by the API, when available.
-
-export interface Collectible {
-  chainId: Chains;
-  contractAddress: string;
-  tokenId: string;
-  collectionLabel: string;
-  tokenLabel: string;
-  description?: string;
-  ownerAddress: string;
-  media: string; // We could adjust if there's a need to have multi media (static, animated, ...)
-  priceUnit?: string;
-  floorPrice?: number;
-}
+// TODO: Update Badge types following what is returned by the API, when available.
 
 export interface Badge {
-  chainId: Chains;
-  contractAddress: string;
-  tokenId: string;
-  collectionLabel: string;
-  tokenLabel: string;
-  description?: string;
-  ownerAddress: string;
-  media: string;
-  proofLabel: string; // Not sure, but assumed it would be something like "Twitter handle"/"Verida DID"/... in a user-friendly format
-  proofValue: string; // Not sure, but assumed it would be the actual value of the proof
+  chain_id: Chains;
+  owner_address: string;
+  token_address: string;
+  token_id: string;
+  name: string | null;
+  metadata: {
+    name: string | null;
+    description: string | null;
+    image: string;
+    proofLabel: string; // Not sure, but assumed it would be something like "Twitter handle"/"Verida DID"/... in a user-friendly format
+    proofValue: string; // Not sure, but assumed it would be the actual value of the proof
+  };
+  isSBT: boolean;
 }

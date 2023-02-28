@@ -4,18 +4,14 @@ import { config } from "lib/config";
 import { DID_VDA_METHOD, VERIDA_ONE_PROFILE_RECORD_ID } from "lib/constants";
 import { ProfileDataSchema } from "lib/schemas";
 import {
-  Collectible,
+  NftToken,
   FeaturedAsset,
   IdentityInfo,
   ProfileData,
   WalletAddress,
 } from "lib/types";
-import {
-  getMockBadges,
-  getMockCollectibles,
-  getMockIdentityInfo,
-  getMockProfileData,
-} from "mock";
+import { getMockBadges, getMockIdentityInfo, getMockProfileData } from "mock";
+import { getNfts, walletProviderSupportedChainsForNft } from "lib/api";
 import { getAnyPublicProfile, getExternalDatastore } from "./veridaUtils";
 
 export const getIdentityInfo = async (
@@ -24,7 +20,7 @@ export const getIdentityInfo = async (
 ): Promise<IdentityInfo> => {
   // TODO: Remove this check as it's only for mock data
   if (!did.startsWith(DID_VDA_METHOD)) {
-    return getMockIdentityInfo(did);
+    return getMockIdentityInfo();
   }
 
   const publicProfile = await getAnyPublicProfile(veridaClient, did);
@@ -43,7 +39,7 @@ export const getProfileData = async (
   did: string
 ): Promise<ProfileData> => {
   if (!did.startsWith(DID_VDA_METHOD)) {
-    return getMockProfileData(did);
+    return getMockProfileData();
   }
 
   const datastore = await getExternalDatastore(
@@ -70,39 +66,49 @@ export const getProfileData = async (
   // Later the best way will likely be to wrap them in app-specific Errors, such as new ProfileNotFoundError(), or new ProfileNotValidError().
 };
 
-export const getCollectibles = async (walletAddresses: WalletAddress[]) => {
-  if (walletAddresses) {
-    return getMockCollectibles();
-    // As we don't have the identity, we will have the default mock data (ryan)
+export const getCollectibles = async (
+  walletAddresses: WalletAddress[],
+  abortSignal?: AbortSignal
+) => {
+  // Filter and format the address for the API
+  const addresses = walletAddresses
+    .filter((address) =>
+      walletProviderSupportedChainsForNft.includes(address.chainId)
+    )
+    .map((address) => `${address.chainId}:${address.address}`);
+
+  if (addresses.length === 0) {
+    return [];
   }
 
-  // TODO: Implement fetching collectibles
+  return await getNfts(addresses, abortSignal);
 };
 
 export const getBadges = async (walletAddresses: WalletAddress[]) => {
+  // TODO: Remove use of mock data
   if (walletAddresses) {
     return getMockBadges();
-    // As we don't have the identity, we will have the default mock data (ryan)
   }
 
   // TODO: Implement fetching badges
+  return Promise.resolve([]);
 };
 
 export const filterFeaturedAssets = (
-  collectibles: Collectible[],
+  collectibles: NftToken[],
   featured: FeaturedAsset[]
-): Collectible[] => {
+): NftToken[] => {
   // TODO: Open up to a mix of Collectibles and Badges
   return featured
     .sort((a, b) => a.order - b.order)
     .map((asset) => {
       return collectibles.find((item) => {
         return (
-          asset.chainId === item.chainId &&
-          asset.contractAddress === item.contractAddress &&
-          asset.tokenId === item.tokenId
+          asset.chainId === item.chain_id &&
+          asset.contractAddress === item.token_address &&
+          asset.tokenId === item.token_id
         );
       });
     })
-    .filter((item): item is Collectible => item !== undefined);
+    .filter((item): item is NftToken => item !== undefined);
 };

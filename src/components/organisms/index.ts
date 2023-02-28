@@ -1,6 +1,6 @@
 export * from "./AssetDetailsMainInfo";
 export * from "./BadgeDetailsProperties";
-export * from "./BadgeGrid";
+export * from "./BadgeMosaic";
 export * from "./BadgesSection";
 export * from "./CollectibleDetailsProperties";
 export * from "./CollectibleGrid";
@@ -9,7 +9,9 @@ export * from "./CustomLinksSection";
 export * from "./FeaturedSection";
 export * from "./Footer";
 export * from "./Header";
+export * from "./HeaderSearchBar";
 export * from "./IdentityInfoSection";
+export * from "./SearchResult";
 export * from "./ShareModal";
 export * from "./ShareModalProfileContent";
 export * from "./ShareModalSocialMediaContent";

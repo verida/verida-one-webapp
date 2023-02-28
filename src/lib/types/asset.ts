@@ -2,7 +2,8 @@ import React from "react";
 
 export type AssetPropertyInfo = {
   propertyLabel: string;
-  value?: string;
-  formattedValue?: React.ReactNode;
+  valueToDisplay?: React.ReactNode;
+  valueToCopy?: string;
+  valueForTitle?: string;
   enableCopyToClipboard?: boolean;
 };

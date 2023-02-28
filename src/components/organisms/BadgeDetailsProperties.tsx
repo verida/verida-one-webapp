@@ -8,12 +8,13 @@ type BadgeDetailsPropertiesProps = {
   badge: Badge;
 } & React.ComponentPropsWithRef<"div">;
 
+/** Comnponent displaying the properties of a Badge. */
 export const BadgeDetailsProperties: React.FC<BadgeDetailsPropertiesProps> = (
   props
 ) => {
   const { badge, ...divProps } = props;
-  const { chainId, contractAddress, proofValue, ownerAddress, proofLabel } =
-    badge;
+  const { chain_id, token_address, metadata, owner_address } = badge;
+  const { proofLabel, proofValue } = metadata;
   const i18n = useIntl();
 
   const chainPropertyLabel = i18n.formatMessage({
@@ -30,35 +31,41 @@ export const BadgeDetailsProperties: React.FC<BadgeDetailsPropertiesProps> = (
 
   const creatorWalletAddressPropertyLabel = i18n.formatMessage({
     id: "BadgeDetailsProperties.creatorWalletAddressPropertyLabel",
-    defaultMessage: "Creator wallet address",
+    defaultMessage: "Creator",
     description: "Label of the 'creatorWalletAddress' property for a badge",
   });
+
+  const chainLabel = getChainLabel(chain_id);
 
   const properties: AssetPropertyInfo[] = [
     {
       propertyLabel: chainPropertyLabel,
-      formattedValue: (
-        <div className="flex items-center space-x-1">
-          {getChainLogo(chainId, 14)}
-          <span>{getChainLabel(chainId)}</span>
-        </div>
+      valueToDisplay: (
+        <span className="flex items-center">
+          <span className="px-1.5">{getChainLogo(chain_id, 14)}</span>
+          <span className="truncate">{chainLabel}</span>
+        </span>
       ),
+      valueForTitle: chainLabel,
     },
     {
       propertyLabel: ownerPropertyLabel,
-      formattedValue: ownerAddress,
+      valueToDisplay: <span title={owner_address}>{owner_address}</span>,
+      valueForTitle: owner_address,
       enableCopyToClipboard: true,
-      value: ownerAddress,
+      valueToCopy: owner_address,
     },
     {
       propertyLabel: creatorWalletAddressPropertyLabel,
-      formattedValue: contractAddress,
+      valueToDisplay: token_address,
+      valueForTitle: token_address,
       enableCopyToClipboard: true,
-      value: contractAddress,
+      valueToCopy: token_address,
     },
     {
       propertyLabel: proofLabel,
-      formattedValue: proofValue,
+      valueToDisplay: proofValue,
+      valueForTitle: proofValue,
     },
   ];
 

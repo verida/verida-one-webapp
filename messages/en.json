@@ -8,7 +8,7 @@
     "description": "Label of the 'chain' property for a badge"
   },
   "BadgeDetailsProperties.creatorWalletAddressPropertyLabel": {
-    "defaultMessage": "Creator wallet address",
+    "defaultMessage": "Creator",
     "description": "Label of the 'creatorWalletAddress' property for a badge"
   },
   "BadgeDetailsProperties.ownerPropertyLabel": {
@@ -64,12 +64,8 @@
     "description": "Label of the 'chain' property for a collectible"
   },
   "CollectibleDetailsProperties.creatorWalletAddressPropertyLabel": {
-    "defaultMessage": "Creator wallet address",
+    "defaultMessage": "Creator",
     "description": "Label of the 'creatorWalletAddress' property for a collectible"
-  },
-  "CollectibleDetailsProperties.floorPricePropertyLabel": {
-    "defaultMessage": "Floor price",
-    "description": "Label of the 'floorPrice' property for a collectible"
   },
   "CollectibleDetailsProperties.ownerPropertyLabel": {
     "defaultMessage": "Owner",
@@ -147,10 +143,6 @@
     "defaultMessage": "Documentation",
     "description": "Label of the 'Documentation' Link in the footer section"
   },
-  "Footer.logoAlt": {
-    "defaultMessage": "Verida One Logo",
-    "description": "Alternate text for the footer logo image"
-  },
   "Footer.termsAndConditionLinkLabel": {
     "defaultMessage": "Terms & Conditions",
     "description": "Label of the 'Terms and Condition' Link in the footer footer section"
@@ -182,6 +174,14 @@
   "ProfileView.notProfileDataMessage": {
     "defaultMessage": "This user is not sharing other public information",
     "description": "Message to show the identity has no Verida One profile information"
+  },
+  "SearchInputField.searchInputPlaceholder": {
+    "defaultMessage": "Search for a DID",
+    "description": "Placeholder for the search bar input field"
+  },
+  "SearchResult.noSearchResultMessage": {
+    "defaultMessage": "No profile found",
+    "description": "Message indicating that no profiles were found in the search list"
   },
   "ShareModal.shareModalTitle": {
     "defaultMessage": "Share",

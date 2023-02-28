@@ -1,26 +1,20 @@
-import { AssetPropertyInfo, Collectible } from "lib/types";
+import { AssetPropertyInfo, NftToken } from "lib/types";
 import React from "react";
 import { useIntl } from "react-intl";
 import { getChainLabel, getChainLogo } from "lib/utils";
 import { AssetDetailsPropertyList } from "components/molecules";
 
 type CollectibleDetailsPropertiesProps = {
-  collectible: Collectible;
+  collectible: NftToken;
 } & React.ComponentPropsWithRef<"div">;
 
+/** Comnponent displaying the properties of a Collectible. */
 export const CollectibleDetailsProperties: React.FC<
   CollectibleDetailsPropertiesProps
 > = (props) => {
   const { collectible, ...divProps } = props;
 
-  const {
-    chainId,
-    contractAddress,
-    tokenId,
-    floorPrice,
-    priceUnit,
-    ownerAddress,
-  } = collectible;
+  const { chain_id, owner_address, token_address, token_id } = collectible;
 
   const i18n = useIntl();
 
@@ -36,12 +30,6 @@ export const CollectibleDetailsProperties: React.FC<
     description: "Label of the 'owner' property for a collectible",
   });
 
-  const floorPricePropertyLabel = i18n.formatMessage({
-    id: "CollectibleDetailsProperties.floorPricePropertyLabel",
-    defaultMessage: "Floor price",
-    description: "Label of the 'floorPrice' property for a collectible",
-  });
-
   const assetsIdPropertyLabel = i18n.formatMessage({
     id: "CollectibleDetailsProperties.assetsIdPropertyLabel",
     defaultMessage: "Asset Id",
@@ -50,43 +38,44 @@ export const CollectibleDetailsProperties: React.FC<
 
   const creatorWalletAddressPropertyLabel = i18n.formatMessage({
     id: "CollectibleDetailsProperties.creatorWalletAddressPropertyLabel",
-    defaultMessage: "Creator wallet address",
+    defaultMessage: "Creator",
     description:
       "Label of the 'creatorWalletAddress' property for a collectible",
   });
 
+  const chainLabel = getChainLabel(chain_id);
+
   const properties: AssetPropertyInfo[] = [
     {
       propertyLabel: chainPropertyLabel,
-      formattedValue: (
-        <div className="flex items-center space-x-1">
-          {getChainLogo(chainId, 14)}
-          <span>{getChainLabel(chainId)}</span>
-        </div>
+      valueToDisplay: (
+        <span className="flex items-center">
+          <span className="px-1.5">{getChainLogo(chain_id, 14)}</span>
+          <span className="truncate">{chainLabel}</span>
+        </span>
       ),
+      valueForTitle: chainLabel,
     },
     {
       propertyLabel: ownerPropertyLabel,
-      formattedValue: ownerAddress,
+      valueToDisplay: owner_address,
+      valueForTitle: owner_address,
       enableCopyToClipboard: true,
-      value: ownerAddress,
-    },
-    {
-      propertyLabel: floorPricePropertyLabel,
-      formattedValue:
-        floorPrice && priceUnit ? `${floorPrice} ${priceUnit}` : undefined,
+      valueToCopy: owner_address,
     },
     {
       propertyLabel: assetsIdPropertyLabel,
-      formattedValue: tokenId,
+      valueToDisplay: token_id,
+      valueForTitle: token_id,
       enableCopyToClipboard: true,
-      value: tokenId,
+      valueToCopy: token_id,
     },
     {
       propertyLabel: creatorWalletAddressPropertyLabel,
-      formattedValue: contractAddress,
+      valueToDisplay: token_address,
+      valueForTitle: token_address,
       enableCopyToClipboard: true,
-      value: contractAddress,
+      valueToCopy: token_address,
     },
   ];
 

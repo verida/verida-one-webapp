@@ -25,17 +25,18 @@ const schemasURL = {
     "https://common.schemas.verida.io/veridaOne/profile/v0.1.0/schema.json",
 };
 
+// API
+const walletProviderApiBaseUrl =
+  process.env.REACT_APP_WALLET_PROVIDER_API_BASE_URL;
+
 // Feature flags variables
 const isDevFeaturesEnabled =
   process.env.REACT_APP_ENABLE_DEV_FEATURES === "true";
 
 const features = {
-  // This object allows a management per feature, with dedicated env var if needed
-  isSearchEnabled: isDevFeaturesEnabled,
-  isSharingEnabled: isDevFeaturesEnabled,
+  // This object allows a management per feature
+  // Add dedicated feature env var if needed
   isVeridaConnectEnabled: isDevFeaturesEnabled,
-  isQueryProfileEnabled: isDevFeaturesEnabled,
-  isFetchTokensEnabled: isDevFeaturesEnabled,
 };
 
 const isMockDataEnabled = process.env.REACT_APP_ENABLE_MOCK_DATA === "true";
@@ -46,6 +47,7 @@ export const config = {
   veridaOneContextName,
   veridaLogoUrl,
   schemasURL,
+  walletProviderApiBaseUrl,
   features,
   isMockDataEnabled,
 };
