@@ -14,16 +14,28 @@ yarn install
 
 Some environment variables are required for the application to run. Have a look at the provided examples.
 
-Copy `.env.example`, rename it to `.env.local` and modify the variables for your local environment.
+Copy `.env.example`, rename it to `.env` and modify the variables for your local environment.
 
 ```
-cp .env.example .env.local
+cp .env.example .env
 ```
 
 ### Run
 
+The application is composed of a frontend and a server. The server merely allows the update of the meta tags dynamically before serving the index.html.
+
+Due to current limitations, the server only serves the build folder of the frontend, so doesn't allow hot reloading of the frontend. During development, we recommend to focus on one of them and run their dedicated command.
+
+The frontend can be started with its dedicated development server supporting hot reloading:
+
 ```
-yarn run start
+yarn run start:dev
+```
+
+The server can be started via the following command (serving the build folder of the frontend):
+
+```
+yarn run start:server:dev
 ```
 
 ### Features in development
@@ -111,9 +123,47 @@ yarn run build
 
 Messages are compiled automatically before the build.
 
+Note: The server part is currently written in javascript and doesn't require any build phase.
+
 ## Deployment
 
-The repository is platform agnostic. The build process generates a `build` folder with the static files to be served.
+Before building and deploying, set the environment variables according to your platform. See the required variables in `.env.example`.
+The variables `NODE_ENV` must be set to the value `production` for an optimised bundle. This is usually done by default on most platform.
 
-Set the environment variables according to your platform. See the required variables in `.env.example`.
-The variables `NODE_ENV` must be set to the value `production`. This is usually done by default on most platform.
+The build command generates a build folder with the bundled static files of the frontend.
+
+From there, several deployment options are possible.
+
+- Static files on a CDN or equivalent
+- Server + local static files
+- A mix of the above: server + static files a CDN location.
+
+### Static files
+
+This option prevent the meta tags from being dynamically updated before serving the page.
+
+The build folder can be deployed to a CDN or equivalent (Netlify, Amplify, S3 web hosting, ..., heroku with the create-react-app buildpack fall in this options as well).
+
+### Server + local static files
+
+This option allows dynamically setting the meta tags before serving the page.
+
+Deploy the server and build the frontend alongside it so that it serves the static files straight from the build folder.
+
+The server has two entry points:
+
+- `servers.js` for a server environment (EC2, Heroku with no particular buildpack, ...)
+- `handler.js` for a serverless environment (Lambda, ...)
+
+### Server + external static files
+
+This option allows dynamically setting the meta tags before serving the page.
+
+For this method to work, all the resources must be referenced with an absolute path, for instance `https://cdn.verida.one/favicon.png` instead of just `/favicon.png`. The environment variable `PUBLIC_URL` is use to that effect. CRA/Webpack prepends the variable to the path to the resources when building the frontend, so ensure to set this environment variable with the location where you will deploy the static files before building the frontend. After building, you can deploy on a CDN such as S3 + CloudFront.
+
+The server, is deployed in a similar way as the previous option. The difference being it must be aware of the location of the resources. The same environment variable `PUBLIC_URL` is used to determine if it should fetch the `index.html` locally or from the specified location. So do not forget to set the variable before running the server, for instance `PUBLIC_URL=https://cdn.verida.one`
+
+Once again, the server has two entry points:
+
+- `servers.js` for a server environment (EC2, Heroku with no particular buildpack, ...)
+- `handler.js` for a serverless environment (Lambda, ...)
