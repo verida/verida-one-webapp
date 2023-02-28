@@ -1,47 +1,66 @@
-import express from "express";
-import path from "path";
-import fs from "fs";
-import cors from "cors";
-import { titleRegExp, urlRegExp, defaultTitle, defaultUrl } from "./meta.mjs";
-import { getNameFromIdentity } from "./verida.mjs";
+import * as dotenv from "dotenv";
+dotenv.config();
 
-console.debug("Starting server");
+import path from "path";
+import express from "express";
+import cors from "cors";
+import axios from "axios";
+import { titleRegExp, urlRegExp } from "./meta.mjs";
+import {
+  buildMetaValues,
+  getFileContent,
+  getNameFromRequest,
+} from "./utils.mjs";
+
+console.log("Configuring server");
 
 const app = express();
-
 app.use(cors());
 
-app.use(express.static(path.join(process.cwd(), "build"), { index: false }));
+// Get the location of the resources
+const RESOURCES_URL = process.env.PUBLIC_URL;
+// If the url is an absolute url, the resources are not local
+const hasLocalResources = RESOURCES_URL?.startsWith("http") ? false : true;
 
-// View engine replacing meta placeholder in index.html
-app.engine("html", (filePath, options, callback) => {
-  fs.readFile(filePath, (err, content) => {
-    if (err) return callback(err);
-    const rendered = content
-      .toString()
-      .replace(titleRegExp, options.title || defaultTitle)
-      .replace(urlRegExp, options.url || defaultUrl);
-    return callback(null, rendered);
-  });
-});
-app.set("views", path.join(process.cwd(), "build"));
-app.set("view engine", "html");
+const BUILD_FOLDER_PATH = path.join(process.cwd(), "build");
 
-// Route controler returning the rendered html file
+if (hasLocalResources) {
+  // if the frontend static resources stayed local, serve the build folder. Except for the index file, which will be dynamically served.
+  app.use(express.static(BUILD_FOLDER_PATH, { index: false }));
+}
+
+// Route controler returning the rendered html content
 app.get("/*", async function (req, res) {
-  let identityName = undefined;
+  try {
+    // Extract the identity from the request info
+    const identityName = await getNameFromRequest(req);
+    const { title, url } = buildMetaValues(req, identityName);
 
-  // Extract the identity from the route path
-  const paths = req.path.split("/");
-  const identity = paths[1];
-  // The identity param, if exists, is the second items in the split
+    let html;
+    if (hasLocalResources) {
+      // Get the html content locally
+      html = await getFileContent(`${BUILD_FOLDER_PATH}/index.html`);
+    } else {
+      // Get the index.html from the resources location
+      const response = await axios.get(RESOURCES_URL);
+      html = response.data;
+    }
 
-  identityName = await getNameFromIdentity(identity);
+    // Replace the placeholders in the html by the actual meta values
+    const rendered = html
+      .toString()
+      .replace(titleRegExp, title)
+      .replace(urlRegExp, url);
 
-  res.render("index", {
-    title: identityName ? `${identityName} - ${defaultTitle}` : undefined,
-    url: `${req.protocol}://${req.headers.host}${req.originalUrl}`,
-  });
+    // Return the dynamically rendered html content
+    res.setHeader("Content-Type", "text/html");
+    res.send(rendered);
+  } catch (error) {
+    console.error(error);
+    res.send("Error");
+  }
 });
+
+console.log("Server configured");
 
 export default app;
