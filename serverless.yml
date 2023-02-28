@@ -1,0 +1,12 @@
+service: verida-one
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+  app:
+    handler: server/handler.handler
+    events:
+      - http: ANY /
+      - http: "ANY /{proxy+}"
