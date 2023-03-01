@@ -1,24 +1,31 @@
-name: Build
+name: Build and Deploy
 
 on:
+  workflow_dispatch:
+  pull_request:
   push:
     branches:
-      - "**"
+      - "main"
+      - "develop"
 
-  pull_request:
-    branches: 
-      - "**"
+# This allows a subsequently queued workflow run to interrupt previous runs
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
 
-  workflow_dispatch:
+# Set the environment variables from the repository configuration variables
+env:
+  PUBLIC_URL: ${{ vars.RESOURCES_CDN_URL }}
 
 jobs:
   build:
+    name: Build and test frontend
     runs-on: ubuntu-latest
-        
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2.5.0
-        
+
       - name: Define node version
         run: echo "NODE_VERSION=$(cat .nvmrc)" >> $GITHUB_ENV
 
@@ -29,10 +36,60 @@ jobs:
           cache: yarn
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install --frozen-lockfile
 
-      - name: Test app
+      - name: Test frontend
         run: yarn run test
 
-      - name: Build app
+      - run: echo "Building with PUBLIC_URL=$PUBLIC_URL"
+
+      - name: Build frontend
         run: yarn run build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: build-folder
+          path: build
+          retention-days: 30
+
+  deployS3:
+    name: Deploy frontend to S3
+    if: github.repository == 'verida/verida-one-webapp'
+    needs: build
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 5
+
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3.0.2
+        with:
+          name: build-folder
+
+      - name: Deploy to S3
+        uses: jakejarvis/s3-sync-action@v0.5.1
+        with:
+          args: --acl public-read --follow-symlinks --delete --exclude '.git*/*'
+        env:
+          SOURCE_DIR: 'build'
+          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET }}
+          AWS_REGION: ${{ secrets.S3_BUCKET_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_TESTNET_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_TESTNET_SECRET_KEY }}
+
+  invalidateCF:
+    name: Invalidate CloudFront
+    if: github.repository == 'verida/verida-one-webapp'
+    needs: deployS3
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Invalidate
+      uses: chetan/invalidate-cloudfront-action@v2
+      env:
+        DISTRIBUTION: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+        PATHS: '/'
+        AWS_REGION: ${{ secrets.CLOUDFRONT_DISTRIBUTION_REGION }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_TESTNET_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_TESTNET_SECRET_KEY }}
