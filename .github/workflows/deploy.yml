@@ -13,8 +13,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ inputs.environment || 'development_testnet' }}
 
 jobs:
-  build:
-    name: Build and test frontend
+  deploy:
+    name: Deploy
+    if: github.repository == 'verida/verida-one-webapp'
     environment:
       name: ${{ inputs.environment || 'development_testnet' }}
       url: ${{ vars.URL }}
@@ -32,7 +33,14 @@ jobs:
 
     steps:
       - name: Environment variables
-        run: echo "PUBLIC_URL=$PUBLIC_URL"
+        run: |
+          echo "NODE_ENV=$NODE_ENV"
+          echo "REACT_APP_VERIDA_ONE_CONTEXT_NAME=$REACT_APP_VERIDA_ONE_CONTEXT_NAME"
+          echo "REACT_APP_PROFILE_SCHEMA_URL=$REACT_APP_PROFILE_SCHEMA_URL"
+          echo "REACT_APP_WALLET_PROVIDER_API_BASE_URL=$REACT_APP_WALLET_PROVIDER_API_BASE_URL"
+          echo "REACT_APP_ENABLE_DEV_FEATURES=$REACT_APP_ENABLE_DEV_FEATURES"
+          echo "REACT_APP_ENABLE_MOCK_DATA=$REACT_APP_ENABLE_MOCK_DATA"
+          echo "PUBLIC_URL=$PUBLIC_URL"
 
       - name: Checkout repository
         uses: actions/checkout@v2.5.0
@@ -61,50 +69,22 @@ jobs:
           name: build
           path: build
 
-  deployS3:
-    name: Deploy frontend to S3
-    if: github.repository == 'verida/verida-one-webapp'
-    needs: build
-    environment:
-      name: ${{ inputs.environment || 'development_testnet' }}
-      url: ${{ vars.URL }}
-    runs-on: ubuntu-latest
-
-    timeout-minutes: 5
-
-    steps:
-      - name: Download build artifacts
-        id: download
-        uses: actions/download-artifact@v3.0.2
-        with:
-          name: build
-
       - name: Deploy to S3
         uses: jakejarvis/s3-sync-action@v0.5.1
         with:
           args: --acl public-read --follow-symlinks --delete --exclude '.git*/*'
         env:
-          SOURCE_DIR: ${{steps.download.outputs.download-path}}
-          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET }}
+          SOURCE_DIR: 'build'
           AWS_REGION: ${{ secrets.S3_BUCKET_REGION }}
+          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-  invalidateCF:
-    name: Invalidate CloudFront
-    if: github.repository == 'verida/verida-one-webapp'
-    needs: deployS3
-    environment:
-      name: ${{ inputs.environment || 'development_testnet' }}
-      url: ${{ vars.URL }}
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Invalidate
-      uses: chetan/invalidate-cloudfront-action@v2
-      env:
-        DISTRIBUTION: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
-        PATHS: '/'
-        AWS_REGION: ${{ secrets.CLOUDFRONT_DISTRIBUTION_REGION }}
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Invalidate CloudFront
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+          PATHS: '/'
+          AWS_REGION: ${{ secrets.CLOUDFRONT_DISTRIBUTION_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
