@@ -5,14 +5,22 @@ on:
   push:
     branches:
       - "main"
+      - "develop"
 
 # This allows a subsequently queued workflow run to interrupt previous runs
 concurrency:
-  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  group: ${{ github.workflow }}-${{ github.ref }}
 
 # Set the environment variables from the repository configuration variables
 env:
+  NODE_ENV: ${{ vars.NODE_ENV }}
   PUBLIC_URL: ${{ vars.RESOURCES_CDN_URL }}
+  EXTEND_ESLINT: ${{ vars.EXTEND_ESLINT }}
+  REACT_APP_VERIDA_ONE_CONTEXT_NAME: ${{ vars.REACT_APP_VERIDA_ONE_CONTEXT_NAME }}
+  REACT_APP_PROFILE_SCHEMA_URL: ${{ vars.REACT_APP_PROFILE_SCHEMA_URL }}
+  REACT_APP_WALLET_PROVIDER_API_BASE_URL: ${{ vars.REACT_APP_WALLET_PROVIDER_API_BASE_URL }}
+  REACT_APP_ENABLE_DEV_FEATURES: ${{ vars.REACT_APP_ENABLE_DEV_FEATURES }}
+  REACT_APP_ENABLE_MOCK_DATA: ${{ vars.REACT_APP_ENABLE_MOCK_DATA }}
 
 jobs:
   build:
