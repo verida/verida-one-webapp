@@ -3,39 +3,47 @@ name: Build
 on:
   workflow_dispatch:
     inputs:
-      save-build:
+      save-artifact:
         description: 'Save build as artifact'
-        required: false
         type: boolean
+        required: false
+        default: false
   push:
-    branches-ignore:
-      - "main" # the deploy workflow already build and test on every push to main
   pull_request:
-    branches:
-      - "**"
 
-# This allows a subsequently queued workflow run to interrupt previous runs
+# Try to avoid having two runs when there's a push within a pull request
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-# Set the environment variables from the repository configuration variables
-env:
-  NODE_ENV: ${{ vars.NODE_ENV }}
-  PUBLIC_URL: ${{ vars.RESOURCES_CDN_URL }}
-  EXTEND_ESLINT: ${{ vars.EXTEND_ESLINT }}
-  REACT_APP_VERIDA_ONE_CONTEXT_NAME: ${{ vars.REACT_APP_VERIDA_ONE_CONTEXT_NAME }}
-  REACT_APP_PROFILE_SCHEMA_URL: ${{ vars.REACT_APP_PROFILE_SCHEMA_URL }}
-  REACT_APP_WALLET_PROVIDER_API_BASE_URL: ${{ vars.REACT_APP_WALLET_PROVIDER_API_BASE_URL }}
-  REACT_APP_ENABLE_DEV_FEATURES: ${{ vars.REACT_APP_ENABLE_DEV_FEATURES }}
-  REACT_APP_ENABLE_MOCK_DATA: ${{ vars.REACT_APP_ENABLE_MOCK_DATA }}
-
 jobs:
   build:
-    name: Build and test frontend
+    name: Build
     runs-on: ubuntu-latest
 
+    env:
+      EXTEND_ESLINT: 'true'
+      PUBLIC_URL: ${{ vars.RESOURCES_CDN_URL }}
+      NODE_ENV: ${{ vars.NODE_ENV || 'production' }}
+      REACT_APP_VERIDA_ONE_CONTEXT_NAME: ${{ vars.REACT_APP_VERIDA_ONE_CONTEXT_NAME }}
+      REACT_APP_VERIDA_ENV: ${{ vars.VERIDA_NETWORK }}
+      REACT_APP_PROFILE_SCHEMA_URL: ${{ vars.REACT_APP_PROFILE_SCHEMA_URL }}
+      REACT_APP_WALLET_PROVIDER_API_BASE_URL: ${{ vars.REACT_APP_WALLET_PROVIDER_API_BASE_URL }}
+      REACT_APP_ENABLE_DEV_FEATURES: ${{ vars.REACT_APP_ENABLE_DEV_FEATURES }}
+      REACT_APP_ENABLE_MOCK_DATA: ${{ vars.REACT_APP_ENABLE_MOCK_DATA }}
+
     steps:
+      - name: Environment variables
+        run: |
+          echo "NODE_ENV=$NODE_ENV"
+          echo "REACT_APP_VERIDA_ONE_CONTEXT_NAME=$REACT_APP_VERIDA_ONE_CONTEXT_NAME"
+          echo "REACT_APP_VERIDA_ENV=$REACT_APP_VERIDA_ENV"
+          echo "REACT_APP_PROFILE_SCHEMA_URL=$REACT_APP_PROFILE_SCHEMA_URL"
+          echo "REACT_APP_WALLET_PROVIDER_API_BASE_URL=$REACT_APP_WALLET_PROVIDER_API_BASE_URL"
+          echo "REACT_APP_ENABLE_DEV_FEATURES=$REACT_APP_ENABLE_DEV_FEATURES"
+          echo "REACT_APP_ENABLE_MOCK_DATA=$REACT_APP_ENABLE_MOCK_DATA"
+          echo "PUBLIC_URL=$PUBLIC_URL"
+
       - name: Checkout repository
         uses: actions/checkout@v2.5.0
 
@@ -58,7 +66,7 @@ jobs:
         run: yarn run build
 
       - name: Upload build artifacts
-        if:  ${{ inputs.save-build }}
+        if:  ${{ inputs.save-artifact }}
         uses: actions/upload-artifact@v3.1.2
         with:
           name: build
