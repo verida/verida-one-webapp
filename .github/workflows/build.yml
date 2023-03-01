@@ -23,6 +23,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Environment variables
+        run: echo "PUBLIC_URL=$PUBLIC_URL"
+
       - name: Checkout repository
         uses: actions/checkout@v2.5.0
 
@@ -40,9 +43,6 @@ jobs:
 
       - name: Test frontend
         run: yarn run test
-
-      - name: Environment variables
-        run: echo "PUBLIC_URL=$PUBLIC_URL"
 
       - name: Build frontend
         run: yarn run build
@@ -69,7 +69,7 @@ jobs:
         with:
           name: build
 
-      - name: 'Echo download path'
+      - name: 'Echo artifacts path'
         run: echo ${{steps.download.outputs.download-path}}
 
       - name: Deploy to S3
@@ -80,8 +80,8 @@ jobs:
           SOURCE_DIR: ${{steps.download.outputs.download-path}}
           AWS_S3_BUCKET: ${{ secrets.S3_BUCKET }}
           AWS_REGION: ${{ secrets.S3_BUCKET_REGION }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_TESTNET_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_TESTNET_SECRET_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
   invalidateCF:
     name: Invalidate CloudFront
@@ -96,5 +96,5 @@ jobs:
         DISTRIBUTION: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
         PATHS: '/'
         AWS_REGION: ${{ secrets.CLOUDFRONT_DISTRIBUTION_REGION }}
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_TESTNET_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_TESTNET_SECRET_KEY }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
