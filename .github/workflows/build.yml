@@ -2,7 +2,8 @@ name: Build
 
 on:
   workflow_dispatch:
-    save-build:
+    inputs:
+      save-build:
         description: 'The build folder as artifacts'
         required: false
         type: boolean
