@@ -53,7 +53,7 @@ export const profileData: ProfileData = {
       order: 1,
     },
   ],
-  featureAssets: [
+  featuredAssets: [
     {
       chainId: Chains.ETHEREUM_GOERLI,
       contractAddress: "0x2e60f8f0ded025c41454e151f75c300fba3bc62b",
