@@ -1,7 +1,7 @@
 import { Client } from "@verida/client-ts";
 import { DatabasePermissionOptionsEnum } from "@verida/types";
 import { config } from "lib/config";
-import { DID_VDA_METHOD, VERIDA_ONE_PROFILE_RECORD_ID } from "lib/constants";
+import { VERIDA_ONE_PROFILE_RECORD_ID } from "lib/constants";
 import { ProfileDataSchema } from "lib/schemas";
 import {
   NftToken,
@@ -9,42 +9,36 @@ import {
   IdentityInfo,
   ProfileData,
   WalletAddress,
+  ResolvedIdentity,
 } from "lib/types";
-import { getMockBadges, getMockIdentityInfo, getMockProfileData } from "mock";
+import { getMockBadges } from "mock";
 import { getNfts, walletProviderSupportedChainsForNft } from "lib/api";
 import { getAnyPublicProfile, getExternalDatastore } from "./veridaUtils";
 
+// TODO: Write JS DOc
+
 export const getIdentityInfo = async (
   veridaClient: Client,
-  did: string
+  resolvedIdentity: ResolvedIdentity
 ): Promise<IdentityInfo> => {
-  // TODO: Remove this check as it's only for mock data
-  if (!did.startsWith(DID_VDA_METHOD)) {
-    return getMockIdentityInfo();
-  }
+  const publicProfile = await getAnyPublicProfile(
+    veridaClient,
+    resolvedIdentity.did
+  );
 
-  const publicProfile = await getAnyPublicProfile(veridaClient, did);
-
-  // TODO: Deal with Verida Username
-  const identityInfo: IdentityInfo = {
+  return {
     ...publicProfile,
-    did,
+    ...resolvedIdentity,
   };
-
-  return identityInfo;
 };
 
 export const getProfileData = async (
   veridaClient: Client,
-  did: string
+  didOrUsername: string
 ): Promise<ProfileData> => {
-  if (!did.startsWith(DID_VDA_METHOD)) {
-    return getMockProfileData();
-  }
-
   const datastore = await getExternalDatastore(
     veridaClient,
-    did,
+    didOrUsername,
     config.veridaOneContextName,
     config.schemasURL.profile,
     {
