@@ -103,11 +103,14 @@ jobs:
       # TODO: Use a variable to conditionally deploy server to Lambda
 
       - name: Install server dependencies
-        run: cd server && yarn install --frozen-lockfile
+        working-directory: ./server
+        run: yarn install --frozen-lockfile
+
 
       - name: Deploy server to Lambda
+        working-directory: ./server
         # Run sls directly rather than using a yarn script, so we can pass a variable for the stage
-        run: "cd server && sls deploy --stage $AWS_LAMBDA_STAGE"
+        run: "sls deploy --stage $AWS_LAMBDA_STAGE"
         # serverless.yml cannot take the stage from env vars so have to set it in cli options
         env:
           AWS_LAMBDA_STAGE: ${{ inputs.environment }}
