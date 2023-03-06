@@ -109,7 +109,7 @@ jobs:
       - name: Deploy server to Lambda
         working-directory: ./server
         # Run sls directly rather than using a yarn script, so we can pass a variable for the stage
-        run: "serverless deploy --stage $AWS_LAMBDA_STAGE"
+        run: npx serverless deploy --stage $AWS_LAMBDA_STAGE
         # serverless.yml cannot take the stage from env vars so have to set it in cli options
         env:
           AWS_LAMBDA_STAGE: ${{ inputs.environment }}
