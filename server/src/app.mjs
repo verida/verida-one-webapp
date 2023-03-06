@@ -18,29 +18,34 @@ const app = express();
 app.use(cors());
 
 // Get the location of the resources
-const RESOURCES_URL = process.env.PUBLIC_URL;
+const RESOURCES_URL = process.env.RESOURCES_URL;
 // If the url is an absolute url, the resources are not local
 const hasLocalResources = RESOURCES_URL?.startsWith("http") ? false : true;
 
-const BUILD_FOLDER_PATH = path.join(process.cwd(), "build");
+// TODO: Could give flexibility by reusing the RESOURCES_URL env var to define the path to the frontend.
+const FRONTEND_FOLDER_PATH = path.join(process.cwd(), "../build");
 
 if (hasLocalResources) {
   // if the frontend static resources stayed local, serve the build folder. Except for the index file, which will be dynamically served.
-  app.use(express.static(BUILD_FOLDER_PATH, { index: false }));
+  app.use(express.static(FRONTEND_FOLDER_PATH, { index: false }));
 }
 
 // Route controler returning the rendered html content
 app.get("/*", async function (req, res) {
+  console.log("Receiving request");
   try {
     // Extract the identity from the request info
     const identityName = await getNameFromRequest(req);
     const { title, url } = buildMetaValues(req, identityName);
+    console.log(`Preparing request with title: ${title}`);
 
     let html;
     if (hasLocalResources) {
+      console.log("Getting html locally");
       // Get the html content locally
-      html = await getFileContent(`${BUILD_FOLDER_PATH}/index.html`);
+      html = await getFileContent(`${FRONTEND_FOLDER_PATH}/index.html`);
     } else {
+      console.log(`Getting html locally from ${RESOURCES_URL}`);
       // Get the index.html from the resources location
       const response = await axios.get(RESOURCES_URL);
       html = response.data;
