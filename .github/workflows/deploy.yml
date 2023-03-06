@@ -27,7 +27,6 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      ENVIRONMENT_NAME: ${{ vars.ENVIRONMENT_NAME }}
       EXTEND_ESLINT: "true"
       PUBLIC_URL: ${{ vars.RESOURCES_CDN_URL }}
       RESOURCES_URL: ${{ vars.RESOURCES_CDN_URL }}
@@ -42,7 +41,6 @@ jobs:
     steps:
       - name: Environment variables
         run: |
-          echo "ENVIRONMENT_NAME=$ENVIRONMENT_NAME"
           echo "NODE_ENV=$NODE_ENV"
           echo "REACT_APP_VERIDA_ONE_CONTEXT_NAME=$REACT_APP_VERIDA_ONE_CONTEXT_NAME"
           echo "REACT_APP_VERIDA_ENV=$REACT_APP_VERIDA_ENV"
@@ -114,7 +112,7 @@ jobs:
         run: npx serverless deploy --stage $AWS_LAMBDA_STAGE
         # serverless.yml cannot take the stage from env vars so have to set it in cli options
         env:
-          AWS_LAMBDA_STAGE: ${{ vars.ENVIRONMENT_NAME }}
+          AWS_LAMBDA_STAGE: ${{ secrets.LAMBDA_STAGE }}
           AWS_LAMBDA_REGION: ${{ secrets.LAMBDA_REGION }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
