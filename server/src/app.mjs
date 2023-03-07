@@ -5,7 +5,7 @@ import path from "path";
 import express from "express";
 import cors from "cors";
 import axios from "axios";
-import { titleRegExp, urlRegExp } from "./meta.mjs";
+import { titleRegExp, descriptionRegExp, urlRegExp } from "./meta.mjs";
 import {
   buildMetaValues,
   getFileContent,
@@ -32,20 +32,16 @@ if (hasLocalResources) {
 
 // Route controler returning the rendered html content
 app.get("/*", async function (req, res) {
-  console.log("Receiving request");
   try {
     // Extract the identity from the request info
-    const identityName = await getNameFromRequest(req);
-    const { title, url } = buildMetaValues(req, identityName);
-    console.log(`Preparing request with title: ${title}`);
+    const profile = await getNameFromRequest(req);
+    const { title, description, url } = buildMetaValues(req, profile);
 
     let html;
     if (hasLocalResources) {
-      console.log("Getting html locally");
       // Get the html content locally
       html = await getFileContent(`${FRONTEND_FOLDER_PATH}/index.html`);
     } else {
-      console.log(`Getting html locally from ${RESOURCES_URL}`);
       // Get the index.html from the resources location
       const response = await axios.get(RESOURCES_URL);
       html = response.data;
@@ -55,6 +51,7 @@ app.get("/*", async function (req, res) {
     const rendered = html
       .toString()
       .replace(titleRegExp, title)
+      .replace(descriptionRegExp, description)
       .replace(urlRegExp, url);
 
     // Return the dynamically rendered html content

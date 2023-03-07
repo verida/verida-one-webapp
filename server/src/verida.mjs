@@ -1,6 +1,10 @@
 import { Client } from "@verida/client-ts";
 import { EnvironmentType } from "@verida/types";
 
+const client = new Client({
+  environment: EnvironmentType.TESTNET, // TODO: Use an environment variable
+});
+
 /**
  * Resolve an identity by returning the Verida DID of a username, or itself if already a Verida DID.
  * Throw an Error if identity is an unsupported DID or if the username cannot be resolved (not found).
@@ -31,13 +35,9 @@ export async function resolveIdentity(identity) {
  * Get the public profile of any Verida DID, if it exists.
  *
  * @param {string} did A Verida DID.
- * @returns {{name: string}} The Verida Public Profile.
+ * @returns {{name: string, description: string}} The Verida Public Profile.
  */
 export async function getAnyPublicProfile(did) {
-  const client = new Client({
-    environment: EnvironmentType.TESTNET,
-  });
-
   const profileInstance = await client.openPublicProfile(did, "Verida: Vault");
   if (!profileInstance) {
     throw new Error("No public profile exists for this did");
@@ -45,6 +45,7 @@ export async function getAnyPublicProfile(did) {
 
   return {
     name: await profileInstance.get("name"),
+    description: await profileInstance.get("description"),
     // The avatar.uri could be interesting for generating a meta image later on
   };
 }
@@ -55,9 +56,9 @@ export async function getAnyPublicProfile(did) {
  * Gracefully return undefined if any of the steps fail or doesn't return any result.
  *
  * @param {string} identity
- * @returns {Promise<string | undefined>} the name associated with the identity
+ * @returns {Promise<{name: string, description: string} | undefined>} The profile associated with the identity
  */
-export async function getNameFromIdentity(identity) {
+export async function getProfileFromIdentity(identity) {
   if (!identity) {
     return undefined;
   }
@@ -72,7 +73,7 @@ export async function getNameFromIdentity(identity) {
 
     const profile = await getAnyPublicProfile(resolvedIdentity.did);
 
-    return profile.name;
+    return profile;
   } catch (error) {
     return undefined;
   }

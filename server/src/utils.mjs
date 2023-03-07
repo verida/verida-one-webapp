@@ -1,6 +1,6 @@
 import fs from "fs";
-import { getNameFromIdentity } from "./verida.mjs";
-import { defaultTitle } from "./meta.mjs";
+import { getProfileFromIdentity } from "./verida.mjs";
+import { defaultTitle, defaultDescription } from "./meta.mjs";
 
 /**
  * Extract the identity information from the request, if any and get the name of this identity.
@@ -14,19 +14,22 @@ export async function getNameFromRequest(req) {
   // The identity param, if exists, is the second items in the split
   const identity = paths[1];
   // Get the public name of the
-  return await getNameFromIdentity(identity);
+  return await getProfileFromIdentity(identity);
 }
 
 /**
  * Build the meta information (the page title and the url).
  *
  * @param {Request} req
- * @param {string|undefined} identityName
- * @returns {{title: string, url: string}}
+ * @param {{name: string, description: string}|undefined} profile
+ * @returns {{title: string, description: string, url: string}}
  */
-export function buildMetaValues(req, identityName) {
+export function buildMetaValues(req, profile) {
   return {
-    title: identityName ? `${identityName} - ${defaultTitle}` : defaultTitle,
+    title: profile?.name ? `${profile.name} - ${defaultTitle}` : defaultTitle,
+    description: profile?.description
+      ? profile.description
+      : defaultDescription,
     url: `${req.protocol}://${req.headers.host}${req.originalUrl}`,
     // TODO: Check the url elements. The request elements may not be reliable, particularly when the server is behind a proxy and doesn't know the actual public url. May need a environment variable instead: `${USER_FACING_URL}${req.originalUrl}`. Note: PUBLIC_URL is taken by cra/webpack, so need another name
   };
