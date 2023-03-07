@@ -53,8 +53,8 @@ export const useWholeProfile = (identity?: string) => {
 
   // TODO: Include Badges in extracting featured assets
   const featuredCollectibles =
-    collectibles && profileData?.featureAssets
-      ? filterFeaturedAssets(collectibles, profileData?.featureAssets)
+    collectibles && profileData?.featuredAssets
+      ? filterFeaturedAssets(collectibles, profileData?.featuredAssets)
       : undefined;
 
   return {

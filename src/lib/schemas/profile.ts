@@ -45,6 +45,6 @@ export const ProfileDataSchema = z
     customLinks: z.array(CustomLinkSchema).optional(),
     platformLinks: z.array(PlatformLinkSchema).optional(),
     walletAddresses: z.array(WalletAddressSchema).optional(),
-    featureAssets: z.array(FeaturedAssetSchema).optional(),
+    featuredAssets: z.array(FeaturedAssetSchema).optional(),
   })
   .passthrough();

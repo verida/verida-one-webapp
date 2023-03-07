@@ -1,32 +1,32 @@
+import { AssetPropertyInfo } from "lib/types";
 import React from "react";
 import { CopyToClipboardButton } from "./CopyToClipboardButton";
 
 type AssetDetailsPropertyItemProps = {
-  label: string;
-  children?: React.ReactNode;
-  valueToCopyToClipboard?: string;
-} & React.ComponentPropsWithRef<"div">;
+  assetProperty: AssetPropertyInfo;
+} & Omit<React.ComponentPropsWithRef<"div">, "children">;
 
 export const AssetDetailsPropertyItem: React.FunctionComponent<
   AssetDetailsPropertyItemProps
 > = (props) => {
-  const { label, children, valueToCopyToClipboard, ...divProps } = props;
+  const { assetProperty, ...divProps } = props;
 
   return (
     <div {...divProps}>
       <div className="flex items-center justify-between text-sm">
-        <div>{label}</div>
-        {children && (
-          <div className="flex max-w-[40%] items-center">
-            {valueToCopyToClipboard && (
-              <CopyToClipboardButton
-                value={valueToCopyToClipboard}
-                iconSize={14}
-              />
-            )}
-            <div className="truncate">{children}</div>
+        <div>{assetProperty.propertyLabel}</div>
+        <div className="flex max-w-[50%] items-center">
+          {assetProperty.enableCopyToClipboard && assetProperty.valueToCopy && (
+            <CopyToClipboardButton
+              value={assetProperty.valueToCopy}
+              iconSize={14}
+              className="-my-[0.1875rem]"
+            />
+          )}
+          <div className="truncate" title={assetProperty.valueForTitle}>
+            {assetProperty.valueToDisplay}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

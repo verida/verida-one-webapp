@@ -1,8 +1,9 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { SearchResult } from "./SearchResult";
 import { useSearchIdentity } from "lib/hooks";
 import { SearchInputField } from "components/molecules";
 import { Icon, IconButton } from "components/atoms";
+import { KEY_NAME_ESC, EVENT_TYPE_KEYDOWN } from "lib/constants";
 
 type HeaderSearchBarProps = {
   onClickResultItem: (identity: string) => void;
@@ -30,6 +31,16 @@ export const HeaderSearchBar: React.FunctionComponent<HeaderSearchBarProps> = (
     inputRef.current?.focus();
   }, [clean, inputRef]);
 
+  const handleEscapeKeyPress = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === KEY_NAME_ESC) {
+        inputRef.current?.blur();
+        setShowResults(false);
+      }
+    },
+    [inputRef]
+  );
+
   const handleClickAway = useCallback(() => {
     setShowResults(false);
   }, [setShowResults]);
@@ -50,6 +61,16 @@ export const HeaderSearchBar: React.FunctionComponent<HeaderSearchBarProps> = (
   const handleInputFocus = useCallback(() => {
     setShowResults(true);
   }, []);
+
+  useEffect(() => {
+    document.body.addEventListener(EVENT_TYPE_KEYDOWN, handleEscapeKeyPress);
+    return () => {
+      document.body.removeEventListener(
+        EVENT_TYPE_KEYDOWN,
+        handleEscapeKeyPress
+      );
+    };
+  }, [handleEscapeKeyPress]);
 
   return (
     <>

@@ -1,6 +1,10 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { PageWrapper, RedirectionCard } from "components/molecules";
+import {
+  AssetDetailsViewSkeleton,
+  PageWrapper,
+  RedirectionCard,
+} from "components/molecules";
 import { getChainExplorerUrlForAddress } from "lib/utils";
 import { AssetMedia, ButtonLink } from "components/atoms";
 import { useIntl } from "react-intl";
@@ -16,12 +20,16 @@ export const CollectibleDetailsView: React.FunctionComponent = () => {
 
   const { data: profileData } = useProfileData(identity);
   const walletAddresses = profileData?.walletAddresses;
-  const { data: collectibles } = useCollectibles(walletAddresses);
+  const {
+    data: collectibles,
+    isLoading,
+    isError,
+  } = useCollectibles(walletAddresses);
   const collectible = collectibles?.find(
     (item) =>
-      item.chainId === chain &&
-      item.contractAddress === contractAddress &&
-      item.tokenId === tokenId
+      item.chain_id === chain &&
+      item.token_address === contractAddress &&
+      item.token_id === tokenId
   );
 
   const redirectPath = identity ? `/${identity}` : `/`;
@@ -46,7 +54,66 @@ export const CollectibleDetailsView: React.FunctionComponent = () => {
       "Message of the redirection card indicating the collectible has not been found.",
   });
 
-  if (!collectible) {
+  const viewInExplorerButtonLabel = i18n.formatMessage({
+    id: "CollectibleDetailsView.viewInExplorerButtonLabel",
+    defaultMessage: "View in Explorer",
+    description:
+      "Label of the button to view an asset in a blockchain explorer.",
+  });
+
+  if (collectible) {
+    const viewInExplorerButton = (
+      <ButtonLink
+        url={getChainExplorerUrlForAddress(
+          collectible.chain_id,
+          collectible.owner_address
+        )}
+        target="_blank"
+        rel="noopener"
+      >
+        {viewInExplorerButtonLabel}
+      </ButtonLink>
+    );
+
+    return (
+      <PageWrapper>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="flex flex-col space-y-6">
+            <AssetMedia
+              source={collectible.metadata.image}
+              alt={collectible.metadata.name || "Collectible"}
+            />
+            <div className="hidden sm:block">{viewInExplorerButton}</div>
+          </div>
+          <div>
+            <AssetDetailsMainInfo
+              className="mb-4"
+              collectionLabel={collectible.name}
+              tokenLabel={collectible.metadata.name}
+              description={collectible.metadata.description}
+            />
+            <CollectibleDetailsProperties collectible={collectible} />
+          </div>
+          <div className="sm:hidden md:mt-0">
+            {/* TODO: Place this button into a fixed bottom bar.
+          see issue #41 https://github.com/verida/verida-one-webapp/issues/41
+           */}
+            {viewInExplorerButton}
+          </div>
+        </div>
+      </PageWrapper>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <PageWrapper>
+        <AssetDetailsViewSkeleton />
+      </PageWrapper>
+    );
+  }
+
+  if (isError || !collectible) {
     return (
       <PageWrapper>
         <RedirectionCard
@@ -60,54 +127,8 @@ export const CollectibleDetailsView: React.FunctionComponent = () => {
     );
   }
 
-  const viewInExplorerButtonLabel = i18n.formatMessage({
-    id: "CollectibleDetailsView.viewInExplorerButtonLabel",
-    defaultMessage: "View in Explorer",
-    description:
-      "Label of the button to view an asset in a blockchain explorer.",
-  });
-
-  const viewInExplorerButton = (
-    <ButtonLink
-      url={getChainExplorerUrlForAddress(
-        collectible.chainId,
-        collectible.ownerAddress
-      )}
-      target="_blank"
-      rel="noopener"
-    >
-      {viewInExplorerButtonLabel}
-    </ButtonLink>
-  );
-
-  return (
-    <PageWrapper>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <div className="">
-          <AssetMedia
-            className="w-full"
-            aspect="aspect-auto"
-            src={collectible.media}
-            alt={collectible.tokenLabel}
-          />
-          <div className="mt-6 hidden sm:block">{viewInExplorerButton}</div>
-        </div>
-        <div>
-          <AssetDetailsMainInfo
-            className="mb-4"
-            collectionLabel={collectible.collectionLabel}
-            tokenLabel={collectible.tokenLabel}
-            description={collectible.description}
-          />
-          <CollectibleDetailsProperties collectible={collectible} />
-        </div>
-        <div className="sm:hidden md:mt-0">
-          {/* TODO: Place this button into a fixed bottom bar.
-          see issue #41 https://github.com/verida/verida-one-webapp/issues/41
-           */}
-          {viewInExplorerButton}
-        </div>
-      </div>
-    </PageWrapper>
-  );
+  // At this point, there is no data, the data is not being loaded, there is no handled errors.
+  // So, throw an error that will be caught by the closest Error boundary.
+  // TODO: Re-throw the error from the query after cleaning it
+  throw new Error("Something went wrong");
 };

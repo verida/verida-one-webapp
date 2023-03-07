@@ -2,11 +2,12 @@ import React from "react";
 import { useIntl } from "react-intl";
 
 type AssetDetailCardProps = {
-  collectionLabel?: string;
-  tokenLabel?: string;
-  description?: string;
+  collectionLabel?: string | null;
+  tokenLabel?: string | null;
+  description?: string | null;
 } & React.ComponentPropsWithRef<"div">;
 
+/** Component displaying the main information of an asset: collection label, token label and description. */
 export const AssetDetailsMainInfo: React.FC<AssetDetailCardProps> = (props) => {
   const { collectionLabel, tokenLabel, description, ...divProps } = props;
 

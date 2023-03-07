@@ -2,6 +2,7 @@ import React, { useCallback, useId } from "react";
 import { Icon, IconButton } from "components/atoms";
 import { PortalWrapper } from "./PortalWrapper";
 import { useEffect } from "react";
+import { KEY_NAME_ESC, EVENT_TYPE_KEYDOWN } from "lib/constants";
 
 type ModalProps = {
   title?: string;
@@ -9,9 +10,6 @@ type ModalProps = {
   onClose: () => void;
   children: React.ReactNode;
 };
-
-const KEY_NAME_ESC = "Escape";
-const KEY_EVENT_TYPE = "keydown";
 
 export const Modal: React.FunctionComponent<ModalProps> = ({
   children,
@@ -21,7 +19,7 @@ export const Modal: React.FunctionComponent<ModalProps> = ({
 }) => {
   const labelId = useId();
 
-  const handleCloseOnEscapeKey = useCallback(
+  const handleEscapeKeyPress = useCallback(
     (event: KeyboardEvent) => {
       if (event.key === KEY_NAME_ESC) {
         onClose();
@@ -31,11 +29,14 @@ export const Modal: React.FunctionComponent<ModalProps> = ({
   );
 
   useEffect(() => {
-    document.body.addEventListener(KEY_EVENT_TYPE, handleCloseOnEscapeKey);
+    document.body.addEventListener(EVENT_TYPE_KEYDOWN, handleEscapeKeyPress);
     return () => {
-      document.body.removeEventListener(KEY_EVENT_TYPE, handleCloseOnEscapeKey);
+      document.body.removeEventListener(
+        EVENT_TYPE_KEYDOWN,
+        handleEscapeKeyPress
+      );
     };
-  }, [handleCloseOnEscapeKey]);
+  }, [handleEscapeKeyPress]);
 
   if (!open) {
     return null;
@@ -54,13 +55,13 @@ export const Modal: React.FunctionComponent<ModalProps> = ({
         aria-modal="true"
       >
         <div className="relative overflow-hidden p-4 pt-6 sm:p-8">
-          <div className="mb-8 flex items-center justify-between sm:mb-10">
-            <div className="w-5" />
+          <div className="mb-5 flex items-center justify-between sm:mb-8">
+            <div className="w-8" />
             <h1 className="text-lg font-semibold leading-5" id={labelId}>
               {title}
             </h1>
             <IconButton
-              size="no-margin"
+              size="small"
               variant="text"
               onClick={onClose}
               icon={<Icon type="close" size={20} />}

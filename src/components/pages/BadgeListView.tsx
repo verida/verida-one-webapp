@@ -1,6 +1,6 @@
 import React from "react";
 import { PageWrapper, RedirectionCard } from "components/molecules";
-import { BadgeGrid } from "components/organisms";
+import { BadgeMosaic } from "components/organisms";
 import { useBadges, useProfileData } from "lib/hooks";
 import { useIntl } from "react-intl";
 import { useParams } from "react-router-dom";
@@ -11,7 +11,7 @@ export const BadgeListView: React.FunctionComponent = () => {
 
   const { data: profileData } = useProfileData(identity);
   const walletAddresses = profileData?.walletAddresses;
-  const { data: badges } = useBadges(walletAddresses);
+  const { data: badges, isLoading, isError } = useBadges(walletAddresses);
 
   const redirectPath = identity ? `/${identity}` : `/`;
 
@@ -41,14 +41,27 @@ export const BadgeListView: React.FunctionComponent = () => {
     defaultMessage: "Badges",
   });
 
-  // TODO: Handle loading state
-  // TODO: Handle error state
+  if (badges || isLoading) {
+    return (
+      <PageWrapper title={pageTitle} badgeValue={badges?.length}>
+        {badges?.length || isLoading ? (
+          <BadgeMosaic className="pt-2" badges={badges} />
+        ) : (
+          <RedirectionCard
+            redirectPath={redirectPath}
+            title={redirectionCardTitle}
+            message={redirectionCardMessage}
+            buttonLabel={redirectionCardButtonLabel}
+            className="flex flex-grow flex-col justify-center"
+          />
+        )}
+      </PageWrapper>
+    );
+  }
 
-  return (
-    <PageWrapper title={pageTitle} badgeValue={badges?.length}>
-      {badges?.length ? (
-        <BadgeGrid className="pt-2" badges={badges} />
-      ) : (
+  if (isError) {
+    return (
+      <PageWrapper title={pageTitle} badgeValue={0}>
         <RedirectionCard
           redirectPath={redirectPath}
           title={redirectionCardTitle}
@@ -56,7 +69,12 @@ export const BadgeListView: React.FunctionComponent = () => {
           buttonLabel={redirectionCardButtonLabel}
           className="flex flex-grow flex-col justify-center"
         />
-      )}
-    </PageWrapper>
-  );
+      </PageWrapper>
+    );
+  }
+
+  // At this point, there is no data, the data is not being loaded, there is no handled errors.
+  // So, throw an error that will be caught by the closest Error boundary.
+  // TODO: Re-throw the error from the query after cleaning it
+  throw new Error("Something went wrong");
 };
