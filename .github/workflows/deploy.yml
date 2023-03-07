@@ -13,7 +13,7 @@ on:
 
 # TODO: Remove the environment fallback
 concurrency:
-  group: ${{ github.workflow }}-${{ inputs.environment || 'development_testnet' }}
+  group: ${{ github.workflow }}-${{ inputs.environment || 'development-testnet' }}
 
 jobs:
   deploy:
@@ -22,7 +22,7 @@ jobs:
     environment:
       # TODO: Remove the environment fallback
       # Environment fallback is helpfull while fine-tuning the workflow but it should not be needed if the environment can be figured out based on the workflow branch (particularly on push trigger)
-      name: ${{ inputs.environment || 'development_testnet' }}
+      name: ${{ inputs.environment || 'development-testnet' }}
       url: ${{ vars.URL }}
     runs-on: ubuntu-latest
 
