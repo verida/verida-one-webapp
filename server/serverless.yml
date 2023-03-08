@@ -8,6 +8,7 @@ provider:
   runtime: nodejs14.x
   stage: ${opt:stage}
   region: ${env:AWS_LAMBDA_REGION}
+  timeout: 60
   httpApi:
     metrics: true
     cors: true
