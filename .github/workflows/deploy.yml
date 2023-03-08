@@ -1,7 +1,7 @@
 name: Deploy
 
-# TODO: Rework the triggers on push, restrict to  push on 'main' and 'develop'.
-# Enabled on all branches for now while we fine-tune the workflow and merge it up to 'main'
+# Currently only dispatched manually to allow choosing the environment to dpeloy on.
+# TODO: Allow the workflow on push to 'main' and 'develop'. Need to figure out how to set the environment without being too verida specific.
 on:
   workflow_dispatch:
     inputs:
@@ -9,20 +9,15 @@ on:
         description: "Environment to deploy on"
         type: environment
         required: true
-  push:
 
-# TODO: Remove the environment fallback
 concurrency:
-  group: ${{ github.workflow }}-${{ inputs.environment || 'development-testnet' }}
+  group: ${{ github.workflow }}-${{ inputs.environment }}
 
 jobs:
   deploy:
     name: Deploy
-    if: github.repository == 'verida/verida-one-webapp'
     environment:
-      # TODO: Remove the environment fallback
-      # Environment fallback is helpfull while fine-tuning the workflow but it should not be needed if the environment can be figured out based on the workflow branch (particularly on push trigger)
-      name: ${{ inputs.environment || 'development-testnet' }}
+      name: ${{ inputs.environment }}
       url: ${{ vars.URL }}
     runs-on: ubuntu-latest
 
