@@ -6,8 +6,8 @@ export const queryKeys = {
   ],
   getIdentityInfo: (did: string) => [{ scope: "IdentityInfo", did }],
   getProfileData: (did: string) => [{ scope: "ProfileData", did }],
-  getCollectibles: (walletAddresses: WalletAddress[]) => [
-    { scope: "Collectibles", walletAddresses },
+  getNfts: (walletAddresses: WalletAddress[]) => [
+    { scope: "NFTs", walletAddresses },
   ],
   getBadges: (walletAddresses: WalletAddress[]) => [
     { scope: "Badges", walletAddresses },

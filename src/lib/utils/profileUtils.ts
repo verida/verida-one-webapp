@@ -11,7 +11,10 @@ import {
   WalletAddress,
 } from "lib/types";
 import { getMockBadges, getMockIdentityInfo, getMockProfileData } from "mock";
-import { getNfts, walletProviderSupportedChainsForNft } from "lib/api";
+import {
+  getNfts as getNftsFromApi,
+  walletProviderSupportedChainsForNft,
+} from "lib/api";
 import { getAnyPublicProfile, getExternalDatastore } from "./veridaUtils";
 
 export const getIdentityInfo = async (
@@ -66,7 +69,7 @@ export const getProfileData = async (
   // Later the best way will likely be to wrap them in app-specific Errors, such as new ProfileNotFoundError(), or new ProfileNotValidError().
 };
 
-export const getCollectibles = async (
+export const getNfts = async (
   walletAddresses: WalletAddress[],
   abortSignal?: AbortSignal
 ) => {
@@ -81,7 +84,7 @@ export const getCollectibles = async (
     return [];
   }
 
-  return await getNfts(addresses, abortSignal);
+  return await getNftsFromApi(addresses, abortSignal);
 };
 
 export const getBadges = async (walletAddresses: WalletAddress[]) => {
