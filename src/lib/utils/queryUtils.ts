@@ -9,7 +9,4 @@ export const queryKeys = {
   getNfts: (walletAddresses: WalletAddress[]) => [
     { scope: "NFTs", walletAddresses },
   ],
-  getBadges: (walletAddresses: WalletAddress[]) => [
-    { scope: "Badges", walletAddresses },
-  ],
 };

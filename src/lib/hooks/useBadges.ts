@@ -1,20 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
-import { WalletAddress } from "lib/types";
-import { getBadges, queryKeys } from "lib/utils";
+import { useCallback } from "react";
+import { NftToken, WalletAddress } from "lib/types";
+import { useNfts } from "./useNfts";
 
 /**
- * Hook extracting the list of badges (Verida SBT) for a list of wallet addresses.
+ * Hook extracting the list of badges (SBT) for a list of wallet addresses.
  */
 export const useBadges = (walletAddresses?: WalletAddress[]) => {
-  // TODO: Think about pagination if needed
+  const selectBadgesFromNfts = useCallback((nfts: NftToken[]) => {
+    return nfts.filter((nft) => nft.isSBT);
+  }, []);
 
-  const query = useQuery({
-    queryKey: queryKeys.getBadges(walletAddresses as WalletAddress[]),
-    queryFn: ({ queryKey: [{ walletAddresses }] }) => {
-      return getBadges(walletAddresses);
-    },
-    enabled: !!walletAddresses,
-  });
+  const query = useNfts(walletAddresses, selectBadgesFromNfts);
 
   return query;
 };

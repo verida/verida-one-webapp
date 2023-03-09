@@ -10,7 +10,7 @@ import {
   ProfileData,
   WalletAddress,
 } from "lib/types";
-import { getMockBadges, getMockIdentityInfo, getMockProfileData } from "mock";
+import { getMockNfts, getMockIdentityInfo, getMockProfileData } from "mock";
 import {
   getNfts as getNftsFromApi,
   walletProviderSupportedChainsForNft,
@@ -84,17 +84,15 @@ export const getNfts = async (
     return [];
   }
 
-  return await getNftsFromApi(addresses, abortSignal);
-};
+  let nfts = await getNftsFromApi(addresses, abortSignal);
 
-export const getBadges = async (walletAddresses: WalletAddress[]) => {
   // TODO: Remove use of mock data
-  if (walletAddresses) {
-    return getMockBadges();
+  if (config.isMockDataEnabled) {
+    const mockNfts = await getMockNfts();
+    nfts = [...nfts, ...mockNfts];
   }
 
-  // TODO: Implement fetching badges
-  return Promise.resolve([]);
+  return nfts;
 };
 
 export const filterFeaturedAssets = (
