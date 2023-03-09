@@ -10,64 +10,35 @@ import { AssetMedia, ButtonLink } from "components/atoms";
 import { useIntl } from "react-intl";
 import {
   AssetDetailsMainInfo,
-  CollectibleDetailsProperties,
+  AssetDetailsProperties,
 } from "components/organisms";
-import { useCollectibles, useProfileData } from "lib/hooks";
+import { useOneNft, useProfileData } from "lib/hooks";
 
-export const CollectibleDetailsView: React.FunctionComponent = () => {
+export const AssetDetailsView: React.FunctionComponent = () => {
   const i18n = useIntl();
   const { identity, chain, contractAddress, tokenId } = useParams();
 
   const { data: profileData } = useProfileData(identity);
+
   const walletAddresses = profileData?.walletAddresses;
+
   const {
-    data: collectibles,
+    data: asset,
     isLoading,
     isError,
-  } = useCollectibles(walletAddresses);
-  const collectible = collectibles?.find(
-    (item) =>
-      item.chain_id === chain &&
-      item.token_address === contractAddress &&
-      item.token_id === tokenId
-  );
-
-  const redirectPath = identity ? `/${identity}` : `/`;
-
-  const redirectionCardButtonLabel = i18n.formatMessage({
-    id: "CollectibleDetailsView.redirectionCardButtonLabel",
-    description: "Label of the redirection link to go to the Profile poage",
-    defaultMessage: "Go to profile",
-  });
-
-  const redirectionCardTitle = i18n.formatMessage({
-    id: "CollectibleDetailsView.redirectionCardTitle",
-    defaultMessage: "Item not found",
-    description:
-      "Title of the redirection card indicating the collectible has not been found.",
-  });
-
-  const redirectionCardMessage = i18n.formatMessage({
-    id: "CollectibleDetailsView.redirectionCardMessage",
-    defaultMessage: "This item doesn't exist or is not available",
-    description:
-      "Message of the redirection card indicating the collectible has not been found.",
-  });
+  } = useOneNft(walletAddresses, chain, contractAddress, tokenId);
 
   const viewInExplorerButtonLabel = i18n.formatMessage({
-    id: "CollectibleDetailsView.viewInExplorerButtonLabel",
+    id: "AssetDetailsView.viewInExplorerButtonLabel",
     defaultMessage: "View in Explorer",
     description:
       "Label of the button to view an asset in a blockchain explorer.",
   });
 
-  if (collectible) {
+  if (asset) {
     const viewInExplorerButton = (
       <ButtonLink
-        url={getChainExplorerUrlForAddress(
-          collectible.chain_id,
-          collectible.owner_address
-        )}
+        url={getChainExplorerUrlForAddress(asset.chain_id, asset.owner_address)}
         target="_blank"
         rel="noopener"
       >
@@ -80,19 +51,19 @@ export const CollectibleDetailsView: React.FunctionComponent = () => {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div className="flex flex-col space-y-6">
             <AssetMedia
-              source={collectible.metadata.image}
-              alt={collectible.metadata.name || "Collectible"}
+              source={asset.metadata.image}
+              alt={asset.metadata.name || "Asset"}
             />
             <div className="hidden sm:block">{viewInExplorerButton}</div>
           </div>
           <div>
             <AssetDetailsMainInfo
               className="mb-4"
-              collectionLabel={collectible.name}
-              tokenLabel={collectible.metadata.name}
-              description={collectible.metadata.description}
+              collectionLabel={asset.name}
+              tokenLabel={asset.metadata.name}
+              description={asset.metadata.description}
             />
-            <CollectibleDetailsProperties collectible={collectible} />
+            <AssetDetailsProperties asset={asset} />
           </div>
           <div className="sm:hidden md:mt-0">
             {/* TODO: Place this button into a fixed bottom bar.
@@ -113,7 +84,29 @@ export const CollectibleDetailsView: React.FunctionComponent = () => {
     );
   }
 
-  if (isError || !collectible) {
+  if (isError || !asset) {
+    const redirectionCardButtonLabel = i18n.formatMessage({
+      id: "AssetDetailsView.redirectionCardButtonLabel",
+      description: "Label of the redirection link to go to the Profile poage",
+      defaultMessage: "Go to profile",
+    });
+
+    const redirectionCardTitle = i18n.formatMessage({
+      id: "AssetDetailsView.redirectionCardTitle",
+      defaultMessage: "Item not found",
+      description:
+        "Title of the redirection card indicating the collectible has not been found.",
+    });
+
+    const redirectionCardMessage = i18n.formatMessage({
+      id: "AssetDetailsView.redirectionCardMessage",
+      defaultMessage: "This item doesn't exist or is not available",
+      description:
+        "Message of the redirection card indicating the collectible has not been found.",
+    });
+
+    const redirectPath = identity ? `/${identity}` : `/`;
+
     return (
       <PageWrapper>
         <RedirectionCard

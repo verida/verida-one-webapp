@@ -4,43 +4,42 @@ import { useIntl } from "react-intl";
 import { getChainLabel, getChainLogo } from "lib/utils";
 import { AssetDetailsPropertyList } from "components/molecules";
 
-type CollectibleDetailsPropertiesProps = {
-  collectible: NftToken;
+type AssetDetailsPropertiesProps = {
+  asset: NftToken;
 } & React.ComponentPropsWithRef<"div">;
 
-/** Comnponent displaying the properties of a Collectible. */
-export const CollectibleDetailsProperties: React.FC<
-  CollectibleDetailsPropertiesProps
-> = (props) => {
-  const { collectible, ...divProps } = props;
+/** Comnponent displaying the properties of an Asset. */
+export const AssetDetailsProperties: React.FC<AssetDetailsPropertiesProps> = (
+  props
+) => {
+  const { asset, ...divProps } = props;
 
-  const { chain_id, owner_address, token_address, token_id } = collectible;
+  const { chain_id, owner_address, token_address, token_id } = asset;
 
   const i18n = useIntl();
 
   const chainPropertyLabel = i18n.formatMessage({
-    id: "CollectibleDetailsProperties.chainPropertyLabel",
+    id: "AssetDetailsProperties.chainPropertyLabel",
     defaultMessage: "Chain",
-    description: "Label of the 'chain' property for a collectible",
+    description: "Label of the 'chain' property for an asset",
   });
 
   const ownerPropertyLabel = i18n.formatMessage({
-    id: "CollectibleDetailsProperties.ownerPropertyLabel",
+    id: "AssetDetailsProperties.ownerPropertyLabel",
     defaultMessage: "Owner",
-    description: "Label of the 'owner' property for a collectible",
+    description: "Label of the 'owner' property for an asset",
   });
 
   const assetsIdPropertyLabel = i18n.formatMessage({
-    id: "CollectibleDetailsProperties.assetsIdPropertyLabel",
+    id: "AssetDetailsProperties.assetsIdPropertyLabel",
     defaultMessage: "Asset Id",
-    description: "Label of the 'tokenId' property for a collectible",
+    description: "Label of the 'tokenId' property for an asset",
   });
 
   const creatorWalletAddressPropertyLabel = i18n.formatMessage({
-    id: "CollectibleDetailsProperties.creatorWalletAddressPropertyLabel",
+    id: "AssetDetailsProperties.creatorWalletAddressPropertyLabel",
     defaultMessage: "Creator",
-    description:
-      "Label of the 'creatorWalletAddress' property for a collectible",
+    description: "Label of the 'creatorWalletAddress' property for an asset",
   });
 
   const chainLabel = getChainLabel(chain_id);

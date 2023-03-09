@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { Chains, NftToken, WalletAddress } from "lib/types";
+import { NftToken, WalletAddress } from "lib/types";
 import { useNfts } from "./useNfts";
 
 /**
@@ -7,7 +7,7 @@ import { useNfts } from "./useNfts";
  */
 export const useOneNft = (
   walletAddresses?: WalletAddress[],
-  chain?: Chains,
+  chain?: string,
   contractAddress?: string,
   tokenId?: string
 ) => {

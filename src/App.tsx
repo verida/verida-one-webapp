@@ -1,8 +1,8 @@
 import React from "react";
 import {
+  AssetDetailsView,
   BadgeDetailsView,
   BadgeListView,
-  CollectibleDetailsView,
   CollectibleListView,
   HomeView,
   ProfileView,
@@ -17,14 +17,13 @@ import { AppLayout } from "components/templates";
 import { ErrorBoundary, RouterErrorHandler } from "components/molecules";
 
 /**
- * Routes
- *
- * /                                                          -> Home
- * /:identity                                                 -> Profile
- * /:identity/collectibles                                    -> CollectibleList
- * /:identity/collectibles/:chain/:contractAddress/:tokenId   -> CollectibleDetails
- * /:identity/badges                                          -> BadgeList
- * /:identity/badges/:chain/:contractAddress/:tokenId         -> BadgeDetails
+ * Routes:
+ * /
+ * /:identity
+ * /:identity/collectibles
+ * /:identity/collectibles/:chain/:contractAddress/:tokenId
+ * /:identity/badges
+ * /:identity/badges/:chain/:contractAddress/:tokenId
  *
  * TODO: Strengthen with a list of routes as constant to be used throughout the app
  */
@@ -43,7 +42,7 @@ const router = createBrowserRouter(
           <Route index element={<CollectibleListView />} />
           <Route
             path=":chain/:contractAddress/:tokenId"
-            element={<CollectibleDetailsView />}
+            element={<AssetDetailsView />}
           />
         </Route>
         <Route path="badges">
