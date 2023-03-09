@@ -1,13 +1,13 @@
 import React, { useCallback } from "react";
 import { useIntl } from "react-intl";
 import { BadgeMosaicItem, ProfileSectionWrapper } from "components/molecules";
-import { NftToken } from "lib/types";
+import { Badge } from "lib/types";
 import { Button, HexagonBase } from "components/atoms";
 import { useNavigate } from "react-router-dom";
 import { MAX_BADGES_IN_PROFILE_SECTION } from "lib/constants";
 
 type BadgesSectionProps = {
-  badges?: NftToken[];
+  badges?: Badge[];
 };
 
 /** Section for the Profile page rendering the list of Badges */

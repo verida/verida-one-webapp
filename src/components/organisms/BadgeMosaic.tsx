@@ -1,9 +1,9 @@
 import React from "react";
-import { NftToken } from "lib/types";
+import { Badge } from "lib/types";
 import { BadgeMosaicItem, BadgeMosaicItemSkeleton } from "components/molecules";
 
 type BadgeMosaicProps = {
-  badges?: NftToken[];
+  badges?: Badge[];
 } & React.ComponentPropsWithoutRef<"div">;
 
 /** Component rendering the Badges in a honeycomb pattern or mosaic. */

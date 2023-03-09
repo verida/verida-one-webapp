@@ -1,10 +1,10 @@
-import { CollectibleCard, CollectibleCardSkeleton } from "components/molecules";
-import { NftToken } from "lib/types";
+import { AssetCard, AssetCardSkeleton } from "components/molecules";
+import { Collectible } from "lib/types";
 import React from "react";
 import { Link } from "react-router-dom";
 
 type CollectibleGridProps = {
-  collectibles?: NftToken[];
+  collectibles?: Collectible[];
 } & React.ComponentPropsWithoutRef<"div">;
 
 /** Component rendering the list of Collectibles */
@@ -22,7 +22,7 @@ export const CollectibleGrid: React.FC<CollectibleGridProps> = (props) => {
               <Link
                 to={`${collectible.chain_id}/${collectible.token_address}/${collectible.token_id}`}
               >
-                <CollectibleCard variant="standard" collectible={collectible} />
+                <AssetCard variant="standard" asset={collectible} />
               </Link>
             </li>
           ))}
@@ -38,7 +38,7 @@ export const CollectibleGrid: React.FC<CollectibleGridProps> = (props) => {
       <ul className="grid grid-cols-2 gap-x-2 gap-y-4 sm:grid-cols-3 lg:grid-cols-4">
         {skeletonItems.map((_, index) => (
           <li key={index}>
-            <CollectibleCardSkeleton />
+            <AssetCardSkeleton />
           </li>
         ))}
       </ul>

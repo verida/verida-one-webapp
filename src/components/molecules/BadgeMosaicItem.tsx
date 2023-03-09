@@ -1,10 +1,10 @@
-import { HexagonBase, SkeletonBase } from "components/atoms";
-import { NftToken } from "lib/types";
 import React from "react";
+import { HexagonBase, SkeletonBase } from "components/atoms";
+import { Badge } from "lib/types";
 import { Link } from "react-router-dom";
 
 type HexagonProps = {
-  badge: NftToken;
+  badge: Badge;
   to: string;
   disableShadow?: boolean;
 } & Omit<React.ComponentPropsWithoutRef<"li">, "className">;
