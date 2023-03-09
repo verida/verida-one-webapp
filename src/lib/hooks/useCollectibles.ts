@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { NftToken, WalletAddress } from "lib/types";
+import { Collectible, NftToken, WalletAddress } from "lib/types";
 import { useNfts } from "./useNfts";
 
 /**
@@ -7,7 +7,7 @@ import { useNfts } from "./useNfts";
  */
 export const useCollectibles = (walletAddresses?: WalletAddress[]) => {
   const selectCollectiblesFromNfts = useCallback((nfts: NftToken[]) => {
-    return nfts.filter((nft) => !nft.isSBT);
+    return nfts.filter((nft): nft is Collectible => !nft.isSBT);
   }, []);
 
   return useNfts(walletAddresses, selectCollectiblesFromNfts);

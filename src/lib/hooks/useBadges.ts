@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { NftToken, WalletAddress } from "lib/types";
+import { Badge, NftToken, WalletAddress } from "lib/types";
 import { useNfts } from "./useNfts";
 
 /**
@@ -7,10 +7,8 @@ import { useNfts } from "./useNfts";
  */
 export const useBadges = (walletAddresses?: WalletAddress[]) => {
   const selectBadgesFromNfts = useCallback((nfts: NftToken[]) => {
-    return nfts.filter((nft) => nft.isSBT);
+    return nfts.filter((nft): nft is Badge => nft.isSBT);
   }, []);
 
-  const query = useNfts(walletAddresses, selectBadgesFromNfts);
-
-  return query;
+  return useNfts(walletAddresses, selectBadgesFromNfts);
 };

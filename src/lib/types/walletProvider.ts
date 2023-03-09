@@ -13,3 +13,7 @@ export type NftMetadata = z.infer<typeof NftMetadataSchema>;
 export type NftToken = z.infer<typeof NftTokenSchema>;
 
 export type NftListApiResponse = z.infer<typeof NftListApiResponseSchema>;
+
+export type Badge = NftToken & { isSBT: true };
+
+export type Collectible = NftToken & { isSBT: false };
