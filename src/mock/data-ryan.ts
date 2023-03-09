@@ -56,11 +56,18 @@ export const profileData: ProfileData = {
   ],
   featuredAssets: [
     {
+      chainId: Chains.POLYGON,
+      ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
+      contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD271",
+      tokenId: "verida-identity-0",
+      order: 1,
+    },
+    {
       chainId: Chains.ETHEREUM_GOERLI,
       contractAddress: "0x2e60f8f0ded025c41454e151f75c300fba3bc62b",
       tokenId: "3",
       ownerAddress: "0xff71512c84096f55cdf5c5f3d3c6ace99b56fef0",
-      order: 1,
+      order: 2,
     },
   ],
 };

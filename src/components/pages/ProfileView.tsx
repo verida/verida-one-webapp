@@ -25,7 +25,7 @@ export const ProfileView: React.FC = () => {
     isErrorIdentityInfo,
     isLoadingProfileData,
     featuredLinks,
-    featuredCollectibles,
+    featuredAssets,
     customLinks,
     socialMediaLinks,
     walletAddresses,
@@ -55,7 +55,7 @@ export const ProfileView: React.FC = () => {
             ) : hasProfileData ? (
               <>
                 <FeaturedSection
-                  collectibles={featuredCollectibles}
+                  assets={featuredAssets}
                   links={featuredLinks}
                 />
                 <SocialMediaSection socialMediaLinks={socialMediaLinks} />
