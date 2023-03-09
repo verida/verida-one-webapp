@@ -51,6 +51,7 @@ export const AssetDetailsView: React.FunctionComponent = () => {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div className="flex flex-col space-y-6">
             <AssetMedia
+              className="bg-asset-media"
               source={asset.metadata.image}
               alt={asset.metadata.name || "Asset"}
             />

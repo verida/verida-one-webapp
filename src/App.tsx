@@ -1,7 +1,6 @@
 import React from "react";
 import {
   AssetDetailsView,
-  BadgeDetailsView,
   BadgeListView,
   CollectibleListView,
   HomeView,
@@ -49,7 +48,7 @@ const router = createBrowserRouter(
           <Route index element={<BadgeListView />} />
           <Route
             path=":chain/:contractAddress/:tokenId"
-            element={<BadgeDetailsView />}
+            element={<AssetDetailsView />}
           />
         </Route>
       </Route>

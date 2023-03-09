@@ -1,6 +1,5 @@
 export * from "./AssetDetailsMainInfo";
 export * from "./AssetDetailsProperties";
-export * from "./BadgeDetailsProperties";
 export * from "./BadgeMosaic";
 export * from "./BadgesSection";
 export * from "./CollectibleGrid";

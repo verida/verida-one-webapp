@@ -1,10 +1,10 @@
 import { HexagonBase, SkeletonBase } from "components/atoms";
-import { Badge } from "lib/types";
+import { NftToken } from "lib/types";
 import React from "react";
 import { Link } from "react-router-dom";
 
 type HexagonProps = {
-  badge: Badge;
+  badge: NftToken;
   to: string;
   disableShadow?: boolean;
 } & Omit<React.ComponentPropsWithoutRef<"li">, "className">;
@@ -22,7 +22,7 @@ export const BadgeMosaicItem: React.FunctionComponent<HexagonProps> = (
       <HexagonBase className="flex items-center justify-center">
         <Link to={to} className="h-full w-full">
           <img
-            src={badge.metadata.image}
+            src={badge.metadata.image || undefined}
             alt={badge.metadata.name || "Collectible"}
             className="h-full w-full object-cover"
           />
