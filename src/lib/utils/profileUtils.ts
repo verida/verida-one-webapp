@@ -26,8 +26,13 @@ import {
   hasDidSyntax,
 } from "./veridaUtils";
 
-// TODO: Write JS DOc
-
+/**
+ * Get the main public information of an Identity (name, description, avatar, ...). This is normally available to all Verida Identities/Accounts whether a Verida One profile has been configured or not.
+ *
+ * @param veridaClient  A Verida client.
+ * @param didOrUsername A username or a DID.
+ * @returns The formatted info of the identity.
+ */
 export const getIdentityInfo = async (
   veridaClient: Client,
   didOrUsername: string
@@ -48,6 +53,13 @@ export const getIdentityInfo = async (
   };
 };
 
+/**
+ * Get the Verida One profile data (platform links, custom links, wallet addresses and featured items).
+ *
+ * @param veridaClient  A Verida client.
+ * @param didOrUsername A username or a DID.
+ * @returns The Verida One profile data.
+ */
 export const getProfileData = async (
   veridaClient: Client,
   didOrUsername: string
@@ -71,6 +83,7 @@ export const getProfileData = async (
     }
   );
 
+  // Get the default profile record from the datastore, identified by its known Id.
   const profileRecord = (await datastore.get(
     VERIDA_ONE_PROFILE_RECORD_ID,
     {}
@@ -81,6 +94,15 @@ export const getProfileData = async (
   // Later the best way will likely be to wrap them in app-specific Errors, such as new ProfileNotFoundError(), or new ProfileNotValidError().
 };
 
+/**
+ * Get all the NFTs of a list of wallet addresses.
+ *
+ * Currently includes the NFTs mock data is mock data is enabled.
+ *
+ * @param walletAddresses The list if wallet addresses to fetch the NFTs from.
+ * @param abortSignal The signal to cancel the request.
+ * @returns The list of NFTs, iinclude the SBTs.
+ */
 export const getNfts = async (
   walletAddresses: WalletAddress[],
   abortSignal?: AbortSignal
@@ -88,6 +110,7 @@ export const getNfts = async (
   // Filter and format the address for the API
   const addresses = walletAddresses
     .filter((address) =>
+      // The API doesn't support all the chains and return an error if we pass an unsupported one. When the API gracefully ignore the unsupported we could remove this filter. We won't need to maintain the supported list.
       walletProviderSupportedChainsForNft.includes(address.chainId)
     )
     .map((address) => `${address.chainId}:${address.address}`);
@@ -107,6 +130,13 @@ export const getNfts = async (
   return nfts;
 };
 
+/**
+ * Filter out the featured items from the list of assets. Not that the list of featured items only provides the necessary properties to identify the asset (chain id, token address and token id) not the whole asset information, hence the need for this function.
+ *
+ * @param assets The list of all assets.
+ * @param featuredAssets The list of featured items.
+ * @returns The list of featured assets.
+ */
 export const filterFeaturedAssets = (
   assets: NftToken[],
   featuredAssets: FeaturedAsset[]
