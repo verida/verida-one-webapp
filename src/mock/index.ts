@@ -31,7 +31,7 @@ export const getMockNfts = async (): Promise<NftToken[]> => {
   return Promise.resolve(nfts);
 };
 
-export const identityInfo: IdentityInfo = {
+const identityInfo: IdentityInfo = {
   did: "did:vda:0x4F984180236a323d90346e36D848792b26b4049E",
   avatarUri: avatarImage,
   name: "Ryan Kris",
@@ -40,7 +40,7 @@ export const identityInfo: IdentityInfo = {
     "Cofounder @ Verida. Building web3 identity and personal data storage",
 };
 
-export const profileData: ProfileData = {
+const profileData: ProfileData = {
   customLinks: [
     {
       label: "ryankris.com",
@@ -96,7 +96,7 @@ export const profileData: ProfileData = {
   ],
 };
 
-export const nfts: NftToken[] = [
+const nfts: NftToken[] = [
   {
     chain_id: Chains.POLYGON,
     owner_address: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",

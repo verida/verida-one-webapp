@@ -7,6 +7,8 @@ import {
   USERNAME_VDA_EXTENSION,
 } from "lib/constants";
 import { ResolvedIdentity } from "lib/types";
+import { MOCK_IDENTITY } from "mock";
+import { config } from "lib/config";
 
 /**
  * Check if the param as a DID syntax, ie: starts with 'did:'.
@@ -45,6 +47,7 @@ export const hasVeridaUsernameSyntax = (didOrUsername: string) => {
  *
  * Currently returns the username if mock data is enabled.
  *
+ * @param client  A Verida client.
  * @param identity A username or DID.
  * @returns The resolved DID.
  */
@@ -52,6 +55,13 @@ export const resolveIdentity = async (
   client: Client,
   identity: string
 ): Promise<ResolvedIdentity> => {
+  // TODO: Remove use of mock data
+  if (config.isMockDataEnabled && identity === MOCK_IDENTITY) {
+    return {
+      username: MOCK_IDENTITY,
+    };
+  }
+
   console.debug("identity:", identity);
   if (hasVeridaDidSyntax(identity)) {
     // Identity is considered a Verida DID.
@@ -89,7 +99,6 @@ export const resolveIdentity = async (
     }
   }
 
-  console.debug("Unsupported DID or Username");
   throw new Error("Unsupported DID or Username");
 };
 
