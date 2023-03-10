@@ -51,10 +51,13 @@ export const useWholeProfile = (identity?: string) => {
     isError: isErrorBadges,
   } = useBadges(walletAddresses);
 
-  // TODO: Include Badges in extracting featured assets
-  const featuredCollectibles =
-    collectibles && profileData?.featureAssets
-      ? filterFeaturedAssets(collectibles, profileData?.featureAssets)
+  const assets = [
+    ...(collectibles ? collectibles : []),
+    ...(badges ? badges : []),
+  ];
+  const featuredAssets =
+    assets.length && profileData?.featuredAssets
+      ? filterFeaturedAssets(assets, profileData?.featuredAssets)
       : undefined;
 
   return {
@@ -64,7 +67,7 @@ export const useWholeProfile = (identity?: string) => {
     profileData,
     hasProfileData,
     featuredLinks,
-    featuredCollectibles,
+    featuredAssets,
     customLinks,
     socialMediaLinks,
     walletAddresses,

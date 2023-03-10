@@ -1,7 +1,7 @@
 import React from "react";
 import { useIntl } from "react-intl";
 import {
-  CollectibleCard,
+  AssetCard,
   CustomLink,
   ProfileSectionWrapper,
 } from "components/molecules";
@@ -15,13 +15,13 @@ import {
 import { SkeletonBase } from "components/atoms";
 
 type FeaturedSectionProps = {
-  collectibles?: NftToken[];
+  assets?: NftToken[];
   links?: CustomLinkType[];
 };
 
 /** Section for the Profile page rendering the featured items */
 export const FeaturedSection: React.FC<FeaturedSectionProps> = (props) => {
-  const { collectibles, links } = props;
+  const { assets, links } = props;
 
   const query = `(min-width: ${screenSizes.sm})`;
   // FIXME: Use breakpoints from tailwind configuration
@@ -30,7 +30,7 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = (props) => {
 
   const i18n = useIntl();
 
-  if (!collectibles?.length && !links?.length) {
+  if (!assets?.length && !links?.length) {
     return null;
   }
 
@@ -43,24 +43,24 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = (props) => {
   return (
     <ProfileSectionWrapper title={sectionTitle}>
       <div className="flex flex-col space-y-3">
-        {collectibles?.length ? (
+        {assets?.length ? (
           <ul className="grid grid-cols-4 gap-2">
-            {collectibles
-              .slice(0, MAX_ASSETS_IN_FEATURED_SECTION)
-              .map((collectible) => (
-                <li
-                  key={`${collectible.chain_id}/${collectible.token_address}/${collectible.token_id}`}
+            {assets.slice(0, MAX_ASSETS_IN_FEATURED_SECTION).map((asset) => (
+              <li
+                key={`${asset.chain_id}/${asset.token_address}/${asset.token_id}`}
+              >
+                <Link
+                  to={`${asset.isSBT ? "badges" : "collectibles"}/${
+                    asset.chain_id
+                  }/${asset.token_address}/${asset.token_id}`}
                 >
-                  <Link
-                    to={`collectibles/${collectible.chain_id}/${collectible.token_address}/${collectible.token_id}`}
-                  >
-                    <CollectibleCard
-                      variant={mediaMatch ? "standard" : "compact"}
-                      collectible={collectible}
-                    />
-                  </Link>
-                </li>
-              ))}
+                  <AssetCard
+                    variant={mediaMatch ? "standard" : "compact"}
+                    asset={asset}
+                  />
+                </Link>
+              </li>
+            ))}
           </ul>
         ) : null}
         {links?.length ? (

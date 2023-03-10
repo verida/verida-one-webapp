@@ -1,5 +1,5 @@
-import { Badge, IdentityInfo, ProfileData } from "lib/types";
-import { identityInfo, profileData, badges } from "./data-ryan";
+import { IdentityInfo, NftToken, ProfileData } from "lib/types";
+import { identityInfo, profileData, nfts } from "./data-ryan";
 import { config } from "lib/config";
 
 function checkMockDataEnabled() {
@@ -18,7 +18,7 @@ export const getMockProfileData = async (): Promise<ProfileData> => {
   return Promise.resolve(profileData);
 };
 
-export const getMockBadges = async (): Promise<Badge[]> => {
+export const getMockNfts = async (): Promise<NftToken[]> => {
   checkMockDataEnabled();
-  return Promise.resolve(badges);
+  return Promise.resolve(nfts);
 };

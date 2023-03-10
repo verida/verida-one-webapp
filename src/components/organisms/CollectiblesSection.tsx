@@ -1,13 +1,13 @@
 import React, { useCallback } from "react";
 import { useIntl } from "react-intl";
-import { CollectibleCard, ProfileSectionWrapper } from "components/molecules";
-import { NftToken } from "lib/types";
+import { AssetCard, ProfileSectionWrapper } from "components/molecules";
+import { Collectible } from "lib/types";
 import { Button } from "components/atoms";
 import { Link, useNavigate } from "react-router-dom";
 import { MAX_COLLECTIBLES_IN_PROFILE_SECTION } from "lib/constants";
 
 type CollectiblesSectionProps = {
-  collectibles?: NftToken[];
+  collectibles?: Collectible[];
 };
 
 /** Section for the Profile page rendering the list of Collectibles */
@@ -72,7 +72,7 @@ export const CollectiblesSection: React.FC<CollectiblesSectionProps> = (
             <Link
               to={`collectibles/${collectible.chain_id}/${collectible.token_address}/${collectible.token_id}`}
             >
-              <CollectibleCard variant="standard" collectible={collectible} />
+              <AssetCard variant="standard" asset={collectible} />
             </Link>
           </li>
         ))}

@@ -18,6 +18,18 @@ export const ShareModalProfileContent: React.FunctionComponent<
   const profileUrl = window.location.href;
   const displayedProfileUrl = `${window.location.host}${window.location.pathname}`;
 
+  const profileUrlShareCardLabel = i18n.formatMessage({
+    id: "ShareModalProfileContent.profileUrlShareCardLabel",
+    defaultMessage: "Profile Link",
+    description: "Label of the share card for the profile url",
+  });
+
+  const didShareCardLabel = i18n.formatMessage({
+    id: "ShareModalProfileContent.didShareCardLabel",
+    defaultMessage: "DID",
+    description: "Label of the share card for the DID",
+  });
+
   const profileUrlShareTitle = i18n.formatMessage({
     id: "ShareModalProfileContent.profileUrlShareTitle",
     defaultMessage: "Checkout my Verida One profile",
@@ -71,11 +83,13 @@ export const ShareModalProfileContent: React.FunctionComponent<
       </div>
       <div className="flex flex-col space-y-2">
         <ShareInfoCard
+          label={profileUrlShareCardLabel}
           value={profileUrl}
           displayedValue={displayedProfileUrl}
           onClickShare={() => void handleClickShare(profileUrlShareData)}
         />
         <ShareInfoCard
+          label={didShareCardLabel}
           value={identityInfo.did}
           displayedValue={identityInfo.did}
           onClickShare={() => void handleClickShare(didShareData)}
