@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { IdentityInfo, ResolvedIdentity } from "lib/types";
+import { IdentityInfo } from "lib/types";
 import { getIdentityInfo, queryKeys } from "lib/utils";
 import { useResolvedIdentity } from "./useResolvedIdentity";
 import { useVerida } from "./useVerida";
@@ -10,24 +10,19 @@ import { useVerida } from "./useVerida";
 export const useIdentityInfo = (identity?: string) => {
   const { client } = useVerida();
 
-  const {
-    data: resolvedIdentity,
-    isLoading: isLoadingResolvedIdentity,
-    isError: isErrorResolvedIdentity,
-    error: errorResolvedIdentity,
-  } = useResolvedIdentity(client, identity);
+  const { data: resolvedIdentity } = useResolvedIdentity(client, identity);
 
   const {
     data: identityInfo,
-    isLoading: isLoadingIdentityInfo,
-    isError: isErrorIdentityInfo,
-    error: errorIdentityInfo,
+    isLoading,
+    isError,
+    error,
   } = useQuery({
-    queryKey: queryKeys.getIdentityInfo(resolvedIdentity?.did as string),
-    queryFn: () => {
-      return getIdentityInfo(client, resolvedIdentity as ResolvedIdentity);
+    queryKey: queryKeys.getIdentityInfo(identity as string),
+    queryFn: ({ queryKey: [{ identity }] }) => {
+      return getIdentityInfo(client, identity);
     },
-    enabled: !!resolvedIdentity?.did,
+    enabled: !!identity,
   });
 
   const data: IdentityInfo | undefined = identityInfo
@@ -39,11 +34,8 @@ export const useIdentityInfo = (identity?: string) => {
 
   return {
     data,
-    isLoading:
-      isErrorResolvedIdentity || isErrorIdentityInfo
-        ? false
-        : isLoadingIdentityInfo || isLoadingResolvedIdentity,
-    isError: isErrorIdentityInfo || isErrorResolvedIdentity,
-    error: errorIdentityInfo || errorResolvedIdentity,
+    isLoading,
+    isError,
+    error,
   };
 };

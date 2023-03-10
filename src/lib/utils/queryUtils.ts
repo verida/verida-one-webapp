@@ -4,8 +4,8 @@ export const queryKeys = {
   resolveIdentity: (identity: string) => [
     { scope: "ResolvedIdentity", identity },
   ],
-  getIdentityInfo: (did: string) => [{ scope: "IdentityInfo", did }],
-  getProfileData: (did: string) => [{ scope: "ProfileData", did }],
+  getIdentityInfo: (identity: string) => [{ scope: "IdentityInfo", identity }],
+  getProfileData: (identity: string) => [{ scope: "ProfileData", identity }],
   getNfts: (walletAddresses: WalletAddress[]) => [
     { scope: "NFTs", walletAddresses },
   ],

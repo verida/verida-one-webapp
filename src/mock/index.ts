@@ -2,6 +2,8 @@ import { IdentityInfo, NftToken, ProfileData } from "lib/types";
 import { identityInfo, profileData, nfts } from "./data-ryan";
 import { config } from "lib/config";
 
+export const MOCK_IDENTITY = "ryan-demo";
+
 function checkMockDataEnabled() {
   if (!config.isMockDataEnabled) {
     throw new Error("Mock data is not enabled");

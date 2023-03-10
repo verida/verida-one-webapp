@@ -9,29 +9,42 @@ import {
   IdentityInfo,
   ProfileData,
   WalletAddress,
-  ResolvedIdentity,
 } from "lib/types";
-import { getMockNfts, getMockIdentityInfo, getMockProfileData } from "mock";
+import {
+  getMockNfts,
+  getMockIdentityInfo,
+  getMockProfileData,
+  MOCK_IDENTITY,
+} from "mock";
 import {
   getNfts as getNftsFromApi,
   walletProviderSupportedChainsForNft,
 } from "lib/api";
-import { getAnyPublicProfile, getExternalDatastore } from "./veridaUtils";
+import {
+  getAnyPublicProfile,
+  getExternalDatastore,
+  hasDidSyntax,
+} from "./veridaUtils";
 
 // TODO: Write JS DOc
 
 export const getIdentityInfo = async (
   veridaClient: Client,
-  resolvedIdentity: ResolvedIdentity
+  didOrUsername: string
 ): Promise<IdentityInfo> => {
-  const publicProfile = await getAnyPublicProfile(
-    veridaClient,
-    resolvedIdentity.did
-  );
+  // TODO: Remove use of mock data
+  if (config.isMockDataEnabled && didOrUsername === MOCK_IDENTITY) {
+    return getMockIdentityInfo();
+  }
+
+  const publicProfile = await getAnyPublicProfile(veridaClient, didOrUsername);
+
+  const isDid = hasDidSyntax(didOrUsername);
 
   return {
     ...publicProfile,
-    ...resolvedIdentity,
+    did: isDid ? didOrUsername : undefined,
+    username: isDid ? undefined : didOrUsername,
   };
 };
 
@@ -39,6 +52,11 @@ export const getProfileData = async (
   veridaClient: Client,
   didOrUsername: string
 ): Promise<ProfileData> => {
+  // TODO: Remove use of mock data
+  if (config.isMockDataEnabled && didOrUsername === MOCK_IDENTITY) {
+    return getMockProfileData();
+  }
+
   const datastore = await getExternalDatastore(
     veridaClient,
     didOrUsername,

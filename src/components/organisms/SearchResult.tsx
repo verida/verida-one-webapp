@@ -36,12 +36,12 @@ export const SearchResult: React.FunctionComponent<SearchResultProps> = (
           {results.map((resultItem) => (
             <li key={resultItem.did}>
               <SearchResultItem
-                did={resultItem.did}
-                name={resultItem?.name}
-                avatar={resultItem?.avatarUri}
-                username={resultItem?.username}
+                identityInfo={resultItem}
                 onClick={() =>
-                  onClickResultItem(resultItem?.username || resultItem.did)
+                  onClickResultItem(
+                    // There is at least one of the two
+                    (resultItem.username || resultItem.did) as string
+                  )
                 }
               />
             </li>
