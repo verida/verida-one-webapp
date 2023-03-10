@@ -1,12 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { VeridaNameClient } from "@verida/vda-name-client";
+import { Client } from "@verida/client-ts";
 import { resolveIdentity } from "lib/utils";
 import { queryKeys } from "lib/utils/queryUtils";
 
-export const useResolvedIdentity = (
-  client: VeridaNameClient,
-  identity?: string
-) => {
+export const useResolvedIdentity = (client: Client, identity?: string) => {
   const query = useQuery({
     queryKey: queryKeys.resolveIdentity(identity as string),
     queryFn: ({ queryKey: [{ identity }] }) => {

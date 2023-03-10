@@ -8,14 +8,14 @@ import { useVerida } from "./useVerida";
  * Hook querying the Verida One profile data (custom links, platform links, ...) for a given identity (DID or Username)
  */
 export const useProfileData = (identity?: string) => {
-  const { client, nameClient } = useVerida();
+  const { client } = useVerida();
 
   const {
     data: resolvedIdentity,
     isLoading: isLoadingResolvedIdentity,
     isError: isErrorResolvedIdentity,
     error: errorResolvedIdentity,
-  } = useResolvedIdentity(nameClient, identity);
+  } = useResolvedIdentity(client, identity);
 
   const {
     data,

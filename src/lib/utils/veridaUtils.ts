@@ -1,5 +1,4 @@
 import { Client } from "@verida/client-ts";
-import { VeridaNameClient } from "@verida/vda-name-client";
 import { WebUserProfile } from "@verida/web-helpers";
 import { DatastoreOpenConfig } from "@verida/types";
 import {
@@ -50,14 +49,17 @@ export const hasVeridaUsernameSyntax = (didOrUsername: string) => {
  * @returns The resolved DID.
  */
 export const resolveIdentity = async (
-  client: VeridaNameClient,
+  client: Client,
   identity: string
 ): Promise<ResolvedIdentity> => {
+  console.debug("identity:", identity);
   if (hasVeridaDidSyntax(identity)) {
     // Identity is considered a Verida DID.
     // "Considered" as in "valid VDA DID method", whether the DID actually exists is not a concern, it will be handled by catching the errors.
     try {
+      console.debug("searching for usernames");
       const usernames = await client.getUsernames(identity);
+      console.debug("usernames:", usernames);
       return {
         did: identity,
         username: usernames?.length > 0 ? usernames[0] : undefined,
@@ -65,6 +67,7 @@ export const resolveIdentity = async (
       };
     } catch (error: unknown) {
       // The errors won't say whether the DID exist or not, so gracefully return it with no usernames
+      console.error(error);
       return { did: identity };
     }
   }
@@ -73,16 +76,20 @@ export const resolveIdentity = async (
   if (hasVeridaUsernameSyntax(identity)) {
     // Identity is considered a Verida Username.
     try {
-      const did = await client.getDid(identity);
+      console.debug("searching for a did");
+      const did = await client.getDID(identity);
+      console.debug("did:", did);
       return {
         did,
         username: identity,
       };
     } catch (error: unknown) {
+      console.error(error);
       throw new Error("Cannot resolve the Verida Username");
     }
   }
 
+  console.debug("Unsupported DID or Username");
   throw new Error("Unsupported DID or Username");
 };
 
