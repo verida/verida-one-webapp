@@ -1,38 +1,45 @@
+import { AssetPropertyInfo, NftToken } from "lib/types";
 import React from "react";
-import { AssetPropertyInfo, Badge } from "lib/types";
 import { useIntl } from "react-intl";
 import { getChainLabel, getChainLogo } from "lib/utils";
 import { AssetDetailsPropertyList } from "components/molecules";
 
-type BadgeDetailsPropertiesProps = {
-  badge: Badge;
+type AssetDetailsPropertiesProps = {
+  asset: NftToken;
 } & React.ComponentPropsWithRef<"div">;
 
-/** Comnponent displaying the properties of a Badge. */
-export const BadgeDetailsProperties: React.FC<BadgeDetailsPropertiesProps> = (
+/** Comnponent displaying the properties of an Asset. */
+export const AssetDetailsProperties: React.FC<AssetDetailsPropertiesProps> = (
   props
 ) => {
-  const { badge, ...divProps } = props;
-  const { chain_id, token_address, metadata, owner_address } = badge;
-  const { proofLabel, proofValue } = metadata;
+  const { asset, ...divProps } = props;
+
+  const { chain_id, owner_address, token_address, token_id } = asset;
+
   const i18n = useIntl();
 
   const chainPropertyLabel = i18n.formatMessage({
-    id: "BadgeDetailsProperties.chainPropertyLabel",
+    id: "AssetDetailsProperties.chainPropertyLabel",
     defaultMessage: "Chain",
-    description: "Label of the 'chain' property for a badge",
+    description: "Label of the 'chain' property for an asset",
   });
 
   const ownerPropertyLabel = i18n.formatMessage({
-    id: "BadgeDetailsProperties.ownerPropertyLabel",
+    id: "AssetDetailsProperties.ownerPropertyLabel",
     defaultMessage: "Owner",
-    description: "Label of the 'owner' property for a badge",
+    description: "Label of the 'owner' property for an asset",
+  });
+
+  const assetsIdPropertyLabel = i18n.formatMessage({
+    id: "AssetDetailsProperties.assetsIdPropertyLabel",
+    defaultMessage: "Asset Id",
+    description: "Label of the 'tokenId' property for an asset",
   });
 
   const creatorWalletAddressPropertyLabel = i18n.formatMessage({
-    id: "BadgeDetailsProperties.creatorWalletAddressPropertyLabel",
+    id: "AssetDetailsProperties.creatorWalletAddressPropertyLabel",
     defaultMessage: "Creator",
-    description: "Label of the 'creatorWalletAddress' property for a badge",
+    description: "Label of the 'creatorWalletAddress' property for an asset",
   });
 
   const chainLabel = getChainLabel(chain_id);
@@ -50,10 +57,17 @@ export const BadgeDetailsProperties: React.FC<BadgeDetailsPropertiesProps> = (
     },
     {
       propertyLabel: ownerPropertyLabel,
-      valueToDisplay: <span title={owner_address}>{owner_address}</span>,
+      valueToDisplay: owner_address,
       valueForTitle: owner_address,
       enableCopyToClipboard: true,
       valueToCopy: owner_address,
+    },
+    {
+      propertyLabel: assetsIdPropertyLabel,
+      valueToDisplay: token_id,
+      valueForTitle: token_id,
+      enableCopyToClipboard: true,
+      valueToCopy: token_id,
     },
     {
       propertyLabel: creatorWalletAddressPropertyLabel,
@@ -61,11 +75,6 @@ export const BadgeDetailsProperties: React.FC<BadgeDetailsPropertiesProps> = (
       valueForTitle: token_address,
       enableCopyToClipboard: true,
       valueToCopy: token_address,
-    },
-    {
-      propertyLabel: proofLabel,
-      valueToDisplay: proofValue,
-      valueForTitle: proofValue,
     },
   ];
 

@@ -1,7 +1,7 @@
 // Temporary data for development purpose
 
 import { PlatformLinkCategories, SocialMedia } from "lib/constants";
-import { Badge, Chains, IdentityInfo, ProfileData } from "lib/types";
+import { Chains, IdentityInfo, NftToken, ProfileData } from "lib/types";
 import avatarImage from "./images/avatar-ryan.png";
 import facebookAccountBadge from "./images/badges/facebook-account-badge.png";
 import twitterAccountBadge from "./images/badges/twitter-account-badge.png";
@@ -56,16 +56,23 @@ export const profileData: ProfileData = {
   ],
   featuredAssets: [
     {
+      chainId: Chains.POLYGON,
+      ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
+      contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD271",
+      tokenId: "verida-identity-0",
+      order: 1,
+    },
+    {
       chainId: Chains.ETHEREUM_GOERLI,
       contractAddress: "0x2e60f8f0ded025c41454e151f75c300fba3bc62b",
       tokenId: "3",
       ownerAddress: "0xff71512c84096f55cdf5c5f3d3c6ace99b56fef0",
-      order: 1,
+      order: 2,
     },
   ],
 };
 
-export const badges: Badge[] = [
+export const nfts: NftToken[] = [
   {
     chain_id: Chains.POLYGON,
     owner_address: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
@@ -74,10 +81,17 @@ export const badges: Badge[] = [
     name: "Verida Badges",
     metadata: {
       name: "Verida Identity",
-      description: "",
+      description: null,
       image: veridaIdentityBadge,
-      proofLabel: "Verida Identity",
-      proofValue: "ryan",
+      animation_url: null,
+      external_link: null,
+      attributes: [
+        {
+          trait_type: "",
+          display_type: "Verida Identity",
+          value: "ryan",
+        },
+      ],
     },
     isSBT: true,
   },
@@ -89,10 +103,17 @@ export const badges: Badge[] = [
     name: "Verida Badges",
     metadata: {
       name: "Twitter Account",
-      description: "",
+      description: null,
       image: twitterAccountBadge,
-      proofLabel: "Twitter Account",
-      proofValue: "@RyanJKris",
+      animation_url: null,
+      external_link: null,
+      attributes: [
+        {
+          trait_type: "",
+          display_type: "Twitter Account",
+          value: "@RyanJKris",
+        },
+      ],
     },
     isSBT: true,
   },
@@ -104,10 +125,17 @@ export const badges: Badge[] = [
     name: "Verida Badges",
     metadata: {
       name: "Facebook Account",
-      description: "",
+      description: null,
       image: facebookAccountBadge,
-      proofLabel: "Facebook Account",
-      proofValue: "@ryan.kris",
+      animation_url: null,
+      external_link: null,
+      attributes: [
+        {
+          trait_type: "",
+          display_type: "Facebook Account",
+          value: "@ryan.kris",
+        },
+      ],
     },
     isSBT: true,
   },
@@ -119,10 +147,17 @@ export const badges: Badge[] = [
     name: "Verida Badges",
     metadata: {
       name: "Verida Identity",
-      description: "",
+      description: null,
       image: veridaIdentityBadge,
-      proofLabel: "Verida Identity",
-      proofValue: "ryan",
+      animation_url: null,
+      external_link: null,
+      attributes: [
+        {
+          trait_type: "",
+          display_type: "Verida Identity",
+          value: "ryan",
+        },
+      ],
     },
     isSBT: true,
   },
@@ -134,10 +169,17 @@ export const badges: Badge[] = [
     name: "Verida Badges",
     metadata: {
       name: "Twitter Account",
-      description: "",
+      description: null,
       image: twitterAccountBadge,
-      proofLabel: "Twitter Account",
-      proofValue: "@RyanJKris",
+      animation_url: null,
+      external_link: null,
+      attributes: [
+        {
+          trait_type: "",
+          display_type: "Twitter Account",
+          value: "@RyanJKris",
+        },
+      ],
     },
     isSBT: true,
   },
@@ -149,10 +191,17 @@ export const badges: Badge[] = [
     name: "Verida Badges",
     metadata: {
       name: "Facebook Account",
-      description: "",
+      description: null,
       image: facebookAccountBadge,
-      proofLabel: "Facebook Account",
-      proofValue: "@ryan.kris",
+      animation_url: null,
+      external_link: null,
+      attributes: [
+        {
+          trait_type: "",
+          display_type: "Facebook Account",
+          value: "@ryan.kris",
+        },
+      ],
     },
     isSBT: true,
   },
@@ -166,8 +215,15 @@ export const badges: Badge[] = [
       name: "Verida Identity",
       description: "",
       image: veridaIdentityBadge,
-      proofLabel: "Verida Identity",
-      proofValue: "ryan",
+      animation_url: null,
+      external_link: null,
+      attributes: [
+        {
+          trait_type: "",
+          display_type: "Verida Identity",
+          value: "ryan",
+        },
+      ],
     },
     isSBT: true,
   },
@@ -179,10 +235,17 @@ export const badges: Badge[] = [
     name: "Verida Badges",
     metadata: {
       name: "Twitter Account",
-      description: "",
+      description: null,
       image: twitterAccountBadge,
-      proofLabel: "Twitter Account",
-      proofValue: "@RyanJKris",
+      animation_url: null,
+      external_link: null,
+      attributes: [
+        {
+          trait_type: "",
+          display_type: "Twitter Account",
+          value: "@RyanJKris",
+        },
+      ],
     },
     isSBT: true,
   },
@@ -194,10 +257,17 @@ export const badges: Badge[] = [
     name: "Verida Badges",
     metadata: {
       name: "Facebook Account",
-      description: "",
+      description: null,
       image: facebookAccountBadge,
-      proofLabel: "Facebook Account",
-      proofValue: "@ryan.kris",
+      animation_url: null,
+      external_link: null,
+      attributes: [
+        {
+          trait_type: "",
+          display_type: "Facebook Account",
+          value: "@ryan.kris",
+        },
+      ],
     },
     isSBT: true,
   },

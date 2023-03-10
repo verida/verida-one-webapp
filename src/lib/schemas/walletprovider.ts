@@ -5,10 +5,10 @@ export const NftMetadataAttributeSchema = z
   .object({
     trait_type: z.string(),
     value: z.string(),
-    display_type: z.string().nullable(),
-    max_value: z.number().nullable(),
-    trait_count: z.number().nullable(),
-    order: z.number().nullable(),
+    display_type: z.string().nullish(),
+    max_value: z.number().nullish(),
+    trait_count: z.number().nullish(),
+    order: z.number().nullish(),
   })
   .passthrough();
 

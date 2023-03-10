@@ -10,8 +10,11 @@ import {
   ProfileData,
   WalletAddress,
 } from "lib/types";
-import { getMockBadges, getMockIdentityInfo, getMockProfileData } from "mock";
-import { getNfts, walletProviderSupportedChainsForNft } from "lib/api";
+import { getMockNfts, getMockIdentityInfo, getMockProfileData } from "mock";
+import {
+  getNfts as getNftsFromApi,
+  walletProviderSupportedChainsForNft,
+} from "lib/api";
 import { getAnyPublicProfile, getExternalDatastore } from "./veridaUtils";
 
 export const getIdentityInfo = async (
@@ -66,7 +69,7 @@ export const getProfileData = async (
   // Later the best way will likely be to wrap them in app-specific Errors, such as new ProfileNotFoundError(), or new ProfileNotValidError().
 };
 
-export const getCollectibles = async (
+export const getNfts = async (
   walletAddresses: WalletAddress[],
   abortSignal?: AbortSignal
 ) => {
@@ -81,34 +84,30 @@ export const getCollectibles = async (
     return [];
   }
 
-  return await getNfts(addresses, abortSignal);
-};
+  let nfts = await getNftsFromApi(addresses, abortSignal);
 
-export const getBadges = async (walletAddresses: WalletAddress[]) => {
   // TODO: Remove use of mock data
-  if (walletAddresses) {
-    return getMockBadges();
+  if (config.isMockDataEnabled) {
+    const mockNfts = await getMockNfts();
+    nfts = [...nfts, ...mockNfts];
   }
 
-  // TODO: Implement fetching badges
-  return Promise.resolve([]);
+  return nfts;
 };
 
 export const filterFeaturedAssets = (
-  collectibles: NftToken[],
-  featured: FeaturedAsset[]
+  assets: NftToken[],
+  featuredAssets: FeaturedAsset[]
 ): NftToken[] => {
-  // TODO: Open up to a mix of Collectibles and Badges
-  return featured
+  return featuredAssets
     .sort((a, b) => a.order - b.order)
-    .map((asset) => {
-      return collectibles.find((item) => {
-        return (
-          asset.chainId === item.chain_id &&
-          asset.contractAddress === item.token_address &&
-          asset.tokenId === item.token_id
-        );
-      });
+    .map((featured) => {
+      return assets.find(
+        (asset) =>
+          featured.chainId === asset.chain_id &&
+          featured.contractAddress === asset.token_address &&
+          featured.tokenId === asset.token_id
+      );
     })
-    .filter((item): item is NftToken => item !== undefined);
+    .filter((asset): asset is NftToken => asset !== undefined);
 };
