@@ -6,24 +6,51 @@ Your identity in one place
 
 ## Development
 
+The application is composed of a frontend and a server. The server merely allows the update of the meta tags dynamically before serving the index.html.
+
+On a local development environment, due to current limitations, the server only serves the build folder of the frontend, so doesn't allow hot reloading of the frontend.
+
+We recommend to focus on either the frontend or the server at a time.
+
 ### Install
 
 ```
+// frontend
+yarn install
+
+// server
+cd ./server
 yarn install
 ```
 
 Some environment variables are required for the application to run. Have a look at the provided examples.
 
-Copy `.env.example`, rename it to `.env.local` and modify the variables for your local environment.
+Copy `.env.example`, rename it to `.env` and modify the variables for your local environment.
 
 ```
-cp .env.example .env.local
+// frontend
+cp .env.example .env
+
+//server
+cd ./server
+cp .env.example .env
 ```
 
 ### Run
 
+The frontend can be started with its dedicated development server supporting hot reloading:
+
 ```
-yarn run start
+// frontend
+yarn run start:dev
+```
+
+The server can be started via the following command (serving the build folder of the frontend):
+
+```
+// server
+cd ./server
+yarn run start:dev
 ```
 
 ### Features in development
@@ -43,10 +70,12 @@ We use eslint for the linting and prettier for the formatting.
 Scripts are available to check and fix issues.
 
 ```
+// frontend
 yarn run check
 ```
 
 ```
+// frontend
 yarn run fix
 ```
 
@@ -92,6 +121,7 @@ The message definition should always be copied into the json files in the messag
 You can run a dedicated script to extract all messages into the json file.
 
 ```
+// frontend
 yarn run messages:extract
 ```
 
@@ -100,20 +130,62 @@ See more information on the [react-intl documentation](https://formatjs.io/docs/
 ### Test
 
 ```
+// frontend
 yarn run test
 ```
 
 ### Build
 
 ```
+// frontend
 yarn run build
 ```
 
 Messages are compiled automatically before the build.
 
+Note: The server part is currently written in javascript and doesn't require any build phase.
+
 ## Deployment
 
-The repository is platform agnostic. The build process generates a `build` folder with the static files to be served.
+Before building and deploying, set the environment variables according to your platform. See the required variables in `.env.example`.
+The variables `NODE_ENV` must be set to the value `production` for an optimised bundle. This is usually done by default on most platform.
 
-Set the environment variables according to your platform. See the required variables in `.env.example`.
-The variables `NODE_ENV` must be set to the value `production`. This is usually done by default on most platform.
+The build command fo the frontend generates a build folder with the bundled static files of the frontend.
+
+From there, several deployment options are possible.
+
+- Static files on a CDN or equivalent
+- Server + local static files
+- A mix of the above: server + static files a CDN location.
+
+### Static files
+
+Note that this option prevents the meta tags from being dynamically updated before serving the page.
+
+The build folder can be deployed to a CDN or equivalent (Netlify, Amplify, S3 web hosting, ..., heroku with the create-react-app buildpack fall in this options as well).
+
+### Server + local static files
+
+This option allows dynamically setting the meta tags before serving the page.
+
+Deploy the repository, build the frontend then run the server so that it serves the static files straight from the build folder.
+
+The server has two entry points under the folder `./server/src`:
+
+- `servers.js` for a server environment (EC2, Heroku with no particular buildpack, ...)
+- `handler.js` for a serverless environment (Lambda, ...), a `serverless.yml` is provided in the repository (although, in its current state it doesn't bundle the frontend build folder)
+
+Note that a serverless deployment is not recommended with this option because all the static files will be requested through it, without the delivery optimisation that a CDN could provide. Check the next option.
+
+### Server + external static files
+
+This option allows dynamically setting the meta tags before serving the page.
+
+For this method to work, all the resources must be referenced with an absolute path, for instance `https://cdn.verida.one/favicon.png` instead of just `/favicon.png`. The environment variable `PUBLIC_URL` is use to that effect. CRA/Webpack prepends the variable to the path to the resources when building the frontend, so ensure to set this environment variable with the location where you will deploy the static files before building the frontend. After building, you can deploy on a CDN such as S3 + CloudFront.
+
+The server, is deployed in a similar way as the previous option. The difference being it must be aware of the location of the resources. The environment variable `RESOURCES_URL` is used to determine if it should fetch the `index.html` locally or from the specified location. So do not forget to set the variable before running the server, for instance `RESOURCES_URL=https://cdn.verida.one`
+
+Once again, the server has two entry points:
+
+- `servers.js` for a server environment (EC2, Heroku with no particular buildpack, ...)
+- `handler.js` for a serverless environment (Lambda, ...), a `serverless.yml` is provided in the repository

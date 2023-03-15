@@ -44,7 +44,10 @@ export const ProfileView: React.FC = () => {
   if (identityInfo || isLoadingIdentityInfo) {
     return (
       <>
-        <MetaTags title={identityInfo?.name} />
+        <MetaTags
+          title={identityInfo?.name}
+          description={identityInfo?.description}
+        />
         <div>
           <div className="mb-7">
             <IdentityInfoSection identityInfo={identityInfo} />

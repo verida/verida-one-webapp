@@ -1,0 +1,24 @@
+service: verida-one
+
+useDotenv: true
+
+provider:
+  name: aws
+  deploymentMethod: direct
+  runtime: nodejs14.x
+  stage: ${opt:stage}
+  region: ${env:AWS_LAMBDA_REGION}
+  timeout: 60
+  httpApi:
+    metrics: true
+    cors: true
+
+functions:
+  app:
+    handler: src/handler.handler
+    events:
+      - httpApi:
+          path: "/{proxy+}"
+          method: "*"
+    environment:
+      RESOURCES_URL: ${env:RESOURCES_URL}

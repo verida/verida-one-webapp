@@ -1,0 +1,119 @@
+name: Deploy
+
+# Currently only dispatched manually to allow choosing the environment to dpeloy on.
+# TODO: Allow the workflow on push to 'main' and 'develop'. Need to figure out how to set the environment without being too verida specific.
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to deploy on"
+        type: environment
+        required: true
+
+concurrency:
+  group: ${{ github.workflow }}-${{ inputs.environment }}
+
+jobs:
+  deploy:
+    name: Deploy
+    environment:
+      name: ${{ inputs.environment }}
+      url: ${{ vars.URL }}
+    runs-on: ubuntu-latest
+
+    env:
+      EXTEND_ESLINT: "true"
+      PUBLIC_URL: ${{ vars.RESOURCES_CDN_URL }}
+      RESOURCES_URL: ${{ vars.RESOURCES_CDN_URL }}
+      NODE_ENV: ${{ vars.NODE_ENV || 'production' }}
+      REACT_APP_VERIDA_ONE_CONTEXT_NAME: ${{ vars.REACT_APP_VERIDA_ONE_CONTEXT_NAME }}
+      REACT_APP_VERIDA_ENV: ${{ vars.VERIDA_NETWORK }}
+      REACT_APP_PROFILE_SCHEMA_URL: ${{ vars.REACT_APP_PROFILE_SCHEMA_URL }}
+      REACT_APP_WALLET_PROVIDER_API_BASE_URL: ${{ vars.REACT_APP_WALLET_PROVIDER_API_BASE_URL }}
+      REACT_APP_ENABLE_DEV_FEATURES: ${{ vars.REACT_APP_ENABLE_DEV_FEATURES }}
+      REACT_APP_ENABLE_MOCK_DATA: ${{ vars.REACT_APP_ENABLE_MOCK_DATA }}
+
+    steps:
+      - name: Environment variables
+        run: |
+          echo "NODE_ENV=$NODE_ENV"
+          echo "REACT_APP_VERIDA_ONE_CONTEXT_NAME=$REACT_APP_VERIDA_ONE_CONTEXT_NAME"
+          echo "REACT_APP_VERIDA_ENV=$REACT_APP_VERIDA_ENV"
+          echo "REACT_APP_PROFILE_SCHEMA_URL=$REACT_APP_PROFILE_SCHEMA_URL"
+          echo "REACT_APP_WALLET_PROVIDER_API_BASE_URL=$REACT_APP_WALLET_PROVIDER_API_BASE_URL"
+          echo "REACT_APP_ENABLE_DEV_FEATURES=$REACT_APP_ENABLE_DEV_FEATURES"
+          echo "REACT_APP_ENABLE_MOCK_DATA=$REACT_APP_ENABLE_MOCK_DATA"
+          echo "PUBLIC_URL=$PUBLIC_URL"
+          echo "RESOURCES_URL=$RESOURCES_URL"
+
+      - name: Checkout repository
+        uses: actions/checkout@v2.5.0
+
+      - name: Define node version
+        run: echo "NODE_VERSION=$(cat .nvmrc)" >> $GITHUB_ENV
+
+      - name: Set up node
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: "${{ env.NODE_VERSION }}"
+          cache: yarn
+
+      - name: Install frontend dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Test frontend
+        run: yarn run test
+
+      - name: Build frontend
+        run: yarn run build
+
+      - name: Upload frontend build artifacts
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: build-frontend
+          path: build
+
+      # TODO: Use a variable to conditionally deploy frontend to S3
+
+      - name: Deploy to S3
+        uses: jakejarvis/s3-sync-action@v0.5.1
+        with:
+          args: --acl public-read --follow-symlinks --delete --exclude '.git*/*'
+        env:
+          SOURCE_DIR: "build"
+          AWS_REGION: ${{ secrets.S3_BUCKET_REGION }}
+          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Invalidate CloudFront
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+          PATHS: "/"
+          AWS_REGION: ${{ secrets.CLOUDFRONT_DISTRIBUTION_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      # TODO: Use a variable to conditionally deploy server to Lambda
+
+      - name: Install server dependencies
+        working-directory: ./server
+        run: yarn install --frozen-lockfile
+
+      - name: Deploy server to Lambda
+        working-directory: ./server
+        # Run sls directly rather than using a yarn script, so we can pass a variable for the stage
+        run: npx serverless deploy --stage $AWS_LAMBDA_STAGE
+        # serverless.yml cannot take the stage from env vars so have to set it in cli options
+        env:
+          AWS_LAMBDA_STAGE: ${{ secrets.LAMBDA_STAGE }}
+          AWS_LAMBDA_REGION: ${{ secrets.LAMBDA_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Upload server deployed artifacts
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: server-deploy
+          path: server/.serverless/verida-one.zip
