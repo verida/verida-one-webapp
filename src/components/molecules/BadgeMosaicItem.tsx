@@ -69,7 +69,7 @@ export const BadgeMosaicItem: React.FunctionComponent<HexagonProps> = (
         </Link>
       </HexagonBase>
       {!disableShadow && (
-        <div className="absolute inset-0 -z-10 w-full blur-lg">
+        <div className="absolute inset-0 -z-10 w-full blur-md">
           <HexagonBase className="w-full bg-badge-purple" />
         </div>
       )}
