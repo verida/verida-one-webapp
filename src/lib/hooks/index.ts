@@ -3,6 +3,8 @@ export * from "./useBadges";
 export * from "./useCollectibles";
 export * from "./useDebounce";
 export * from "./useIdentityInfo";
+export * from "./useIsFirstRender";
+export * from "./useMediaQuery";
 export * from "./useNfts";
 export * from "./useOneNft";
 export * from "./useProfileData";
