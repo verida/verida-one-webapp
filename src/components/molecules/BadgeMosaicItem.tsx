@@ -3,6 +3,7 @@ import { HexagonBase, Icon, SkeletonBase } from "components/atoms";
 import { Badge } from "lib/types";
 import { Link } from "react-router-dom";
 import { useIntl } from "react-intl";
+import { useIsFirstRender } from "lib/hooks";
 
 type HexagonProps = {
   badge: Badge;
@@ -17,6 +18,7 @@ export const BadgeMosaicItem: React.FunctionComponent<HexagonProps> = (
   const source = badge.metadata.image;
   const i18n = useIntl();
   const [failedImage, setFailedImage] = useState(false);
+  const firstRender = useIsFirstRender();
 
   const noContentMessage = i18n.formatMessage({
     id: "BadgeMosaicItem.noContentMessage",
@@ -26,6 +28,7 @@ export const BadgeMosaicItem: React.FunctionComponent<HexagonProps> = (
   });
 
   const imageClasses = "h-full w-full object-cover";
+  const imageClassesLoading = `animate-pulse bg-primary-15 ${imageClasses}`;
 
   const handleImageLoad = useCallback(
     (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -54,7 +57,8 @@ export const BadgeMosaicItem: React.FunctionComponent<HexagonProps> = (
               // Set temporary classes until it is overriden by the onLoad event
               // bg-primary-15 is for the background color
               // animate-pulse is for applying a loading animation
-              className={`animate-pulse bg-primary-15 ${imageClasses}`}
+              // firstRender prevent the loading state to be applied on update as the image is already loaded
+              className={firstRender ? imageClassesLoading : imageClasses}
               onLoad={handleImageLoad}
               onError={handleImageError}
             />

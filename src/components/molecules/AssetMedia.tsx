@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { Icon } from "components/atoms";
 import { useIntl } from "react-intl";
+import { useIsFirstRender } from "lib/hooks";
 
 type AssetMediaProps = {
   source?: string | null;
@@ -22,6 +23,7 @@ export const AssetMedia: React.FunctionComponent<AssetMediaProps> = (props) => {
   } = props;
   const i18n = useIntl();
   const [failedImage, setFailedImage] = useState(false);
+  const firstRender = useIsFirstRender();
 
   const noContentMessage = i18n.formatMessage({
     id: "AssetMedia.noContentMessage",
@@ -30,13 +32,15 @@ export const AssetMedia: React.FunctionComponent<AssetMediaProps> = (props) => {
       "Message indicating that the asset has either no media content or this content is broken",
   });
 
-  const imageClasses = `w-full border border-solid border-primary-15 object-cover ${radius}`;
+  const imageClassesBase = `w-full border border-solid border-primary-15 object-cover ${radius}`;
+  const imageClasses = `h-full ${imageClassesBase}`;
+  const imageClassesLoading = `aspect-square animate-pulse bg-primary-15 ${imageClassesBase}`;
 
   const handleImageLoad = useCallback(
     (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
       setFailedImage(false);
       // Set the final classes once we know the image is loaded
-      event.currentTarget.className = `h-full ${imageClasses}`;
+      event.currentTarget.className = imageClasses;
     },
     [imageClasses]
   );
@@ -65,7 +69,8 @@ export const AssetMedia: React.FunctionComponent<AssetMediaProps> = (props) => {
             // Set temporary classes until it is overriden by the onLoad event
             // aspect-square is for keeping height
             // animate-pulse is for applying a loading animation
-            className={`aspect-square animate-pulse bg-primary-15 ${imageClasses}`}
+            // firstRender prevent the loading state to be applied on update as the image is already loaded
+            className={firstRender ? imageClassesLoading : imageClasses}
             onLoad={handleImageLoad}
             onError={handleImageError}
           />
