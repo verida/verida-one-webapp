@@ -19,6 +19,7 @@ export const NftMetadataSchema = z
     animation_url: z.string().nullable(),
     external_link: z.string().nullable(),
     image: z.string().nullable(),
+    background_color: z.string().nullish(),
     attributes: z.array(NftMetadataAttributeSchema).optional(),
   })
   .passthrough();
