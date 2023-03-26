@@ -13,6 +13,7 @@ import {
   MAX_LINKS_IN_FEATURED_SECTION,
 } from "lib/constants";
 import { SkeletonBase } from "components/atoms";
+import { useMediaQuery } from "lib/hooks";
 
 type FeaturedSectionProps = {
   assets?: NftToken[];
@@ -23,10 +24,8 @@ type FeaturedSectionProps = {
 export const FeaturedSection: React.FC<FeaturedSectionProps> = (props) => {
   const { assets, links } = props;
 
-  const query = `(min-width: ${screenSizes.sm})`;
   // FIXME: Use breakpoints from tailwind configuration
-  const mediaMatch = window.matchMedia(query).matches;
-  // FIXME: Make the media query match more responsive, currently has to refresh to update it
+  const mediaMatch = useMediaQuery(`(min-width: ${screenSizes.sm})`);
 
   const i18n = useIntl();
 
