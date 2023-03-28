@@ -1,7 +1,7 @@
 import { Client } from "@verida/client-ts";
 import { DatabasePermissionOptionsEnum } from "@verida/types";
 import { config } from "lib/config";
-import { DID_VDA_METHOD, VERIDA_ONE_PROFILE_RECORD_ID } from "lib/constants";
+import { VERIDA_ONE_PROFILE_RECORD_ID } from "lib/constants";
 import { ProfileDataSchema } from "lib/schemas";
 import {
   NftToken,
@@ -10,44 +10,68 @@ import {
   ProfileData,
   WalletAddress,
 } from "lib/types";
-import { getMockNfts, getMockIdentityInfo, getMockProfileData } from "mock";
+import {
+  getMockNfts,
+  getMockIdentityInfo,
+  getMockProfileData,
+  MOCK_IDENTITY,
+} from "mock";
 import {
   getNfts as getNftsFromApi,
   walletProviderSupportedChainsForNft,
 } from "lib/api";
-import { getAnyPublicProfile, getExternalDatastore } from "./veridaUtils";
+import {
+  getAnyPublicProfile,
+  getExternalDatastore,
+  hasDidSyntax,
+} from "./veridaUtils";
 
+/**
+ * Get the main public information of an Identity (name, description, avatar, ...). This is normally available to all Verida Identities/Accounts whether a Verida One profile has been configured or not.
+ *
+ * @param veridaClient  A Verida client.
+ * @param didOrUsername A username or a DID.
+ * @returns The formatted info of the identity.
+ */
 export const getIdentityInfo = async (
   veridaClient: Client,
-  did: string
+  didOrUsername: string
 ): Promise<IdentityInfo> => {
-  // TODO: Remove this check as it's only for mock data
-  if (!did.startsWith(DID_VDA_METHOD)) {
+  // TODO: Remove use of mock data
+  if (config.isMockDataEnabled && didOrUsername === MOCK_IDENTITY) {
     return getMockIdentityInfo();
   }
 
-  const publicProfile = await getAnyPublicProfile(veridaClient, did);
+  const publicProfile = await getAnyPublicProfile(veridaClient, didOrUsername);
 
-  // TODO: Deal with Verida Username
-  const identityInfo: IdentityInfo = {
+  const isDid = hasDidSyntax(didOrUsername);
+
+  return {
     ...publicProfile,
-    did,
+    did: isDid ? didOrUsername : undefined,
+    username: isDid ? undefined : didOrUsername,
   };
-
-  return identityInfo;
 };
 
+/**
+ * Get the Verida One profile data (platform links, custom links, wallet addresses and featured items).
+ *
+ * @param veridaClient  A Verida client.
+ * @param didOrUsername A username or a DID.
+ * @returns The Verida One profile data.
+ */
 export const getProfileData = async (
   veridaClient: Client,
-  did: string
+  didOrUsername: string
 ): Promise<ProfileData> => {
-  if (!did.startsWith(DID_VDA_METHOD)) {
+  // TODO: Remove use of mock data
+  if (config.isMockDataEnabled && didOrUsername === MOCK_IDENTITY) {
     return getMockProfileData();
   }
 
   const datastore = await getExternalDatastore(
     veridaClient,
-    did,
+    didOrUsername,
     config.veridaOneContextName,
     config.schemasURL.profile,
     {
@@ -59,16 +83,26 @@ export const getProfileData = async (
     }
   );
 
+  // Get the default profile record from the datastore, identified by its known Id.
   const profileRecord = (await datastore.get(
     VERIDA_ONE_PROFILE_RECORD_ID,
     {}
   )) as ProfileData;
   return ProfileDataSchema.parse(profileRecord);
-  // TODO: Try catch errors and identity the type of error to handle it specifically
+  // TODO: Try catch errors and identify the type of error to handle it specifically
   // For the moment, there is no specific handling of the errors, so there is no point of catching and identifying them.
   // Later the best way will likely be to wrap them in app-specific Errors, such as new ProfileNotFoundError(), or new ProfileNotValidError().
 };
 
+/**
+ * Get all the NFTs of a list of wallet addresses.
+ *
+ * Currently includes the NFTs mock data is mock data is enabled.
+ *
+ * @param walletAddresses The list if wallet addresses to fetch the NFTs from.
+ * @param abortSignal The signal to cancel the request.
+ * @returns The list of NFTs, iinclude the SBTs.
+ */
 export const getNfts = async (
   walletAddresses: WalletAddress[],
   abortSignal?: AbortSignal
@@ -76,6 +110,7 @@ export const getNfts = async (
   // Filter and format the address for the API
   const addresses = walletAddresses
     .filter((address) =>
+      // The API doesn't support all the chains and return an error if we pass an unsupported one. When the API gracefully ignore the unsupported we could remove this filter. We won't need to maintain the supported list.
       walletProviderSupportedChainsForNft.includes(address.chainId)
     )
     .map((address) => `${address.chainId}:${address.address}`);
@@ -95,6 +130,13 @@ export const getNfts = async (
   return nfts;
 };
 
+/**
+ * Filter out the featured items from the list of assets. Not that the list of featured items only provides the necessary properties to identify the asset (chain id, token address and token id) not the whole asset information, hence the need for this function.
+ *
+ * @param assets The list of all assets.
+ * @param featuredAssets The list of featured items.
+ * @returns The list of featured assets.
+ */
 export const filterFeaturedAssets = (
   assets: NftToken[],
   featuredAssets: FeaturedAsset[]

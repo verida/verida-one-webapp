@@ -63,6 +63,8 @@ Check for `.env.example` for the exact variables.
 
 In a similar way as the development features, a set of mock data is available. It can be enabled by setting the environment variable `REACT_APP_ENABLE_MOCK_DATA=true`.
 
+The mock profile can found by searching for the Username "ryan-demo.vda".
+
 ### Linting and Formatting
 
 We use eslint for the linting and prettier for the formatting.

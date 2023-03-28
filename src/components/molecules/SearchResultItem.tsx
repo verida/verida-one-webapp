@@ -1,18 +1,16 @@
 import { Avatar, SkeletonBase } from "components/atoms";
+import { IdentityInfo } from "lib/types";
 import React from "react";
 
 type SearchResultItemProps = {
-  did: string;
-  avatar?: string;
-  name?: string;
-  username?: string;
+  identityInfo: IdentityInfo;
   onClick: () => void;
 } & React.ComponentPropsWithRef<"div">;
 
 export const SearchResultItem: React.FunctionComponent<
   SearchResultItemProps
 > = (props) => {
-  const { avatar, name, did, username, onClick, ...otherProps } = props;
+  const { identityInfo, onClick, ...otherProps } = props;
 
   return (
     <div {...otherProps}>
@@ -20,10 +18,16 @@ export const SearchResultItem: React.FunctionComponent<
         className="flex w-full rounded-lg p-2 hover:bg-gray-dark active:bg-gray-dark"
         onClick={onClick}
       >
-        <Avatar className="mr-3 aspect-square h-10" image={avatar} alt={name} />
+        <Avatar
+          className="mr-3 aspect-square h-10"
+          image={identityInfo.avatarUri}
+          alt={identityInfo.name}
+        />
         <div className="flex min-w-0 flex-col text-start">
-          <span className="truncate font-semibold">{name}</span>
-          <span className="truncate text-gray-light">{username || did}</span>
+          <span className="truncate font-semibold">{identityInfo.name}</span>
+          <span className="truncate text-gray-light">
+            {identityInfo.username || identityInfo.did}
+          </span>
         </div>
       </button>
     </div>
