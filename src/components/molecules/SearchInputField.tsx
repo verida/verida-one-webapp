@@ -51,6 +51,10 @@ export const SearchInputField: React.FunctionComponent<
           className="w-full rounded-xl border border-solid border-transparent bg-primary-10 py-[calc(0.625rem_-_1px)] pl-3 pr-10 text-base leading-5 hover:border-primary-15 focus:border-primary-15 focus:bg-[inherit] focus:outline-none sm:pl-10"
           onFocus={onFocus}
           onBlur={onBlur}
+          autoCapitalize="off"
+          autoCorrect="off"
+          autoComplete="off"
+          spellCheck={false}
         />
         {query ? (
           <IconButton
