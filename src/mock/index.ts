@@ -4,9 +4,13 @@ import { config } from "lib/config";
 import { PlatformLinkCategories, SocialMedia } from "lib/constants";
 import { Chains, IdentityInfo, NftToken, ProfileData } from "lib/types";
 import avatarImage from "./images/avatar-ryan.png";
+import veridaIdentityBadge from "./images/badges/verida-identity-badge.png";
 import facebookAccountBadge from "./images/badges/facebook-account-badge.png";
 import twitterAccountBadge from "./images/badges/twitter-account-badge.png";
-import veridaIdentityBadge from "./images/badges/verida-identity-badge.png";
+import twitter1mFollowersBadge from "./images/badges/twitter-1mfollowers-badge.png";
+import twitter100kFollowersBadge from "./images/badges/twitter-100kfollowers-badge.png";
+import twitter10kFollowersBadge from "./images/badges/twitter-10kfollowers-badge.png";
+import twitter1kFollowersBadge from "./images/badges/twitter-1kfollowers-badge.png";
 
 export const MOCK_IDENTITY = "ryan-demo.vda";
 
@@ -83,15 +87,29 @@ const profileData: ProfileData = {
       chainId: Chains.POLYGON,
       ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
       contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD271",
-      tokenId: "verida-identity-0",
+      tokenId: "verida-identity",
       order: 1,
+    },
+    {
+      chainId: Chains.POLYGON,
+      ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
+      contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD271",
+      tokenId: "twitter-account",
+      order: 2,
+    },
+    {
+      chainId: Chains.POLYGON,
+      ownerAddress: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
+      contractAddress: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD271",
+      tokenId: "twitter-1mfollowers",
+      order: 3,
     },
     {
       chainId: Chains.ETHEREUM_GOERLI,
       contractAddress: "0x2e60f8f0ded025c41454e151f75c300fba3bc62b",
       tokenId: "3",
       ownerAddress: "0xff71512c84096f55cdf5c5f3d3c6ace99b56fef0",
-      order: 2,
+      order: 4,
     },
   ],
 };
@@ -101,7 +119,7 @@ const nfts: NftToken[] = [
     chain_id: Chains.POLYGON,
     owner_address: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
     token_address: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD271",
-    token_id: "verida-identity-0",
+    token_id: "verida-identity",
     name: "Verida Badges",
     metadata: {
       name: "Verida Identity",
@@ -122,8 +140,8 @@ const nfts: NftToken[] = [
   {
     chain_id: Chains.POLYGON,
     owner_address: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
-    token_address: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD270",
-    token_id: "twitter-account-0",
+    token_address: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD271",
+    token_id: "twitter-account",
     name: "Verida Badges",
     metadata: {
       name: "Twitter Account",
@@ -144,8 +162,8 @@ const nfts: NftToken[] = [
   {
     chain_id: Chains.POLYGON,
     owner_address: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
-    token_address: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD273",
-    token_id: "facebook-account-0",
+    token_address: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD271",
+    token_id: "facebook-account",
     name: "Verida Badges",
     metadata: {
       name: "Facebook Account",
@@ -167,63 +185,19 @@ const nfts: NftToken[] = [
     chain_id: Chains.POLYGON,
     owner_address: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
     token_address: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD271",
-    token_id: "verida-identity-1",
+    token_id: "twitter-1mfollowers",
     name: "Verida Badges",
     metadata: {
-      name: "Verida Identity",
+      name: "Twitter 1M followers",
       description: null,
-      image: veridaIdentityBadge,
+      image: twitter1mFollowersBadge,
       animation_url: null,
       external_link: null,
       attributes: [
         {
           trait_type: "",
-          display_type: "Verida Identity",
-          value: "ryan",
-        },
-      ],
-    },
-    isSBT: true,
-  },
-  {
-    chain_id: Chains.POLYGON,
-    owner_address: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
-    token_address: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD270",
-    token_id: "twitter-account-1",
-    name: "Verida Badges",
-    metadata: {
-      name: "Twitter Account",
-      description: null,
-      image: twitterAccountBadge,
-      animation_url: null,
-      external_link: null,
-      attributes: [
-        {
-          trait_type: "",
-          display_type: "Twitter Account",
-          value: "@RyanJKris",
-        },
-      ],
-    },
-    isSBT: true,
-  },
-  {
-    chain_id: Chains.POLYGON,
-    owner_address: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
-    token_address: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD273",
-    token_id: "facebook-account-1",
-    name: "Verida Badges",
-    metadata: {
-      name: "Facebook Account",
-      description: null,
-      image: facebookAccountBadge,
-      animation_url: null,
-      external_link: null,
-      attributes: [
-        {
-          trait_type: "",
-          display_type: "Facebook Account",
-          value: "@ryan.kris",
+          display_type: "Twitter followers",
+          value: "1M",
         },
       ],
     },
@@ -233,19 +207,19 @@ const nfts: NftToken[] = [
     chain_id: Chains.POLYGON,
     owner_address: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
     token_address: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD271",
-    token_id: "verida-identity-2",
+    token_id: "twitter-100kfollowers",
     name: "Verida Badges",
     metadata: {
-      name: "Verida Identity",
-      description: "",
-      image: veridaIdentityBadge,
+      name: "Twitter 100k followers",
+      description: null,
+      image: twitter100kFollowersBadge,
       animation_url: null,
       external_link: null,
       attributes: [
         {
           trait_type: "",
-          display_type: "Verida Identity",
-          value: "ryan",
+          display_type: "Twitter followers",
+          value: "100k",
         },
       ],
     },
@@ -254,20 +228,20 @@ const nfts: NftToken[] = [
   {
     chain_id: Chains.POLYGON,
     owner_address: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
-    token_address: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD270",
-    token_id: "twitter-account-2",
+    token_address: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD271",
+    token_id: "twitter-10kfollowers",
     name: "Verida Badges",
     metadata: {
-      name: "Twitter Account",
+      name: "Twitter 10k followers",
       description: null,
-      image: twitterAccountBadge,
+      image: twitter10kFollowersBadge,
       animation_url: null,
       external_link: null,
       attributes: [
         {
           trait_type: "",
-          display_type: "Twitter Account",
-          value: "@RyanJKris",
+          display_type: "Twitter followers",
+          value: "10k",
         },
       ],
     },
@@ -276,20 +250,20 @@ const nfts: NftToken[] = [
   {
     chain_id: Chains.POLYGON,
     owner_address: "0x378e4BCb49EE4B270A4808EA1Fc39B26BD89336E",
-    token_address: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD273",
-    token_id: "facebook-account-2",
+    token_address: "0xa7d8d9ef8D8Ce8992Df33D8b8CF4Aebabd5bD271",
+    token_id: "twitter-1kfollowers",
     name: "Verida Badges",
     metadata: {
-      name: "Facebook Account",
+      name: "Twitter 1k followers",
       description: null,
-      image: facebookAccountBadge,
+      image: twitter1kFollowersBadge,
       animation_url: null,
       external_link: null,
       attributes: [
         {
           trait_type: "",
-          display_type: "Facebook Account",
-          value: "@ryan.kris",
+          display_type: "Twitter followers",
+          value: "1k",
         },
       ],
     },
