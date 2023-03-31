@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getProfileData } from "lib/utils";
 import { queryKeys } from "lib/utils/queryUtils";
-import { useResolvedIdentity } from "./useResolvedIdentity";
 import { useVerida } from "./useVerida";
 
 /**
@@ -10,27 +9,16 @@ import { useVerida } from "./useVerida";
 export const useProfileData = (identity?: string) => {
   const { client } = useVerida();
 
-  const {
-    data: resolvedIdentity,
-    isLoading: isLoadingResolvedIdentity,
-    isError: isErrorResolvedIdentity,
-    error: errorResolvedIdentity,
-  } = useResolvedIdentity(identity);
-
-  const {
-    data,
-    isLoading: isLoadingProfileData,
-    isError: isErrorProfileData,
-    error: errorProfileData,
-  } = useQuery({
-    queryKey: queryKeys.getProfileData(resolvedIdentity?.did as string),
-    queryFn: ({ queryKey: [{ did }] }) => {
-      return getProfileData(client, did);
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: queryKeys.getProfileData(identity as string),
+    queryFn: ({ queryKey: [{ identity }] }) => {
+      return getProfileData(client, identity);
     },
-    enabled: !!resolvedIdentity?.did,
+    enabled: !!identity,
   });
 
   const hasData =
+    data?.featuredAssets?.length ||
     data?.platformLinks?.length ||
     data?.customLinks?.length ||
     data?.walletAddresses?.length;
@@ -38,8 +26,8 @@ export const useProfileData = (identity?: string) => {
   return {
     data,
     hasData,
-    isLoading: isLoadingProfileData || isLoadingResolvedIdentity,
-    isError: isErrorProfileData || isErrorResolvedIdentity,
-    error: errorProfileData || errorResolvedIdentity,
+    isLoading,
+    isError,
+    error,
   };
 };

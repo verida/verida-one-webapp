@@ -1,9 +1,45 @@
 import { Client } from "@verida/client-ts";
 import { WebUserProfile } from "@verida/web-helpers";
 import { DatastoreOpenConfig } from "@verida/types";
-import { DID_VDA_METHOD } from "lib/constants";
-import { config } from "lib/config";
+import {
+  DID_METHOD,
+  DID_VDA_METHOD,
+  USERNAME_VDA_EXTENSION,
+} from "lib/constants";
 import { ResolvedIdentity } from "lib/types";
+import { MOCK_IDENTITY } from "mock";
+import { config } from "lib/config";
+
+/**
+ * Check if the param as a DID syntax, ie: starts with 'did:'.
+ *
+ * @param didOrUsername A username or DID.
+ * @returns true if it has a DID syntax.
+ */
+export const hasDidSyntax = (didOrUsername: string) => {
+  return didOrUsername.startsWith(DID_METHOD) ? true : false;
+};
+
+/**
+ * Check if the param as a Verida DID syntax, ie: starts with 'did:vda:'.
+ *
+ * @param didOrUsername A username or DID.
+ * @returns true if it has a Verida DID syntax.
+ */
+export const hasVeridaDidSyntax = (didOrUsername: string) => {
+  return didOrUsername.startsWith(DID_VDA_METHOD) ? true : false;
+};
+
+/**
+ * Check if the param as a Verida Username syntax, ie: ends with 'd.vda'.
+ *
+ * @param didOrUsername A username or DID.
+ * @returns true if it has a Verida Username syntax.
+ */
+export const hasVeridaUsernameSyntax = (didOrUsername: string) => {
+  // TODO: Check other rules if needed
+  return didOrUsername.endsWith(USERNAME_VDA_EXTENSION) ? true : false;
+};
 
 /**
  * Resolve an identity by returning the Verida DID of a username, or itself if already a Verida DID.
@@ -11,44 +47,69 @@ import { ResolvedIdentity } from "lib/types";
  *
  * Currently returns the username if mock data is enabled.
  *
+ * @param client  A Verida client.
  * @param identity A username or DID.
  * @returns The resolved DID.
  */
 export const resolveIdentity = async (
+  client: Client,
   identity: string
 ): Promise<ResolvedIdentity> => {
-  if (identity.startsWith(DID_VDA_METHOD)) {
-    // Identity is already a Verida DID
-    // TODO: Check if there is a associated username and returned a full resolved identity
-    return Promise.resolve({ did: identity });
+  // TODO: Remove use of mock data
+  if (config.isMockDataEnabled && identity === MOCK_IDENTITY) {
+    return {
+      username: MOCK_IDENTITY,
+    };
   }
 
-  if (identity.startsWith("did:")) {
-    // Identity is an unsupported DID
-    return Promise.reject(new Error("Unsupported DID method"));
+  if (hasVeridaDidSyntax(identity)) {
+    // Identity is considered a Verida DID.
+    // "Considered" as in "valid VDA DID method", whether the DID actually exists is not a concern, it will be handled by catching the errors.
+    try {
+      const usernames = await client.getUsernames(identity);
+      return {
+        did: identity,
+        username: usernames?.length > 0 ? usernames[0] : undefined,
+        // TODO: Support multiple usernames
+      };
+    } catch (error: unknown) {
+      // The errors won't say whether the DID exist or not, so gracefully return it with no usernames
+      return { did: identity };
+    }
   }
 
-  // TODO: Remove this check. Temporarily return the identity to use the mock data with it.
-  if (config.isMockDataEnabled) {
-    return Promise.resolve({ did: identity });
+  // TODO: Handle case of username without extension, they should be considered Verida Username
+  if (hasVeridaUsernameSyntax(identity)) {
+    // Identity is considered a Verida Username.
+    try {
+      const did = await client.getDID(identity);
+      return {
+        did,
+        username: identity,
+      };
+    } catch (error: unknown) {
+      throw new Error("Cannot resolve the Verida Username");
+    }
   }
 
-  // TODO: Use the SDK to resolve the Verida Username and return both the DID and username in a resolved identity
-  return Promise.reject(new Error("Not implemented"));
+  throw new Error("Unsupported DID or Username");
 };
 
 /**
- * Get the public profiel of any Verida DID, if it exists.
+ * Get the public profile of any Verida DID, if it exists.
  *
  * @param client A Verida client.
- * @param did A Verida DID.
+ * @param didOrUsername A username or DID.
  * @returns The Verida Public Profile.
  */
 export const getAnyPublicProfile = async (
   client: Client,
-  did: string
+  didOrUsername: string
 ): Promise<WebUserProfile> => {
-  const profileInstance = await client.openPublicProfile(did, "Verida: Vault");
+  const profileInstance = await client.openPublicProfile(
+    didOrUsername,
+    "Verida: Vault"
+  );
   if (!profileInstance) {
     throw new Error("No public profile exists for this did");
   }
@@ -69,7 +130,7 @@ export const getAnyPublicProfile = async (
  * Open an external context and a data store of this context.
  *
  * @param client A Verida client.
- * @param did A Verida DID.
+ * @param did A username or DID.
  * @param contextName The context name.
  * @param schemaUri The schema of the datastore.
  * @param datastoreConfig The optional configuration of the datastore.
@@ -77,12 +138,16 @@ export const getAnyPublicProfile = async (
  */
 export const getExternalDatastore = async (
   client: Client,
-  did: string,
+  didOrUsername: string,
   contextName: string,
   schemaUri: string,
   datastoreConfig: DatastoreOpenConfig = {}
 ) => {
-  const context = await client.openExternalContext(contextName, did);
-  return await context.openExternalDatastore(schemaUri, did, datastoreConfig);
+  const context = await client.openExternalContext(contextName, didOrUsername);
+  return await context.openExternalDatastore(
+    schemaUri,
+    didOrUsername,
+    datastoreConfig
+  );
   // TODO: catch error and return a dedicated error (context not found, ...)
 };

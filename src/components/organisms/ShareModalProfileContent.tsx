@@ -88,12 +88,14 @@ export const ShareModalProfileContent: React.FunctionComponent<
           displayedValue={displayedProfileUrl}
           onClickShare={() => void handleClickShare(profileUrlShareData)}
         />
-        <ShareInfoCard
-          label={didShareCardLabel}
-          value={identityInfo.did}
-          displayedValue={identityInfo.did}
-          onClickShare={() => void handleClickShare(didShareData)}
-        />
+        {identityInfo.did ? (
+          <ShareInfoCard
+            label={didShareCardLabel}
+            value={identityInfo.did}
+            displayedValue={identityInfo.did}
+            onClickShare={() => void handleClickShare(didShareData)}
+          />
+        ) : null}
       </div>
     </div>
   );
