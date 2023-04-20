@@ -54,15 +54,13 @@ export const BadgesSection: React.FC<BadgesSectionProps> = ({ badges }) => {
       title={sectionTitle}
       badgeValue={badges.length}
       onClickMore={handleClickMore}
-      style={{ marginBottom: "-1rem" }}
     >
-      <div className="overflow-x-auto">
-        <div className="min-w-[664px] pb-4">
+      <div className="-mx-4 overflow-x-auto px-4">
+        <div className="w-fit py-5">
+          {/* Should be py-10 with the honeycomb pattern */}
           <ul
-            className={`mx-auto mt-[calc(1.73205/13_*_100%)] grid w-[calc(12/13_*_100%)] sm:mt-[calc(1.73205/13_*_100%)] sm:grid-cols-4 ${
-              hasMore
-                ? "grid-cols-[repeat(5,_calc(3/13_*_664px))]"
-                : "grid-cols-4"
+            className={`mx-[calc(0.5/13_*_664px)] mt-[calc(1.73205/13_*_664px)] grid grid-cols-[repeat(auto-fit,_calc(3/13_*_664px))] sm:max-w-[664px] ${
+              hasMore ? "max-w-[calc(16/13_*_664px)]" : "max-w-[664px]"
             }`}
           >
             {truncatedBadgeList.map((badge) => (
@@ -70,7 +68,6 @@ export const BadgesSection: React.FC<BadgesSectionProps> = ({ badges }) => {
                 key={`${badge.chain_id}/${badge.token_address}/${badge.token_id}`}
                 badge={badge}
                 to={`badges/${badge.chain_id}/${badge.token_address}/${badge.token_id}`}
-                disableShadow // FIXME: Enable shadow under tiles by fixing edges underlapping
               />
             ))}
             {/* FIXME: Use rounded hexagonal shape, see HexagonBase */}
@@ -94,7 +91,7 @@ export const BadgesSection: React.FC<BadgesSectionProps> = ({ badges }) => {
             )}
           </ul>
         </div>
-        {hasMore && <div className="my-4 max-sm:hidden">{showAllButton}</div>}
+        {hasMore && <div className="mt-4 max-sm:hidden">{showAllButton}</div>}
       </div>
     </ProfileSectionWrapper>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import { NftToken } from "lib/types";
-import { AssetMedia, SkeletonBase } from "components/atoms";
-import { AssetMediaChip } from "./AssetMediaChip";
+import { SkeletonBase } from "components/atoms";
+import { AssetMedia, AssetMediaChip } from "components/molecules";
 
 type AssetCardProps = {
   asset: NftToken;
@@ -18,10 +18,12 @@ export const AssetCard: React.FC<AssetCardProps> = (props) => {
       <div className="flex flex-col items-start space-y-2">
         <div className="relative w-full">
           <AssetMedia
-            className="bg-asset-media aspect-square w-full"
+            className="aspect-square w-full"
             source={asset.metadata.image}
             alt={asset.metadata.name || "Collectible"}
             radius={variant === "compact" ? "rounded-lg" : "rounded-xl"}
+            hasBackground={asset.isSBT}
+            backgroundColor={asset.metadata.background_color}
           />
           <div className="absolute bottom-0 left-0 ml-1 mb-1 max-w-full pr-2">
             <AssetMediaChip variant={variant} chain={asset.chain_id} />

@@ -2,6 +2,7 @@ export * from "./AssetCard";
 export * from "./AssetDetailsPropertyItem";
 export * from "./AssetDetailsPropertyList";
 export * from "./AssetDetailsViewSkeleton";
+export * from "./AssetMedia";
 export * from "./AssetMediaChip";
 export * from "./BadgeMosaicItem";
 export * from "./ChainIcon";

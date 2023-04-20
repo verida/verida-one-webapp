@@ -11,6 +11,7 @@ import {
   ArrowRight,
   ArrowLeft,
   Telegram,
+  ErrorPicture,
 } from "@icon-park/react";
 import { ReactComponent as Share } from "assets/icons/share.svg";
 import { ReactComponent as Outside } from "assets/icons/outside.svg";
@@ -36,6 +37,7 @@ type GenericIconType =
   | "outside"
   | "search"
   | "more"
+  | "error-picture"
   | "chevron-right"
   | "arrow-right"
   | "arrow-left"
@@ -86,6 +88,8 @@ export const Icon: React.FunctionComponent<IconProps> = (props) => {
       return <Check size={size} {...otherProps} />;
     case "search":
       return <Search size={size} {...otherProps} />;
+    case "error-picture":
+      return <ErrorPicture size={size} {...otherProps} />;
     case "chevron-right":
       return <Right size={size} {...otherProps} />;
     case "arrow-right":
