@@ -1,18 +1,18 @@
 import React from "react";
-import { PlatformLink } from "lib/types";
+import { PlatformLink as PlatformLinkType } from "lib/types";
 import { Icon, IconButtonLink } from "components/atoms";
-import { getSocialMediaLogo } from "lib/utils";
+import { getPlatformLogo } from "lib/utils";
 
-type SocialMediaLinkProps = {
-  link: PlatformLink;
+type PlatformLinkProps = {
+  link: PlatformLinkType;
 } & Omit<React.ComponentPropsWithoutRef<"div">, "children">;
 
-export const SocialMediaLink: React.FunctionComponent<SocialMediaLinkProps> = (
+export const PlatformLink: React.FunctionComponent<PlatformLinkProps> = (
   props
 ) => {
   const { link, ...otherProps } = props;
 
-  const platformIcon = getSocialMediaLogo(link.platform);
+  const platformIcon = getPlatformLogo(link.platform);
 
   // TODO: Consider verifying the proof rather than checking it exists.
   return (

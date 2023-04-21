@@ -1,19 +1,14 @@
 import React from "react";
 import { defineMessage, useIntl } from "react-intl";
-import {
-  getSocialMediaLabel,
-  getSocialMediaLogo,
-  getSocialMediaShareUrl,
-} from "lib/utils";
-import { SocialMedia } from "lib/constants";
+import { sharingPlatformDefinitions, getSharingPlatformLogo } from "lib/utils";
 import { CopyToClipboardButton } from "components/molecules";
 
-type ShareModalSocialMediaContentProps = {
+type ShareModalPlatformContentProps = {
   data: ShareData;
 };
 
-export const ShareModalSocialMediaContent: React.FunctionComponent<
-  ShareModalSocialMediaContentProps
+export const ShareModalPlatformContent: React.FunctionComponent<
+  ShareModalPlatformContentProps
 > = ({ data }) => {
   const i18n = useIntl();
 
@@ -22,45 +17,33 @@ export const ShareModalSocialMediaContent: React.FunctionComponent<
   const contentTitle = data.title as string;
 
   const socialMediaActionLabel = defineMessage({
-    id: "ShareModalSocialMediaContent.socialMediaActionLabel",
+    id: "ShareModalPlatformContent.socialMediaActionLabel",
     defaultMessage: "Share via {platformLabel}",
     description: "Label of the action to share content via a certain platform",
   });
 
   const copyContentLabel = i18n.formatMessage({
-    id: "ShareModalSocialMediaContent.copyContentLabel",
+    id: "ShareModalPlatformContent.copyContentLabel",
     defaultMessage: "Copy to clipboard",
     description: "Label of the action to copy the content to the clipboard",
   });
 
-  // TODO: Hanlde social platform constraint when sharing (url required, etc.)
-  const platforms = [
-    SocialMedia.TELEGRAM,
-    // SocialMedia.FACEBOOK, // Only accept URL
-    SocialMedia.TWITTER,
-    SocialMedia.WHATSAPP,
-    // SocialMedia.LINKEDIN, // Only accept URL
-    SocialMedia.EMAIL,
-  ];
+  const platforms = Object.values(sharingPlatformDefinitions);
 
   return (
     <ul className="flex flex-col space-y-2">
       {platforms.map((platform) => (
-        <li className="py-2.5 px-2" key={platform}>
+        <li className="py-2.5 px-2" key={platform.platformId}>
           <a
             className="flex items-center hover:text-primary/60"
             target="_blank"
             rel="noopener noreferrer"
-            href={getSocialMediaShareUrl(
-              platform,
-              contentToShare,
-              contentTitle
-            )}
+            href={platform.getUrl(contentToShare, contentTitle)}
           >
-            {getSocialMediaLogo(platform)}
+            {getSharingPlatformLogo(platform.platformId)}
             <span className="ml-4 font-semibold">
               {i18n.formatMessage(socialMediaActionLabel, {
-                platformLabel: getSocialMediaLabel(platform),
+                platformLabel: platform.label,
               })}
             </span>
           </a>

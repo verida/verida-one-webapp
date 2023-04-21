@@ -4,7 +4,7 @@ import { IdentityInfo } from "lib/types";
 import { useIntl } from "react-intl";
 import { useCallback } from "react";
 import { ShareModalProfileContent } from "./ShareModalProfileContent";
-import { ShareModalSocialMediaContent } from "./ShareModalSocialMediaContent";
+import { ShareModalPlatformContent } from "./ShareModalPlatformContent";
 
 type ShareModalProps = {
   identityInfo: IdentityInfo;
@@ -42,7 +42,7 @@ export const ShareModal: React.FunctionComponent<ShareModalProps> = ({
       onClose={handleClose}
     >
       {shareData ? (
-        <ShareModalSocialMediaContent data={shareData} />
+        <ShareModalPlatformContent data={shareData} />
       ) : (
         <ShareModalProfileContent
           identityInfo={identityInfo}

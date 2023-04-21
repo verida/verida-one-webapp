@@ -1,6 +1,5 @@
 import { z } from "zod";
-import { SocialMedia, PlatformLinkCategories } from "lib/constants";
-import { Chains } from "lib/types";
+import { Chains, Platforms, PlatformLinkCategories } from "lib/types";
 
 export const VerificationProofSchema = z.object({
   type: z.string(), // TODO: Enum?
@@ -15,8 +14,10 @@ export const CustomLinkSchema = z.object({
 });
 
 export const PlatformLinkSchema = z.object({
+  // TODO: Replace enum
   category: z.nativeEnum(PlatformLinkCategories),
-  platform: z.nativeEnum(SocialMedia),
+  // TODO: Replace enum
+  platform: z.nativeEnum(Platforms),
   accountId: z.string(),
   avatarUrl: z.string().optional(),
   url: z.string(),

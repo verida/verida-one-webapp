@@ -1,4 +1,4 @@
-import { PlatformLinkCategories } from "lib/constants";
+import { PlatformLinkCategories } from "lib/types";
 import { filterFeaturedAssets } from "lib/utils";
 import { useBadges } from "./useBadges";
 import { useCollectibles } from "./useCollectibles";
@@ -31,7 +31,7 @@ export const useWholeProfile = (identity?: string) => {
     ?.filter((link) => !link.featured)
     .sort((a, b) => a.order - b.order);
 
-  const socialMediaLinks = profileData?.platformLinks
+  const socialPlatformLinks = profileData?.platformLinks
     ?.filter((link) => link.category === PlatformLinkCategories.SOCIAL)
     .sort((a, b) => a.order - b.order);
 
@@ -69,7 +69,7 @@ export const useWholeProfile = (identity?: string) => {
     featuredLinks,
     featuredAssets,
     customLinks,
-    socialMediaLinks,
+    socialPlatformLinks,
     walletAddresses,
     isLoadingProfileData,
     IsErrorProfileData,

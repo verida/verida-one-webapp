@@ -13,6 +13,6 @@ export * from "./IdentityInfoSection";
 export * from "./SearchResult";
 export * from "./ShareModal";
 export * from "./ShareModalProfileContent";
-export * from "./ShareModalSocialMediaContent";
-export * from "./SocialMediaSection";
+export * from "./ShareModalPlatformContent";
+export * from "./SocialPlatformSection";
 export * from "./WalletAddressesSection";
