@@ -1,0 +1,26 @@
+import { PlatformIconType } from "components/atoms";
+
+// TODO: Replace enum
+/** Enum for the categories of Platform Links  */
+export enum PlatformLinkCategories {
+  SOCIAL = "social",
+}
+
+// TODO: Replace enum
+/** TODO: write doc */
+export enum Platforms {
+  DISCORD = "discord",
+  FACEBOOK = "facebook",
+  GITHUB = "github",
+  LINKEDIN = "linkedIn",
+  TELEGRAM = "telegram",
+  TWITTER = "twitter",
+  WHATSAPP = "whatsapp",
+}
+
+/** TODO: write doc */
+export type PlatformDefinition = {
+  platformId: Platforms;
+  label: string;
+  iconId: PlatformIconType;
+};

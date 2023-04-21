@@ -26,6 +26,7 @@ export const NftMetadataSchema = z
 
 export const NftTokenSchema = z
   .object({
+    // TODO: Replace enum
     chain_id: z.nativeEnum(Chains),
     owner_address: z.string(),
     token_address: z.string(),

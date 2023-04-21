@@ -1,7 +1,7 @@
 import { Client } from "@verida/client-ts";
 import { DatabasePermissionOptionsEnum } from "@verida/types";
 import { config } from "lib/config";
-import { VERIDA_ONE_PROFILE_RECORD_ID } from "lib/constants";
+import { VERIDA_ONE_PUBLIC_PROFILE_RECORD_ID } from "lib/constants";
 import { ProfileDataSchema } from "lib/schemas";
 import {
   NftToken,
@@ -85,7 +85,7 @@ export const getProfileData = async (
 
   // Get the default profile record from the datastore, identified by its known Id.
   const profileRecord = (await datastore.get(
-    VERIDA_ONE_PROFILE_RECORD_ID,
+    VERIDA_ONE_PUBLIC_PROFILE_RECORD_ID,
     {}
   )) as ProfileData;
   return ProfileDataSchema.parse(profileRecord);

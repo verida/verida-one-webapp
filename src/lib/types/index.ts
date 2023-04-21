@@ -2,5 +2,8 @@ export * from "./asset";
 export * from "./chains";
 export * from "./i18n";
 export * from "./profile";
+export * from "./platforms";
+export * from "./sharing";
+export * from "./utils";
 export * from "./verida";
 export * from "./walletProvider";

@@ -1,24 +1,26 @@
 import React from "react";
 import { useIntl } from "react-intl";
-import { PlatformLink } from "lib/types";
-import { ProfileSectionWrapper, SocialMediaLink } from "components/molecules";
+import { PlatformLink as PlatformLinkType } from "lib/types";
+import { ProfileSectionWrapper, PlatformLink } from "components/molecules";
 
-type SocialSectionProps = {
-  socialMediaLinks?: PlatformLink[];
+type SocialPlatformSectionProps = {
+  socialPlatformLinks?: PlatformLinkType[];
 };
 
 /** Section for the Profile page rendering the list of Social Media links */
-export const SocialMediaSection: React.FC<SocialSectionProps> = (props) => {
-  const { socialMediaLinks } = props;
+export const SocialPlatformSection: React.FC<SocialPlatformSectionProps> = (
+  props
+) => {
+  const { socialPlatformLinks } = props;
 
   const i18n = useIntl();
 
-  if (!socialMediaLinks?.length) {
+  if (!socialPlatformLinks?.length) {
     return null;
   }
 
   const sectionTitle = i18n.formatMessage({
-    id: "SocialMediaSection.sectionTitle",
+    id: "SocialPlatformSection.sectionTitle",
     description: "Title of the 'Socials' section in the 'Profile' page",
     defaultMessage: "Socials",
   });
@@ -26,9 +28,9 @@ export const SocialMediaSection: React.FC<SocialSectionProps> = (props) => {
   return (
     <ProfileSectionWrapper title={sectionTitle}>
       <ul className="flex flex-wrap gap-3">
-        {socialMediaLinks.map((link) => (
+        {socialPlatformLinks.map((link) => (
           <li key={link.url}>
-            <SocialMediaLink link={link} />
+            <PlatformLink link={link} />
           </li>
         ))}
       </ul>

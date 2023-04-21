@@ -1,10 +1,12 @@
 import React from "react";
 
+// TODO: Replace enum
 export enum ChainNetworkTypes {
   MAINNET = "mainnet",
   TESTNET = "testnet",
 }
 
+// TODO: Replace enum
 export enum Chains {
   ETHEREUM = "eip155:1",
   ETHEREUM_GOERLI = "eip155:5",

@@ -7,7 +7,7 @@ import {
   FeaturedSection,
   FeaturedSectionSkeleton,
   IdentityInfoSection,
-  SocialMediaSection,
+  SocialPlatformSection,
   WalletAddressesSection,
 } from "components/organisms";
 import { useWholeProfile } from "lib/hooks";
@@ -27,7 +27,7 @@ export const ProfileView: React.FC = () => {
     featuredLinks,
     featuredAssets,
     customLinks,
-    socialMediaLinks,
+    socialPlatformLinks,
     walletAddresses,
     hasProfileData,
     collectibles,
@@ -61,7 +61,9 @@ export const ProfileView: React.FC = () => {
                   assets={featuredAssets}
                   links={featuredLinks}
                 />
-                <SocialMediaSection socialMediaLinks={socialMediaLinks} />
+                <SocialPlatformSection
+                  socialPlatformLinks={socialPlatformLinks}
+                />
                 <CollectiblesSection collectibles={collectibles} />
                 {/** FIXME: Find a way to overlap the collectibles list above the padding of the main container */}
                 <BadgesSection badges={badges} />

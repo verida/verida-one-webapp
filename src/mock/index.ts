@@ -1,8 +1,14 @@
 // Temporary data for development purpose
 
 import { config } from "lib/config";
-import { PlatformLinkCategories, SocialMedia } from "lib/constants";
-import { Chains, IdentityInfo, NftToken, ProfileData } from "lib/types";
+import {
+  Chains,
+  IdentityInfo,
+  NftToken,
+  PlatformLinkCategories,
+  Platforms,
+  ProfileData,
+} from "lib/types";
 import avatarImage from "./images/avatar-ryan.png";
 import veridaIdentityBadge from "./images/badges/verida-identity-badge.png";
 import facebookAccountBadge from "./images/badges/facebook-account-badge.png";
@@ -61,7 +67,7 @@ const profileData: ProfileData = {
   platformLinks: [
     {
       category: PlatformLinkCategories.SOCIAL,
-      platform: SocialMedia.TWITTER,
+      platform: Platforms.TWITTER,
       accountId: "RyanJKris",
       url: "https://twitter.com/RyanJKris",
       verificationProof: {
