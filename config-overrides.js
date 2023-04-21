@@ -4,12 +4,20 @@ module.exports = function override(config) {
   const fallback = config.resolve.fallback || {};
 
   Object.assign(fallback, {
+    assert: false,
     crypto: require.resolve("crypto-browserify"),
+    fs: false,
     http: require.resolve("stream-http"),
     https: require.resolve("https-browserify"),
+    net: false,
+    os: false,
+    path: false,
     stream: require.resolve("stream-browserify"),
-    util: require.resolve("util"),
+    tls: false,
     url: require.resolve("url"),
+    util: require.resolve("util"),
+    zlib: false,
+    async_hooks: false,
   });
   config.resolve.fallback = fallback;
 
