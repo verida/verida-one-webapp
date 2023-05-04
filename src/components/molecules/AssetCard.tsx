@@ -1,17 +1,17 @@
 import React from "react";
 import { NftToken } from "lib/types";
-import { AssetMedia, SkeletonBase } from "components/atoms";
-import { AssetMediaChip } from "./AssetMediaChip";
+import { SkeletonBase } from "components/atoms";
+import { AssetMedia, AssetMediaChip } from "components/molecules";
 
-type CollectibleCardProps = {
-  collectible: NftToken;
+type AssetCardProps = {
+  asset: NftToken;
   variant?: "standard" | "compact";
 } & Omit<React.ComponentPropsWithoutRef<"div">, "children">;
 
-/** Render a card displaying the main information of a Collectible: media,
+/** Render a card displaying the main information of an Asset: media,
  * labels of the collection and item and price.  */
-export const CollectibleCard: React.FC<CollectibleCardProps> = (props) => {
-  const { collectible, variant = "standard", ...otherProps } = props;
+export const AssetCard: React.FC<AssetCardProps> = (props) => {
+  const { asset, variant = "standard", ...otherProps } = props;
 
   return (
     <div {...otherProps}>
@@ -19,24 +19,24 @@ export const CollectibleCard: React.FC<CollectibleCardProps> = (props) => {
         <div className="relative w-full">
           <AssetMedia
             className="aspect-square w-full"
-            source={collectible.metadata.image}
-            alt={collectible.metadata.name || "Collectible"}
+            source={asset.metadata.image}
+            alt={asset.metadata.name || "Collectible"}
             radius={variant === "compact" ? "rounded-lg" : "rounded-xl"}
+            hasBackground={asset.isSBT}
+            backgroundColor={asset.metadata.background_color}
           />
           <div className="absolute bottom-0 left-0 ml-1 mb-1 max-w-full pr-2">
-            <AssetMediaChip variant={variant} chain={collectible.chain_id} />
+            <AssetMediaChip variant={variant} chain={asset.chain_id} />
           </div>
         </div>
         {variant !== "compact" && (
           <div className="flex max-w-full flex-col items-start">
-            {collectible.name ? (
-              <p className="w-full truncate text-primary/60">
-                {collectible.name}
-              </p>
+            {asset.name ? (
+              <p className="w-full truncate text-primary/60">{asset.name}</p>
             ) : null}
-            {collectible.metadata.name ? (
+            {asset.metadata.name ? (
               <p className="w-full font-bold line-clamp-2">
-                {collectible.metadata.name}
+                {asset.metadata.name}
               </p>
             ) : null}
           </div>
@@ -46,12 +46,12 @@ export const CollectibleCard: React.FC<CollectibleCardProps> = (props) => {
   );
 };
 
-type CollectibleCardSkeletonProps = {
+type AssetCardSkeletonProps = {
   variant?: "standard" | "compact";
 } & Omit<React.ComponentPropsWithoutRef<"div">, "children">;
 
-export const CollectibleCardSkeleton: React.FunctionComponent<
-  CollectibleCardSkeletonProps
+export const AssetCardSkeleton: React.FunctionComponent<
+  AssetCardSkeletonProps
 > = (props) => {
   const { variant = "standard", ...otherProps } = props;
 

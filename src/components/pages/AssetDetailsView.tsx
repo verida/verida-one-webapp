@@ -1,66 +1,45 @@
 import React from "react";
-import { AssetMedia, ButtonLink } from "components/atoms";
+import { useParams } from "react-router-dom";
 import {
-  RedirectionCard,
-  PageWrapper,
   AssetDetailsViewSkeleton,
+  AssetMedia,
+  PageWrapper,
+  RedirectionCard,
 } from "components/molecules";
+import { getChainExplorerUrlForAddress } from "lib/utils";
+import { ButtonLink } from "components/atoms";
+import { useIntl } from "react-intl";
 import {
   AssetDetailsMainInfo,
-  BadgeDetailsProperties,
+  AssetDetailsProperties,
 } from "components/organisms";
-import { useBadges, useProfileData } from "lib/hooks";
-import { getChainExplorerUrlForAddress } from "lib/utils";
-import { useIntl } from "react-intl";
-import { useParams } from "react-router-dom";
+import { useOneNft, useProfileData } from "lib/hooks";
 
-export const BadgeDetailsView: React.FunctionComponent = () => {
+export const AssetDetailsView: React.FunctionComponent = () => {
   const i18n = useIntl();
   const { identity, chain, contractAddress, tokenId } = useParams();
 
   const { data: profileData } = useProfileData(identity);
+
   const walletAddresses = profileData?.walletAddresses;
-  const { data: badges, isLoading, isError } = useBadges(walletAddresses);
-  const badge = badges?.find(
-    (item) =>
-      item.chain_id === chain &&
-      item.token_address === contractAddress &&
-      item.token_id === tokenId
-  );
 
-  const redirectPath = identity ? `/${identity}` : `/`;
-
-  const redirectionCardButtonLabel = i18n.formatMessage({
-    id: "BadgeDetailsView.redirectionCardButtonLabel",
-    description: "Label of the redirection link to go to the Profile poage",
-    defaultMessage: "Go to profile",
-  });
-
-  const redirectionCardTitle = i18n.formatMessage({
-    id: "BadgeDetailsView.redirectionCardTitle",
-    defaultMessage: "Item not found",
-    description:
-      "Title of the redirection card indicating the badge has not been found.",
-  });
-
-  const redirectionCardMessage = i18n.formatMessage({
-    id: "BadgeDetailsView.redirectionCardMessage",
-    defaultMessage: "This item doesn't exist or is not available",
-    description:
-      "Message of the redirection card indicating the badges has not been found.",
-  });
+  const {
+    data: asset,
+    isLoading,
+    isError,
+  } = useOneNft(walletAddresses, chain, contractAddress, tokenId);
 
   const viewInExplorerButtonLabel = i18n.formatMessage({
-    id: "BadgeDetailsView.viewInExplorerButtonLabel",
+    id: "AssetDetailsView.viewInExplorerButtonLabel",
     defaultMessage: "View in Explorer",
     description:
       "Label of the button to view an asset in a blockchain explorer.",
   });
 
-  if (badge) {
+  if (asset) {
     const viewInExplorerButton = (
       <ButtonLink
-        url={getChainExplorerUrlForAddress(badge.chain_id, badge.owner_address)}
+        url={getChainExplorerUrlForAddress(asset.chain_id, asset.owner_address)}
         target="_blank"
         rel="noopener"
       >
@@ -73,20 +52,21 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div className="flex flex-col space-y-6">
             <AssetMedia
-              className="bg-asset-media p-3"
-              source={badge.metadata.image}
-              alt={badge.metadata.name || "Badge"}
+              source={asset.metadata.image}
+              alt={asset.metadata.name || "Asset"}
+              hasBackground={asset.isSBT}
+              backgroundColor={asset.metadata.background_color}
             />
             <div className="hidden sm:block">{viewInExplorerButton}</div>
           </div>
           <div>
             <AssetDetailsMainInfo
               className="mb-4"
-              collectionLabel={badge.name}
-              tokenLabel={badge.metadata.name}
-              description={badge.metadata.description}
+              collectionLabel={asset.name}
+              tokenLabel={asset.metadata.name}
+              description={asset.metadata.description}
             />
-            <BadgeDetailsProperties badge={badge} />
+            <AssetDetailsProperties asset={asset} />
           </div>
           <div className="sm:hidden md:mt-0">
             {/* TODO: Place this button into a fixed bottom bar.
@@ -107,7 +87,29 @@ export const BadgeDetailsView: React.FunctionComponent = () => {
     );
   }
 
-  if (isError || !badge) {
+  if (isError || !asset) {
+    const redirectionCardButtonLabel = i18n.formatMessage({
+      id: "AssetDetailsView.redirectionCardButtonLabel",
+      description: "Label of the redirection link to go to the Profile poage",
+      defaultMessage: "Go to profile",
+    });
+
+    const redirectionCardTitle = i18n.formatMessage({
+      id: "AssetDetailsView.redirectionCardTitle",
+      defaultMessage: "Item not found",
+      description:
+        "Title of the redirection card indicating the collectible has not been found.",
+    });
+
+    const redirectionCardMessage = i18n.formatMessage({
+      id: "AssetDetailsView.redirectionCardMessage",
+      defaultMessage: "This item doesn't exist or is not available",
+      description:
+        "Message of the redirection card indicating the collectible has not been found.",
+    });
+
+    const redirectPath = identity ? `/${identity}` : `/`;
+
     return (
       <PageWrapper>
         <RedirectionCard

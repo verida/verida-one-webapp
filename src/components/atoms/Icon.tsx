@@ -11,23 +11,25 @@ import {
   ArrowRight,
   ArrowLeft,
   Telegram,
+  Facebook,
+  GithubOne,
+  ErrorPicture,
 } from "@icon-park/react";
 import { ReactComponent as Share } from "assets/icons/share.svg";
 import { ReactComponent as Outside } from "assets/icons/outside.svg";
-import { ReactComponent as Messenger } from "assets/logos/socialMedia/messenger.svg";
-import { ReactComponent as Whatsapp } from "assets/logos/socialMedia/whatsapp.svg";
-import { ReactComponent as LinkedIn } from "assets/logos/socialMedia/linkedin.svg";
-import { ReactComponent as Mail } from "assets/logos/socialMedia/mail.svg";
+import { ReactComponent as Whatsapp } from "assets/logos/platforms/whatsapp.svg";
+import { ReactComponent as LinkedIn } from "assets/logos/platforms/linkedin.svg";
+import { ReactComponent as Mail } from "assets/logos/platforms/mail.svg";
 import { ReactComponent as VeridaTick } from "assets/icons/verida_tick.svg";
 import { ReactComponent as Algorand } from "assets/logos/chains/algorand.svg";
 import { ReactComponent as Ethereum } from "assets/logos/chains/ethereum.svg";
 import { ReactComponent as Near } from "assets/logos/chains/near.svg";
 import { ReactComponent as Polygon } from "assets/logos/chains/polygon.svg";
-import { ReactComponent as Discord } from "assets/logos/socialMedia/discord.svg";
+import { ReactComponent as Discord } from "assets/logos/platforms/discord.svg";
 
 // TODO: Need a variant for the logos (coloured, white, black, ...)
 
-type GenericIconType =
+export type GenericIconType =
   | "user"
   | "check"
   | "close"
@@ -36,24 +38,26 @@ type GenericIconType =
   | "outside"
   | "search"
   | "more"
+  | "error-picture"
   | "chevron-right"
   | "arrow-right"
   | "arrow-left"
   | "verida-tick";
-type SocialMediaIconType =
-  | "social-twitter"
-  | "social-discord"
-  | "social-telegram"
-  | "social-whatsapp"
-  | "social-email"
-  | "social-messenger"
-  | "social-linkedin";
-type ChainIconType =
+export type PlatformIconType =
+  | "platform-discord"
+  | "platform-email"
+  | "platform-facebook"
+  | "platform-github"
+  | "platform-linkedin"
+  | "platform-telegram"
+  | "platform-twitter"
+  | "platform-whatsapp";
+export type ChainIconType =
   | "chain-algorand"
   | "chain-ethereum"
   | "chain-near"
   | "chain-polygon";
-type IconType = GenericIconType | SocialMediaIconType | ChainIconType;
+export type IconType = GenericIconType | PlatformIconType | ChainIconType;
 
 type IconProps = {
   type: IconType;
@@ -86,6 +90,8 @@ export const Icon: React.FunctionComponent<IconProps> = (props) => {
       return <Check size={size} {...otherProps} />;
     case "search":
       return <Search size={size} {...otherProps} />;
+    case "error-picture":
+      return <ErrorPicture size={size} {...otherProps} />;
     case "chevron-right":
       return <Right size={size} {...otherProps} />;
     case "arrow-right":
@@ -124,40 +130,38 @@ export const Icon: React.FunctionComponent<IconProps> = (props) => {
           <Polygon height={size} width={size} />
         </IconContainer>
       );
-    case "social-discord":
+    case "platform-discord":
       return (
         <IconContainer {...otherProps}>
           <Discord height={size} width={size} />
         </IconContainer>
       );
-    case "social-whatsapp":
+    case "platform-whatsapp":
       return (
         <IconContainer {...otherProps}>
           <Whatsapp height={size} width={size} />
         </IconContainer>
       );
-    case "social-messenger":
-      return (
-        <IconContainer {...otherProps}>
-          <Messenger height={size} width={size} />
-        </IconContainer>
-      );
-    case "social-email":
+    case "platform-email":
       return (
         <IconContainer {...otherProps}>
           <Mail height={size} width={size} />
         </IconContainer>
       );
-    case "social-linkedin":
+    case "platform-linkedin":
       return (
         <IconContainer {...otherProps}>
           <LinkedIn height={size} width={size} />
         </IconContainer>
       );
-    case "social-twitter":
+    case "platform-twitter":
       return <Twitter size={size} {...otherProps} />;
-    case "social-telegram":
+    case "platform-telegram":
       return <Telegram size={size} {...otherProps} />;
+    case "platform-facebook":
+      return <Facebook size={size} {...otherProps} />;
+    case "platform-github":
+      return <GithubOne size={size} {...otherProps} />;
 
     default:
       throw new Error("A supported type must be defined for the icon");

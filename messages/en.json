@@ -3,33 +3,41 @@
     "defaultMessage": "Description",
     "description": "Title above the description of an asset in the details page"
   },
-  "BadgeDetailsProperties.chainPropertyLabel": {
+  "AssetDetailsProperties.assetsIdPropertyLabel": {
+    "defaultMessage": "Asset Id",
+    "description": "Label of the 'tokenId' property for an asset"
+  },
+  "AssetDetailsProperties.chainPropertyLabel": {
     "defaultMessage": "Chain",
-    "description": "Label of the 'chain' property for a badge"
+    "description": "Label of the 'chain' property for an asset"
   },
-  "BadgeDetailsProperties.creatorWalletAddressPropertyLabel": {
+  "AssetDetailsProperties.creatorWalletAddressPropertyLabel": {
     "defaultMessage": "Creator",
-    "description": "Label of the 'creatorWalletAddress' property for a badge"
+    "description": "Label of the 'creatorWalletAddress' property for an asset"
   },
-  "BadgeDetailsProperties.ownerPropertyLabel": {
+  "AssetDetailsProperties.ownerPropertyLabel": {
     "defaultMessage": "Owner",
-    "description": "Label of the 'owner' property for a badge"
+    "description": "Label of the 'owner' property for an asset"
   },
-  "BadgeDetailsView.redirectionCardButtonLabel": {
+  "AssetDetailsView.redirectionCardButtonLabel": {
     "defaultMessage": "Go to profile",
     "description": "Label of the redirection link to go to the Profile poage"
   },
-  "BadgeDetailsView.redirectionCardMessage": {
+  "AssetDetailsView.redirectionCardMessage": {
     "defaultMessage": "This item doesn't exist or is not available",
-    "description": "Message of the redirection card indicating the badges has not been found."
+    "description": "Message of the redirection card indicating the collectible has not been found."
   },
-  "BadgeDetailsView.redirectionCardTitle": {
+  "AssetDetailsView.redirectionCardTitle": {
     "defaultMessage": "Item not found",
-    "description": "Title of the redirection card indicating the badge has not been found."
+    "description": "Title of the redirection card indicating the collectible has not been found."
   },
-  "BadgeDetailsView.viewInExplorerButtonLabel": {
+  "AssetDetailsView.viewInExplorerButtonLabel": {
     "defaultMessage": "View in Explorer",
     "description": "Label of the button to view an asset in a blockchain explorer."
+  },
+  "AssetMedia.noContentMessage": {
+    "defaultMessage": "Content not available",
+    "description": "Message indicating that the asset has either no media content or this content is broken"
   },
   "BadgeListView.pageTitle": {
     "defaultMessage": "Badges",
@@ -47,6 +55,10 @@
     "defaultMessage": "It's empty here",
     "description": "Title of the redirection card indicating the list of badges is empty."
   },
+  "BadgeMosaicItem.noContentMessage": {
+    "defaultMessage": "Content not available",
+    "description": "Message indicating that the asset has either no media content or this content is broken"
+  },
   "BadgesSection.sectionTitle": {
     "defaultMessage": "Badges",
     "description": "Title of the 'Badges' section in the 'Profile' page"
@@ -54,38 +66,6 @@
   "BadgesSection.showAllButtonLabel": {
     "defaultMessage": "Show All",
     "description": "Label of the button redirecting from the 'Badges' profile section to the 'Badges' page"
-  },
-  "CollectibleDetailsProperties.assetsIdPropertyLabel": {
-    "defaultMessage": "Asset Id",
-    "description": "Label of the 'tokenId' property for a collectible"
-  },
-  "CollectibleDetailsProperties.chainPropertyLabel": {
-    "defaultMessage": "Chain",
-    "description": "Label of the 'chain' property for a collectible"
-  },
-  "CollectibleDetailsProperties.creatorWalletAddressPropertyLabel": {
-    "defaultMessage": "Creator",
-    "description": "Label of the 'creatorWalletAddress' property for a collectible"
-  },
-  "CollectibleDetailsProperties.ownerPropertyLabel": {
-    "defaultMessage": "Owner",
-    "description": "Label of the 'owner' property for a collectible"
-  },
-  "CollectibleDetailsView.redirectionCardButtonLabel": {
-    "defaultMessage": "Go to profile",
-    "description": "Label of the redirection link to go to the Profile poage"
-  },
-  "CollectibleDetailsView.redirectionCardMessage": {
-    "defaultMessage": "This item doesn't exist or is not available",
-    "description": "Message of the redirection card indicating the collectible has not been found."
-  },
-  "CollectibleDetailsView.redirectionCardTitle": {
-    "defaultMessage": "Item not found",
-    "description": "Title of the redirection card indicating the collectible has not been found."
-  },
-  "CollectibleDetailsView.viewInExplorerButtonLabel": {
-    "defaultMessage": "View in Explorer",
-    "description": "Label of the button to view an asset in a blockchain explorer."
   },
   "CollectibleListView.pageTitle": {
     "defaultMessage": "Collectibles",
@@ -187,23 +167,31 @@
     "defaultMessage": "Share",
     "description": "Title for the share modal"
   },
+  "ShareModalPlatformContent.copyContentLabel": {
+    "defaultMessage": "Copy to clipboard",
+    "description": "Label of the action to copy the content to the clipboard"
+  },
+  "ShareModalPlatformContent.socialMediaActionLabel": {
+    "defaultMessage": "Share via {platformLabel}",
+    "description": "Label of the action to share content via a certain platform"
+  },
+  "ShareModalProfileContent.didShareCardLabel": {
+    "defaultMessage": "DID",
+    "description": "Label of the share card for the DID"
+  },
   "ShareModalProfileContent.didShareTitle": {
     "defaultMessage": "Here is my Verida DID",
     "description": "Title used in the native sharing function for the DID"
+  },
+  "ShareModalProfileContent.profileUrlShareCardLabel": {
+    "defaultMessage": "Profile Link",
+    "description": "Label of the share card for the profile url"
   },
   "ShareModalProfileContent.profileUrlShareTitle": {
     "defaultMessage": "Checkout my Verida One profile",
     "description": "Title used in the native sharing function for the profile URL"
   },
-  "ShareModalSocialMediaContent.copyContentLabel": {
-    "defaultMessage": "Copy to clipboard",
-    "description": "Label of the action to copy the content to the clipboard"
-  },
-  "ShareModalSocialMediaContent.socialMediaActionLabel": {
-    "defaultMessage": "Share via {platformLabel}",
-    "description": "Label of the action to share content via a certain platform"
-  },
-  "SocialMediaSection.sectionTitle": {
+  "SocialPlatformSection.sectionTitle": {
     "defaultMessage": "Socials",
     "description": "Title of the 'Socials' section in the 'Profile' page"
   },

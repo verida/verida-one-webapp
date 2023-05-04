@@ -1,28 +1,31 @@
 import { EnvironmentType } from "@verida/types";
+import {
+  APP_TITLE,
+  PROFILE_SCHEMA_URL,
+  VERIDA_CONTEXT_NAME,
+} from "lib/constants";
+
+// TODO: set up a pre-build script validating env variables
 
 // Application variables
-const appTitle = "Verida One";
+const appTitle = APP_TITLE;
 
 // Verida variables
+const veridaOneContextName = VERIDA_CONTEXT_NAME;
+
+const veridaLogoUrl = process.env.REACT_APP_VERIDA_APP_LOGO_URL;
+
 const veridaEnv: EnvironmentType =
   process.env.REACT_APP_VERIDA_ENV === "local"
     ? EnvironmentType.LOCAL
     : process.env.REACT_APP_VERIDA_ENV === "mainnet"
     ? EnvironmentType.MAINNET
     : EnvironmentType.TESTNET;
-const veridaOneContextName = process.env.REACT_APP_VERIDA_ONE_CONTEXT_NAME;
-if (!veridaOneContextName) {
-  throw new Error("The Verida One context name is not defined");
-}
-const veridaLogoUrl = process.env.REACT_APP_VERIDA_APP_LOGO_URL;
 
 // Schemas
 // Set a fallback to avoid further issues.
-// TODO: set up a pre-build script validating env variables
 const schemasURL = {
-  profile:
-    process.env.REACT_APP_PROFILE_SCHEMA_URL ||
-    "https://common.schemas.verida.io/veridaOne/profile/v0.1.0/schema.json",
+  profile: process.env.REACT_APP_PROFILE_SCHEMA_URL || PROFILE_SCHEMA_URL,
 };
 
 // API

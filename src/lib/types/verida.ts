@@ -1,7 +1,7 @@
 import { WebUserProfile } from "@verida/web-helpers";
 
 export interface ResolvedIdentity {
-  did: string;
+  did?: string;
   username?: string;
 }
 

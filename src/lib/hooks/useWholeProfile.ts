@@ -1,4 +1,4 @@
-import { PlatformLinkCategories } from "lib/constants";
+import { PlatformLinkCategories } from "lib/types";
 import { filterFeaturedAssets } from "lib/utils";
 import { useBadges } from "./useBadges";
 import { useCollectibles } from "./useCollectibles";
@@ -31,7 +31,7 @@ export const useWholeProfile = (identity?: string) => {
     ?.filter((link) => !link.featured)
     .sort((a, b) => a.order - b.order);
 
-  const socialMediaLinks = profileData?.platformLinks
+  const socialPlatformLinks = profileData?.platformLinks
     ?.filter((link) => link.category === PlatformLinkCategories.SOCIAL)
     .sort((a, b) => a.order - b.order);
 
@@ -51,10 +51,13 @@ export const useWholeProfile = (identity?: string) => {
     isError: isErrorBadges,
   } = useBadges(walletAddresses);
 
-  // TODO: Include Badges in extracting featured assets
-  const featuredCollectibles =
-    collectibles && profileData?.featuredAssets
-      ? filterFeaturedAssets(collectibles, profileData?.featuredAssets)
+  const assets = [
+    ...(collectibles ? collectibles : []),
+    ...(badges ? badges : []),
+  ];
+  const featuredAssets =
+    assets.length && profileData?.featuredAssets
+      ? filterFeaturedAssets(assets, profileData?.featuredAssets)
       : undefined;
 
   return {
@@ -64,9 +67,9 @@ export const useWholeProfile = (identity?: string) => {
     profileData,
     hasProfileData,
     featuredLinks,
-    featuredCollectibles,
+    featuredAssets,
     customLinks,
-    socialMediaLinks,
+    socialPlatformLinks,
     walletAddresses,
     isLoadingProfileData,
     IsErrorProfileData,

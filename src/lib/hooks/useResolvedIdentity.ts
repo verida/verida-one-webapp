@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
+import { Client } from "@verida/client-ts";
 import { resolveIdentity } from "lib/utils";
 import { queryKeys } from "lib/utils/queryUtils";
 
-export const useResolvedIdentity = (identity?: string) => {
+export const useResolvedIdentity = (client: Client, identity?: string) => {
   const query = useQuery({
     queryKey: queryKeys.resolveIdentity(identity as string),
     queryFn: ({ queryKey: [{ identity }] }) => {
-      return resolveIdentity(identity);
+      return resolveIdentity(client, identity);
     },
     enabled: !!identity,
     staleTime: 1000 * 60 * 60, // The username is not changing frequently
