@@ -1,5 +1,6 @@
 export * from "./app";
 export * from "./events";
+export * from "./ipfs";
 export * from "./misc";
 export * from "./profile";
 export * from "./sharing";

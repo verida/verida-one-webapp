@@ -1,5 +1,6 @@
 export * from "./browserUtils";
 export * from "./chainsUtils";
+export * from "./ipfsUtils";
 export * from "./profileUtils";
 export * from "./queryUtils";
 export * from "./platformUtils";
