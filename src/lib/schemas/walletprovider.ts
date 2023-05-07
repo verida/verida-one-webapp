@@ -4,7 +4,7 @@ import { z } from "zod";
 export const NftMetadataAttributeSchema = z
   .object({
     trait_type: z.string(),
-    value: z.string(),
+    value: z.unknown(), // TODO: Maybe set a narrower type?
     display_type: z.string().nullish(),
     max_value: z.number().nullish(),
     trait_count: z.number().nullish(),

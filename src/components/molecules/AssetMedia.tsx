@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import { Icon } from "components/atoms";
 import { useIntl } from "react-intl";
 import { useIsFirstRender } from "lib/hooks";
+import { getHttpUrlFromIpfUri, isIpfsUri } from "lib/utils";
 
 type AssetMediaProps = {
   source?: string | null;
@@ -24,6 +25,12 @@ export const AssetMedia: React.FunctionComponent<AssetMediaProps> = (props) => {
   const i18n = useIntl();
   const [failedImage, setFailedImage] = useState(false);
   const firstRender = useIsFirstRender();
+
+  const url = source
+    ? isIpfsUri(source)
+      ? getHttpUrlFromIpfUri(source)
+      : source
+    : null;
 
   const noContentMessage = i18n.formatMessage({
     id: "AssetMedia.noContentMessage",
@@ -62,9 +69,9 @@ export const AssetMedia: React.FunctionComponent<AssetMediaProps> = (props) => {
             backgroundColor && !failedImage ? `#${backgroundColor}` : undefined,
         }}
       >
-        {source && !failedImage ? (
+        {url && !failedImage ? (
           <img
-            src={source}
+            src={url}
             alt={alt || "Asset"}
             // Set temporary classes until it is overriden by the onLoad event
             // aspect-square is for keeping height
