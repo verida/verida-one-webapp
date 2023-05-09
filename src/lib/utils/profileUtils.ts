@@ -88,6 +88,7 @@ export const getProfileData = async (
     VERIDA_ONE_PUBLIC_PROFILE_RECORD_ID,
     {}
   )) as ProfileData;
+
   return ProfileDataSchema.parse(profileRecord);
   // TODO: Try catch errors and identify the type of error to handle it specifically
   // For the moment, there is no specific handling of the errors, so there is no point of catching and identifying them.
