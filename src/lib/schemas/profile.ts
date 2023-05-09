@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { Chains, Platforms, PlatformLinkCategories } from "lib/types";
+import { makeFilteredArraySchema } from "lib/schemas/utils";
 
 export const VerificationProofSchema = z.object({
   type: z.string(), // TODO: Enum?
@@ -43,9 +44,9 @@ export const FeaturedAssetSchema = z.object({
 
 export const ProfileDataSchema = z
   .object({
-    customLinks: z.array(CustomLinkSchema).optional(),
-    platformLinks: z.array(PlatformLinkSchema).optional(),
-    walletAddresses: z.array(WalletAddressSchema).optional(),
-    featuredAssets: z.array(FeaturedAssetSchema).optional(),
+    customLinks: makeFilteredArraySchema(CustomLinkSchema).optional(),
+    platformLinks: makeFilteredArraySchema(PlatformLinkSchema).optional(),
+    walletAddresses: makeFilteredArraySchema(WalletAddressSchema).optional(),
+    featuredAssets: makeFilteredArraySchema(FeaturedAssetSchema).optional(),
   })
   .passthrough();
