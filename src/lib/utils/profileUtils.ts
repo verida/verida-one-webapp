@@ -1,7 +1,10 @@
 import { Client } from "@verida/client-ts";
 import { DatabasePermissionOptionsEnum } from "@verida/types";
 import { config } from "lib/config";
-import { VERIDA_ONE_PUBLIC_PROFILE_RECORD_ID } from "lib/constants";
+import {
+  MAX_ASSETS_IN_FEATURED_SECTION,
+  VERIDA_ONE_PUBLIC_PROFILE_RECORD_ID,
+} from "lib/constants";
 import { ProfileDataSchema } from "lib/schemas";
 import {
   NftToken,
@@ -144,6 +147,7 @@ export const filterFeaturedAssets = (
 ): NftToken[] => {
   return featuredAssets
     .sort((a, b) => a.order - b.order)
+    .slice(0, MAX_ASSETS_IN_FEATURED_SECTION)
     .map((featured) => {
       return assets.find(
         (asset) =>
