@@ -6,9 +6,11 @@ import { ZodSchema, z } from "zod";
  * @param schema A Z schema instance
  * @returns A Zod array schema of the given schema
  */
-export const makeFilteredArraySchema = <S extends ZodSchema>(schema: S) =>
+export const makeFilteredArraySchema = <TSchema extends ZodSchema>(
+  schema: TSchema
+) =>
   z.array(z.unknown()).transform((items) =>
-    items?.filter((item): item is z.infer<S> => {
+    items?.filter((item): item is z.infer<TSchema> => {
       const result = schema.safeParse(item);
       if (!result.success) {
         // TODO: Report the validation error
