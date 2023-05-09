@@ -4,6 +4,7 @@ import { useBadges } from "./useBadges";
 import { useCollectibles } from "./useCollectibles";
 import { useIdentityInfo } from "./useIdentityInfo";
 import { useProfileData } from "./useProfileData";
+import { MAX_LINKS_IN_FEATURED_SECTION } from "lib/constants";
 
 /**
  * Hook aggregating all the data of a given identity, for the whole Profile view.
@@ -25,10 +26,11 @@ export const useWholeProfile = (identity?: string) => {
 
   const featuredLinks = profileData?.customLinks
     ?.filter((link) => link.featured)
-    .sort((a, b) => a.order - b.order);
+    .sort((a, b) => a.order - b.order)
+    .slice(0, MAX_LINKS_IN_FEATURED_SECTION);
 
   const customLinks = profileData?.customLinks
-    ?.filter((link) => !link.featured)
+    ?.filter((link) => !featuredLinks?.includes(link))
     .sort((a, b) => a.order - b.order);
 
   const socialPlatformLinks = profileData?.platformLinks

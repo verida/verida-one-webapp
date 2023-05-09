@@ -44,7 +44,7 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = (props) => {
       <div className="flex flex-col space-y-3">
         {assets?.length ? (
           <ul className="grid grid-cols-4 gap-2">
-            {assets.slice(0, MAX_ASSETS_IN_FEATURED_SECTION).map((asset) => (
+            {assets.map((asset) => (
               <li
                 key={`${asset.chain_id}/${asset.token_address}/${asset.token_id}`}
               >
@@ -64,7 +64,7 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = (props) => {
         ) : null}
         {links?.length ? (
           <ul className="space-y-2">
-            {links.slice(0, MAX_LINKS_IN_FEATURED_SECTION).map((link) => (
+            {links.map((link) => (
               <li key={link.url}>
                 <CustomLink link={link} />
               </li>
