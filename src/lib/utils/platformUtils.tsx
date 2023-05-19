@@ -24,6 +24,11 @@ export const socialPlatformDefinitions: Record<Platforms, PlatformDefinition> =
       label: "LinkedIn",
       iconId: "platform-linkedin",
     },
+    [Platforms.INSTAGRAM]: {
+      platformId: Platforms.INSTAGRAM,
+      label: "Instagram",
+      iconId: "platform-instagram",
+    },
     [Platforms.TELEGRAM]: {
       platformId: Platforms.TELEGRAM,
       label: "Telegram",
@@ -38,6 +43,11 @@ export const socialPlatformDefinitions: Record<Platforms, PlatformDefinition> =
       platformId: Platforms.WHATSAPP,
       label: "WhatsApp",
       iconId: "platform-whatsapp",
+    },
+    [Platforms.YOUTUBE]: {
+      platformId: Platforms.YOUTUBE,
+      label: "YouTube",
+      iconId: "platform-youtube",
     },
   };
 
