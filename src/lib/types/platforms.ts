@@ -12,10 +12,12 @@ export enum Platforms {
   DISCORD = "discord",
   FACEBOOK = "facebook",
   GITHUB = "github",
-  LINKEDIN = "linkedIn",
+  LINKEDIN = "linkedin",
+  INSTAGRAM = "instagram",
   TELEGRAM = "telegram",
   TWITTER = "twitter",
   WHATSAPP = "whatsapp",
+  YOUTUBE = "youtube",
 }
 
 /** TODO: write doc */

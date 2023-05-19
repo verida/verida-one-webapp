@@ -14,6 +14,8 @@ import {
   Facebook,
   GithubOne,
   ErrorPicture,
+  Youtube,
+  Instagram,
 } from "@icon-park/react";
 import { ReactComponent as Share } from "assets/icons/share.svg";
 import { ReactComponent as Outside } from "assets/icons/outside.svg";
@@ -49,9 +51,11 @@ export type PlatformIconType =
   | "platform-facebook"
   | "platform-github"
   | "platform-linkedin"
+  | "platform-instagram"
   | "platform-telegram"
   | "platform-twitter"
-  | "platform-whatsapp";
+  | "platform-whatsapp"
+  | "platform-youtube";
 export type ChainIconType =
   | "chain-algorand"
   | "chain-ethereum"
@@ -162,6 +166,10 @@ export const Icon: React.FunctionComponent<IconProps> = (props) => {
       return <Facebook size={size} {...otherProps} />;
     case "platform-github":
       return <GithubOne size={size} {...otherProps} />;
+    case "platform-youtube":
+      return <Youtube size={size} {...otherProps} />;
+    case "platform-instagram":
+      return <Instagram size={size} {...otherProps} />;
 
     default:
       throw new Error("A supported type must be defined for the icon");
