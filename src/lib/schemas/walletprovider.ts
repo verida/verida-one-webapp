@@ -1,5 +1,6 @@
 import { Chains } from "lib/types";
 import { z } from "zod";
+import { makeFilteredArraySchema } from "lib/schemas/utils";
 
 export const NftMetadataAttributeSchema = z
   .object({
@@ -20,7 +21,7 @@ export const NftMetadataSchema = z
     external_link: z.string().nullable(),
     image: z.string().nullable(),
     background_color: z.string().nullish(),
-    attributes: z.array(NftMetadataAttributeSchema).optional(),
+    attributes: makeFilteredArraySchema(NftMetadataAttributeSchema).optional(),
   })
   .passthrough();
 
@@ -40,7 +41,7 @@ export const NftTokenSchema = z
 export const NftListApiResponseSchema = z
   .object({
     status: z.enum(["success", "error"]),
-    data: z.array(NftTokenSchema).nullable(),
+    data: makeFilteredArraySchema(NftTokenSchema).nullable(),
     error: z.string().nullish(),
   })
   .passthrough();

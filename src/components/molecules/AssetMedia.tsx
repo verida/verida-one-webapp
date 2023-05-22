@@ -63,7 +63,7 @@ export const AssetMedia: React.FunctionComponent<AssetMediaProps> = (props) => {
           hasBackground && !backgroundColor && !failedImage
             ? "bg-asset-media"
             : ""
-        } ${radius}`}
+        } ${radius} h-full w-full`}
         style={{
           backgroundColor:
             backgroundColor && !failedImage ? `#${backgroundColor}` : undefined,

@@ -1,7 +1,10 @@
 import { Client } from "@verida/client-ts";
 import { DatabasePermissionOptionsEnum } from "@verida/types";
 import { config } from "lib/config";
-import { VERIDA_ONE_PUBLIC_PROFILE_RECORD_ID } from "lib/constants";
+import {
+  MAX_ASSETS_IN_FEATURED_SECTION,
+  VERIDA_ONE_PUBLIC_PROFILE_RECORD_ID,
+} from "lib/constants";
 import { ProfileDataSchema } from "lib/schemas";
 import {
   NftToken,
@@ -88,6 +91,7 @@ export const getProfileData = async (
     VERIDA_ONE_PUBLIC_PROFILE_RECORD_ID,
     {}
   )) as ProfileData;
+
   return ProfileDataSchema.parse(profileRecord);
   // TODO: Try catch errors and identify the type of error to handle it specifically
   // For the moment, there is no specific handling of the errors, so there is no point of catching and identifying them.
@@ -143,6 +147,7 @@ export const filterFeaturedAssets = (
 ): NftToken[] => {
   return featuredAssets
     .sort((a, b) => a.order - b.order)
+    .slice(0, MAX_ASSETS_IN_FEATURED_SECTION)
     .map((featured) => {
       return assets.find(
         (asset) =>
