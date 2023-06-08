@@ -2,7 +2,6 @@ import React from "react";
 import {
   Copy,
   Check,
-  Twitter,
   Search,
   More,
   Right,
@@ -10,24 +9,31 @@ import {
   Close,
   ArrowRight,
   ArrowLeft,
-  Telegram,
-  Facebook,
-  GithubOne,
   ErrorPicture,
-  Youtube,
-  Instagram,
 } from "@icon-park/react";
 import { ReactComponent as Share } from "assets/icons/share.svg";
 import { ReactComponent as Outside } from "assets/icons/outside.svg";
-import { ReactComponent as Whatsapp } from "assets/logos/platforms/whatsapp.svg";
-import { ReactComponent as LinkedIn } from "assets/logos/platforms/linkedin.svg";
-import { ReactComponent as Mail } from "assets/logos/platforms/mail.svg";
 import { ReactComponent as VeridaTick } from "assets/icons/verida_tick.svg";
+
+// Chains
 import { ReactComponent as Algorand } from "assets/logos/chains/algorand.svg";
 import { ReactComponent as Ethereum } from "assets/logos/chains/ethereum.svg";
 import { ReactComponent as Near } from "assets/logos/chains/near.svg";
 import { ReactComponent as Polygon } from "assets/logos/chains/polygon.svg";
+
+// Platforms
 import { ReactComponent as Discord } from "assets/logos/platforms/discord.svg";
+import { ReactComponent as Email } from "assets/logos/platforms/email.svg";
+import { ReactComponent as Facebook } from "assets/logos/platforms/facebook.svg";
+import { ReactComponent as GitHub } from "assets/logos/platforms/github.svg";
+import { ReactComponent as Instagram } from "assets/logos/platforms/instagram.svg";
+import { ReactComponent as LinkedIn } from "assets/logos/platforms/linkedin.svg";
+import { ReactComponent as Medium } from "assets/logos/platforms/medium.svg";
+import { ReactComponent as Reddit } from "assets/logos/platforms/reddit.svg";
+import { ReactComponent as Telegram } from "assets/logos/platforms/telegram.svg";
+import { ReactComponent as Twitter } from "assets/logos/platforms/twitter.svg";
+import { ReactComponent as Whatsapp } from "assets/logos/platforms/whatsapp.svg";
+import { ReactComponent as Youtube } from "assets/logos/platforms/youtube.svg";
 
 // TODO: Need a variant for the logos (coloured, white, black, ...)
 
@@ -50,8 +56,10 @@ export type PlatformIconType =
   | "platform-email"
   | "platform-facebook"
   | "platform-github"
-  | "platform-linkedin"
   | "platform-instagram"
+  | "platform-linkedin"
+  | "platform-medium"
+  | "platform-reddit"
   | "platform-telegram"
   | "platform-twitter"
   | "platform-whatsapp"
@@ -110,6 +118,8 @@ export const Icon: React.FunctionComponent<IconProps> = (props) => {
           <VeridaTick height={size} width={size} />
         </IconContainer>
       );
+
+    // Chains
     case "chain-algorand":
       return (
         <IconContainer {...otherProps}>
@@ -134,22 +144,36 @@ export const Icon: React.FunctionComponent<IconProps> = (props) => {
           <Polygon height={size} width={size} />
         </IconContainer>
       );
+
+    // Platforms
     case "platform-discord":
       return (
         <IconContainer {...otherProps}>
           <Discord height={size} width={size} />
         </IconContainer>
       );
-    case "platform-whatsapp":
-      return (
-        <IconContainer {...otherProps}>
-          <Whatsapp height={size} width={size} />
-        </IconContainer>
-      );
     case "platform-email":
       return (
         <IconContainer {...otherProps}>
-          <Mail height={size} width={size} />
+          <Email height={size} width={size} />
+        </IconContainer>
+      );
+    case "platform-facebook":
+      return (
+        <IconContainer {...otherProps}>
+          <Facebook height={size} width={size} />
+        </IconContainer>
+      );
+    case "platform-github":
+      return (
+        <IconContainer {...otherProps}>
+          <GitHub height={size} width={size} />
+        </IconContainer>
+      );
+    case "platform-instagram":
+      return (
+        <IconContainer {...otherProps}>
+          <Instagram height={size} width={size} />
         </IconContainer>
       );
     case "platform-linkedin":
@@ -158,18 +182,42 @@ export const Icon: React.FunctionComponent<IconProps> = (props) => {
           <LinkedIn height={size} width={size} />
         </IconContainer>
       );
-    case "platform-twitter":
-      return <Twitter size={size} {...otherProps} />;
+    case "platform-medium":
+      return (
+        <IconContainer {...otherProps}>
+          <Medium height={size} width={size} />
+        </IconContainer>
+      );
+    case "platform-reddit":
+      return (
+        <IconContainer {...otherProps}>
+          <Reddit height={size} width={size} />
+        </IconContainer>
+      );
     case "platform-telegram":
-      return <Telegram size={size} {...otherProps} />;
-    case "platform-facebook":
-      return <Facebook size={size} {...otherProps} />;
-    case "platform-github":
-      return <GithubOne size={size} {...otherProps} />;
+      return (
+        <IconContainer {...otherProps}>
+          <Telegram height={size} width={size} />
+        </IconContainer>
+      );
+    case "platform-twitter":
+      return (
+        <IconContainer {...otherProps}>
+          <Twitter height={size} width={size} />
+        </IconContainer>
+      );
+    case "platform-whatsapp":
+      return (
+        <IconContainer {...otherProps}>
+          <Whatsapp height={size} width={size} />
+        </IconContainer>
+      );
     case "platform-youtube":
-      return <Youtube size={size} {...otherProps} />;
-    case "platform-instagram":
-      return <Instagram size={size} {...otherProps} />;
+      return (
+        <IconContainer {...otherProps}>
+          <Youtube height={size} width={size} />
+        </IconContainer>
+      );
 
     default:
       throw new Error("A supported type must be defined for the icon");
