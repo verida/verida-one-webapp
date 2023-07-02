@@ -22,6 +22,8 @@ const veridaEnv: EnvironmentType =
     ? EnvironmentType.MAINNET
     : EnvironmentType.TESTNET;
 
+const veridaRpcUrl = process.env.REACT_APP_VERIDA_RPC_URL || undefined;
+
 // Schemas
 // Set a fallback to avoid further issues.
 const schemasURL = {
@@ -47,6 +49,7 @@ const isMockDataEnabled = process.env.REACT_APP_ENABLE_MOCK_DATA === "true";
 export const config = {
   appTitle,
   veridaEnv,
+  veridaRpcUrl,
   veridaOneContextName,
   veridaLogoUrl,
   schemasURL,
