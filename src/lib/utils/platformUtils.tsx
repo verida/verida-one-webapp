@@ -19,15 +19,25 @@ export const socialPlatformDefinitions: Record<Platforms, PlatformDefinition> =
       label: "GitHub",
       iconId: "platform-github",
     },
+    [Platforms.INSTAGRAM]: {
+      platformId: Platforms.INSTAGRAM,
+      label: "Instagram",
+      iconId: "platform-instagram",
+    },
     [Platforms.LINKEDIN]: {
       platformId: Platforms.LINKEDIN,
       label: "LinkedIn",
       iconId: "platform-linkedin",
     },
-    [Platforms.INSTAGRAM]: {
-      platformId: Platforms.INSTAGRAM,
-      label: "Instagram",
-      iconId: "platform-instagram",
+    [Platforms.MEDIUM]: {
+      platformId: Platforms.MEDIUM,
+      label: "Medium",
+      iconId: "platform-medium",
+    },
+    [Platforms.REDDIT]: {
+      platformId: Platforms.REDDIT,
+      label: "Reddit",
+      iconId: "platform-reddit",
     },
     [Platforms.TELEGRAM]: {
       platformId: Platforms.TELEGRAM,
