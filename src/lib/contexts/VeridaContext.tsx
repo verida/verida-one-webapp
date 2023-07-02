@@ -4,6 +4,10 @@ import { config } from "lib/config";
 
 const client = new Client({
   environment: config.veridaEnv,
+  didClientConfig: {
+    network: config.veridaEnv,
+    rpcUrl: config.veridaRpcUrl,
+  },
 });
 
 // TODO: Implement a context with WebUser when we will need to handle user connection
