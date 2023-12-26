@@ -1,15 +1,14 @@
-name: Build
+name: CI
 
 on:
   workflow_dispatch:
     inputs:
       save-artifact:
-        description: 'Save build as artifact'
+        description: "Save build as artifact"
         type: boolean
         required: false
         default: false
   push:
-  pull_request:
 
 # Try to avoid having two runs when there's a push within a pull request
 concurrency:
@@ -18,11 +17,11 @@ concurrency:
 
 jobs:
   build:
-    name: Build
+    name: Check, Test and Build
     runs-on: ubuntu-latest
 
     env:
-      EXTEND_ESLINT: 'true'
+      EXTEND_ESLINT: "true"
       PUBLIC_URL: ${{ vars.RESOURCES_CDN_URL }}
       NODE_ENV: ${{ vars.NODE_ENV || 'production' }}
       REACT_APP_VERIDA_ONE_CONTEXT_NAME: ${{ vars.REACT_APP_VERIDA_ONE_CONTEXT_NAME }}
@@ -53,11 +52,14 @@ jobs:
       - name: Set up node
         uses: actions/setup-node@v3.5.1
         with:
-          node-version: '${{ env.NODE_VERSION }}'
+          node-version: "${{ env.NODE_VERSION }}"
           cache: yarn
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+
+      - name: Check linting and formatting
+        run: yarn run check
 
       - name: Test frontend
         run: yarn run test
@@ -66,7 +68,7 @@ jobs:
         run: yarn run build
 
       - name: Upload build artifacts
-        if:  ${{ inputs.save-artifact }}
+        if: ${{ inputs.save-artifact }}
         uses: actions/upload-artifact@v3.1.2
         with:
           name: build
