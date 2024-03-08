@@ -22,12 +22,12 @@ export const AssetDetailsMainInfo: React.FC<AssetDetailCardProps> = (props) => {
   return (
     <div {...divProps}>
       {collectionLabel && (
-        <div className="mb-1 text-sm font-normal text-gray-light line-clamp-1 sm:font-semibold">
+        <div className="mb-1 line-clamp-1 text-sm font-normal text-gray-light sm:font-semibold">
           {collectionLabel}
         </div>
       )}
       {tokenLabel && (
-        <h2 className="mb-4 text-xl font-bold leading-6 line-clamp-2">
+        <h2 className="mb-4 line-clamp-2 text-xl font-bold leading-6">
           {tokenLabel}
         </h2>
       )}

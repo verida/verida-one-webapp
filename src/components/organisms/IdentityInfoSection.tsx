@@ -27,8 +27,8 @@ export const IdentityInfoSection: React.FC<IdentityInfoSectionProps> = (
     const displayedId = identityInfo.username
       ? identityInfo.username
       : identityInfo.did
-      ? truncateDid(identityInfo.did)
-      : undefined;
+        ? truncateDid(identityInfo.did)
+        : undefined;
 
     return (
       <section>

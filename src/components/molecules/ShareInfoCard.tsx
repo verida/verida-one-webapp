@@ -18,7 +18,7 @@ export const ShareInfoCard: React.FunctionComponent<ShareInfoCardProps> = ({
 }) => {
   return (
     <div {...divProps}>
-      <div className="rounded-xl bg-gray-dark py-2 px-4">
+      <div className="rounded-xl bg-gray-dark px-4 py-2">
         <div className="flex min-w-0 items-center justify-between space-x-3">
           <div className="flex min-w-0 flex-col">
             <span className="truncate font-semibold">{label}</span>

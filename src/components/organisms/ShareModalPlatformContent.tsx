@@ -33,7 +33,7 @@ export const ShareModalPlatformContent: React.FunctionComponent<
   return (
     <ul className="flex flex-col space-y-2">
       {platforms.map((platform) => (
-        <li className="py-2.5 px-2" key={platform.platformId}>
+        <li className="px-2 py-2.5" key={platform.platformId}>
           <a
             className="flex items-center hover:text-primary/60"
             target="_blank"
@@ -49,7 +49,7 @@ export const ShareModalPlatformContent: React.FunctionComponent<
           </a>
         </li>
       ))}
-      <li className="py-2.5 px-2">
+      <li className="px-2 py-2.5">
         <div className="flex items-center">
           {/* TODO: Update the copy to clipboard to be consistent with the others share options, ie: click on the whole link, not just the button */}
           <CopyToClipboardButton value={contentToShare} size="no-margin" />

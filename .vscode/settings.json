@@ -1,5 +1,6 @@
 {
   "editor.formatOnSave": true,
+  "typescript.tsdk": "./node_modules/typescript/lib",
   "yaml.schemas": {
     "https://json.schemastore.org/github-workflow.json": ".github/workflows/*.yml"
   }

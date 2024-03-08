@@ -40,7 +40,7 @@ export const SearchInputField: React.FunctionComponent<
       <div className="relative">
         <Icon
           type="search"
-          className="absolute top-1/2 left-3 hidden -translate-y-1/2 text-gray-light sm:block"
+          className="absolute left-3 top-1/2 hidden -translate-y-1/2 text-gray-light sm:block"
         />
         <input
           ref={inputRef}
