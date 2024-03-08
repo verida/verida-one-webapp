@@ -19,10 +19,10 @@ const veridaEnv: EnvironmentType =
   process.env.REACT_APP_VERIDA_ENV === "local"
     ? EnvironmentType.LOCAL
     : process.env.REACT_APP_VERIDA_ENV === "devnet"
-    ? EnvironmentType.DEVNET
-    : process.env.REACT_APP_VERIDA_ENV === "mainnet"
-    ? EnvironmentType.MAINNET
-    : EnvironmentType.TESTNET;
+      ? EnvironmentType.DEVNET
+      : process.env.REACT_APP_VERIDA_ENV === "mainnet"
+        ? EnvironmentType.MAINNET
+        : EnvironmentType.TESTNET;
 
 const veridaRpcUrl = process.env.REACT_APP_VERIDA_RPC_URL || undefined;
 
