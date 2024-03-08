@@ -55,7 +55,7 @@ export const Header: React.FC = () => {
 
   return (
     <header
-      className={`grid grid-cols-[minmax(165px,_1fr)_minmax(min-content,696px)_minmax(165px,_1fr)] border-b border-solid border-gray-dark bg-background/80 px-4 pt-3 pb-[calc(0.75rem_-_1px)] backdrop-blur-[10px] sm:px-6`}
+      className={`grid grid-cols-[minmax(165px,_1fr)_minmax(min-content,696px)_minmax(165px,_1fr)] border-b border-solid border-gray-dark bg-background/80 px-4 pb-[calc(0.75rem_-_1px)] pt-3 backdrop-blur-[10px] sm:px-6`}
     >
       <h1 className={`col-start-1 justify-self-start ${hideWhenSearch}`}>
         <Link to="/">

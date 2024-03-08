@@ -26,7 +26,7 @@ export const WalletAddressCard: React.FunctionComponent<
   return (
     <div {...otherProps}>
       <div
-        className={`flex items-center justify-between rounded-xl bg-gray-dark py-2 px-4`}
+        className={`flex items-center justify-between rounded-xl bg-gray-dark px-4 py-2`}
       >
         <div className="flex min-w-0 items-center space-x-2.5">
           <ChainIcon

@@ -35,6 +35,10 @@
     "defaultMessage": "View in Explorer",
     "description": "Label of the button to view an asset in a blockchain explorer."
   },
+  "AssetMedia.imageAltFallback": {
+    "defaultMessage": "Asset",
+    "description": "Alt message for the asset"
+  },
   "AssetMedia.noContentMessage": {
     "defaultMessage": "Content not available",
     "description": "Message indicating that the asset has either no media content or this content is broken"
@@ -54,6 +58,10 @@
   "BadgeListView.redirectionCardTitle": {
     "defaultMessage": "It's empty here",
     "description": "Title of the redirection card indicating the list of badges is empty."
+  },
+  "BadgeMosaicItem.imageAltFallback": {
+    "defaultMessage": "Collectible",
+    "description": "Alt message for the collectible"
   },
   "BadgeMosaicItem.noContentMessage": {
     "defaultMessage": "Content not available",

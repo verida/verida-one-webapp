@@ -42,7 +42,6 @@ export const RawErrorFallbackCard: React.FunctionComponent<
   RawErrorFallbackCardProps & React.ComponentPropsWithoutRef<"div">
 > = (props) => {
   const {
-    error,
     resetErrorBoundary,
     title = cardTitleDefinition.defaultMessage,
     message = cardMessageDefinition.defaultMessage,

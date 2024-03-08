@@ -39,6 +39,12 @@ export const AssetMedia: React.FunctionComponent<AssetMediaProps> = (props) => {
       "Message indicating that the asset has either no media content or this content is broken",
   });
 
+  const imageAltFallback = i18n.formatMessage({
+    id: "AssetMedia.imageAltFallback",
+    defaultMessage: "Asset",
+    description: "Alt message for the asset",
+  });
+
   const imageClassesBase = `w-full border border-solid border-primary-15 object-cover ${radius}`;
   const imageClasses = `h-full ${imageClassesBase}`;
   const imageClassesLoading = `aspect-square animate-pulse bg-primary-15 ${imageClassesBase}`;
@@ -72,7 +78,7 @@ export const AssetMedia: React.FunctionComponent<AssetMediaProps> = (props) => {
         {url && !failedImage ? (
           <img
             src={url}
-            alt={alt || "Asset"}
+            alt={alt || imageAltFallback}
             // Set temporary classes until it is overriden by the onLoad event
             // aspect-square is for keeping height
             // animate-pulse is for applying a loading animation
