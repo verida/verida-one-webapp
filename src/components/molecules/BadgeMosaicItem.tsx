@@ -27,6 +27,12 @@ export const BadgeMosaicItem: React.FunctionComponent<HexagonProps> = (
       "Message indicating that the asset has either no media content or this content is broken",
   });
 
+  const imageAltFallback = i18n.formatMessage({
+    id: "BadgeMosaicItem.imageAltFallback",
+    defaultMessage: "Collectible",
+    description: "Alt message for the collectible",
+  });
+
   const imageClasses = "h-full w-full object-cover";
   const imageClassesLoading = `animate-pulse bg-primary-15 ${imageClasses}`;
 
@@ -53,7 +59,7 @@ export const BadgeMosaicItem: React.FunctionComponent<HexagonProps> = (
           {source && !failedImage ? (
             <img
               src={source}
-              alt={badge.metadata.name || "Collectible"}
+              alt={badge.metadata.name || imageAltFallback}
               // Set temporary classes until it is overriden by the onLoad event
               // bg-primary-15 is for the background color
               // animate-pulse is for applying a loading animation
