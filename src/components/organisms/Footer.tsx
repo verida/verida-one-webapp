@@ -39,7 +39,7 @@ export const Footer: React.FunctionComponent = () => {
   );
 
   return (
-    <footer className="flex flex-col items-center justify-center space-y-3 border-t border-solid border-gray-dark py-4 px-6 text-primary/60 sm:flex-row sm:justify-between">
+    <footer className="flex flex-col items-center justify-center space-y-3 border-t border-solid border-gray-dark px-6 py-4 text-primary/60 sm:flex-row sm:justify-between">
       <div className="flex flex-col justify-center sm:order-2">
         <a
           className="flex flex-col items-center"

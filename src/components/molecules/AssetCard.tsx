@@ -25,7 +25,7 @@ export const AssetCard: React.FC<AssetCardProps> = (props) => {
             hasBackground={asset.isSBT}
             backgroundColor={asset.metadata.background_color}
           />
-          <div className="absolute bottom-0 left-0 ml-1 mb-1 max-w-full pr-2">
+          <div className="absolute bottom-0 left-0 mb-1 ml-1 max-w-full pr-2">
             <AssetMediaChip variant={variant} chain={asset.chain_id} />
           </div>
         </div>
@@ -35,7 +35,7 @@ export const AssetCard: React.FC<AssetCardProps> = (props) => {
               <p className="w-full truncate text-primary/60">{asset.name}</p>
             ) : null}
             {asset.metadata.name ? (
-              <p className="w-full font-bold line-clamp-2">
+              <p className="line-clamp-2 w-full font-bold">
                 {asset.metadata.name}
               </p>
             ) : null}

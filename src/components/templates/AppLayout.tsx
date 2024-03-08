@@ -17,7 +17,7 @@ export const AppLayout: React.FunctionComponent = () => {
       </MetaTags>
       <ErrorBoundary defaultFallbackCardClassName="h-screen w-screen flex flex-col items-center justify-center">
         <div className="relative flex h-full w-full flex-col">
-          <div className="fixed top-0 left-0 right-0 z-50 backdrop-blur-[6px]">
+          <div className="fixed left-0 right-0 top-0 z-50 backdrop-blur-[6px]">
             <Header />
           </div>
           <div
