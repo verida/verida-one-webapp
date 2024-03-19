@@ -23,13 +23,19 @@ module.exports = {
       "badge-purple": "#7703D1",
       "verida-blue": "#37D5C7",
       "verida-purple": "#5354D1",
+      "dark-purple": "#3e2e7c"
     },
     fontFamily: {
       sans: ["Sora", "sans-serif"],
     },
     extend: {
       screens: {
-        sm: "696px",
+        '2xl': { max: '1800px' },
+        xl: { max: '1535px' },
+        lg: { max: '1279px' },
+        md: { max: '992px' },
+        sm: { max: '696px' },
+        xs: { max: '479px' },
       },
       spacing: {
         4.5: "1.125rem",

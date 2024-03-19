@@ -39,8 +39,11 @@ export const Footer: React.FunctionComponent = () => {
   );
 
   return (
-    <footer className="flex flex-col items-center justify-center space-y-3 border-t border-solid border-gray-dark px-6 py-4 text-primary/60 sm:flex-row sm:justify-between">
-      <div className="flex flex-col justify-center sm:order-2">
+    <footer className="flex flex-row items-center justify-between gap-y-3 border-t border-solid border-gray-dark px-6 py-4 text-primary/60 sm:flex-col sm:justify-center sm:gap-y-6">
+      <div className="sm:order-3">
+        <span>{copyrightMessage}</span>
+      </div>
+      <div className="flex flex-col justify-center sm:order-1">
         <a
           className="flex flex-col items-center"
           href={VERIDA_NETWORK_URL}
@@ -55,28 +58,23 @@ export const Footer: React.FunctionComponent = () => {
           </div>
         </a>
       </div>
-      <div className="sm:order-3 sm:flex-1">
-        <div className="flex flex-col items-center space-y-3 sm:flex-row sm:justify-end sm:space-x-4 sm:space-y-0">
-          <a
-            href={VERIDA_ONE_DOCUMENTATION_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:underline"
-          >
-            {documentationLinkLabel}
-          </a>
-          <a
-            href={VERIDA_TERMS_AND_CONDITIONS_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:underline"
-          >
-            {termsAndConditionLinkLabel}
-          </a>
-        </div>
-      </div>
-      <div className="sm:order-1 sm:flex-1">
-        <span>{copyrightMessage}</span>
+      <div className="flex items-center gap-x-4 sm:order-2 sm:flex-col">
+        <a
+          href={VERIDA_ONE_DOCUMENTATION_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:underline"
+        >
+          {documentationLinkLabel}
+        </a>
+        <a
+          href={VERIDA_TERMS_AND_CONDITIONS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:underline"
+        >
+          {termsAndConditionLinkLabel}
+        </a>
       </div>
     </footer>
   );
