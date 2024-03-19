@@ -55,20 +55,21 @@ export const Header: React.FC = () => {
 
   return (
     <header
-      className={`grid grid-cols-[minmax(165px,_1fr)_minmax(min-content,696px)_minmax(165px,_1fr)] border-b border-solid border-gray-dark bg-background/10 px-4 py-4 backdrop-blur-[10px] sm:px-6`}
+      className={`grid grid-cols-[minmax(165px,_1fr)_minmax(min-content,696px)_minmax(165px,_1fr)] border-b border-solid border-gray-dark bg-background/10 px-4 py-4 backdrop-blur-[10px] sm:flex sm:gap-4 sm:px-6`}
     >
       <h1 className={`col-start-1 justify-self-start ${hideWhenSearch}`}>
         <Link to="/">
-          <div className="aspect-[10/6.97] h-10 sm:hidden">
+          <div className="hidden aspect-[10/6.97] h-10 sm:block">
             <VeridaOneLogo height="100%" width="100%" />
           </div>
-          <div className="hidden aspect-[10/3] h-10 sm:block">
+          <div className="aspect-[10/3] h-10 sm:hidden">
             <VeridaOneLogoWithText height="100%" width="100%" />
           </div>
         </Link>
       </h1>
       <div
-        className={`${searchVisibility} flex sm:col-auto sm:col-start-2 sm:block sm:max-w-screen-sm sm:px-4`}
+        // className={`${searchVisibility} flex sm:col-auto sm:col-start-2 sm:block sm:max-w-screen-sm sm:px-4`}
+        className={`${searchVisibility} col-auto col-start-2 block max-w-screen-sm px-4 sm:ml-auto sm:flex sm:max-w-full sm:px-0`}
       >
         <HeaderSearchBar
           inputRef={searchFieldRef}
