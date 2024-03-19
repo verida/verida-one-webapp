@@ -64,7 +64,7 @@ export const CollectiblesSection: React.FC<CollectiblesSectionProps> = (
     >
       <div className="-mx-4 overflow-x-auto px-4">
         <div className="w-fit pb-4">
-          <ul className="grid auto-cols-[160px] gap-2 max-sm:grid-flow-col sm:grid-cols-4">
+          <ul className="max-sm:grid-flow-col grid auto-cols-[160px] gap-2 sm:grid-cols-4">
             {truncatedCollectiblesList.map((collectible) => (
               <li
                 key={`${collectible.chain_id}/${collectible.token_address}/${collectible.token_id}`}
@@ -84,7 +84,7 @@ export const CollectiblesSection: React.FC<CollectiblesSectionProps> = (
           </ul>
         </div>
       </div>
-      {hasMore && <div className="mt-4 max-sm:hidden">{showAllButton}</div>}
+      {hasMore && <div className="max-sm:hidden mt-4">{showAllButton}</div>}
     </ProfileSectionWrapper>
   );
 };

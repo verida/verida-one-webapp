@@ -59,7 +59,7 @@ const HeroSection = () => {
       ></p>
 
       <div className="mx-auto overflow-hidden rounded-xl border-[3px] border-white/50">
-        <button className="xs:px-4 mx-auto bg-[#efefef] px-10 py-3 text-base font-semibold text-background">
+        <button className="mx-auto bg-[#efefef] px-10 py-3 text-base font-semibold text-background xs:px-4">
           {joinTheWaitlistButtonLabel}
         </button>
       </div>

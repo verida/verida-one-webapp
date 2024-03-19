@@ -69,7 +69,7 @@ export const Header: React.FC = () => {
       </h1>
       <div
         // className={`${searchVisibility} flex sm:col-auto sm:col-start-2 sm:block sm:max-w-screen-sm sm:px-4`}
-        className={`${searchVisibility} col-auto col-start-2 block max-w-screen-sm px-4 sm:ml-auto sm:flex sm:max-w-full sm:px-0`}
+        className={`${searchVisibility} max-w-screen-sm col-auto col-start-2 block px-4 sm:ml-auto sm:flex sm:max-w-full sm:px-0`}
       >
         <HeaderSearchBar
           inputRef={searchFieldRef}
