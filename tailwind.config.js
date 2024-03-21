@@ -30,12 +30,7 @@ module.exports = {
     },
     extend: {
       screens: {
-        '2xl': { max: '1800px' },
-        xl: { max: '1535px' },
-        lg: { max: '1279px' },
-        md: { max: '992px' },
-        sm: { max: '696px' },
-        xs: { max: '479px' },
+        sm: "696px",
       },
       spacing: {
         4.5: "1.125rem",

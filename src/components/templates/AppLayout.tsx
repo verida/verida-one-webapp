@@ -26,7 +26,9 @@ export const AppLayout: React.FunctionComponent = () => {
             }`}
           >
             <HeaderOffset />
-            <main className="mx-auto flex w-full max-w-[1248px] flex-grow flex-col px-4 pt-4">
+            <main
+              className={`mx-auto flex w-full flex-grow flex-col px-4 pt-4 ${window.location.pathname === "/" ? "max-w-[1248px]" : "max-w-screen-sm"}`}
+            >
               <ErrorBoundary defaultFallbackCardClassName="flex flex-col flex-grow justify-center">
                 <Outlet />
               </ErrorBoundary>

@@ -1,10 +1,11 @@
 import React from "react";
-// import { ReactComponent as VeridaOneLogo } from "assets/images/verida_one_logo_with_text.svg";
 import { useIntl } from "react-intl";
-import HeroSection from "./HeroSection";
-import JoinWaitlist from "./JoinWaitlist";
-import LearnMore from "./LearnMore";
-import Showcase from "./Showcase";
+import HeroSection from "../organisms/HeroSection";
+import JoinWaitlist from "../organisms/JoinWaitlist";
+import LearnMore from "../organisms/LearnMore";
+import Showcase from "../organisms/Showcase";
+import HeroBg from "../../assets/images/hero_bg.webp";
+import FooterBg from "../../assets/images/footer-gradient-w1.webp";
 
 export const HomeView: React.FunctionComponent = () => {
   const i18n = useIntl();
@@ -18,21 +19,23 @@ export const HomeView: React.FunctionComponent = () => {
   return (
     <div className="flex flex-grow flex-col items-center justify-center space-y-12">
       <img
-        src="/hero_bg.webp"
+        src={HeroBg}
         alt={comingSoonMessage}
-        className="absolute bottom-auto left-0 right-0 top-0 z-[-1] md:h-[700px] md:object-cover"
+        className="absolute bottom-auto left-0 right-0 top-0 z-[-1] h-[700px] w-full object-cover"
       />
 
       <HeroSection />
 
       <Showcase />
 
-      <JoinWaitlist />
+      <div className="mt-40">
+        <JoinWaitlist />
+      </div>
 
       <LearnMore />
 
       <img
-        src="/footer-gradient-w1.webp"
+        src={FooterBg}
         alt={comingSoonMessage}
         className="absolute bottom-0 left-0 right-0 z-[-1]"
       />

@@ -43,12 +43,12 @@ const ContentBox: React.FC<ContentBoxProps> = (props) => {
       )}
     >
       {!!logoImageUrl && (
-        <div className="mb-6 h-20 w-20 rounded-xl border border-white/60 bg-[linear-gradient(rgba(255,255,255,.2),rgba(255,255,255,.1))] p-3">
+        <div className="mx-6 mb-6 h-20 w-20 rounded-xl border border-white/60 bg-[linear-gradient(rgba(255,255,255,.2),rgba(255,255,255,.1))] p-3">
           <img src={logoImageUrl} alt={``} />
         </div>
       )}
-      <h3 className="mb-3 text-[34px] font-bold leading-tight">{title}</h3>
-      <span className="mb-6 block text-xl">{description}</span>
+      <h3 className="mb-3 px-6 text-[34px] font-bold leading-tight">{title}</h3>
+      <span className="mb-6 block px-6 text-xl">{description}</span>
       <img
         src={mainImageUrl}
         alt={``}

@@ -32,14 +32,14 @@ const JoinWaitlist = () => {
         },
       }}
       transition={{ duration: 0.8 }}
-      className="!mt-40 flex flex-col"
+      className="flex flex-col"
     >
-      <h2 className="mb-4 text-center text-[59px] font-bold leading-tight md:text-[49px]">
+      <h2 className="mb-4 text-center text-[49px] font-bold leading-tight sm:text-[59px]">
         {joinTheVeridaWaitlistTitle}
       </h2>
 
       <div className="mx-auto overflow-hidden rounded-xl border-[3px] border-white/50">
-        <button className="mx-auto bg-[#efefef] px-10 py-3 text-base font-semibold text-background xs:px-4 ">
+        <button className="mx-auto bg-[#efefef] px-4 py-3 text-base font-semibold text-background sm:px-10 ">
           {joinTheWaitlistButtonLabel}
         </button>
       </div>

@@ -50,7 +50,7 @@ const HeroSection = () => {
         {heroTagLabel}
       </div>
 
-      <h1 className="text-center text-9xl font-bold leading-tight sm:text-[88px]">
+      <h1 className="text-center text-[88px] font-bold leading-tight sm:text-9xl">
         {heroSectionHeading}
       </h1>
       <p
@@ -59,7 +59,7 @@ const HeroSection = () => {
       ></p>
 
       <div className="mx-auto overflow-hidden rounded-xl border-[3px] border-white/50">
-        <button className="mx-auto bg-[#efefef] px-10 py-3 text-base font-semibold text-background xs:px-4">
+        <button className="mx-auto bg-[#efefef] px-4 py-3 text-base font-semibold text-background sm:px-10">
           {joinTheWaitlistButtonLabel}
         </button>
       </div>
