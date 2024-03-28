@@ -72,7 +72,7 @@ const SearchResultWrapper: React.FunctionComponent<SearchResultWrapperProps> = (
         className="fixed inset-0 mt-16 bg-background/80 backdrop-blur-[10px] sm:bg-background/0 sm:backdrop-blur-0"
         onClick={onClickAway}
       />
-      <div className="sm:max-w-screen-sm fixed top-0 z-50 mt-16 w-full sm:left-1/2 sm:-translate-x-1/2 sm:px-4">
+      <div className="fixed top-0 z-50 mt-16 w-full sm:left-1/2 sm:max-w-screen-sm sm:-translate-x-1/2 sm:px-4">
         <div className="relative p-4 sm:rounded-xl sm:border sm:border-solid sm:border-gray-dark sm:bg-background/80 sm:backdrop-blur-[10px]">
           {children}
         </div>

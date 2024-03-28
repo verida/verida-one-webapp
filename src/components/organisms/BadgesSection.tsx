@@ -91,7 +91,7 @@ export const BadgesSection: React.FC<BadgesSectionProps> = ({ badges }) => {
             )}
           </ul>
         </div>
-        {hasMore && <div className="max-sm:hidden mt-4">{showAllButton}</div>}
+        {hasMore && <div className="mt-4 max-sm:hidden">{showAllButton}</div>}
       </div>
     </ProfileSectionWrapper>
   );
