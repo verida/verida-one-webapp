@@ -23,6 +23,7 @@ module.exports = {
       "badge-purple": "#7703D1",
       "verida-blue": "#37D5C7",
       "verida-purple": "#5354D1",
+      "dark-purple": "#3e2e7c"
     },
     fontFamily: {
       sans: ["Sora", "sans-serif"],
