@@ -25,3 +25,4 @@ export * from "./SearchInputField";
 export * from "./SearchResultItem";
 export * from "./ShareInfoCard";
 export * from "./WalletAddressCard";
+export * from "./ContentBox";

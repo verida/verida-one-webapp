@@ -1,11 +1,11 @@
 import { useIntl } from "react-intl";
 import { motion } from "framer-motion";
-import ContentBox from "../molecules/ContentBox";
+import { ContentBox } from "../molecules";
 import BracketsIcon from "../../assets/images/brackets-icon.svg";
 import ArrowLeftIcon from "../../assets/images/arrow-left.svg";
 import BlockchainIcon from "../../assets/images/blockchain-icon.svg";
 
-const LearnMore = () => {
+export const LearnMore = () => {
   const i18n = useIntl();
 
   const learnMore1Label = i18n.formatMessage({
@@ -94,5 +94,3 @@ const LearnMore = () => {
     </motion.div>
   );
 };
-
-export default LearnMore;

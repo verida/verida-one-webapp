@@ -1,7 +1,7 @@
 import { useIntl } from "react-intl";
 import { motion } from "framer-motion";
 
-const HeroSection = () => {
+export const HeroSection = () => {
   const i18n = useIntl();
 
   const heroTagLabel = i18n.formatMessage({
@@ -66,5 +66,3 @@ const HeroSection = () => {
     </motion.div>
   );
 };
-
-export default HeroSection;

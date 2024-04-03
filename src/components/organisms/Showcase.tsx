@@ -1,5 +1,5 @@
 import { useIntl } from "react-intl";
-import ContentBox from "../molecules/ContentBox";
+import { ContentBox } from "../molecules";
 import ShowcasePhoneP from "../../assets/images/showcase-phones-p.webp";
 import ShowcaseCardTopRightMin from "../../assets/images/showcase-card-top-right-min.png";
 import ShowcaseCardLeftMin from "../../assets/images/showcase-card-left-min.png";
@@ -21,7 +21,7 @@ import Vector from "../../assets/images/Vector.png";
 import Vector1 from "../../assets/images/Vector-1.png";
 import IdentityImageMinP from "../../assets/images/identity-image-min-p-800.png";
 
-const Showcase = () => {
+export const Showcase = () => {
   const i18n = useIntl();
 
   const showcaseBoxLabel = i18n.formatMessage({
@@ -246,5 +246,3 @@ const Showcase = () => {
     </>
   );
 };
-
-export default Showcase;

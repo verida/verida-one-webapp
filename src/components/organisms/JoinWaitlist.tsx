@@ -1,7 +1,7 @@
 import { useIntl } from "react-intl";
 import { motion } from "framer-motion";
 
-const JoinWaitlist = () => {
+export const JoinWaitlist = () => {
   const i18n = useIntl();
 
   const joinTheVeridaWaitlistTitle = i18n.formatMessage({
@@ -46,5 +46,3 @@ const JoinWaitlist = () => {
     </motion.div>
   );
 };
-
-export default JoinWaitlist;

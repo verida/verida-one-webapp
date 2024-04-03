@@ -16,3 +16,7 @@ export * from "./ShareModalProfileContent";
 export * from "./ShareModalPlatformContent";
 export * from "./SocialPlatformSection";
 export * from "./WalletAddressesSection";
+export * from "./LearnMore";
+export * from "./Showcase";
+export * from "./HeroSection";
+export * from "./JoinWaitlist";

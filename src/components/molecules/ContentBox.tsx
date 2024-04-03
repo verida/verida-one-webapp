@@ -10,7 +10,7 @@ interface ContentBoxProps extends React.PropsWithChildren {
   mainImageClassName?: string;
 }
 
-const ContentBox: React.FC<ContentBoxProps> = (props) => {
+export const ContentBox: React.FC<ContentBoxProps> = (props) => {
   const {
     children,
     title,
@@ -58,5 +58,3 @@ const ContentBox: React.FC<ContentBoxProps> = (props) => {
     </motion.div>
   );
 };
-
-export default ContentBox;
